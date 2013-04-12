@@ -86,10 +86,6 @@ L_End1:
     set @RequiredItem$, "";
     set @RequiredLevel, 0;
     callfunc("PirateBlock");
-    deletearray @SmallQuestReward$;
-    deletearray @MediumQuestReward$;
-    deletearray @EndQuestReward$;
-    deletearray @EpicQuestReward$;
     return;
 
 onInit:
