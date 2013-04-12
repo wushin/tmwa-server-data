@@ -86,7 +86,7 @@ L_TreasureMapBuy:
     getinventorylist;
     if ((checkweight("TreasureMap", 1) == 0) || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
-    if (George_Quest_Time < gettimetick(2))
+    if (George_Quest_Time > gettimetick(2))
         goto L_AlreadyBought;
     set George_Quest_Time, gettimetick(2) + $@GEORGE_PURCHASE_WAIT_TIME;
     set Zeny, Zeny - @TREASURE_MAP_COST;
