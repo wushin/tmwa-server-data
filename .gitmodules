@@ -1,3 +1,0 @@
-[submodule "client-data"]
-	path = client-data
-	url = git://github.com/themanaworld/tmwa-client-data.git
