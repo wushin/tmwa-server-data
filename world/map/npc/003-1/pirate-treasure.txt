@@ -1,0 +1,32 @@
+// Pirates Treasure
+// Author: wushin
+
+003-1.gat,95,84,0|script|#Item0|401,{
+    set $@QuestItemID, 0;
+    setarray @questitem_posx, 50, 57, 60, 64, 67;
+    setarray @questitem_posy, 87, 89, 88, 93, 98;
+    set @CurrentMap$, "003-1.gat";
+
+    callfunc("PirateDrop");
+    callfunc("QuestEvent");
+}
+
+003-1.gat,92,80,0|script|#Item1|401,{
+    set $@QuestItemID, 1;
+    setarray @questitem_posx, 50, 57, 60, 64, 67;
+    setarray @questitem_posy, 87, 89, 88, 93, 98;
+    set @CurrentMap$, "003-1.gat";
+
+    callfunc("PirateDrop");
+    callfunc("QuestEvent");
+}
+
+003-1.gat,95,80,0|script|#Item2|401,{
+    set $@QuestItemID, 2;
+    setarray @questitem_posx, 50, 57, 60, 64, 67;
+    setarray @questitem_posy, 87, 89, 88, 93, 98;
+    set @CurrentMap$, "003-1.gat";
+
+    callfunc("PirateDrop");
+    callfunc("QuestEvent");
+}

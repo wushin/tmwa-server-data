@@ -2,6 +2,9 @@
 
 008-1.gat,136,36,0|script|George|138,{
     set @hw2011_npc_id, $@hw2011_npc_george;
+    set @TREASURE_MAP_COST, 15000;
+    set $@GEORGE_PURCHASE_WAIT_TIME, 86400;
+
     if (gettime(7) == $@hw2011_year && gettime(6) == 10 && gettime(5) >= $@hw2011_start_day)
         goto L_TrickOrTreat;
 
@@ -15,21 +18,34 @@ L_Begin:
     if (getequipid(equip_head) == 621) goto L_EyePatch;
     mes "[George the Pirate]";
     mes "\"Arrrrh! 'Tis some kind of treasure map!\"";
+    next;
+    if (BaseLevel < 60) 
+        mes "\"Aye might be willing to part with the booty this map may lead to, fer a price?\"";
+        mes "\"15,000 GP would keep me warm at night. Ha, Yarrr... I crack me up.\"";
+        menu 
+           "Pirate Treasure! Count me in!.", L_TreasureMapBuy,
+           "Whoaaaa, too rich for my blood.",-;
+        goto L_Close;
+    mes "\"Yar, Maybe one day I'll part with night, but today is not that day, matey.\"";
+    mes "\"Come back and see me later.\"";
     close;
 
 L_Pirate:
     mes "[George the Pirate]";
     mes "\"Arrrrh! Ye be wearing a pirate's hat!\"";
+    goto L_Begin;
     close;
 
 L_Bandana:
     mes "[George the Pirate]";
     mes "\"Arrrrh! Ye remind me of my old first mate!\"";
+    goto L_Begin;
     close;
 
 L_EyePatch:
     mes "[George the Pirate]";
     mes "\"Arrrrh! Looks like ye lost an eye there!\"";
+    goto L_Begin;
     close;
 
 L_TrickOrTreat:
@@ -62,5 +78,40 @@ L_George_Easter2012:
     menu
         "Thank you George, I will check this information right now!", -;
     set QUEST_Easter12, 4;
+    close;
+
+L_TreasureMapBuy:
+    if (Zeny < @TREASURE_MAP_COST)
+       goto L_TreasureMapWait;
+    getinventorylist;
+    if ((checkweight("TreasureMap", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    if (George_Quest_Time < gettimetick(2))
+        goto L_AlreadyBought;
+    set George_Quest_Time, gettimetick(2) + $@GEORGE_PURCHASE_WAIT_TIME;
+    set Zeny, Zeny - @TREASURE_MAP_COST;
+    getitem "TreasureMap",1;
+    mes "[George the Pirate]";
+    mes "\"Thar Ya go, Pleasarrr doing buisness.";
+    close;
+
+L_AlreadyBought:
+    mes "[George the Pirate]";
+    mes "\"Yar, you got barnacles on yer brain? Ya already found this treasure. Come see me tomorrow.\"";
+    close;
+
+L_TreasureMapWait:
+    mes "[George the Pirate]";
+    mes "\"Quit rattling my saber until ya got the goods!\"";
+    close;
+
+L_InventoryNoSpace:
+    mes "[George the Pirate]";
+    mes "\"Yarrr, Looks like you areadly have enough booty! Stow some of that or better yet, bury it and make a map!\"";
+    close;
+
+L_Close:
+    mes "[George the Pirate]";
+    mes "Your loss, I'm off to get me some Booty!";
     close;
 }

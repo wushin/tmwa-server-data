@@ -1,0 +1,14 @@
+// Quest Drop Table
+
+function|script|NoDrop|{
+
+   setarray $@SmallQuestItems$, "", "","","";
+
+   setarray $@MediumQuestRewards$, "","","";
+
+   setarray $@EndQuestRewards$, "","","","","","";
+
+   setarray $@EpicQuestReward$, "", "", "", "";
+   return;
+
+}

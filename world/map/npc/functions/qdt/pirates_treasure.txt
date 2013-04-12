@@ -1,0 +1,32 @@
+// Quest Drop Table
+
+function|script|PirateDrop|{
+
+    set @QuestTime, PIRATE_QUEST_TIME;
+    set @QUEST_FOUND_WAIT_TIME, 0;
+    set @QUEST_QUEST_REDO_WAIT_TIME, 86400;
+    set @QUEST_QUEST_REDO_LAST_TIME, gettimetick(2); // set to permenant player var
+    set @QUEST_FINAL_REW_INV_CHANCE, 70;
+    set @QUEST_ITEM_INV_CHANCE, 750;
+    set @QUEST_QUEST_DROP_CHANCE, 80;
+
+    set @RequiredItemCn$, "Treasure Map";
+    set @RequiredItemSn$, "TreasureMap";
+    set @RequiredLevel, 39;
+    set @WarmUp$, "Beer";
+
+    setarray @SmallQuestItems$, "Orange", "Beer", "Arrow", "IronArrow";
+
+    setarray @MediumQuestRewards$, "CasinoCoins", "IronPowder", "SulphurPowder";
+
+    setarray @EndQuestRewards$, "Diamond", "Ruby", "Sapphire", "Topaz", "Amethyst", "Emerald";
+
+    setarray @EpicQuestReward$, "PirateHat", "TreasureMap", "Bandana", "TreasureMap", "Eyepatch", "TreasureMap";
+    return;
+
+}
+
+function|script|PirateBlock|{
+    set PIRATE_QUEST_TIME, @QuestTime;
+    return;
+}
