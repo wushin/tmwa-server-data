@@ -1,14 +1,69 @@
 //
 
-002-1.gat,15,67,0|script|Samuel|132,{
+002-1.gat,45,67,0|script|Samuel|132,{
+
+    stopnpctimer;
     mes "[Samuel the Nomad]";
     mes "\"This is really a nice place.\"";
     mes "Don't you think so?\"";
-    close;
+    close2;
+    startnpctimer;
+    end;
+
+OnInit:
+    set $@NpcName$, "Samuel";
+    set $@NpcId, 0;
+    set $@NPCPos[$@NpcId], 0;
+    initnpctimer;
+    end;
+
+OnTimer6000: 
+    set $@NpcName$, "Samuel";
+    set $@NpcId, 0;
+    callfunc("NpcClearMove");
+    setarray $@NpcPosX,"45","35","25","15";
+    setarray $@NpcPosY,"67","67","67","67";
+    callfunc("NpcRandMove");
+    setnpctimer 0;
+    end;
 }
 
 002-1.gat,18,68,0|script|Elijah|128,{
+    stopnpctimer;
     mes "[Elijah the Nomad]";
     mes "\"If I only had a tent...\"";
-    close;
+    close2;
+    startnpctimer;
+    end;
+
+OnInit:
+    set $@NpcId, 1;
+    set $@NpcMapName$, "002-1.gat";
+    set $@NPCPos[$@NpcId], 0;
+    initnpctimer;
+    end;
+
+OnTimer3000: 
+    set $@NpcName$, "Elijah";
+    set $@NpcId, 1;
+    callfunc("NpcClearMove");
+    setarray $@NpcPosX,"18","28","38","48";
+    setarray $@NpcPosY,"68","68","68","68";
+    callfunc("NpcOrdMove");
+    setnpctimer 0;
+    npctalk "Incoming!";
+    goto L_Volley;
+
+L_Volley:
+    areatimer $@NpcMapName$, 30, 66, 34, 70, 10, "Elijah::onVolley";
+    end;
+
+onVolley:
+    set @NpcHealHarm, -(BaseLevel/2);
+    set $@AoeEpiX[$@NpcId], 32;
+    set $@AoeEpiY[$@NpcId], 68;
+    set $@AoeRadX[$@NpcId], 2;
+    set $@AoeRadY[$@NpcId], 2;
+    callfunc "NpcPCVolley";
+    end;
 }

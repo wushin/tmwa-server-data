@@ -1,32 +1,88 @@
 // Pirates Treasure
 // Author: wushin
 
-003-1.gat,95,84,0|script|#Item0|401,{
-    set $@QuestItemID, 0;
-    setarray @questitem_posx, 50, 57, 60, 64, 67;
-    setarray @questitem_posy, 87, 89, 88, 93, 98;
-    set @CurrentMap$, "003-1.gat";
+003-1.gat,22,42,0|script|X|400,{
 
-    callfunc("PirateDrop");
-    callfunc("QuestEvent");
-}
+    set $@NpcName$, "X";
+    set $@NpcId, 2;
+    set $@NPCPos[$@NpcId], 0;
+    set @NPCWaitTime, 15;
+    set @RedoWaitTime, 86400;
+    set @LootChance, 80;
+    set @TrapChance, 10;
 
-003-1.gat,92,80,0|script|#Item1|401,{
-    set $@QuestItemID, 1;
-    setarray @questitem_posx, 50, 57, 60, 64, 67;
-    setarray @questitem_posy, 87, 89, 88, 93, 98;
-    set @CurrentMap$, "003-1.gat";
+    if ((countitem("TreasureMap") == 0) || (BaseLevel < 60)) //player must be level X and have Y
+        goto L_EndTooYoung;
+    if (PirateTime > gettimetick(2))
+        goto L_EndTooSoon;
+    if (gettimetick(2) < @NPCpenalty + @NPCWaitTime)
+        goto L_End2;
+    set @NPCpenalty, gettimetick(2);
 
-    callfunc("PirateDrop");
-    callfunc("QuestEvent");
-}
+    if (@TrapChance > rand(100))
+        goto L_Trap;
+    goto L_CheckLoot;
 
-003-1.gat,95,80,0|script|#Item2|401,{
-    set $@QuestItemID, 2;
-    setarray @questitem_posx, 50, 57, 60, 64, 67;
-    setarray @questitem_posy, 87, 89, 88, 93, 98;
-    set @CurrentMap$, "003-1.gat";
+L_Trap:
+        set @PosionTick, 1;
+        set @PosionCounter, (BaseLevel/2);
+        message strcharinfo(0), "Oh no! It's a Trap!";
+        callfunc "NpcPosionPC";
+        set @PosionTick, 0;
+        set @PosionCounter, 0;
+        goto L_CheckLoot;
 
-    callfunc("PirateDrop");
-    callfunc("QuestEvent");
+L_CheckLoot:
+    if (@LootChance > rand(100)) 
+        goto L_Loot;
+    goto L_End;
+
+L_Loot:
+    set $@NPCXP[$@NpcId], rand(BaseLevel * 10);
+    callfunc "NpcEsLXp";
+    set $@NPCZeny[$@NpcId], rand(BaseLevel * 10);
+    callfunc "NpcEsLZeny";
+
+    callfunc("NpcClearLoot");
+    setarray $@SmallQuestRewards$, "Orange", "Beer", "Arrow", "IronArrow";
+    set $@NPCSmCnt[$@NpcId], rand(2);
+    callfunc "NpcEsLSm";
+    message strcharinfo(0), "A clue towards the next location!";
+    misceffect FX_GETITEM, strcharinfo(0);
+    callfunc "NpcClearMove";
+    setarray $@NpcPosX, "75", "122", "146", "35", "22";
+    setarray $@NpcPosY, "48", "66", "23", "30", "42";
+    callfunc "NpcRandMove";
+    end;
+
+L_End:
+    delitem "TreasureMap", 1;
+    set PirateTime, gettimetick(2) + @RedoWaitTime;
+    callfunc "NpcClearLoot";
+    setarray $@MediumQuestRewards$, "CasinoCoins", "IronPowder", "SulphurPowder";
+    set $@NPCMdCnt[$@NpcId], rand(2,4);
+    callfunc "NpcEsLMd";
+    callfunc "NpcClearLoot";
+    setarray $@EndQuestRewards$, "PirateHat", "Diamond", "Ruby", "Sapphire", "Topaz", "Amethyst", "Emerald", "Bandana", "Eyepatch", "TreasureMap";
+    set $@NPCEndCnt[$@NpcId], 1;
+    callfunc "NpcEsLEnd";
+    message strcharinfo(0), "Yar! Treasure!";
+    misceffect FX_GETITEM, strcharinfo(0);
+    end;
+
+L_EndTooYoung:
+    message strcharinfo(0), "The item is empty.";
+    end;
+
+L_EndTooSoon:
+    message strcharinfo(0), "You've already found this treasure today.";
+    end;
+
+L_End2:
+    message strcharinfo(0), "Don't be greedy! You just found something a moment ago.";
+    set @NPCpenalty, @NPCpenalty + 5;
+    if (@NPCpenalty > gettimetick(2))
+        set @NPCpenalty, gettimetick(2);
+        end;
+
 }
