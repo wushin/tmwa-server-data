@@ -1,0 +1,125 @@
+//  NPC Functions
+// A collection of functions called by NPCs
+// 1) Npc Move Random
+// 2) Npc Move Ordered
+// 3) Npc Clear Move
+// 4) Easy NPC Loot Tables
+// 5) Interaction Count
+// 6) Random Volley
+// 7) Posion PC
+// Author: wushin
+
+function|script|NpcRandMove|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+
+    if (getarraysize($@NpcPosX) != getarraysize($@NpcPosY))
+        goto L_FAULTY_SETUP;
+
+    disablenpc $@NpcName$;
+    set $@NPCPos[$@NpcId], rand(getarraysize($@NpcPosX));
+    npcwarp $@NpcPosX[$@NPCPos[$@NpcId]], $@NpcPosY[$@NPCPos[$@NpcId]], $@NpcName$;
+    enablenpc $@NpcName$;
+    return;
+
+L_FAULTY_SETUP:
+    end;
+
+}
+
+function|script|NpcOrdMove|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+
+    if (getarraysize($@NpcPosX) != getarraysize($@NpcPosY))
+        goto L_FAULTY_SETUP;
+
+    disablenpc $@NpcName$;
+    if (getarraysize($@NpcPosX) > $@NPCPos[$@NpcId])
+        set $@NPCPos[$@NpcId], $@NPCPos[$@NpcId] + 1;
+    if (getarraysize($@NpcPosX) == $@NPCPos[$@NpcId])
+        set $@NPCPos[$@NpcId], 0;
+    npcwarp $@NpcPosX[$@NPCPos[$@NpcId]], $@NpcPosY[$@NPCPos[$@NpcId]], $@NpcName$;
+    enablenpc $@NpcName$;
+    return;
+
+L_FAULTY_SETUP:
+    end;
+
+}
+
+function|script|NpcClearMove|{
+    cleararray $@NpcRandPosX, "", getarraysize($@NpcRandPosX);
+    cleararray $@NpcRandPosY, "", getarraysize($@NpcRandPosY);
+    cleararray $@NpcOrdPosX, "", getarraysize($@NpcOrdPosX);
+    cleararray $@NpcOrdPosY, "", getarraysize($@NpcOrdPosY);
+    return;
+}
+
+function|script|NpcEsLXp|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+    getexp $@NPCXP[$@NpcId], 0;
+    return;
+}
+
+function|script|NpcEsLZeny|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+    set Zeny, Zeny + $@NPCZeny[$@NpcId];
+    return;
+}
+
+function|script|NpcEsLSm|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+    set @random, rand(getarraysize($@SmallQuestRewards$));
+    getitem $@SmallQuestRewards$[@random], $@NPCSmCnt[$@NpcId];
+    return;
+}
+
+function|script|NpcEsLMd|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+    set @random, rand(getarraysize($@MediumQuestRewards$));
+    getitem $@MediumQuestRewards$[@random], $@NPCMdCnt[$@NpcId];
+    return;
+}
+
+function|script|NpcEsLEnd|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+    set @random, rand(getarraysize($@EndQuestRewards$));
+    getitem $@EndQuestRewards$[@random], $@NPCEndCnt[$@NpcId];
+    return;
+}
+
+function|script|NpcClearLoot|{
+    cleararray $@SmallQuestRewards$, "", getarraysize($@SmallQuestRewards$);
+    cleararray $@MediumQuestRewards$, "", getarraysize($@MediumQuestRewards$);
+    cleararray $@EndQuestRewards$, "", getarraysize($@EndQuestRewards$);
+    return;
+}
+
+function|script|NpcCnt|{
+    // Author of Easter Quest this is based off of: PjotrOrial
+
+    set $@peopleFoundNpc[$@NpcId], $@peopleFoundNpc[$@NpcId]+1;
+    return;
+
+}
+
+function|script|NpcPCVolley|{
+    // Author: wushin
+
+    set $@AoePosXO[$@NpcId], ($@AoeEpiX[$@NpcId] - rand($@AoeRadX[$@NpcId]));
+    set $@AoePosXT[$@NpcId], ($@AoeEpiX[$@NpcId] + rand($@AoeRadX[$@NpcId]));
+    set $@AoePosYO[$@NpcId], ($@AoeEpiY[$@NpcId] - rand($@AoeRadY[$@NpcId]));
+    set $@AoePosYT[$@NpcId], ($@AoeEpiY[$@NpcId] + rand($@AoeRadY[$@NpcId]));
+
+    if (isin($@NpcMapName$, $@AoePosXO[$@NpcId], $@AoePosYO[$@NpcId], $@AoePosXT[$@NpcId], $@AoePosYT[$@NpcId]))
+        percentheal @NpcHealHarm;
+    return;
+
+}
+
+function|script|NpcPosionPC|{
+    // Author: wushin
+
+    sc_start sc_poison, @PosionTick, @PosionCounter;
+    return;
+
+}
