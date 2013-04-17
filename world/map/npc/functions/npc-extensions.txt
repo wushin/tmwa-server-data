@@ -111,7 +111,7 @@ function|script|NpcPCVolley|{
     set $@AoePosYT[$@NpcId], ($@AoeEpiY[$@NpcId] + rand($@AoeRadY[$@NpcId]));
 
     if (isin($@NpcMapName$, $@AoePosXO[$@NpcId], $@AoePosYO[$@NpcId], $@AoePosXT[$@NpcId], $@AoePosYT[$@NpcId]))
-        percentheal @NpcHealHarm, 0;
+        percentheal @NpcHealHarm;
     return;
 
 }
