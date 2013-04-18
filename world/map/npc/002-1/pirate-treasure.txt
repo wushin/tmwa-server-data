@@ -1,11 +1,11 @@
 // Pirates Treasure
 // Author: wushin
 
-003-1.gat,22,42,0|script|X#3|400,{
+002-1.gat,105,104,0|script|X#2|400,{
 
-    set @NpcId, 3;
-    set @NpcName$, "X#3";
-    set @NPCWaitTime, 15;
+    set @NpcId, 2;
+    set @NpcName$, "X#2";
+    set @NPCWaitTime, 0;
     set @RedoWaitTime, 86400;
     set @LootChance, 80;
     set @RareChance, 5;
@@ -71,8 +71,8 @@ L_Move:
     cleararray @NpcPosX, "", getarraysize(@NpcRandPosX);
     cleararray @NpcPosY, "", getarraysize(@NpcRandPosY);
 
-    setarray $@NpcPosX, "22", "75", "122", "146", "35";
-    setarray $@NpcPosY, "42", "48", "66", "23", "30";
+    setarray @NpcPosX, "105", "57", "49", "19", "81", "99";
+    setarray @NpcPosY, "104", "74", "93", "35", "23", "49";
 
     if (getarraysize(@NpcPosX) != getarraysize(@NpcPosY))
         goto L_FAULTY_SETUP;
@@ -111,9 +111,8 @@ L_MoveEnd:
     cleararray @NpcPosX, "", getarraysize(@NpcRandPosX);
     cleararray @NpcPosY, "", getarraysize(@NpcRandPosY);
 
-    setarray $@NpcPosX, "22", "75", "122", "146", "35";
-    setarray $@NpcPosY, "42", "48", "66", "23", "30";
-
+    setarray @NpcPosX, "105", "57", "49", "19", "81", "99";
+    setarray @NpcPosY, "104", "74", "93", "35", "23", "49";
 
     if (getarraysize(@NpcPosX) != getarraysize(@NpcPosY))
         goto L_FAULTY_SETUP;
