@@ -44,7 +44,6 @@ L_Loot:
     cleararray @SmallQuestRewards$, "", getarraysize(@SmallQuestRewards$);
     goto L_Move;
 
-
 L_End:
     delitem "TreasureMap", 1;
     set PirateTime, gettimetick(2) + @RedoWaitTime;
@@ -70,55 +69,39 @@ L_Move:
 
     cleararray @NpcPosX, "", getarraysize(@NpcRandPosX);
     cleararray @NpcPosY, "", getarraysize(@NpcRandPosY);
-
     setarray @NpcPosX, "105", "57", "49", "19", "81", "99";
     setarray @NpcPosY, "104", "74", "93", "35", "23", "49";
-
     if (getarraysize(@NpcPosX) != getarraysize(@NpcPosY))
         goto L_FAULTY_SETUP;
-
     set @DirMsg$, "Getting Warmer!";
     set @NpcMsg$, "";
     set @OldX, @NpcPosX[@NPCPos[@NpcId]];
     set @OldY, @NpcPosY[@NPCPos[@NpcId]];
-
     set @NPCPos[@NpcId], rand(getarraysize(@NpcPosX));
-
     set @NewX, @NpcPosX[@NPCPos[@NpcId]];
     set @NewY, @NpcPosY[@NPCPos[@NpcId]];
-
     if(@OldX > @NewX)
         set @DirMsg$, (@OldX - @NewX) + " Paces West.";
     if(@OldX < @NewX)
         set @DirMsg$, (@NewX - @OldX) + " Paces East.";
-
     if(@OldY > @NewY)
         set @DirMsg$, (@OldY - @NewY) + " Paces North, " + @DirMsg$;
     if(@OldY < @NewY)
         set @DirMsg$, (@NewY - @OldY) + " Paces South, " + @DirMsg$;
-
     message strcharinfo(0), @DirMsg$;
-
     disablenpc @NpcName$;
-
     npcwarp @NpcPosX[@NPCPos[@NpcId]], @NpcPosY[@NPCPos[@NpcId]], @NpcName$;
-
     enablenpc @NpcName$;
-
     end;
 
 L_MoveEnd:
     cleararray @NpcPosX, "", getarraysize(@NpcRandPosX);
     cleararray @NpcPosY, "", getarraysize(@NpcRandPosY);
-
     setarray @NpcPosX, "105", "57", "49", "19", "81", "99";
     setarray @NpcPosY, "104", "74", "93", "35", "23", "49";
-
     if (getarraysize(@NpcPosX) != getarraysize(@NpcPosY))
         goto L_FAULTY_SETUP;
-
     set @NPCPos[@NpcId], rand(getarraysize(@NpcPosX));
-
     disablenpc @NpcName$;
     npcwarp @NpcPosX[@NPCPos[@NpcId]], @NpcPosY[@NPCPos[@NpcId]], @NpcName$;
     enablenpc @NpcName$;
