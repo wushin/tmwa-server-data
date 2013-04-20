@@ -24,12 +24,10 @@
     goto L_Move;
 
 OnInit:
-    cleararray $@PT_NpcPosX, "", getarraysize($@PT_NpcPosX);
-    cleararray $@PT_NpcPosY, "", getarraysize($@PT_NpcPosY);
-    setarray $@PT_NpcPosX, "22", "75", "122", "146", "35";
-    setarray $@PT_NpcPosY, "42", "48", "66", "23", "30";
+    setarray $@PT_NpcPosX, 22, 75, 122, 146, 35;
+    setarray $@PT_NpcPosY, 42, 48, 66, 23, 30;
 
-    if (getarraysize(@PT_NpcPosX) != getarraysize(@PT_NpcPosY))
+    if (getarraysize($@PT_NpcPosX) != getarraysize($@PT_NpcPosY))
         goto L_FAULTY_SETUP;
     end;
 
@@ -58,23 +56,27 @@ L_PTTreasure:
     set @random, rand(getarraysize(@PT_MediumQuestRewards$));
     getitem @PT_MediumQuestRewards$[@random], rand(2,4);
     if (@PT_RareChance > rand(100)) 
-        cleararray @PT_EndQuestRewards$, "", getarraysize(@PT_EndQuestRewards$);
-        setarray @PT_EndQuestRewards$, "PirateHat", "Diamond", "Ruby", "Sapphire", "Topaz", "Amethyst", "Emerald", "Bandana", "Eyepatch", "TreasureMap";
-        set @random, rand(getarraysize(@PT_EndQuestRewards$));
-        getitem @PT_EndQuestRewards$[@random], 1;
+        goto L_PTRareTreasure;
     message strcharinfo(0), "Yar! Treasure!";
     misceffect FX_GETITEM, strcharinfo(0);
     goto L_MoveEnd;
 
+L_PTRareTreasure:
+    cleararray @PT_EndQuestRewards$, "", getarraysize(@PT_EndQuestRewards$);
+    setarray @PT_EndQuestRewards$, "PirateHat", "Diamond", "Ruby", "Sapphire", "Topaz", "Amethyst", "Emerald", "Bandana", "Eyepatch", "TreasureMap";
+    set @random, rand(getarraysize(@PT_EndQuestRewards$));
+    getitem @PT_EndQuestRewards$[@random], 1;
+    goto L_MoveEnd;
+
 L_Move:
-    if (getarraysize(@PT_NpcPosX) != getarraysize(@PT_NpcPosY))
+    if (getarraysize($@PT_NpcPosX) != getarraysize($@PT_NpcPosY))
         goto L_FAULTY_SETUP;
     set @PT_DirMsg$, "Getting Warmer!";
-    set @PT_OldX, @PT_NpcPosX[@PT_NpcPos[@PT_XId]];
-    set @PT_OldY, @PT_NpcPosY[@PT_NpcPos[@PT_XId]];
-    set @PT_NpcPos[@PT_XId], rand(getarraysize(@PT_NpcPosX));
-    set @PT_NewX, @PT_NpcPosX[@PT_NpcPos[@PT_XId]];
-    set @PT_NewY, @PT_NpcPosY[@PT_NpcPos[@PT_XId]];
+    set @PT_OldX, $@PT_NpcPosX[$@PT_NpcPos[@PT_XId]];
+    set @PT_OldY, $@PT_NpcPosY[@PT_NpcPos[@PT_XId]];
+    set $@PT_NpcPos[@PT_XId], rand(getarraysize($@PT_NpcPosX));
+    set @PT_NewX, $@PT_NpcPosX[$@PT_NpcPos[@PT_XId]];
+    set @PT_NewY, $@PT_NpcPosY[$@PT_NpcPos[@PT_XId]];
     if(@PT_OldX > @PT_NewX)
         set @PT_DirMsg$, (@PT_OldX - @PT_NewX) + " Paces West.";
     if(@PT_OldX < @PT_NewX)
@@ -85,14 +87,14 @@ L_Move:
         set @PT_DirMsg$, (@PT_NewY - @PT_OldY) + " Paces South, " + @PT_DirMsg$;
     message strcharinfo(0), @PT_DirMsg$;
     disablenpc "X#" + @PT_XId;
-    npcwarp @PT_NpcPosX[@PT_NpcPos[@PT_XId]], @PT_NpcPosY[@PT_NpcPos[@PT_XId]], "X#" + @PT_XId;
+    npcwarp $@PT_NpcPosX[$@PT_NpcPos[@PT_XId]], $@PT_NpcPosY[$@PT_NpcPos[@PT_XId]], "X#" + @PT_XId;
     enablenpc "X#" + @PT_XId;
     goto L_End;
 
 L_MoveEnd:
-    set @PT_NpcPos[@PT_XId], rand(getarraysize(@PT_NpcPosX));
+    set $@PT_NpcPos[@PT_XId], rand(getarraysize($@PT_NpcPosX));
     disablenpc "X#" + @PT_XId;
-    npcwarp @PT_NpcPosX[@PT_NpcPos[@PT_XId]], @PT_NpcPosY[@PT_NpcPos[@PT_XId]], "X#" + @PT_XId;
+    npcwarp $@PT_NpcPosX[$@PT_NpcPos[@PT_XId]], $@PT_NpcPosY[$@PT_NpcPos[@PT_XId]], "X#" + @PT_XId;
     enablenpc "X#" + @PT_XId;
     goto L_End;
 
@@ -120,11 +122,11 @@ L_End:
     end;
 
 L_End2:
-    message strcharinfo(0), "Your exhausted from searching. Why don't you rest a spell.";
+    message strcharinfo(0), "Your exhausted from searching. Why don't you sit for a while.";
     set @PT_Npcpenalty, @PT_Npcpenalty + 5;
     if (@PT_Npcpenalty > gettimetick(2))
         set @PT_Npcpenalty, gettimetick(2);
-        end;
+    end;
 
 L_FAULTY_SETUP:
     gmcommand @mapexit;
