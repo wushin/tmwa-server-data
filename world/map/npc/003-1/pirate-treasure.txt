@@ -1,110 +1,100 @@
 // Pirates Treasure
 // Author: wushin
 
-003-1.gat,22,42,0|script|X#3|400,{
+003-1.gat,22,42,0|script|X#0|400,{
 
-    set @NpcId, 3;
-    set @NpcName$, "X#3";
-    set @NPCWaitTime, 15;
-    set @RedoWaitTime, 86400;
-    set @LootChance, 80;
-    set @RareChance, 5;
-    set @TrapChance, 10;
+    set @PT_XId, 0;
+    set @PT_NpcWaitTime, 15;
+    set @PT_RedoWaitTime, 86400;
+    set @PT_LootChance, 80;
+    set @PT_RareChance, 5;
+    set @PT_TrapChance, 10;
 
     if ((countitem("TreasureMap") == 0) || (BaseLevel < 60)) //player must be level X and have Y
         goto L_EndTooYoung;
     if (PirateTime > gettimetick(2))
         goto L_EndTooSoon;
-    if (gettimetick(2) < @NPCpenalty + @NPCWaitTime)
+    if (gettimetick(2) < @PT_Npcpenalty + @PT_NpcWaitTime)
         goto L_End2;
-    set @NPCpenalty, gettimetick(2);
-    goto L_BeginHunt;
-
-L_Trap:
-        message strcharinfo(0), "A Trap! Thats not treasure. Ugh.";
-        sc_start sc_poison, 1, (BaseLevel/2);
-        goto L_Move;
-
-L_BeginHunt:
-    if (@TrapChance > rand(100))
-        goto L_Trap;
-
-L_CheckLoot:
-    if (@LootChance > rand(100)) 
-        goto L_Loot;
-    goto L_End;
-
-L_Loot:
-    getexp rand(BaseLevel * 10), 0;
-    set Zeny, Zeny + rand(BaseLevel * 10);
-    setarray @SmallQuestRewards$, "Orange", "Beer", "Arrow", "IronArrow";
-    set @random, rand(getarraysize(@SmallQuestRewards$));
-    getitem @SmallQuestRewards$[@random], rand(2);
-    misceffect FX_GETITEM, strcharinfo(0);
-    cleararray @SmallQuestRewards$, "", getarraysize(@SmallQuestRewards$);
+    set @PT_Npcpenalty, gettimetick(2);
+    if (@PT_TrapChance <= rand(100))
+        goto L_PTReward;
+    message strcharinfo(0), "A Trap! Thats not treasure. Ugh.";
+    sc_start sc_poison, 1, (BaseLevel/2);
     goto L_Move;
 
-L_End:
-    delitem "TreasureMap", 1;
-    set PirateTime, gettimetick(2) + @RedoWaitTime;
+OnInit:
+    cleararray $@PT_NpcPosX, "", getarraysize($@PT_NpcPosX);
+    cleararray $@PT_NpcPosY, "", getarraysize($@PT_NpcPosY);
+    setarray $@PT_NpcPosX, "22", "75", "122", "146", "35";
+    setarray $@PT_NpcPosY, "42", "48", "66", "23", "30";
+
+    if (getarraysize(@PT_NpcPosX) != getarraysize(@PT_NpcPosY))
+        goto L_FAULTY_SETUP;
+    end;
+
+L_PTReward:
+    if (@PT_LootChance <= rand(100)) 
+        goto L_PTTreasure;
     getexp rand(BaseLevel * 10), 0;
     set Zeny, Zeny + rand(BaseLevel * 10);
-    setarray @SmallQuestRewards$, "Orange", "Beer", "Arrow", "IronArrow";
-    set @random, rand(getarraysize(@SmallQuestRewards$));
-    getitem @SmallQuestRewards$[@random], rand(2,4);
-    cleararray @MediumQuestRewards$, "", getarraysize(@MediumQuestRewards$);
-    setarray @MediumQuestRewards$, "CasinoCoins", "IronPowder", "SulphurPowder";
-    set @random, rand(getarraysize(@MediumQuestRewards$));
-    getitem @MediumQuestRewards$[@random], rand(2,4);
-    if (@RareChance > rand(100)) 
-        cleararray @EndQuestRewards$, "", getarraysize(@EndQuestRewards$);
-        setarray @EndQuestRewards$, "PirateHat", "Diamond", "Ruby", "Sapphire", "Topaz", "Amethyst", "Emerald", "Bandana", "Eyepatch", "TreasureMap";
-        set @random, rand(getarraysize(@EndQuestRewards$));
-        getitem @EndQuestRewards$[@random], 1;
+    setarray @PT_SmallQuestRewards$, "Orange", "Beer", "Arrow", "IronArrow";
+    set @random, rand(getarraysize(@PT_SmallQuestRewards$));
+    getitem @PT_SmallQuestRewards$[@random], rand(2);
+    misceffect FX_GETITEM, strcharinfo(0);
+    cleararray @PT_SmallQuestRewards$, "", getarraysize(@PT_SmallQuestRewards$);
+    goto L_Move;
+
+L_PTTreasure:
+    delitem "TreasureMap", 1;
+    set PirateTime, gettimetick(2) + @PT_RedoWaitTime;
+    getexp rand(BaseLevel * 10), 0;
+    set Zeny, Zeny + rand(BaseLevel * 10);
+    setarray @PT_SmallQuestRewards$, "Orange", "Beer", "Arrow", "IronArrow";
+    set @random, rand(getarraysize(@PT_SmallQuestRewards$));
+    getitem @PT_SmallQuestRewards$[@random], rand(2,4);
+    cleararray @PT_MediumQuestRewards$, "", getarraysize(@PT_MediumQuestRewards$);
+    setarray @PT_MediumQuestRewards$, "CasinoCoins", "IronPowder", "SulphurPowder";
+    set @random, rand(getarraysize(@PT_MediumQuestRewards$));
+    getitem @PT_MediumQuestRewards$[@random], rand(2,4);
+    if (@PT_RareChance > rand(100)) 
+        cleararray @PT_EndQuestRewards$, "", getarraysize(@PT_EndQuestRewards$);
+        setarray @PT_EndQuestRewards$, "PirateHat", "Diamond", "Ruby", "Sapphire", "Topaz", "Amethyst", "Emerald", "Bandana", "Eyepatch", "TreasureMap";
+        set @random, rand(getarraysize(@PT_EndQuestRewards$));
+        getitem @PT_EndQuestRewards$[@random], 1;
     message strcharinfo(0), "Yar! Treasure!";
     misceffect FX_GETITEM, strcharinfo(0);
     goto L_MoveEnd;
 
 L_Move:
-    cleararray @NpcPosX, "", getarraysize(@NpcRandPosX);
-    cleararray @NpcPosY, "", getarraysize(@NpcRandPosY);
-    setarray $@NpcPosX, "22", "75", "122", "146", "35";
-    setarray $@NpcPosY, "42", "48", "66", "23", "30";
-    if (getarraysize(@NpcPosX) != getarraysize(@NpcPosY))
+    if (getarraysize(@PT_NpcPosX) != getarraysize(@PT_NpcPosY))
         goto L_FAULTY_SETUP;
-    set @DirMsg$, "Getting Warmer!";
-    set @NpcMsg$, "";
-    set @OldX, @NpcPosX[@NPCPos[@NpcId]];
-    set @OldY, @NpcPosY[@NPCPos[@NpcId]];
-    set @NPCPos[@NpcId], rand(getarraysize(@NpcPosX));
-    set @NewX, @NpcPosX[@NPCPos[@NpcId]];
-    set @NewY, @NpcPosY[@NPCPos[@NpcId]];
-    if(@OldX > @NewX)
-        set @DirMsg$, (@OldX - @NewX) + " Paces West.";
-    if(@OldX < @NewX)
-        set @DirMsg$, (@NewX - @OldX) + " Paces East.";
-    if(@OldY > @NewY)
-        set @DirMsg$, (@OldY - @NewY) + " Paces North, " + @DirMsg$;
-    if(@OldY < @NewY)
-        set @DirMsg$, (@NewY - @OldY) + " Paces South, " + @DirMsg$;
-    message strcharinfo(0), @DirMsg$;
-    disablenpc @NpcName$;
-    npcwarp @NpcPosX[@NPCPos[@NpcId]], @NpcPosY[@NPCPos[@NpcId]], @NpcName$;
-    enablenpc @NpcName$;
-    end;
+    set @PT_DirMsg$, "Getting Warmer!";
+    set @PT_OldX, @PT_NpcPosX[@PT_NpcPos[@PT_XId]];
+    set @PT_OldY, @PT_NpcPosY[@PT_NpcPos[@PT_XId]];
+    set @PT_NpcPos[@PT_XId], rand(getarraysize(@PT_NpcPosX));
+    set @PT_NewX, @PT_NpcPosX[@PT_NpcPos[@PT_XId]];
+    set @PT_NewY, @PT_NpcPosY[@PT_NpcPos[@PT_XId]];
+    if(@PT_OldX > @PT_NewX)
+        set @PT_DirMsg$, (@PT_OldX - @PT_NewX) + " Paces West.";
+    if(@PT_OldX < @PT_NewX)
+        set @PT_DirMsg$, (@PT_NewX - @PT_OldX) + " Paces East.";
+    if(@PT_OldY > @PT_NewY)
+        set @PT_DirMsg$, (@PT_OldY - @PT_NewY) + " Paces North, " + @PT_DirMsg$;
+    if(@PT_OldY < @PT_NewY)
+        set @PT_DirMsg$, (@PT_NewY - @PT_OldY) + " Paces South, " + @PT_DirMsg$;
+    message strcharinfo(0), @PT_DirMsg$;
+    disablenpc "X#" + @PT_XId;
+    npcwarp @PT_NpcPosX[@PT_NpcPos[@PT_XId]], @PT_NpcPosY[@PT_NpcPos[@PT_XId]], "X#" + @PT_XId;
+    enablenpc "X#" + @PT_XId;
+    goto L_End;
 
 L_MoveEnd:
-    cleararray @NpcPosX, "", getarraysize(@NpcRandPosX);
-    cleararray @NpcPosY, "", getarraysize(@NpcRandPosY);
-    setarray $@NpcPosX, "22", "75", "122", "146", "35";
-    setarray $@NpcPosY, "42", "48", "66", "23", "30";
-    if (getarraysize(@NpcPosX) != getarraysize(@NpcPosY))
-        goto L_FAULTY_SETUP;
-    set @NPCPos[@NpcId], rand(getarraysize(@NpcPosX));
-    disablenpc @NpcName$;
-    npcwarp @NpcPosX[@NPCPos[@NpcId]], @NpcPosY[@NPCPos[@NpcId]], @NpcName$;
-    enablenpc @NpcName$;
-    end;
+    set @PT_NpcPos[@PT_XId], rand(getarraysize(@PT_NpcPosX));
+    disablenpc "X#" + @PT_XId;
+    npcwarp @PT_NpcPosX[@PT_NpcPos[@PT_XId]], @PT_NpcPosY[@PT_NpcPos[@PT_XId]], "X#" + @PT_XId;
+    enablenpc "X#" + @PT_XId;
+    goto L_End;
 
 L_EndTooYoung:
     message strcharinfo(0), "You have no idea how to understand the markings.";
@@ -114,11 +104,26 @@ L_EndTooSoon:
     message strcharinfo(0), "You've already found this treasure today.";
     end;
 
+L_End:
+    set @random, 0;
+    set @PT_XId, 0;
+    set @PT_NpcWaitTime, 0;
+    set @PT_RedoWaitTime, 0;
+    set @PT_LootChance, 0;
+    set @PT_RareChance, 0;
+    set @PT_TrapChance, 0;
+    set @PT_DirMsg$, "";
+    set @PT_OldX, 0;
+    set @PT_OldY, 0;
+    set @PT_NewX, 0;
+    set @PT_NewY, 0;
+    end;
+
 L_End2:
-    message strcharinfo(0), "Don't be greedy! You just found something a moment ago.";
-    set @NPCpenalty, @NPCpenalty + 5;
-    if (@NPCpenalty > gettimetick(2))
-        set @NPCpenalty, gettimetick(2);
+    message strcharinfo(0), "Your exhausted from searching. Why don't you rest a spell.";
+    set @PT_Npcpenalty, @PT_Npcpenalty + 5;
+    if (@PT_Npcpenalty > gettimetick(2))
+        set @PT_Npcpenalty, gettimetick(2);
         end;
 
 L_FAULTY_SETUP:
