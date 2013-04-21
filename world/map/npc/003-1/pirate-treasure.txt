@@ -2,20 +2,19 @@
 // Author: wushin
 // Based off PjotrOrial's Easter Hunt
 
-
 003-1.gat,22,42,0|script|X#0|400,{
 
-    // X Idi for the NPC and Hunt as more treasures maybe added
+    // X Id for the NPC and Hunt as more treasures maybe added
     set @PT_XId, 0;
     // How long between searches
     set @PT_NpcWaitTime, 15;
     // Quest redo wait time
     set @PT_RedoWaitTime, 86400;
-    // Basic loot chance for mior loot
+    // Basic loot chance for minor loot
     set @PT_LootChance, 80;
     // Loot chance for pirate rare
     set @PT_RareChance, 5;
-    // Chnace there is no treasure but a trap (poisoned)
+    // Chance there is no treasure but a trap (poisoned)
     set @PT_TrapChance, 10;
 
     if ((countitem("TreasureMap") == 0) || (BaseLevel < 60)) //player must be level X and have Y
