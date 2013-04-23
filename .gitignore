@@ -3,5 +3,3 @@ log/
 gm.log.*
 online.*
 /converter.txt
-_*.txt
-*.wlk
