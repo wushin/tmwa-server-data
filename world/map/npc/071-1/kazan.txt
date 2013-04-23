@@ -1,0 +1,9 @@
+//
+
+071-1.gat,30,30,0|script|Kazan|125,{
+
+    mes "[Kazan]";
+    mes "\"Astronomical!\"";
+    close;
+
+}

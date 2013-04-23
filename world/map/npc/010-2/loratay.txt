@@ -679,9 +679,10 @@ L_cape:
     next;
     goto L_main_menu;
 
+// NEW
 L_robe:
     mes "[Lora Tay the Seamstress]";
-    mes "\"A robe?  Well, as long as you're not asking me to make it out of cotton...\"";
+    mes "\"A robe? Well, as long as you're not asking me to make it out of cotton...\"";
     next;
     if (countitem("SilkCocoon") == 0)
         goto L_robe_nosilk;
@@ -695,18 +696,18 @@ L_robe_menu:
         "Oh, never mind.", L_main_menu;
     mes "[Lora Tay the Seamstress]";
     mes "The seamstress stares at you as if you had gone out of your mind.";
-    mes "\"And what precisely do you expect me to do with Silk Cocoons?  String them together in some baubly chain?  Somehow remove the thread and spin and weave it so that some random person can have their robe?\"";
+    mes "\"And what precisely do you expect me to do with Silk Cocoons? String them together in some baubly chain? Somehow remove the thread and spin and weave it so that some random person can have their robe?\"";
     next;
     menu
         "Will you trade cocoons for sheets?", -,
         "Never mind.", L_main_menu;
     mes "[Lora Tay the Seamstress]";
     mes "Lora frowns.";
-    mes "\"It's not all that easy to get properly processed silk around here.  Easier for me than for you, I admit...\"";
+    mes "\"It's not all that easy to get properly processed silk around here. Easier for me than for you, I admit...\"";
     next;
     mes "[Lora Tay the Seamstress]";
     mes "She sighs.";
-    mes "\"All right, very well then.  I have enough spare silk sheets right now, but you pay the silk processing for your cocoons.\"";
+    mes "\"All right, very well then. I have enough spare silk sheets right now, but you pay the silk processing for your cocoons.\"";
     next;
     mes "[Lora Tay the Seamstress]";
     mes "\"Let's see... " + @ROBE_COCOONS_NR + " silk cocoons and " + @ROBE_ZENY + " GP should just about cover that.\"";
@@ -725,18 +726,18 @@ L_robe_menu:
     delitem "SilkCocoon", @ROBE_COCOONS_NR;
     getitem "SilkRobe", 1;
     mes "[Lora Tay the Seamstress]";
-    mes "The seamstress puts your cocoons and GP away, takes your measurements and pulls out several silk sheets.  She asks you to stretch out your arms, then pins the silk sheets in place all over your body.";
+    mes "The seamstress puts your cocoons and GP away, takes your measurements and pulls out several silk sheets. She asks you to stretch out your arms, then pins the silk sheets in place all over your body.";
     next;
     mes "[Lora Tay the Seamstress]";
-    mes "She proceeds to make a number of mysterious marks on the sheets with a charcoal pen.  Meanwhile, your arms are getting tired, but you're afraid to lower them-- she used a lot of pins to put everything into place, and you lost track of where they went...";
+    mes "She proceeds to make a number of mysterious marks on the sheets with a charcoal pen. Meanwhile, your arms are getting tired, but you're afraid to lower them-- she used a lot of pins to put everything into place, and you lost track of where they went...";
     next;
     mes "[Lora Tay the Seamstress]";
     mes "\"Splendid.\"";
     mes "After removing the sheets (and pins!), she picks up a pair of scissors and plows through the cloth at her usual amazing pace, only stopping briefly to sew together parts here and there.";
     next;
     mes "[Lora Tay the Seamstress]";
-    mes "She then treats the seams with some odorless liquid, making them vanish completely.  Finally she hands you the finished robe.";
-    mes "\"Here you are now, this will fit.  And don't you dare tell anyone that I did this!  I'm not about to start a silk cocoon collection!\"";
+    mes "She then treats the seams with some odorless liquid, making them vanish completely. Finally she hands you the finished robe.";
+    mes "\"Here you are now, this will fit. And don't you dare tell anyone that I did this! I'm not about to start a silk cocoon collection!\"";
     next;
     goto L_main_menu;
 
@@ -749,7 +750,7 @@ L_robe_missing_cocoons:
 
 L_robe_missing_Zeny:
     mes "[Lora Tay the Seamstress]";
-    mes "\"No, no no.  The way this works is that you give me the GP first and I give you the robe afterwards.  You're " + (@ROBE_ZENY - Zeny) + " GP short, so come back when you can afford the robe!\"";
+    mes "\"No, no no. The way this works is that you give me the GP first and I give you the robe afterwards. You're " + (@ROBE_ZENY - Zeny) + " GP short, so come back when you can afford the robe!\"";
     next;
     goto L_main_menu;
 
@@ -759,7 +760,7 @@ L_where_silk:
     next;
     mes "[Lora Tay the Seamstress]";
     mes "She hesitates.";
-    mes "\"I didn't see her there the last time I visited, though.  She may be visiting family.  Tough luck.\"";
+    mes "\"I didn't see her there the last time I visited, though. She may be visiting family. Tough luck.\"";
     next;
     goto L_robe_menu;
 
@@ -771,7 +772,7 @@ L_how_much_silk:
 
 L_robe_nosilk:
     mes "[Lora Tay the Seamstress]";
-    mes "\"What is that?  You don't have any silk?  Well, you're out of luck, I would say.  I shan't make one out of those cotton rags; you might as well be wearing an apple sack.\"";
+    mes "\"What is that? You don't have any silk? Well, you're out of luck, I would say. I shan't make one out of those cotton rags; you might as well be wearing an apple sack.\"";
     next;
     goto L_main_menu;
 

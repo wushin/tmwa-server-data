@@ -6,11 +6,55 @@
     next;
     menu
         "How do I use the ferry?", L_Explain,
-        "Nothing I guess", -;
-    close;
+        "Where can I go?",L_Places,
+        "Nothing I guess",L_Close;
 
 L_Explain:
     mes "[Ferry Master]";
     mes "\"You'll step up on the dock and select your destination. Each destination has an associated price that you need to pay. You don't have to go anywhere. Choosing the current port will result in nothing.\"";
+    goto L_Close;
+
+L_Places:
+    mes "[Ferry Master]";
+    mes "\"TODO: Mention Tulimshar (here we are), Hurnscald (you can travel there), Nivalis/Kaizei (you can't travel there because of the ice, no dock), Candor (only for experienced adventurers).\"";
+    goto L_More;
+
+L_More:
+    menu
+        "Give me some information about Tulimshar.",L_Tulimshar,
+        "Please tell me more about Hurnscald.",L_Hurnscald,
+        "Can you tell me more about the snow continent?",L_Kaizei,
+        "Candor... what exactly is there?",L_Candor,
+        "Thank you!",L_Close;
+
+L_Tulimshar:
+    mes "[Ferry Master]";
+    mes "\"TODO\"";
+    menu
+        "That's very interesting, I'd like to aks you something more.",L_More,
+        "Thank you!",L_Close;
+
+L_Hurnscald:
+    mes "[Ferry Master]";
+    mes "\"TODO\"";
+    menu
+        "That's very interesting, I'd like to aks you something more.",L_More,
+        "Thank you!",L_Close;
+
+L_Kaizei:
+    mes "[Ferry Master]";
+    mes "\"TODO\"";
+    menu
+        "That's very interesting, I'd like to aks you something more.",L_More,
+        "Thank you!",L_Close;
+
+L_Candor:
+    mes "[Ferry Master]";
+    mes "\"TODO stay vague here\"";
+    menu
+        "That's very interesting, I'd like to aks you something more.",L_More,
+        "Thank you!",L_Close;
+
+L_Close:
     close;
 }

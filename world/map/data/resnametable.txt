@@ -55,8 +55,11 @@
 020-3.gat#020-3.wlk#
 021-1.gat#021-1.wlk#
 021-2.gat#021-2.wlk#
+021-3.gat#021-3.wlk#
 021-8.gat#021-8.wlk#
 022-1.gat#022-1.wlk#
+022-2.gat#022-2.wlk#
+022-3.gat#022-3.wlk#
 023-1.gat#023-1.wlk#
 024-1.gat#024-1.wlk#
 024-2.gat#024-2.wlk#
@@ -104,4 +107,14 @@
 056-1.gat#056-1.wlk#
 056-2.gat#056-2.wlk#
 057-1.gat#057-1.wlk#
+068-1.gat#068-1.wlk#
+068-2.gat#068-2.wlk#
+068-3.gat#068-3.wlk#
+069-1.gat#069-1.wlk#
+069-2.gat#069-2.wlk#
+069-3.gat#069-3.wlk#
+070-1.gat#070-1.wlk#
+071-1.gat#071-1.wlk#
+072-1.gat#072-1.wlk#
+073-1.gat#073-1.wlk#
 botcheck.gat#botcheck.wlk#
