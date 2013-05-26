@@ -13,7 +13,7 @@
     goto L_End;
 
 L_Underground_Palace_Barrier_Open:
-    warp "002-4.gat",34,98;
+    warp "002-4.gat",37,95;
     goto L_End;
 
 L_End:
