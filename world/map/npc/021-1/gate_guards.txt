@@ -34,7 +34,7 @@
 
 021-1.gat,156,95,0|script|Guard|104,{
     mes "[Guard]";
-    mes "\"The Palace is East of Here. That is where you will find the Council of Wizards.\"";
+    mes "\"The Palace is East of here. That is where you will find the Council of Wizards.\"";
     close;
 }
 
