@@ -1,0 +1,27 @@
+// Further Edit into Ore Veins & cleanup. mining treasure quest
+// Author of Easter Quest this is based off of: PjotrOrial
+// Author: wushin
+
+// Gather Node NPC
+002-4.gat,76,28,0|script|#Node0|501,{
+    set @NodeID, 0;
+    setarray @gathernode_posx, 76, 63, 78, 45, 87; 
+    setarray @gathernode_posy, 28, 43, 86, 81, 47; 
+    callfunc("CoalVein");
+}
+
+// Gather Node NPC
+002-4.gat,78,86,0|script|#Node1|501,{
+    set @NodeID, 1;
+    setarray @gathernode_posx, 76, 63, 78, 45, 87; 
+    setarray @gathernode_posy, 28, 43, 86, 81, 47; 
+    callfunc("CoalVein");
+}
+
+// Gather Node NPC
+002-4.gat,87,47,0|script|#Node2|501,{
+    set @NodeID, 2;
+    setarray @gathernode_posx, 76, 63, 78, 45, 87; 
+    setarray @gathernode_posy, 28, 43, 86, 81, 47; 
+    callfunc("CoalVein");
+}

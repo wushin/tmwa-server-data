@@ -1,0 +1,13 @@
+// Recipes for creating objects from mining
+
+function|script|MRTerraniteIngot|{
+
+    set @CommonName$, "Terranite Ingot";
+    set @ItemName$, "TerraniteIngot";
+    set @ZenyAmt, 1250;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "TerraniteOre","IronIngot","Coal";
+    setarray @ReqIngCn$, "Terranite Ore","Iron Ingot","Coal";
+    setarray @ReqIngNum, "5","1","10";
+    return;
+}

@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRTopaz|{
+
+    set @CommonName$, "Topaz";
+    set @ItemName$, "Topaz";
+    set @ZenyAmt, 500;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "Coal","YellowDye";
+    setarray @ReqIngCn$, "Coal","Yellow Dye";
+    setarray @ReqIngNum, "1000","5";
+    return;
+
+}

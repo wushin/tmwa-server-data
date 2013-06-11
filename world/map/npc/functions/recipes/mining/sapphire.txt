@@ -1,0 +1,13 @@
+// Recipes for creating objects from mining
+
+function|script|MRSapphire|{
+
+    set @CommonName$, "Sapphire";
+    set @ItemName$, "Sapphire";
+    set @ZenyAmt, 500;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "Coal","BlueDye";
+    setarray @ReqIng$, "Coal","Blue Dye";
+    setarray @ReqIngNum, "1000","5";
+    return;
+}

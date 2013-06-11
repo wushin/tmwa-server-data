@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRBronzeIngot|{
+
+    set @CommonName$, "Bronze Ingot"; // Human Readable
+    set @ItemName$, "BronzeIngot"; // computer readable
+    set @ZenyAmt, 250; // Cost for recipe
+    set @ItemNum, 1; // Num created
+    setarray @ReqIng$, "CopperOre","Tin"; // List of required ingredients
+    setarray @ReqIngCn$, "Copper Ore","Tin"; // List of required ingredients
+    setarray @ReqIngNum, "5","1"; // Amounts of required ingredients.
+    return;
+
+}

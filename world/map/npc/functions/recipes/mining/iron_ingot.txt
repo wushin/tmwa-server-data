@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRIronIngot|{
+
+    set @CommonName$, "Iron Ingot";
+    set @ItemName$, "IronIngot";
+    set @ZenyAmt, 750;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "IronOre","Coal";
+    setarray @ReqIngCn$, "Iron Ore","Coal";
+    setarray @ReqIngNum, "5","10";
+    return;
+
+}

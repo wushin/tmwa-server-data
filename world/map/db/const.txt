@@ -480,6 +480,15 @@ BYTE_3_SHIFT 24
 SKILL_EMOTE           1
 SKILL_TRADE           2
 SKILL_PARTY           3
+// Crafting
+SKILL_MINING          20
+SKILL_FORGING         21
+SKILL_FORAGING        22
+SKILL_ALCHEMY         23
+SKILL_TANNING         24
+SKILL_LEATHERCRAFT    25
+SKILL_WEAVING         26
+SKILL_CLOTHIER        27
 
 // Focus Skills
 SKILL_POOL            339

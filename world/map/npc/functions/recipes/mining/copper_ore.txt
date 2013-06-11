@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRCopperOre|{
+
+    set @CommonName$, "Copper Ore";
+    set @ItemName$, "CopperOre";
+    set @ZenyAmt, 0;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "Sandstone";
+    setarray @ReqIngCn$, "Sandstone";
+    setarray @ReqIngNum, "1";
+    return;
+
+}

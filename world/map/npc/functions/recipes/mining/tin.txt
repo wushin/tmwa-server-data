@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRTin|{
+
+    set @CommonName$, "Tin";
+    set @ItemName$, "Tin";
+    set ZenyAmt, 0;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "SulphurPowder";
+    setarray @ReqIngCn$, "Sulphur Powder";
+    setarray @ReqIngNum, "10";
+    return;
+
+}
