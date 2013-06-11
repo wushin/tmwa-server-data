@@ -56,34 +56,29 @@ function|script|CraftMenu|{
 
     L_SimpleMenu:
         mes "\"What shall we make?\"";
-        next;
         menu
-           @RecipesCho$[@ListVar],L_CraftOne,
+           @RecipesCho$[(@ListVar + 0)],L_CraftOne,
            @RecipesCho$[(@ListVar + 1)],L_CraftTwo,
            @RecipesCho$[(@ListVar + 2)],L_CraftThree,
            @RecipesCho$[(@ListVar + 3)],L_CraftFour,
-           @RecipesCho$[(@ListVar + 4)],L_CraftFive,
-           @RecipesCho$[(@ListVar + 5)],L_CraftSix;
+           @RecipesCho$[(@ListVar + 4)],L_CraftFive;
         goto L_FinReturn;
 
     L_CraftOne:
-         message strcharinfo, @RecipesIdx$[@ListVar];
-        goto L_FinReturn;
+         set @menuItem, @ListVar;
+         goto L_CraftItem;
     L_CraftTwo:
-         message strcharinfo, @RecipesIdx$[@ListVar + 1];
-        goto L_FinReturn;
+         set @menuItem, @ListVar + 1;
+         goto L_CraftItem;
     L_CraftThree:
-         message strcharinfo, @RecipesIdx$[@ListVar + 2];
-        goto L_FinReturn;
+         set @menuItem, @ListVar + 2;
+         goto L_CraftItem;
     L_CraftFour:
-         message strcharinfo, @RecipesIdx$[@ListVar + 3];
-        goto L_FinReturn;
+         set @menuItem, @ListVar + 3;
+         goto L_CraftItem;
     L_CraftFive:
-         message strcharinfo, @RecipesIdx$[@ListVar + 4];
-        goto L_FinReturn;
-    L_CraftSix:
-         message strcharinfo, @RecipesIdx$[@ListVar + 5];
-        goto L_FinReturn;
+         set @menuItem, @ListVar + 4;
+         goto L_CraftItem;
 
     L_Learn:
         mes "\"You need to learn "+@RequiredSkillName$+".\"";
@@ -92,61 +87,58 @@ function|script|CraftMenu|{
 
     L_FinReturn:
         return;
-}
 
-// ------------------------------------------------------------
-// Craft Item
-// ------------------------------------------------------------
-function|script|CraftItem|{
-    callfunc(@RecipesIdx$[@menu]);
-//    set @ReqsCheck, 0;
+    L_CraftItem:
+        callfunc(@RecipesIdx$[@menuItem]);
+//        set @ReqsCheck, 0;
 
-//    set @ReqIngCnt, getarraysize(@ReqIng$);
+//        set @ReqIngCnt, getarraysize(@ReqIng$);
 
-//    L_CheckReqIng:
-//       if(@ReqIngCnt > @ReqsCheck)
-//          set @ItemCount, countitem(@ReqIng$[@ReqsCheck]);
-//          if(@ItemCount < @ReqIngNum[@ReqsCheck])
-//             goto L_ReqIngMes;
-//          set @ReqsCheck, (@ReqsCheck + 1);
-//          goto L_CheckReqIng;
+//        L_CheckReqIng:
+//           if(@ReqIngCnt > @ReqsCheck)
+//              set @ItemCount, countitem(@ReqIng$[@ReqsCheck]);
+//              if(@ItemCount < @ReqIngNum[@ReqsCheck])
+//                 goto L_ReqIngMes;
+//              set @ReqsCheck, (@ReqsCheck + 1);
+//              goto L_CheckReqIng;
 
-//    getinventorylist;
-//    if (checkweight(@ItemName$, 1) == 0)
-//       mes "\"This item will be too heavy for you to construct.\"";
-//       goto L_FinClear;
-//    if (@inventorylist_count == 100)
-//       mes "\"You have no space in your inventory. \"";
-//       goto L_FinClear;
+//        getinventorylist;
+//        if (checkweight(@ItemName$, 1) == 0)
+//            mes "\"This item will be too heavy for you to construct.\"";
+//            next;
+//            goto L_FinClear;
+//        if (@inventorylist_count == 100)
+//            mes "\"You have no space in your inventory. \"";
+//            next;
+//            goto L_FinClear;
 
-//    set @DelReqsCheck, 0;
-//    L_DelReqIng:
-//       if(@DelReqIngCnt > @DelReqsCheck)
-//          delitem @ReqIng$[@DelReqsCheck], @ReqIngNum[@DelReqsCheck];
-//          set @DelReqsCheck, @DelReqsCheck + 1;
-//          goto L_DelReqIng;
+//        set @DelReqsCheck, 0;
+//        L_DelReqIng:
+//             if(@DelReqIngCnt > @DelReqsCheck)
+//                  delitem @ReqIng$[@DelReqsCheck], @ReqIngNum[@DelReqsCheck];
+//                  set @DelReqsCheck, @DelReqsCheck + 1;
+//                  goto L_DelReqIng;
 
-    getitem @ItemName$, @ItemNum;
-    misceffect FX_GETITEM, strcharinfo(0);
-    goto L_FinClear;
+        getitem @ItemName$, @ItemNum;
+        misceffect FX_GETITEM, strcharinfo(0);
+        goto L_FinClear;
 
-//    L_ReqIngMes:
-//       set @MesReqsCheck, 0;
-//       mes "You are missing Ingredients. The Following are required to make "+@CommonName$+": ";
-//       L_BuildMsg:
-//          if(@ReqIngCnt > @MesReqsCheck)
-//             mes @ReqIngNum[@MesReqsCheck] + " " + @ReqIngCn$[@MesReqsCheck];
-//             set @MesReqsCheck, @MesReqsCheck + 1;
-//             goto L_BuildMsg;
-//       goto L_FinClear;
+//        L_ReqIngMes:
+//           set @MesReqsCheck, 0;
+//           mes "You are missing Ingredients. The Following are required to make "+@CommonName$+": ";
+//           L_BuildMsg:
+//              if(@ReqIngCnt > @MesReqsCheck)
+//                  mes @ReqIngNum[@MesReqsCheck] + " " + @ReqIngCn$[@MesReqsCheck];
+//                  set @MesReqsCheck, @MesReqsCheck + 1;
+//                  goto L_BuildMsg;
+//           goto L_FinClear;
 
-    L_FinClear:
-       end;
-       set @CommonName$, "";
-       set @ItemName$, "";
-       set ZenyAmt, 0;
-       deletearray @ReqIng$;
-       deletearray @ReqIngCn$;
-       deletearray @ReqCnt;
-       return;
+        L_FinClear:
+           set @CommonName$, "";
+           set @ItemName$, "";
+           set ZenyAmt, 0;
+           deletearray @ReqIng$;
+           deletearray @ReqIngCn$;
+           deletearray @ReqCnt;
+           return;
 }
