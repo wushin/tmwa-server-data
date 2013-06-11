@@ -59,10 +59,10 @@ function|script|TrainMenu|{
         set CRAFT_TWO_XP, 0;
         return;
     L_LevelUp:
-        if(Zeny > @TrainZeny)
+        if(@Zeny > @TrainZeny)
             goto L_NeedZeny;
         misceffect sfx_skillup, strcharinfo(0);
-        set Zeny, Zeny - @TrainZeny;
+        set @Zeny, @Zeny - @TrainZeny;
         setskill @RequiredSkill, (@HasSkill +1);
         if(CRAFT_ONE == @RequiredSkill)
             set CRAFT_ONE_XP, 0;

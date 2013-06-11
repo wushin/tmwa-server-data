@@ -12,7 +12,6 @@ function|script|GatherEvent|{
         goto L_FAULTY_SETUP;
 
     set @HasSkill, getskilllv(@RequiredSkill);
-    message strcharinfo(0), @HasSkill;
     if(@HasSkill == 0)
         goto L_EndNeedSkill;
 
@@ -32,7 +31,7 @@ function|script|GatherEvent|{
 L_Work:
     misceffect FX_GETITEM, strcharinfo(0);
     message strcharinfo(0), "Phew this is hard work.";
-    return;
+    end;
 
 L_Gather:
     getitem @NodeDrop$, 1;
@@ -74,7 +73,6 @@ L_EndNoMove:
 
 L_EndCraftOne:
     set CRAFT_ONE_XP, CRAFT_ONE_XP + @NodeXp;
-    message strcharinfo(0), CRAFT_ONE_XP;
     if(@DROP_CHNACE_EPIC)
         goto L_BonusDrop;
     goto L_EndMove;
@@ -93,7 +91,6 @@ L_BonusDrop:
 L_EndMove:
     disablenpc "#Node" + @NodeID;
     initnpctimer;
-
     set @gathernodePos, rand(getarraysize(@gathernode_posx));
     npcwarp @gathernode_posx[@gathernodePos], @gathernode_posy[@gathernodePos], "#Node" + @NodeID;
 
