@@ -64,6 +64,10 @@ function|script|TrainMenu|{
         misceffect sfx_skillup, strcharinfo(0);
         set Zeny, Zeny - @TrainZeny;
         setskill @RequiredSkill, (@HasSkill +1);
+        if(CRAFT_ONE == @RequiredSkill)
+            set CRAFT_ONE_XP, 0;
+        if(CRAFT_TWO == @RequiredSkill)
+            set CRAFT_TWO_XP, 0;
         return;
     L_NeedZeny:
         mes "\"You don't have enough money, please come back when you do.\"";

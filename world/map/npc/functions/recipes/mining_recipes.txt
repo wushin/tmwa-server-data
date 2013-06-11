@@ -109,7 +109,6 @@ function|script|MiningRecipes|{
 
     L_Pad:
         set @paditem, ((getarraysize(@RecipesCho$) - ((getarraysize(@RecipesCho$)/5)*5))+1);
-        message strcharinfo(0), @paditem;
         goto L_AddPadItem;
 
     L_End:
