@@ -1,5 +1,5 @@
 
-function|script|MiningRecipes|{
+function|script|AlchemyRecipes|{
 
     cleararray @RecipesCho$,"",getarraysize(@RecipesCho$);
     cleararray @RecipesIdx$,"",getarraysize(@RecipesIdx$);
@@ -37,14 +37,8 @@ function|script|MiningRecipes|{
     goto L_End;
 
     L_NineSkills:
-        setarray @RecipesCho$[@RecipeNr], "Amethyst";
-        setarray @RecipesIdx$[@RecipeNr], "MRAmethyst";
-        set @RecipeNr, @RecipeNr + 1;
         goto L_EightSkills;
     L_EightSkills:
-        setarray @RecipesCho$[@RecipeNr], "Sapphire";
-        setarray @RecipesIdx$[@RecipeNr], "MRSapphire";
-        set @RecipeNr, @RecipeNr + 1;
         goto L_SevenSkills;
     L_SevenSkills:
         goto L_SixSkills;
@@ -53,29 +47,14 @@ function|script|MiningRecipes|{
     L_FiveSkills:
         goto L_FourSkills;
     L_FourSkills:
-        setarray @RecipesCho$[@RecipeNr], "Coal";
-        setarray @RecipesIdx$[@RecipeNr], "MRCoal";
-        set @RecipeNr, @RecipeNr + 1;
         goto L_ThreeSkills;
     L_ThreeSkills:
-        setarray @RecipesCho$[@RecipeNr], "Diamond";
-        setarray @RecipesIdx$[@RecipeNr], "MRDiamond";
-        set @RecipeNr, @RecipeNr + 1;
-        setarray @RecipesCho$[@RecipeNr], "Emerald";
-        setarray @RecipesIdx$[@RecipeNr], "MREmerald";
-        set @RecipeNr, @RecipeNr + 1;
         goto L_TwoSkills;
     L_TwoSkills:
-        setarray @RecipesCho$[@RecipeNr], "Topaz";
-        setarray @RecipesIdx$[@RecipeNr], "MRTopaz";
-        set @RecipeNr, @RecipeNr + 1;
-        setarray @RecipesCho$[@RecipeNr], "Ruby";
-        setarray @RecipesIdx$[@RecipeNr], "MRRuby";
-        set @RecipeNr, @RecipeNr + 1;
         goto L_OneSkills;
     L_OneSkills:
-        setarray @RecipesCho$[@RecipeNr], "Iron Ingot";
-        setarray @RecipesIdx$[@RecipeNr], "MRIronIngot";
+        setarray @RecipesCho$[@RecipeNr], "";
+        setarray @RecipesIdx$[@RecipeNr], "";
         set @RecipeNr, @RecipeNr + 1;
         goto L_Pad;
 

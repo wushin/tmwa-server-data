@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORTerraniteLegs|{
+
+    set @CommonName$, "Terranite Legs";
+    set @ItemName$, "TerraniteLegs";
+    set @ZenyAmt, 35000;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "TerraniteOre","Coal";
+    setarray @ReqIngCn$, "Terranite Ore","Coal";
+    setarray @ReqIngNum, "30","200";
+    return;
+
+}

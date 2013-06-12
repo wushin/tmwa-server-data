@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORChainMail|{
+
+    set @CommonName$, "Chain Mail";
+    set @ItemName$, "ChainMail";
+    set @ZenyAmt, 15000;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "IronIngot","Coal";
+    setarray @ReqIngCn$, "Iron Ingot","Coal";
+    setarray @ReqIngNum, "5","10";
+    return;
+
+}

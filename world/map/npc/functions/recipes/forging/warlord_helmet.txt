@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORWarlordHelmet|{
+
+    set @CommonName$, "Warlord Helmet";
+    set @ItemName$, "WarlordHelmet";
+    set @ZenyAmt, 5000;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "IronIngot","Coal";
+    setarray @ReqIngCn$, "Iron Ingot","Coal";
+    setarray @ReqIngNum, "9","18";
+    return;
+
+}
