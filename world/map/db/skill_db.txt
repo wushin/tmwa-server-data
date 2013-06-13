@@ -5,14 +5,6 @@
 4,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		weapon,		0,		no,	none,	X0//SM_SWORD
 6,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	X1//SM_RECOVERY
 11,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	X2//MG_SRECOVERY
-20,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Mining//NV_CRAFT_ONE
-21,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Forging//NV_CRAFT_TWO
-22,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Foraging//NV_CRAFT_ONE
-23,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Alchmey//NV_CRAFT_TWO
-24,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Tanning//NV_CRAFT_ONE
-25,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Leathercraft//NV_CRAFT_TWO
-26,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Weaving//NV_CRAFT_ONE
-27,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	Clothier//NV_CRAFT_TWO
 38,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	X3//MC_INCCARRY
 39,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	X4//MC_DISCOUNT
 40,	0,	0,	0,	0,	0,	0,	10,	0,		no,		0,			0,	0,		none,		0,		no,	none,	X5//MC_OVERCHARGE
