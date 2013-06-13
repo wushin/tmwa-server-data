@@ -11,7 +11,11 @@ function|script|GatherEvent|{
     if (getarraysize(@gathernode_posy) != getarraysize(@gathernode_posx))
         goto L_FAULTY_SETUP;
 
-    set @HasSkill, getskilllv(@RequiredSkill);
+    set @HasSkill, 0;
+    if(CRAFT_ONE == @RequiredSkill)
+        set @HasSkill, CRAFT_ONE_LVL;
+    if(CRAFT_TWO == @RequiredSkill)
+        set @HasSkill, CRAFT_TWO_LVL;
     if(@HasSkill == 0)
         goto L_EndNeedSkill;
 

@@ -4,14 +4,17 @@
 // Craft Menu
 // ------------------------------------------------------------
 function|script|CraftMenu|{
-    set @HasSkill, getskilllv(@RequiredSkill);
+    set @HasSkill, 0;
+    if(CRAFT_ONE == @RequiredSkill)
+        set @HasSkill, CRAFT_ONE_LVL;
+        set @OldCraftXP, CRAFT_ONE_XP;
+    if(CRAFT_TWO == @RequiredSkill)
+        set @HasSkill, CRAFT_TWO_LVL;
+        set @OldCraftXP, CRAFT_TWO_XP;
+
     set @ListVar, 0;
     set $@MesReqsCheck, 0;
     // Set Used if exists
-    if(CRAFT_ONE == @RequiredSkill)
-        set @OldCraftXP, CRAFT_ONE_XP;
-    if(CRAFT_TWO == @RequiredSkill)
-        set @OldCraftXP, CRAFT_TWO_XP;
 
     mes "["+@CraftObject$+"]";
     mes "\"Welcome to the "+@CraftObject$+".\"";
