@@ -1,0 +1,52 @@
+// 043-3 Slientist 
+
+// Sea Slimes
+043-3.gat,92,113,114,121|monster|AngrySeaSlime|1109,6,100,1000,specialMob043-3::On1109
+043-3.gat,83,70,126,94|monster|AngrySeaSlime|1109,6,100,1000,specialMob043-3::On1109
+// Green Slimes
+043-3.gat,92,113,114,121|monster|AngryGreenSlime|1110,6,100,1000,specialMob043-3::On1110
+043-3.gat,83,70,126,94|monster|AngryGreenSlime|1110,6,100,1000,specialMob043-3::On1110
+
+043-3.gat,0,0,0|script|specialMob043-3|-1,
+{
+
+On1109:
+    set @mobID, 1109;
+    callsub S_MobCount_ASS;
+    callfunc "MobPoints";
+    end;
+
+On1110:
+    set @mobID, 1110;
+    callsub S_MobCount_AGS;
+    callfunc "MobPoints";
+    end;
+
+S_MobCount_ASS:
+
+    set @slime, @slime + 1;
+    if (@slime < 10)
+        return;
+    if (rand(8) != 0)
+        return;
+    if(countitem(5110) != 0)
+      message strcharinfo(0), "You collected the sea slime sample.";
+      getitem 5112, 1;
+      delitem 5110, 1;
+      set @slime, 0;
+    return;
+
+S_MobCount_AGS:
+
+    set @slime, @slime + 1;
+    if (@slime < 10)
+        return;
+    if (rand(8) != 0)
+        return;
+    if(countitem(5110) != 0)
+      message strcharinfo(0), "You collected the green slime sample.";
+      getitem 5111, 1;
+      delitem 5110, 1;
+      set @slime, 0;
+    return;
+}

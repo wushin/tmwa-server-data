@@ -1,0 +1,10 @@
+// Dead Miner
+002-5.gat,38,30,0|script|Jacob Waltz|379,
+{
+    mes "[Jacob Waltz]";
+    mes "\"...\"";
+    next;
+    mes "[Jacob Waltz]";
+    mes "\"... Last Thing I remember was the Earthquake... \"";
+    close;
+}

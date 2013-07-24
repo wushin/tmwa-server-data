@@ -1,5 +1,5 @@
 // This file is generated automatically. All manually changes will be removed when running the Converter.
-// Beach House warps
+// Buccener's Den warps
 
 004-2.gat,39,20|warp|To Room|0,-1,004-2.gat,74,29
 004-2.gat,75,30|warp|To Entrance|0,-1,004-2.gat,38,21

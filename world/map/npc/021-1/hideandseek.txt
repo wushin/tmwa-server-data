@@ -128,7 +128,7 @@ L_Doing:
 
 L_Done:
     mes "[Latif]";
-    mes "\"Inside that building over there is a workshop. My father works there and wants me to do that too when I'm grown up. But I don't want do that! I want to go on an adventure! Just like you.\"";
+    mes "\"Inside the building in the NE corner there is a workshop. My father works there and wants me to do that too when I'm grown up. But I don't want do that! I want to go on an adventure! Just like you.\"";
     goto L_Close;
 
 L_Close:

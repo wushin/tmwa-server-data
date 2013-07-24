@@ -1,0 +1,10 @@
+// Slientist for slime quest
+
+043-1.gat,89,112,0|script|Crick|387,
+{
+
+    mes "[Crick]";
+    mes "\"I'm from Thermin.\"";
+    close;
+}
+
