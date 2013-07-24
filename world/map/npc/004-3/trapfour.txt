@@ -1,0 +1,110 @@
+// trap four
+
+004-3.gat,92,67,0|script|#trigger7|32767,5,0
+{
+    if (($@traptimefour + 600) > gettimetick(2)) 
+       goto L_NoTrap;
+    goto L_Trap;
+L_Trap:
+    set $@traptimefour, gettimetick(2);
+    set @random, rand(readparam(bAgi));
+    if @random > 10
+        goto L_TrapSeen;
+    goto L_TrapNotSeen;
+L_TrapSeen:
+    set @random, 0;
+    enablenpc "#vtrap4";
+    disablenpc "#itrap4";
+    disablenpc "#trigger7";
+    disablenpc "#trigger8";
+    end;
+L_TrapNotSeen:
+    set @random, 0;
+    disablenpc "#trigger7";
+    disablenpc "#trigger8";
+    end;
+L_NoTrap:
+    end;
+OnInit:
+    disablenpc "#vtrap4";
+    disablenpc "#itrap4";
+    set $@traptimefour, 0;
+}
+
+004-3.gat,89,74,0|script|#trigger8|32767,0,3
+{
+    if (($@traptimefour + 600) > gettimetick(2)) 
+       goto L_NoTrap;
+    goto L_Trap;
+L_Trap:
+    set $@traptimefour, gettimetick(2);
+    set @random, rand(readparam(bAgi));
+    if @random > 10
+        goto L_TrapSeen;
+    goto L_TrapNotSeen;
+L_TrapSeen:
+    set @random, 0;
+    enablenpc "#vtrap4";
+    disablenpc "#itrap4";
+    disablenpc "#trigger7";
+    disablenpc "#trigger8";
+    end;
+L_TrapNotSeen:
+    set @random, 0;
+    disablenpc "#trigger7";
+    disablenpc "#trigger8";
+    end;
+L_NoTrap:
+    end;
+OnInit:
+    disablenpc "#vtrap4";
+    disablenpc "#itrap4";
+    set $@traptimefour, 0;
+}
+
+004-3.gat,91,72,0|script|#vtrap4|388,1,0,
+{
+    set @disarmdiff, 10;
+    mes "It's a Trap!";
+    mes "Do you want to try to disarm it?";
+    next;
+    menu
+       "Yes.", L_Disarm,
+       "No, I think I'll try to avoid it.", L_End;
+L_Disarm:
+    set @disarm, rand((readparam(bDex) * readparam(bInt)) / 2);
+    if rand(@disarm) < @disarmdiff
+      goto L_DisarmSucess;
+    goto L_TrapSprung;
+L_TrapSprung:
+    specialeffect2 304;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    disablenpc "#vtrap4";
+    goto L_End;
+L_DisarmSucess:
+    getexp BaseLevel, 0;
+    disablenpc "#vtrap4";
+    goto L_End;
+L_End:
+    set @disarm, 0;
+    set @disarmdiff, 0;
+    enablenpc "#trigger7";
+    enablenpc "#trigger8";
+    end;
+OnTouch:
+    goto L_TrapSprung;
+}
+
+004-3.gat,91,72,0|script|#itrap4|32767,1,0,
+{
+    specialeffect2 304;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    disablenpc "#itrap4";
+    set @disarm, 0;
+    set @disarmdiff, 0;
+    enablenpc "#trigger7";
+    enablenpc "#trigger8";
+    end;
+}

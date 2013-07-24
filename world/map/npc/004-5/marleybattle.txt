@@ -1,0 +1,101 @@
+// Secret Entrances Trigger and end Marley battle
+
+004-5.gat,88,63,0|script|Lever#3|389,,
+{
+    mes "Do you want to flip the lever?";
+    menu
+        "Yes.", L_ToggleLever,
+        "No.", L_End;
+L_ToggleLever:
+    //add to array
+    warp "004-5", 78, 65;
+    goto L_End;
+L_End:
+    close;
+}
+
+004-5.gat,78,63,0|script|Lever#4|390,,
+{
+    mes "Do you want to flip the lever?";
+    menu
+        "Yes.", L_ToggleLever,
+        "No.", L_End;
+L_ToggleLever:
+    //remove from array
+    warp "004-5", 88, 65;
+L_End:
+    close;
+}
+
+004-5.gat,65,67,0|script|The Dread Pirate Marley|394,,
+{
+    mes "[The Dread Pirate Marley]";
+    mes "\"So you came here to challenge me to a fight?\"";
+    mes "\"Ha, thats a laugh. Me and My Crew will make short work of you.\"";
+    next;
+    mes "\"Have at ye Matey!\"";
+    goto L_StartFight;
+
+L_StartFight:
+    enablenpc "#marleyfight";
+    cmdothernpc "#marleyfight", "StartFight";
+    close;
+OnInit:
+    disablenpc "#marleyfight";
+    end;
+}
+
+004-5.gat,65,67,0|script|#marleyfight|32767,,
+{
+L_SpawnCrew:
+    set $@crewdeath, 0;
+    set $@crewwave, @crewwave + 1;
+    if ($@crewwave > 5)
+        goto L_SpawnMarley;
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1113, $@playercount, "#marleyfight::OnCrewDeath";
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1114, $@playercount, "#marleyfight::OnCrewDeath";
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1115, $@playercount, "#marleyfight::OnCrewDeath";
+    goto L_Continue;
+L_SpawnMarley:
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1113, $@playercount, "";
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1114, $@playercount, "";
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1115, $@playercount, "";
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1116, 1, "#marleyfight::OnDeath";
+    goto L_Continue;
+L_Continue:
+    end;
+L_End:
+    enablenpc "The Dread Pirate Marley";
+    disablenpc "#marleyfight";
+    end;
+OnCrewDeath:
+    set $@playercount, getareausers("004-5.gat", 53, 47, 79, 78);
+    set $@crewdeath, $@crewdeath + 1;
+    if ($@crewdeath == ($@playercount * 3)) 
+      goto L_SpawnCrew;
+    goto L_Continue;
+OnDeath:
+    enablenpc "Lever#4";
+    enablenpc "Pirate's Treasure"; // Spawn a Loot box
+    killmonster "004-5.gat", "All";
+    startnpctimer;
+    end;
+OnTimer30000:
+    stopnpctimer;
+    goto L_End;
+   
+OnPCDieEvent:
+    set $@playercount, getareausers("004-5.gat", 53, 47, 79, 78);
+    if ($@playercount < 1)
+        killmonster "004-5.gat", "All";
+        goto L_End;
+    goto L_Continue;
+OnCommandStartFight:
+    disablenpc "Lever#3";
+    disablenpc "Lever#4";
+    set $@playercount, getareausers("004-5.gat", 53, 47, 79, 78);
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1113, $@playercount, "#marleyfight::OnCrewDeath";
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1114, $@playercount, "#marleyfight::OnCrewDeath";
+    areamonster "004-5.gat", 68, 67, 70, 69, "", 1115, $@playercount, "#marleyfight::OnCrewDeath";
+    end;
+}

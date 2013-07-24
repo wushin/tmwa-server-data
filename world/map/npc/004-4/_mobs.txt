@@ -1,0 +1,33 @@
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+// Pirate Caves Second Floor mobs
+
+004-4.gat,36,62,5,20|monster|Grenadier|1115,1,100000,30000,Mob004-4::On1115
+004-4.gat,37,61,5,21|monster|Swashbuckler|1114,2,100000,30000,Mob004-4::On1114
+004-4.gat,62,52,12,7|monster|Thug|1113,2,100000,30000,Mob004-4::On1113
+004-4.gat,34,87,12,7|monster|Thug|1113,2,100000,30000,Mob004-4::On1113
+004-4.gat,37,62,6,22|monster|Thug|1113,2,100000,30000,Mob004-4::On1113
+004-4.gat,34,88,10,6|monster|Swashbuckler|1114,2,100000,30000,Mob004-4::On1114
+004-4.gat,63,52,10,6|monster|Swashbuckler|1114,2,100000,30000,Mob004-4::On1114
+004-4.gat,62,52,11,4|monster|Grenadier|1115,1,100000,30000,Mob004-4::On1115
+004-4.gat,34,88,10,4|monster|Grenadier|1115,1,100000,30000,Mob004-4::On1115
+
+
+004-4.gat,0,0,0|script|Mob004-4|-1,
+{
+On1113:
+    set @mobID, 1113;
+    callfunc "MobPoints";
+    end;
+
+On1114:
+    set @mobID, 1114;
+    callfunc "MobPoints";
+    end;
+
+On1115:
+    set @mobID, 1115;
+    callfunc "MobPoints";
+    end;
+
+    end;
+}

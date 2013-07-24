@@ -1,0 +1,9 @@
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+// Tulimshar Noble warps
+
+068-1.gat,34,108|warp|To North Tulimshar|3,-1,021-1.gat,144,23
+068-1.gat,84,108|warp|To Tulimshar Castle|3,-1,069-1.gat,55,23
+068-1.gat,41,96|warp|To Weavers Shop|-1,-1,068-2.gat,55,23
+068-1.gat,40,79|warp|To Cocanut Farm|-1,-1,068-2.gat,55,23
+068-1.gat,52,48|warp|To Barracks|-1,-1,068-2.gat,55,23
+068-1.gat,47,38|warp|To Watch Tower|-1,-1,068-2.gat,55,23

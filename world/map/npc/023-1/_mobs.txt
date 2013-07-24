@@ -1,0 +1,42 @@
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+// Tulimshar Lighthouse Beach mobs
+
+023-1.gat,70,41,7,7|monster|Thug|1113,1,100000,30000,Mob023-1::On1113
+023-1.gat,84,33,11,7|monster|Swashbuckler|1114,1,100000,30000,Mob023-1::On1114
+023-1.gat,58,28,6,6|monster|Grenadier|1115,1,100000,30000,Mob023-1::On1115
+023-1.gat,80,99,11,7|monster|Swashbuckler|1114,1,100000,30000,Mob023-1::On1114
+023-1.gat,86,117,19,2|monster|Grenadier|1115,1,100000,30000,Mob023-1::On1115
+023-1.gat,55,126,7,7|monster|Thug|1113,1,100000,30000,Mob023-1::On1113
+023-1.gat,47,86,7,7|monster|Thug|1113,1,100000,30000,Mob023-1::On1113
+023-1.gat,102,67,11,7|monster|Swashbuckler|1114,1,100000,30000,Mob023-1::On1114
+023-1.gat,105,90,7,7|monster|Thug|1113,1,100000,30000,Mob023-1::On1113
+023-1.gat,62,60,7,7|monster|Thug|1113,1,100000,30000,Mob023-1::On1113
+023-1.gat,93,49,13,11|monster|Grenadier|1115,1,100000,30000,Mob023-1::On1115
+023-1.gat,64,95,1,46|monster|AngrySeaSlime|1109,3,150000,100000,Mob023-1::On1109
+023-1.gat,45,54,5,38|monster|AngrySeaSlime|1109,3,150000,100000,Mob023-1::On1109
+
+
+023-1.gat,0,0,0|script|Mob023-1|-1,
+{
+On1109:
+    set @mobID, 1109;
+    callfunc "MobPoints";
+    end;
+
+On1113:
+    set @mobID, 1113;
+    callfunc "MobPoints";
+    end;
+
+On1114:
+    set @mobID, 1114;
+    callfunc "MobPoints";
+    end;
+
+On1115:
+    set @mobID, 1115;
+    callfunc "MobPoints";
+    end;
+
+    end;
+}

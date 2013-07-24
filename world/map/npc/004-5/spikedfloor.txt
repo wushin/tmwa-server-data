@@ -1,0 +1,246 @@
+// Spiked Trap Floor
+
+004-5.gat,73,77,0|script|Lever#1|389,,
+{
+    mes "Do you want to flip the lever?";
+    menu
+        "Yes.", L_ToggleTrap,
+        "No.", L_End;
+L_ToggleTrap:
+    cmdothernpc "#spikedfloortrap", "ToggleOff";
+    goto L_End;
+L_End:
+    close;
+OnInit:
+    disablenpc "Lever#2";
+    end;
+}
+
+004-5.gat,73,77,0|script|Lever#2|390,,
+{
+    mes "Do you want to flip the lever?";
+    menu
+        "Yes.", L_ToggleTrap,
+        "No.", L_End;
+L_ToggleTrap:
+    cmdothernpc "#spikedfloortrap", "ToggleOn";
+    goto L_End;
+L_End:
+    close;
+}
+
+004-5.gat,53,56,0|script|#spikedfloortrap|393,0,0,
+{
+OnCommandToggleOff:
+    goto L_ToggleOff;
+OnCommandToggleOn:
+    goto L_ToggleOn;
+L_ToggleOff:
+    disablenpc "Lever#1";
+    disablenpc "#spikedfloor1";
+    disablenpc "#spikedfloor2";
+    disablenpc "#spikedfloor3";
+    disablenpc "#spikedfloor4";
+    disablenpc "#spikedfloor5";
+    disablenpc "#spikedfloor6";
+    disablenpc "#spikedfloor7";
+    disablenpc "#spikedfloor8";
+    disablenpc "#spikedfloor9";
+    disablenpc "#spikedfloor10";
+    disablenpc "#spikedfloor11";
+    disablenpc "#spikedfloor12";
+    disablenpc "#spikedfloor13";
+    disablenpc "#spikedfloor14";
+    disablenpc "#spikedfloor15";
+    disablenpc "#spikedfloor16";
+    enablenpc "Lever#2";
+    initnpctimer;
+    end;
+L_ToggleOn:
+    disablenpc "Lever#2";
+    enablenpc "#spikedfloor1";
+    enablenpc "#spikedfloor2";
+    enablenpc "#spikedfloor3";
+    enablenpc "#spikedfloor4";
+    enablenpc "#spikedfloor5";
+    enablenpc "#spikedfloor6";
+    enablenpc "#spikedfloor7";
+    enablenpc "#spikedfloor8";
+    enablenpc "#spikedfloor9";
+    enablenpc "#spikedfloor10";
+    enablenpc "#spikedfloor11";
+    enablenpc "#spikedfloor12";
+    enablenpc "#spikedfloor13";
+    enablenpc "#spikedfloor14";
+    enablenpc "#spikedfloor15";
+    enablenpc "#spikedfloor16";
+    enablenpc "Lever#1";
+    end;
+OnTimer10000:
+    goto L_ToggleOn;
+    end;
+}
+004-5.gat,53,56,0|script|#spikedfloor1|393,0,0,
+{
+    end;
+OnCommandStrike:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,56,57,0|script|#spikedfloor2|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,57,53,0|script|#spikedfloor3|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,60,56,0|script|#spikedfloor4|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,55,50,0|script|#spikedfloor5|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,62,51,0|script|#spikedfloor6|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,66,56,0|script|#spikedfloor7|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,75,67,0|script|#spikedfloor8|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,68,50,0|script|#spikedfloor9|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,63,49,0|script|#spikedfloor10|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,70,55,0|script|#spikedfloor11|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,69,59,0|script|#spikedfloor12|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,74,61,0|script|#spikedfloor13|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,70,66,0|script|#spikedfloor14|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,73,71,0|script|#spikedfloor15|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}
+
+004-5.gat,72,74,0|script|#spikedfloor16|393,0,0,
+{
+    end;
+OnTouch:
+    specialeffect 303;
+    misceffect 26, strcharinfo(0);
+    percentheal -10, 0;
+    end;
+}

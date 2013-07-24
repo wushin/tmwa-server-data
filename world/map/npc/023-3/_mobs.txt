@@ -1,0 +1,25 @@
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+// Tulimshar Beach Caves mobs
+
+023-3.gat,91,77,7,7|monster|Thug|1113,1,100000,30000,Mob023-3::On1113
+023-3.gat,127,85,7,7|monster|Swashbuckler|1114,1,100000,30000,Mob023-3::On1114
+023-3.gat,98,28,7,7|monster|Swashbuckler|1114,1,100000,30000,Mob023-3::On1114
+023-3.gat,120,45,7,7|monster|Thug|1113,1,100000,30000,Mob023-3::On1113
+023-3.gat,51,107,12,5|monster|Swashbuckler|1114,1,100000,30000,Mob023-3::On1114
+023-3.gat,69,52,66,8|monster|Thug|1113,1,100000,30000,Mob023-3::On1113
+
+
+023-3.gat,0,0,0|script|Mob023-3|-1,
+{
+On1113:
+    set @mobID, 1113;
+    callfunc "MobPoints";
+    end;
+
+On1114:
+    set @mobID, 1114;
+    callfunc "MobPoints";
+    end;
+
+    end;
+}
