@@ -1,0 +1,56 @@
+// Effects for opening and closing the gate. Also set it so no new player can't be warped in once the gate is opened.
+
+027-6.gat,33,72,0|script|#undeadgate|323,6,0
+{
+
+    set @state, ((GATE_Instance & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
+
+    if(@state == 1)
+        end;
+
+    mes "Once you pass this point Your soul will be bound to this place.";
+    mes "Are you sure you are ready to go?";
+    menu
+        "Let's go",L_BindSoul,
+        "No thank you",-;
+    warp "027-4.gat",108,88;
+    close;
+
+L_BindSoul:
+    callfunc "ClearVariables";
+    set @state, 1;
+    callsub S_Update_Var;
+    set @map$, "027-6.gat";
+    setarray @Xs, 55, 56, 57, 55, 57, 55, 57;
+    setarray @Ys, 70, 70, 70, 71, 71, 72, 72;
+    set @x, 0;
+    set @y, 0;
+    goto L_Save;
+
+L_Save:
+    if (@x == 0 && @y == 0)
+        goto L_FindPoint;
+
+L_Do_Save:
+    savepoint @map$, @x, @y;
+    goto L_Return;
+
+L_FindPoint:
+    set @n, rand(getarraysize(@Xs));
+    set @x, @Xs[@n];
+    set @y, @Ys[@n];
+    goto L_Do_Save;
+
+L_Return:
+    set @map$, "";
+    cleararray @Xs[0], 0, 7;
+    cleararray @Ys[0], 0, 7;
+    set @x, 0;
+    set @y, 0;
+    set @state, 0;
+    close;
+
+S_Update_Var:
+    set GATE_Instance, (GATE_Instance & ~(NIBBLE_0_MASK) | (@state << NIBBLE_0_SHIFT));
+    return;
+}
