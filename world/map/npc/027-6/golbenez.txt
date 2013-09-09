@@ -25,9 +25,9 @@ L_Find_Stones:
     close;
 
 L_Warp:
-    if (countitem("BloodStone") < @fee)
+    if (countitem("Bloodstone") < @fee)
         goto L_No_Stones;
-    delitem "BloodStone", @fee;
+    delitem "Bloodstone", @fee;
     set @state, 0;
     callsub S_Update_Var;
     callfunc "ClearVariables";

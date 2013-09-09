@@ -1,0 +1,19 @@
+// A locked door in the crypts to keep less experienced players out of the Underworld
+
+027-4.gat,108,94,0|script|#CryptDoor1|0,0,0,
+{
+    if (BaseLevel < 80)
+        goto L_Weak;
+    warp "027-4.gat",108,90;
+    end;
+
+L_Weak:
+    message strcharinfo(0), "Come back when you're a bit more experienced.";
+    end;
+}
+
+027-4.gat,108,92,0|script|#CryptDoor2|0,0,0,
+{
+    warp "027-4.gat",108,95;
+    end;
+}
