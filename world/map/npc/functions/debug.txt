@@ -940,3 +940,12 @@ OnInit:
     if (!debug)
         disablenpc "Debug4";
 }
+
+027-6.gat,41,39,0|script|Debug5|154,
+{
+    callfunc "Debug";
+    end;
+OnInit:
+    if (!debug)
+        disablenpc "Debug5";
+}
