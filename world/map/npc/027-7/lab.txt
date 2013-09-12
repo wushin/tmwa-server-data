@@ -1,0 +1,8 @@
+//
+
+027-7.gat,49,62,0|script|#Lab1|379,
+{
+    mes "\"I make good drugs\"";
+    close;
+}
+

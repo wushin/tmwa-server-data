@@ -17,6 +17,7 @@
     close;
 
 L_BindSoul:
+    specialeffect 303;
     callfunc "ClearVariables";
     set @state, 1;
     callsub S_Update_Var;
