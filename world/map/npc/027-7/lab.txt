@@ -1,6 +1,6 @@
 //
 
-027-7.gat,49,62,0|script|#Lab1|379,
+027-7.gat,49,62,0|script|Alchemy Lab#1|400,
 {
     mes "\"I make good drugs\"";
     close;
