@@ -1,6 +1,6 @@
-// Effects for opening and closing the gate. Also set it so no new player can't be warped in once the gate is opened.
+// Locking Portal
 
-027-6.gat,33,72,0|script|#undeadgate|323,6,0
+027-6.gat,32,87,0|script|#undeadportal|400,3,0
 {
 
     set @state, ((GATE_Instance & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
@@ -12,12 +12,15 @@
     mes "Are you sure you are ready to go?";
     menu
         "Let's go",L_BindSoul,
-        "No thank you",-;
-    warp "027-4.gat",108,88;
+        "No thank you",L_Leave;
     close;
 
+L_Leave:
+    warp "027-4.gat",108,88;
+    end;
+
 L_BindSoul:
-    specialeffect 303;
+    misceffect 303;
     callfunc "ClearVariables";
     set @state, 1;
     callsub S_Update_Var;
@@ -32,7 +35,7 @@ L_Save:
     if (@x == 0 && @y == 0)
         goto L_FindPoint;
 
-L_Do_Save:
+L_DoSave:
     savepoint @map$, @x, @y;
     goto L_Return;
 
@@ -40,7 +43,7 @@ L_FindPoint:
     set @n, rand(getarraysize(@Xs));
     set @x, @Xs[@n];
     set @y, @Ys[@n];
-    goto L_Do_Save;
+    goto L_DoSave;
 
 L_Return:
     set @map$, "";
@@ -49,6 +52,7 @@ L_Return:
     set @x, 0;
     set @y, 0;
     set @state, 0;
+    warp "027-6.gat",33,71;
     close;
 
 S_Update_Var:

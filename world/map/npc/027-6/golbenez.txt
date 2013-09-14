@@ -42,7 +42,7 @@ L_Save:
     if (@x == 0 && @y == 0)
         goto L_FindPoint;
 
-L_Do_Save:
+L_DoSave:
     savepoint @map$, @x, @y;
     goto L_Return;
 
@@ -50,7 +50,7 @@ L_FindPoint:
     set @n, rand(getarraysize(@Xs));
     set @x, @Xs[@n];
     set @y, @Ys[@n];
-    goto L_Do_Save;
+    goto L_DoSave;
 
 L_Return:
     set @map$, "";
