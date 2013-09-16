@@ -6,7 +6,7 @@
     end;
 }
 
-027-7.gat,86,42,0|script|Alchemy Lab#1|400,
+027-7.gat,86,42,0|script|Alchemy Lab#2|400,
 {
     // callfunc "AlchemyLab";
     end;

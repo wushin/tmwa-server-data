@@ -2,6 +2,7 @@
 
 027-7,105,44,0|script|Lydia|400,
 {
+    end;
 }
 
 027-7.gat,105,42,0|script|Lydia's Lab#1|400,
