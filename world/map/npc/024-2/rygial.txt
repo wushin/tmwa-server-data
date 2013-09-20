@@ -5,7 +5,7 @@
 // 1 - knows ingredients
 // 2 - made blood ink
 
-024-2.gat,22,20,0|script|Rygial|107,
+024-2.gat,22,20,0|script|Rygial|360,
 {
     set @state, ((CRYPT_Quest & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
     set @crafted, ((CRYPT_Quest & NIBBLE_3_MASK) >> NIBBLE_3_SHIFT);
@@ -68,6 +68,7 @@ L_MakeInk:
     delitem "MaggotSlime", @CRYPT_MSLIME_REQ;
     delitem "JarofOwnBlood", @CRYPT_JARSOFBLOOD_REQ;
     set Zeny, Zeny - @CRYPT_GOLD_REQ;
+    getitem "BloodInk", 1;
     set @crafted, 2;
     callsub S_Update_Var;
     goto L_Close;
@@ -75,6 +76,7 @@ L_MakeInk:
 L_MissingItems:
     mes "[Rygial]";
     mes "\"Wait a second, not everything is here. Please get the remaining ingredients.\"";
+    next;
     goto L_Ingredients;
 
 L_InventoryNoSpace:
@@ -89,12 +91,18 @@ L_Look:
         "I'm just looking around.", L_Close;
 
 S_Update_Var:
-    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_3_MASK) | (@state << NIBBLE_3_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_3_MASK) | (@crafted << NIBBLE_3_SHIFT));
     return;
 
 L_Close:
+   set @inventorylist_count, 0;
    set @state, 0;
    set @crafted, 0;
+   set @CRYPT_GOLD_REQ, 0;
+   set @CRYPT_BLSCROP_REQ, 0;
+   set @CRYPT_MOUNTEGG_REQ, 0;
+   set @CRYPT_MSLIME_REQ, 0;
+   set @CRYPT_JARSOFBLOOD_REQ, 0;
    close;
 
 }
