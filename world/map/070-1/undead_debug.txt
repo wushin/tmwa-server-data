@@ -1,10 +1,7 @@
 // Debug for underworld
 
-027-6.gat,32,62,0|script|UndeadDebug|155,
+070-1.gat,32,62,0|script|UndeadDebug|155,
 {
-    set @warpmap$, "027-6.gat";
-    set @warpx, 31;
-    set @warpy, 65;
     set @state, ((GATE_Instance & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
 
     mes "Reset your self to the various states.";
@@ -16,25 +13,27 @@
         "Book of Dead (0) [W] [UBS]", L_BookOfDead,
         "Bound to Underworld (1) [BS]", L_BindSoul,
         "Escape to GY Inn. (0) [W] [UBS]", L_Warp;
-    close;
 
 L_AddBossPoints:
     mes "Add How Many Boss Points?";
     input @bosspoints;
     set BOSS_POINTS, @bosspoints;
     set @bosspoints, 0;
-    close;
+    goto L_Close;
 
 L_BindSoul:
     callfunc "ClearVariables";
     set @state, 1;
     callsub S_Update_Var;
-    set @map$, "027-6.gat";
+    set @map$, "070-1.gat";
     setarray @Xs, 55, 56, 57, 55, 57, 55, 57;
     setarray @Ys, 70, 70, 70, 71, 71, 72, 72;
     set @x, 0;
     set @y, 0;
-    goto L_Save;
+    set @warpmap$, "070-1.gat";
+    set @warpx, 33;
+    set @warpy, 71;
+    goto L_SaveWarp;
 
 L_BookOfDead:
     set @state, 0;
@@ -64,29 +63,6 @@ L_Warp:
     set @warpy, 44;
     goto L_SaveWarp;
 
-L_Save:
-    if (@x == 0 && @y == 0)
-        goto L_FindPoint;
-
-L_DoSave:
-    savepoint @map$, @x, @y;
-    goto L_Return;
-
-L_FindPoint:
-    set @n, rand(getarraysize(@Xs));
-    set @x, @Xs[@n];
-    set @y, @Ys[@n];
-    goto L_DoSave;
-
-L_Return:
-    set @map$, "";
-    cleararray @Xs[0], 0, 7;
-    cleararray @Ys[0], 0, 7;
-    set @x, 0;
-    set @y, 0;
-    set @state, 0;
-    end;
-
 L_SaveWarp:
     if (@x == 0 && @y == 0)
         goto L_FindPointWarp;
@@ -102,13 +78,16 @@ L_FindPointWarp:
     goto L_DoSaveWarp;
 
 L_ReturnWarp:
+    warp @warpmap$,@warpx,@warpy;
+    goto L_Close;
+
+L_Close:
     set @map$, "";
     cleararray @Xs[0], 0, 7;
     cleararray @Ys[0], 0, 7;
     set @x, 0;
     set @y, 0;
     set @state, 0;
-    warp @warpmap$,@warpx,@warpy;
     close;
 
 S_Update_Var:

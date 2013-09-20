@@ -1,0 +1,5 @@
+// Players have to periodically feel souls into the pool or take damage 
+// -- possibly warp one into collision and make players heal them
+// Candor eske battle with Undead Mobs
+// Lobby is on 070-2 Reaper's Sanctum
+// Add in dead party member spawning a mob

@@ -1,0 +1,16 @@
+// REAPER
+
+070-2.gat,142,79,0|script|Reaper|379,
+{
+    mes "WHAT CAN I DO FOR YOU MORTAL?";
+    menu
+        "I'm here to challege you.", L_ReaperFight,
+        "nevermind.", L_Close;
+
+L_ReaperFight:
+    warp "070-3.gat", 44, 50;
+    goto L_Close;
+
+L_Close:
+    close;
+}

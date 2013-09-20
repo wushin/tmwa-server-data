@@ -1,9 +1,9 @@
 //
 
-027-6.gat,56,71,0|script|Soul Menhir#townofdead|351,
+070-1.gat,56,71,0|script|Soul Menhir#townofdead|351,
 {
     callfunc "ClearVariables";
-    set @map$, "027-6.gat";
+    set @map$, "070-1.gat";
     setarray @Xs, 55, 56, 57, 55, 57, 55, 57;
     setarray @Ys, 70, 70, 70, 71, 71, 72, 72;
     set @x, 0;

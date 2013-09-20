@@ -1,19 +1,38 @@
 // A locked door in the crypts to keep less experienced players out of the Underworld
 
-027-4.gat,108,94,0|script|#CryptDoor1|0,0,0,
+027-4.gat,108,94,0|script|#CryptDoor1|45,0,0,
 {
-    if (BaseLevel < 80)
-        goto L_Weak;
-    warp "027-4.gat",108,90;
-    end;
+    // Need Underworld Key made by Cerhan
+    if (countitem("UnderWKey") == 0) 
+        goto L_NoKey;
+    mes "Open the Crypt Door?";
+    menu
+        "Yes, I feel brave.", L_Open,
+        "No, It's quite nice out here.", L_Close;
 
-L_Weak:
-    message strcharinfo(0), "Come back when you're a bit more experienced.";
-    end;
+L_Open:
+    warp "027-4.gat",108,90;
+    goto L_Close;
+
+L_NoKey:
+    message strcharinfo(0), "This door appears locked by magical forces.";
+    goto L_Close;
+
+L_Close:
+    close;
 }
 
-027-4.gat,108,92,0|script|#CryptDoor2|0,0,0,
+027-4.gat,108,92,0|script|#CryptDoor2|45,0,0,
 {
+    mes "Open the Crypt Door?";
+    menu
+        "Yes, I feel brave.", L_Open,
+        "No, It's quite nice out here.", L_Close;
+
+L_Open:
     warp "027-4.gat",108,95;
-    end;
+    goto L_Close;
+
+L_Close:
+    close;
 }

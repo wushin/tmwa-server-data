@@ -1,2 +1,0 @@
-027-6.gat|mapflag|no_player_drops
-027-6.gat|mapflag|town

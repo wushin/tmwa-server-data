@@ -1,1 +1,1 @@
-027-3.gat|mapflag|nosave|027-2,107,31
+027-9.gat|mapflag|nosave|027-3,82,89

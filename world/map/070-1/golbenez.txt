@@ -1,4 +1,4 @@
-027-6.gat,73,95,0|script|#Golbenez#_U|204,
+070-1.gat,73,95,0|script|#Golbenez#_U|204,
 {
     set @state, ((GATE_Instance & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
     set @fee, 100;
@@ -15,14 +15,14 @@
         "... I'm really beginning to hate you.", -;
     mes "[Golbenez]";
     mes "\"Come back when you've changed your mind. It's a wonderful place.\"";
-    close;
+    goto L_Close;
 
 L_Find_Stones:
     mes "[Golbenez]";
     mes "\"Go to the East and kill monsters in the Marsh of the Damned.\"";
     mes "\"Honestly, some days it barely pays to help you puny brained mortals.\"";
     mes "\"Now do my bidding or find your own way home, mortal.\"";
-    close;
+    goto L_Close;
 
 L_Warp:
     if (countitem("Bloodstone") < @fee)
@@ -53,19 +53,22 @@ L_FindPoint:
     goto L_DoSave;
 
 L_Return:
-    set @map$, "";
-    cleararray @Xs[0], 0, 7;
-    cleararray @Ys[0], 0, 7;
-    set @x, 0;
-    set @y, 0;
     warp "027-2.gat", 105, 44;
-    close;
+    goto L_Close;
 
 L_No_Stones:
     mes "[Golbenez]";
     mes "\"It is astonishing how WEAK you humans can be.\"";
     next;
     mes "\"Come back when you can pay my service.\"";
+    goto L_Close;
+
+L_Close:
+    set @map$, "";
+    cleararray @Xs[0], 0, 7;
+    cleararray @Ys[0], 0, 7;
+    set @x, 0;
+    set @y, 0;
     close;
 
 S_Update_Var:

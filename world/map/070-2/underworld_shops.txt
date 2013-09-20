@@ -1,7 +1,7 @@
 // Shops in the Underworld
 
 // Bank and Storage
-027-7.gat,29,25,0|script|Ronald Frump|321,
+070-2.gat,29,25,0|script|Ronald Frump|321,
 {
     callfunc "ClearVariables";
     set @npcname$, "Ronald Frump";
@@ -10,7 +10,7 @@
 }
 
 // Boss Point Vendor
-027-7.gat,35,25,0|script|Shane Tsun|321,
+070-2.gat,35,25,0|script|Shane Tsun|321,
 {
     mes "[Shane Tsun]";
     mes "\"I'll trade you Boss Points for Underworld Items\"";
