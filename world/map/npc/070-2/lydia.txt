@@ -1,4 +1,6 @@
 // Teaches Alchemy
+// CRYPTS_Quest
+// NIBBLE 4
 
 070-2,105,44,0|script|Lydia|400,
 {

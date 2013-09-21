@@ -1,0 +1,17 @@
+// The scripts associated with the reaper mob summoned by Alacrius in the 027-2
+
+070-2.gat,0,0,0|script|Reaper|-1,
+{
+OnDead:
+    mes "you won!";
+    mapwarp "070-2.gat", "027-2.gat",104,41;
+    close;
+
+OnPCDieEvent:
+    // summon a zombie and give a message and sfx
+    end;
+
+OnAvenged:
+    // tell players your fallen comrad has been avenged
+    end;
+}

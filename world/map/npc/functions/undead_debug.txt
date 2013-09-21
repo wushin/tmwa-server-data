@@ -1,0 +1,250 @@
+// Debug Underworld/Alacrius CRYPT_Quest
+// CRYPT_Quest
+// NIBBLE_0 - Mainline
+// Alacrius, Crypts Entrance 027-2
+// 1 - Knows about items and where to get them
+// Styx, Last Chance Island 070-1
+// 2 - Investigated Reaper/Wife
+// 3 - Beat Reaper Once
+// NIBBLE_1 -
+// Cerhan, GY Inn, 027-2
+// 1 - Knows Materials
+// 2 - Got Underworld Key
+// --- Bound to UnderWorld ---
+// X
+// 3 - X talked to
+// NIBBLE_2 -
+// Markie Desod, Blue Sage Mansion, 048-2
+// 1 - Knows Reagents
+// 2 - Got Quill of Binding
+// --- Bound to UnderWorld ---
+// Y
+// 3 - Y talked to
+// NIBBLE_3 -
+// Rygial, Tulimshar School of Magic, 024-2
+// 1 - Knows Ingredients
+// 2 - Got Blood Ink
+// --- Bound to UnderWorld ---
+// Z
+// 3 - Z talked to
+// NIBBLE 4
+// Gate 
+// 1 - Bound to Underworld
+// NIBBLE 5
+// NIBBLE 6
+// NIBBLE 7
+
+function|script|UndeadDebug|,
+{
+    set @state, ((CRYPT_Quest & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
+    set @craftkey, ((CRYPT_Quest & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
+    set @craftquill, ((CRYPT_Quest & NIBBLE_2_MASK) >> NIBBLE_2_SHIFT);
+    set @craftink, ((CRYPT_Quest & NIBBLE_3_MASK) >> NIBBLE_3_SHIFT);
+    set @gatebind, ((CRYPT_Quest & NIBBLE_4_MASK) >> NIBBLE_4_SHIFT);
+
+L_Main:
+    if (@undeaddebug == 1)
+        goto L_UndeadDebugOne;
+    if (@undeaddebug == 2)
+        goto L_UndeadDebugTwo;
+    goto L_Close;
+
+L_UndeadDebugOne:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Audit Quest", L_AuditQuest,
+        "Alacrius Unknown", L_Reset,
+        "Alacrius Known", L_QuestStart,
+        "Underworld Key", L_CraftKey,
+        "Quill of Binding", L_CraftQuill,
+        "Blood Ink", L_CraftInk,
+        "Book of Dead", L_BookOfDead,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugTwo:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Audit Quest", L_AuditQuest,
+        "Add Boss Points", L_AddBossPoints,
+        "Book of Dead", L_BookOfDead,
+        "Bound to Underworld", L_BindSoul,
+        "Escape to GY Inn.", L_Warp,
+        "Nevermind.", L_Close;
+
+L_AuditQuest:
+    mes "Boss Points:         " + BOSS_POINTS;
+    mes "NIBBLE_0 Mainline:   " + @state;
+    mes "NIBBLE_1 Key/Talk:   " + @craftkey;
+    mes "NIBBLE_2 Quill/Talk: " + @craftquill;
+    mes "NIBBLE_3 Ink/Talk:   " + @craftink;
+    mes "NIBBLE_4 Gate:       " + @gatebind;
+    goto L_Main;
+
+L_Reset:
+    set @state, 0;
+    set @craftkey, 0;
+    set @craftquill, 0;
+    set @craftink, 0;
+    set @gatebind, 0;
+    delitem "UnderworldKey", 1;
+    delitem "QuillOfBinding", 1;
+    delitem "BloodInk", 1;
+    callsub S_Update_Var;
+    goto L_Warp;
+
+L_QuestStart:
+    set @state, 1;
+    set @craftkey, 0;
+    set @craftquill, 0;
+    set @craftink, 0;
+    set @gatebind, 0;
+    delitem "UnderworldKey", 1;
+    delitem "QuillOfBinding", 1;
+    delitem "BloodInk", 1;
+    callsub S_Update_Var;
+    goto L_Warp;
+
+L_CraftKey:
+    set @state, 1;
+    set @craftkey, 2;
+    set @gatebind, 0;
+    getinventorylist;
+    if ((checkweight("UnderworldKey", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "UnderworldKey", 1;
+    callsub S_Update_Var;
+    goto L_Warp;
+
+L_CraftQuill:
+    set @state, 1;
+    set @craftquill, 2;
+    set @gatebind, 0;
+    getinventorylist;
+    if ((checkweight("QuillOfBinding", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "QuillOfBinding", 1;
+    callsub S_Update_Var;
+    goto L_Warp;
+
+L_CraftInk:
+    set @state, 1;
+    set @craftink, 2;
+    set @gatebind, 0;
+    getinventorylist;
+    if ((checkweight("BloodInk", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "BloodInk", 1;
+    callsub S_Update_Var;
+    goto L_Warp;
+
+L_InventoryNoSpace:
+    mes "\"Drop some weight then come back.\"";
+    goto L_Close;
+
+L_AddBossPoints:
+    mes "Add How Many Boss Points?";
+    input @bosspoints;
+    set BOSS_POINTS, @bosspoints;
+    set @bosspoints, 0;
+    goto L_Close;
+
+L_BookOfDead:
+    set @gatebind, 0;
+    callsub S_Update_Var;
+    callfunc "ClearVariables";
+    set @map$, "009-1.gat";
+    setarray @Xs, 52, 53, 54, 52, 54, 52, 54;
+    setarray @Ys, 39, 39, 39, 40, 40, 41, 41;
+    set @x, 0;
+    set @y, 0;
+    set @warpmap$, "027-4.gat";
+    set @warpx, 108;
+    set @warpy, 88;
+    goto L_SaveWarp;
+
+L_BindSoul:
+    callfunc "ClearVariables";
+    set @gatebind, 1;
+    callsub S_Update_Var;
+    set @map$, "070-1.gat";
+    setarray @Xs, 55, 56, 57, 55, 57, 55, 57;
+    setarray @Ys, 70, 70, 70, 71, 71, 72, 72;
+    set @x, 0;
+    set @y, 0;
+    set @warpmap$, "070-1.gat";
+    set @warpx, 33;
+    set @warpy, 71;
+    goto L_SaveWarp;
+
+L_Warp:
+    set @gatebind, 0;
+    callsub S_Update_Var;
+    callfunc "ClearVariables";
+    set @map$, "009-1.gat";
+    setarray @Xs, 52, 53, 54, 52, 54, 52, 54;
+    setarray @Ys, 39, 39, 39, 40, 40, 41, 41;
+    set @x, 0;
+    set @y, 0;
+    set @warpmap$, "027-2.gat";
+    set @warpx, 123;
+    set @warpy, 102;
+    goto L_SaveWarp;
+
+L_SaveWarp:
+    if (@x == 0 && @y == 0)
+        goto L_FindPointWarp;
+
+L_FindPointWarp:
+    set @n, rand(getarraysize(@Xs));
+    set @x, @Xs[@n];
+    set @y, @Ys[@n];
+    goto L_DoSaveWarp;
+
+L_DoSaveWarp:
+    savepoint @map$, @x, @y;
+    goto L_ReturnWarp;
+
+L_ReturnWarp:
+    warp @warpmap$,@warpx,@warpy;
+    goto L_Close;
+
+L_Close:
+    set @map$, "";
+    cleararray @Xs[0], 0, 7;
+    cleararray @Ys[0], 0, 7;
+    set @x, 0;
+    set @y, 0;
+    set @state, 0;
+    set @craftkey, 0;
+    set @craftquill, 0;
+    set @craftink, 0;
+    set @gatebind, 0;
+    close;
+
+S_Update_Var:
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_0_MASK) | (@state << NIBBLE_0_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_1_MASK) | (@craftkey << NIBBLE_1_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_2_MASK) | (@craftquill << NIBBLE_2_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_3_MASK) | (@craftink << NIBBLE_3_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_4_MASK) | (@gatebind << NIBBLE_4_SHIFT));
+    return;
+}
+
+// Debug for Crypts
+027-2.gat,120,103,0|script|UndeadDebug1|155,
+{
+    set @undeaddebug, 1;
+    callfunc "UndeadDebug";
+    end;   
+}
+
+// Debug for underworld
+070-1.gat,32,62,0|script|UndeadDebug2|155,
+{
+    set @undeaddebug, 2;
+    callfunc "UndeadDebug";
+    end;   
+}
+

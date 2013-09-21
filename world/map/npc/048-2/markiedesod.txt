@@ -5,7 +5,7 @@
 // 1 - knows requirements
 // 2 - quill made
 
-048-2.gat,113,76,0|script|Markie Desod|362,
+048-2.gat,115,74,0|script|Markie Desod|362,
 {
     set @state, ((CRYPT_Quest & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
     set @crafted, ((CRYPT_Quest & NIBBLE_2_MASK) >> NIBBLE_2_SHIFT);

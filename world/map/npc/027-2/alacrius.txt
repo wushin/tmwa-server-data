@@ -1,31 +1,5 @@
 // Author: ????, wushin
 //Starts Crypt Quest
-// CRYPT_Quest
-// NIBBLE_0 - Mainline
-// 1 - Knows about items and where to get them
-// 2 - Bound to Crypts
-// 3 - Investigated Reaper/Wife
-// 4 - Beat Reaper Once
-// NIBBLE_1 - 
-// Cerhan, GY Inn, 027-2
-// 1 - Knows Materials
-// 2 - Got Underworld Key
-// X
-// 3 - X talked to
-// NIBBLE_2 -
-// Markie Desod, Blue Sage Mansion, 048-2
-// 1 - Knows Reagents
-// 2 - Got Quill of Binding
-// Y
-// 3 - Y talked to
-// NIBBLE_3 - 
-// Rygial, Tulimshar School of Magic, 024-2
-// 1 - Knows Ingredients
-// 2 - Got Blood Ink
-// Z
-// 3 - Z talked to
-// NIBBLE 6
-// NIBBLE 7
 
 027-2.gat,122,105,0|script|Alacrius|313,
 {
