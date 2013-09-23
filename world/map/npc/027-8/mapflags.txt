@@ -1,0 +1,1 @@
+027-8.gat|mapflag|nosave|027-5,70,27
