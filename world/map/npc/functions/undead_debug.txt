@@ -31,8 +31,11 @@
 // Gate 
 // 1 - Bound to Underworld
 // NIBBLE 5
+// Empty
 // NIBBLE 6
+// Empty
 // NIBBLE 7
+// Empty
 
 function|script|UndeadDebug|,
 {
@@ -47,6 +50,10 @@ L_Main:
         goto L_UndeadDebugOne;
     if (@undeaddebug == 2)
         goto L_UndeadDebugTwo;
+    if (@undeaddebug == 3)
+        goto L_UndeadDebugThree;
+    if (@undeaddebug == 4)
+        goto L_UndeadDebugFour;
     goto L_Close;
 
 L_UndeadDebugOne:
@@ -56,9 +63,12 @@ L_UndeadDebugOne:
         "Audit Quest", L_AuditQuest,
         "Alacrius Unknown", L_Reset,
         "Alacrius Known", L_QuestStart,
-        "Underworld Key", L_CraftKey,
-        "Quill of Binding", L_CraftQuill,
-        "Blood Ink", L_CraftInk,
+        "Underworld Key known", L_KnowKey,
+        "Underworld Key made", L_CraftKey,
+        "Quill of Binding known", L_KnowQuill,
+        "Quill of Binding made", L_CraftQuill,
+        "Blood Ink known", L_KnowInk,
+        "Blood Ink made", L_CraftInk,
         "Book of Dead", L_BookOfDead,
         "Nevermind.", L_Close;
 
@@ -67,10 +77,31 @@ L_UndeadDebugTwo:
     mes "Options Limited to Time and Place.";
     menu
         "Audit Quest", L_AuditQuest,
-        "Add Boss Points", L_AddBossPoints,
+        "Set Boss Points", L_AddBossPoints,
         "Book of Dead", L_BookOfDead,
         "Bound to Underworld", L_BindSoul,
         "Escape to GY Inn.", L_Warp,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugThree:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Get Ritual Items.", L_KrukanItems,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugFour:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Get Ritual Items.", L_RazhaItems,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugFive:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Get Ritual Items.", L_TeroganItems,
         "Nevermind.", L_Close;
 
 L_AuditQuest:
@@ -106,6 +137,13 @@ L_QuestStart:
     callsub S_Update_Var;
     goto L_Warp;
 
+L_KnowKey:
+    set @state, 1;
+    set @craftkey, 1;
+    set @gatebind, 0;
+    callsub S_Update_Var;
+    goto L_Warp;
+
 L_CraftKey:
     set @state, 1;
     set @craftkey, 2;
@@ -117,6 +155,13 @@ L_CraftKey:
     callsub S_Update_Var;
     goto L_Warp;
 
+L_KnowQuill:
+    set @state, 1;
+    set @craftquill, 1;
+    set @gatebind, 0;
+    callsub S_Update_Var;
+    goto L_Warp;
+
 L_CraftQuill:
     set @state, 1;
     set @craftquill, 2;
@@ -125,6 +170,13 @@ L_CraftQuill:
     if ((checkweight("QuillOfBinding", 1) == 0) || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
     getitem "QuillOfBinding", 1;
+    callsub S_Update_Var;
+    goto L_Warp;
+
+L_KnowInk:
+    set @state, 1;
+    set @craftink, 1;
+    set @gatebind, 0;
     callsub S_Update_Var;
     goto L_Warp;
 
@@ -144,11 +196,11 @@ L_InventoryNoSpace:
     goto L_Close;
 
 L_AddBossPoints:
-    mes "Add How Many Boss Points?";
+    mes "Set Boss Points.";
     input @bosspoints;
     set BOSS_POINTS, @bosspoints;
     set @bosspoints, 0;
-    goto L_Close;
+    goto L_Main;
 
 L_BookOfDead:
     set @gatebind, 0;
@@ -210,6 +262,27 @@ L_ReturnWarp:
     warp @warpmap$,@warpx,@warpy;
     goto L_Close;
 
+L_KrukanItems:
+    getitem "JackOSoul", 3;
+    getitem "DiseasedHeart", 5;
+    getitem "UndeadEye", 5;
+    getitem "UndeadEar", 5;
+    goto L_Main;
+
+L_RazhaItems:
+    getitem "JackOSoul", 5;
+    getitem "DiseasedHeart", 5;
+    getitem "UndeadEye", 5;
+    getitem "UndeadEar", 5;
+    goto L_Main;
+
+L_TeroganItems:
+    getitem "JackOSoul", 5;
+    getitem "DiseasedHeart", 5;
+    getitem "UndeadEye", 5;
+    getitem "UndeadEar", 5;
+    goto L_Main;
+
 L_Close:
     set @map$, "";
     cleararray @Xs[0], 0, 7;
@@ -248,3 +321,26 @@ S_Update_Var:
     end;   
 }
 
+// Debug for Krukan
+027-3.gat,84,89,0|script|UndeadDebug3|155,
+{
+    set @undeaddebug, 3;
+    callfunc "UndeadDebug";
+    end;   
+}
+
+// Debug for Razha
+027-4.gat,76,79,0|script|UndeadDebug4|155,
+{
+    set @undeaddebug, 4;
+    callfunc "UndeadDebug";
+    end;   
+}
+
+// Debug for Terogan
+027-5.gat,72,26,0|script|UndeadDebug5|155,
+{
+    set @undeaddebug, 5;
+    callfunc "UndeadDebug";
+    end;   
+}

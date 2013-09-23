@@ -1,11 +1,11 @@
 // Locking Portal
 
-070-1.gat,32,87,0|script|#undeadportal|400,3,0
+070-1.gat,34,85,0|script|Boatman Styx|319,2,2
 {
 
-    set @state, ((CRYPT_Quest & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
+    set @gatebind, ((CRYPT_Quest & NIBBLE_4_MASK) >> NIBBLE_4_SHIFT);
 
-    if(@state > 1)
+    if(@gatebind > 0)
         end;
 
     mes "Once you pass this point Your soul will be bound to this place.";
@@ -21,7 +21,7 @@ L_Leave:
 L_BindSoul:
     misceffect 303;
     callfunc "ClearVariables";
-    set @state, 2;
+    set @gatebind, 1;
     callsub S_Update_Var;
     set @map$, "070-1.gat";
     setarray @Xs, 55, 56, 57, 55, 57, 55, 57;
@@ -54,10 +54,10 @@ L_Close:
     cleararray @Ys[0], 0, 7;
     set @x, 0;
     set @y, 0;
-    set @state, 0;
+    set @gatebind, 0;
     close;
 
 S_Update_Var:
-    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_0_MASK) | (@state << NIBBLE_0_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_4_MASK) | (@gatebind << NIBBLE_4_SHIFT));
     return;
 }

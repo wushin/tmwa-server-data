@@ -2,7 +2,7 @@
 {
     if (BaseLevel < 60)
         goto L_Weak;
-    warp "027-2.gat", 112, 108;
+    warp "027-2.gat", 112, 110;
     end;
 
 L_Weak:

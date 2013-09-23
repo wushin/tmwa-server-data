@@ -950,7 +950,7 @@ OnInit:
         disablenpc "Debug5";
 }
 
-070-1.gat,41,39,0|script|Debug6|154,
+070-1.gat,35,64,0|script|Debug6|154,
 {
     callfunc "Debug";
     end;
