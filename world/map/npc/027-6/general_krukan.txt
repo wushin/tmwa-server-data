@@ -7,10 +7,10 @@
     if ($@CRYPT_FIGHT1 != 0)
         end;
 
-    set @KRUKAN_SOUL_REQ, 3;
-    set @KRUKAN_ROTTEN_RAGS_REQ, 5;
-    set @KRUKAN_UNDEAD_EYE_REQ, 5;
-    set @KRUKAN_UNDEAD_EAR_REQ, 5;
+    set @KRUKAN_SOUL_REQ, 1;
+    set @KRUKAN_SKULL_REQ, 5;
+    set @KRUKAN_DARK_CRYSTAL_REQ, 5;
+    set @KRUKAN_BONE_REQ, 5;
     set @minlevel, 60;
 
     mes "[Tome]";
@@ -26,7 +26,7 @@ L_TomeMain:
         "Nothing.", L_Close;
 
 L_SummonReagents:
-    mes "Says we need " + @KRUKAN_SOUL_REQ + " Souls, " + @KRUKAN_ROTTEN_RAGS_REQ + " Diseased Hearts, " + @KRUKAN_UNDEAD_EYE_REQ + " Undead Eyes, and " + @KRUKAN_UNDEAD_EAR_REQ + " Undead Ears to perform the ritual.";
+    mes "Says we need " + @KRUKAN_SOUL_REQ + " Souls, " + @KRUKAN_SKULL_REQ + " Diseased Hearts, " + @KRUKAN_DARK_CRYSTAL_REQ + " Undead Eyes, and " + @KRUKAN_BONE_REQ + " Undead Ears to perform the ritual.";
     next;
     goto L_TomeMain;
 
@@ -38,15 +38,15 @@ L_MissingReagents:
 L_Ritual:
     if (BaseLevel < @minlevel)
         goto L_ToWeak;
-    if ( (countitem("JackOSoul") < @KRUKAN_SOUL_REQ)
-        || (countitem("RottenRags") < @KRUKAN_ROTTEN_RAGS_REQ) 
-        || (countitem("UndeadEye") < @KRUKAN_UNDEAD_EYE_REQ) 
-        || (countitem("UndeadEar") < @KRUKAN_UNDEAD_EAR_REQ) )
+    if ( (countitem("Soul") < @KRUKAN_SOUL_REQ)
+        || (countitem("Skull") < @KRUKAN_SKULL_REQ) 
+        || (countitem("DarkCrystal") < @KRUKAN_DARK_CRYSTAL_REQ) 
+        || (countitem("Bone") < @KRUKAN_BONE_REQ) )
         goto L_MissingReagents;
-    delitem "JackOSoul", @KRUKAN_SOUL_REQ;
-    delitem "RottenRags", @KRUKAN_ROTTEN_RAGS_REQ;
-    delitem "UndeadEye", @KRUKAN_UNDEAD_EYE_REQ;
-    delitem "UndeadEar", @KRUKAN_UNDEAD_EAR_REQ;
+    delitem "Soul", @KRUKAN_SOUL_REQ;
+    delitem "Skull", @KRUKAN_SKULL_REQ;
+    delitem "DarkCrystal", @KRUKAN_DARK_CRYSTAL_REQ;
+    delitem "Bone", @KRUKAN_BONE_REQ;
     mes "As you perform the ritual you can feel the energy amass.";
     next;
     mes "A cold shiver runs down your spine as you feel something manifesting out of the void.";
@@ -76,9 +76,9 @@ L_Close:
     set @minlevel, 0;
     set @inventorylist_count, 0;
     set @KRUKAN_SOUL_REQ, 0;
-    set @KRUKAN_ROTTEN_RAGS_REQ, 0;
-    set @KRUKAN_UNDEAD_EYE_REQ, 0;
-    set @KRUKAN_UNDEAD_EAR_REQ, 0;
+    set @KRUKAN_SKULL_REQ, 0;
+    set @KRUKAN_DARK_CRYSTAL_REQ, 0;
+    set @KRUKAN_BONE_REQ, 0;
     close;
 
 // Fight logic attached to npc
@@ -116,7 +116,7 @@ L_NextWave:
         goto L_SummonNuke;
     if ($@CRYPT_FIGHT1_WAVE < 5)
         goto L_WeakSummons;
-    if ( ($@CRYPT_FIGHT1_WAVE < 10) && ($@CRYPT_FIGHT1_WAVE > 5) )
+    if ( ($@CRYPT_FIGHT1_WAVE < 10) && ($@CRYPT_FIGHT1_WAVE >= 5) )
         goto L_StrongSummons;
     if ($@CRYPT_FIGHT1_WAVE == 10)
         goto L_BossSummons;
@@ -127,7 +127,7 @@ L_SummonNuke:
     goto L_Announce;
 
 L_WeakSummons:
-    set $@CRYPT_FIGHT1_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT1_WAVE) + (2 * $@CRYPT_FIGHT1_PLAYER_COUNT))/4;
+    set $@CRYPT_FIGHT1_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT1_WAVE) + (2 * $@CRYPT_FIGHT1_PLAYER_COUNT))/2;
     set $@CRYPT_FIGHT1_SUMMONS_COUNT, $@CRYPT_FIGHT1_SUMMONS_COUNT + $@CRYPT_FIGHT1_SUMMONS_NUMBER;
 
     areamonster "027-6.gat", 0, 0, 79, 84, "", 1043, ($@CRYPT_FIGHT1_SUMMONS_NUMBER/2), "General Krukan::OnPetDeath";
@@ -135,7 +135,7 @@ L_WeakSummons:
     goto L_Announce;
 
 L_StrongSummons:
-    set $@CRYPT_FIGHT1_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT1_WAVE) + (2 * $@CRYPT_FIGHT1_PLAYER_COUNT))/4;
+    set $@CRYPT_FIGHT1_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT1_WAVE) + (2 * $@CRYPT_FIGHT1_PLAYER_COUNT))/2;
     set $@CRYPT_FIGHT1_SUMMONS_COUNT, $@CRYPT_FIGHT1_SUMMONS_COUNT + $@CRYPT_FIGHT1_SUMMONS_NUMBER;
 
     areamonster "027-6.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT1_SUMMONS_NUMBER/2), "General Krukan::OnPetDeath";
@@ -143,7 +143,7 @@ L_StrongSummons:
     goto L_Announce;
 
 L_BossSummons:
-    set $@CRYPT_FIGHT1_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT1_WAVE) + (2 * $@CRYPT_FIGHT1_PLAYER_COUNT))/4;
+    set $@CRYPT_FIGHT1_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT1_WAVE) + (2 * $@CRYPT_FIGHT1_PLAYER_COUNT))/2;
     areamonster "027-6.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT1_SUMMONS_NUMBER/2), "General Krukan::OnPetDeath";
     areamonster "027-6.gat", 0, 0, 79, 84, "", 1045, ($@CRYPT_FIGHT1_SUMMONS_NUMBER/2), "General Krukan::OnPetDeath";
     areamonster "027-6.gat", 0, 0, 79, 84, "", 1115, 1, "General Krukan::OnPetDeath";
@@ -188,16 +188,18 @@ OnReward:
     set @bonus, (BaseLevel/4);
     set DailyQuestBonus, DailyQuestBonus + @bonus;
     message strcharinfo(0), "You feel a temporary rush of power and zest for action. " + @bonus + " daily bonus gained." ;
-    set BOSS_POINTS, BOSS_POINTS + 20;
-    message strcharinfo(0), "You gain 50 Boss Points giving you a total of " + BOSS_POINTS + ".";
+    set BOSS_POINTS, BOSS_POINTS + 25;
+    message strcharinfo(0), "You gain 20 Boss Points giving you a total of " + BOSS_POINTS + ".";
+    goto L_End;
+
 L_End:
     set @bonus, 0;
     set @minlevel, 0;
     set @inventorylist_count, 0;
     set @KRUKAN_SOUL_REQ, 0;
-    set @KRUKAN_ROTTEN_RAGS_REQ, 0;
-    set @KRUKAN_UNDEAD_EYE_REQ, 0;
-    set @KRUKAN_UNDEAD_EAR_REQ, 0;
+    set @KRUKAN_SKULL_REQ, 0;
+    set @KRUKAN_DARK_CRYSTAL_REQ, 0;
+    set @KRUKAN_BONE_REQ, 0;
     end;
 
 OnInit:

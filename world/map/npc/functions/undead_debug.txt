@@ -54,6 +54,8 @@ L_Main:
         goto L_UndeadDebugThree;
     if (@undeaddebug == 4)
         goto L_UndeadDebugFour;
+    if (@undeaddebug == 5)
+        goto L_UndeadDebugFive;
     goto L_Close;
 
 L_UndeadDebugOne:
@@ -64,10 +66,13 @@ L_UndeadDebugOne:
         "Alacrius Unknown", L_Reset,
         "Alacrius Known", L_QuestStart,
         "Underworld Key known", L_KnowKey,
+        "Underworld Key Mats", L_MatsKey,
         "Underworld Key made", L_CraftKey,
         "Quill of Binding known", L_KnowQuill,
+        "Quill of Binding Mats", L_MatsQuill,
         "Quill of Binding made", L_CraftQuill,
         "Blood Ink known", L_KnowInk,
+        "Blood Ink mats", L_MatsInk,
         "Blood Ink made", L_CraftInk,
         "Book of Dead", L_BookOfDead,
         "Nevermind.", L_Close;
@@ -144,6 +149,14 @@ L_KnowKey:
     callsub S_Update_Var;
     goto L_Warp;
 
+L_MatsKey:
+    additem "CryptKey", 10;
+    additem "Bone", 25;
+    additem "Skull", 25;
+    additem "Soul", 5;
+    set Zeny, Zeny + 20000;
+    goto L_Warp;
+
 L_CraftKey:
     set @state, 1;
     set @craftkey, 2;
@@ -162,6 +175,14 @@ L_KnowQuill:
     callsub S_Update_Var;
     goto L_Warp;
 
+L_MatsQuill:
+    additem "RedDye", 10;
+    additem "YellowDye", 10;
+    additem "WhiteFur", 20;
+    additem "YetiClaw", 20;
+    set Zeny, Zeny + 20000;
+    goto L_Warp;
+
 L_CraftQuill:
     set @state, 1;
     set @craftquill, 2;
@@ -178,6 +199,14 @@ L_KnowInk:
     set @craftink, 1;
     set @gatebind, 0;
     callsub S_Update_Var;
+    goto L_Warp;
+
+L_MatsInk:
+    addtem "BlackScorpionStinger", 20;
+    additem "MountainSnakeEgg", 10;
+    additem "MaggotSlime", 20;
+    additem "JarofOwnBlood", 5;
+    set Zeny, Zeny + 20000;
     goto L_Warp;
 
 L_CraftInk:
@@ -263,21 +292,21 @@ L_ReturnWarp:
     goto L_Close;
 
 L_KrukanItems:
-    getitem "JackOSoul", 3;
-    getitem "DiseasedHeart", 5;
-    getitem "UndeadEye", 5;
-    getitem "UndeadEar", 5;
+    getitem "Soul", 1;
+    getitem "Skull", 5;
+    getitem "DarkCrystal", 5;
+    getitem "Bone", 5;
     goto L_Main;
 
 L_RazhaItems:
-    getitem "JackOSoul", 5;
-    getitem "DiseasedHeart", 5;
+    getitem "Soul", 3;
+    getitem "RottenRags", 5;
     getitem "UndeadEye", 5;
     getitem "UndeadEar", 5;
     goto L_Main;
 
 L_TeroganItems:
-    getitem "JackOSoul", 5;
+    getitem "Soul", 5;
     getitem "DiseasedHeart", 5;
     getitem "UndeadEye", 5;
     getitem "UndeadEar", 5;

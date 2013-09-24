@@ -7,7 +7,7 @@
     if ($@CRYPT_FIGHT2 != 0)
         end;
 
-    set @RAZHA_SOUL_REQ, 5;
+    set @RAZHA_SOUL_REQ, 3;
     set @RAZHA_ROTTEN_RAGS_REQ, 5;
     set @RAZHA_UNDEAD_EYE_REQ, 5;
     set @RAZHA_UNDEAD_EAR_REQ, 5;
@@ -38,12 +38,12 @@ L_MissingReagents:
 L_Ritual:
     if (BaseLevel < @minlevel)
         goto L_ToWeak;
-    if ( (countitem("JackOSoul") < @RAZHA_SOUL_REQ)
+    if ( (countitem("Soul") < @RAZHA_SOUL_REQ)
         || (countitem("RottenRags") < @RAZHA_ROTTEN_RAGS_REQ) 
         || (countitem("UndeadEye") < @RAZHA_UNDEAD_EYE_REQ) 
         || (countitem("UndeadEar") < @RAZHA_UNDEAD_EAR_REQ) )
         goto L_MissingReagents;
-    delitem "JackOSoul", @RAZHA_SOUL_REQ;
+    delitem "Soul", @RAZHA_SOUL_REQ;
     delitem "RottenRags", @RAZHA_ROTTEN_RAGS_REQ;
     delitem "UndeadEye", @RAZHA_UNDEAD_EYE_REQ;
     delitem "UndeadEar", @RAZHA_UNDEAD_EAR_REQ;
@@ -116,7 +116,7 @@ L_NextWave:
         goto L_SummonNuke;
     if ($@CRYPT_FIGHT2_WAVE < 5)
         goto L_WeakSummons;
-    if ( ($@CRYPT_FIGHT2_WAVE < 10) && ($@CRYPT_FIGHT2_WAVE > 5) )
+    if ( ($@CRYPT_FIGHT2_WAVE < 10) && ($@CRYPT_FIGHT2_WAVE >= 5) )
         goto L_StrongSummons;
     if ($@CRYPT_FIGHT2_WAVE == 10)
         goto L_BossSummons;
@@ -127,7 +127,7 @@ L_SummonNuke:
     goto L_Announce;
 
 L_WeakSummons:
-    set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/4;
+    set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/2;
     set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + $@CRYPT_FIGHT2_SUMMONS_NUMBER;
 
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
@@ -135,7 +135,7 @@ L_WeakSummons:
     goto L_Announce;
 
 L_StrongSummons:
-    set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/4;
+    set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/2;
     set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + $@CRYPT_FIGHT2_SUMMONS_NUMBER;
 
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
@@ -143,7 +143,7 @@ L_StrongSummons:
     goto L_Announce;
 
 L_BossSummons:
-    set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/4;
+    set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/2;
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1042, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1116, 1, "General Razha::OnPetDeath";
@@ -188,8 +188,10 @@ OnReward:
     set @bonus, (BaseLevel/2);
     set DailyQuestBonus, DailyQuestBonus + @bonus;
     message strcharinfo(0), "You feel a temporary rush of power and zest for action. " + @bonus + " daily bonus gained." ;
-    set BOSS_POINTS, BOSS_POINTS + 70;
-    message strcharinfo(0), "You gain 70 Boss Points giving you a total of " + BOSS_POINTS + ".";
+    set BOSS_POINTS, BOSS_POINTS + 50;
+    message strcharinfo(0), "You gain 50 Boss Points giving you a total of " + BOSS_POINTS + ".";
+    goto L_End;
+
 L_End:
     set @bonus, 0;
     set @minlevel, 0;

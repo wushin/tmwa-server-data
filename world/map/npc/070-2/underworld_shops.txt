@@ -33,7 +33,7 @@ L_BossShop:
         "Grass Snake Tongue (5 BP)", L_GrassSnake,
         "Bloodstone. (10 BP)", L_Bloodstone,
         "Dark Crystal (10 BP)", L_DarkCrystal,
-        "Jack O Soul (10 BP)", L_JackO,
+        "Soul (10 BP)", L_JackO,
         "Skull Mask (20,000 BP)", L_SkullMask,
         "I've shopped enough today.", L_Close;
 
@@ -53,7 +53,7 @@ L_DarkCrystal:
     goto L_CheckNGo;
 
 L_JackO:
-    set @BossPointItem$, "JackOSoul";
+    set @BossPointItem$, "Soul";
     set @BossPointCost, 10;
     goto L_CheckNGo;
 

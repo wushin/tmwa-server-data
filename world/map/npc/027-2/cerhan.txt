@@ -48,7 +48,7 @@ L_MakeUKey:
         || (countitem("CryptKey") < @CRYPT_KEY_REQ)
         || (countitem("Bone") < @CRYPT_BONE_REQ)
         || (countitem("Skull") < @CRYPT_SKULL_REQ)
-        || (countitem("JackOSoul") < @CRYPT_SOUL_REQ) )
+        || (countitem("Soul") < @CRYPT_SOUL_REQ) )
         goto L_MissingItems;
     getinventorylist;
     if ((checkweight("UnderworldKey", 1) == 0) || (@inventorylist_count == 100))
@@ -56,7 +56,7 @@ L_MakeUKey:
     delitem "CryptKey", @CRYPT_KEY_REQ;
     delitem "Bone", @CRYPT_BONE_REQ;
     delitem "Skull", @CRYPT_SKULL_REQ;
-    delitem "JackOSoul", @CRYPT_SOUL_REQ;
+    delitem "Soul", @CRYPT_SOUL_REQ;
     set Zeny, Zeny - @CRYPT_GOLD_REQ;
     getitem "UnderworldKey", 1;
     set @crafted, 2;

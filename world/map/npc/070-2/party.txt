@@ -1,0 +1,4 @@
+// Group of wasted Underworld patrons want to be served.
+// If taken too long to serve, quest failed.
+// Always a chance for them to turn hostile.
+
