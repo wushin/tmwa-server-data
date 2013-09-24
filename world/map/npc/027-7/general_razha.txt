@@ -74,7 +74,6 @@ L_ToWeak:
 L_Close:
     set @bonus, 0;
     set @minlevel, 0;
-    set @inventorylist_count, 0;
     set @RAZHA_SOUL_REQ, 0;
     set @RAZHA_ROTTEN_RAGS_REQ, 0;
     set @RAZHA_UNDEAD_EYE_REQ, 0;
@@ -195,7 +194,6 @@ OnReward:
 L_End:
     set @bonus, 0;
     set @minlevel, 0;
-    set @inventorylist_count, 0;
     set @RAZHA_SOUL_REQ, 0;
     set @RAZHA_ROTTEN_RAGS_REQ, 0;
     set @RAZHA_UNDEAD_EYE_REQ, 0;

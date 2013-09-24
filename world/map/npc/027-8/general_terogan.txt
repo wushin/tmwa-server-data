@@ -121,7 +121,6 @@ L_ToWeak:
 L_Close:
     set @bonus, 0;
     set @minlevel, 0;
-    set @inventorylist_count, 0;
     set @TEROGAN_SOUL_REQ, 0;
     set @TEROGAN_DISEASED_HEART_REQ, 0;
     set @TEROGAN_UNDEAD_EYE_REQ, 0;
@@ -243,7 +242,6 @@ OnReward:
 L_End:
     set @bonus, 0;
     set @minlevel, 0;
-    set @inventorylist_count, 0;
     set @TEROGAN_SOUL_REQ, 0;
     set @TEROGAN_DISEASED_HEART_REQ, 0;
     set @TEROGAN_UNDEAD_EYE_REQ, 0;

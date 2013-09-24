@@ -56,6 +56,12 @@ L_Main:
         goto L_UndeadDebugFour;
     if (@undeaddebug == 5)
         goto L_UndeadDebugFive;
+    if (@undeaddebug == 6)
+        goto L_UndeadDebugSix;
+    if (@undeaddebug == 7)
+        goto L_UndeadDebugSeven;
+    if (@undeaddebug == 8)
+        goto L_UndeadDebugEight;
     goto L_Close;
 
 L_UndeadDebugOne:
@@ -67,14 +73,18 @@ L_UndeadDebugOne:
         "Alacrius Known", L_QuestStart,
         "Underworld Key known", L_KnowKey,
         "Underworld Key Mats", L_MatsKey,
+        "Warp to Underworld Key Maker", L_MakeKey,
         "Underworld Key made", L_CraftKey,
         "Quill of Binding known", L_KnowQuill,
         "Quill of Binding Mats", L_MatsQuill,
+        "Warp to Quill of Binding Maker", L_MakeQuill,
         "Quill of Binding made", L_CraftQuill,
         "Blood Ink known", L_KnowInk,
         "Blood Ink mats", L_MatsInk,
+        "Warp to Blood Ink maker", L_MakeInk,
         "Blood Ink made", L_CraftInk,
         "Book of Dead", L_BookOfDead,
+        "Die!", L_Die,
         "Nevermind.", L_Close;
 
 L_UndeadDebugTwo:
@@ -86,6 +96,7 @@ L_UndeadDebugTwo:
         "Book of Dead", L_BookOfDead,
         "Bound to Underworld", L_BindSoul,
         "Escape to GY Inn.", L_Warp,
+        "Die!", L_Die,
         "Nevermind.", L_Close;
 
 L_UndeadDebugThree:
@@ -107,6 +118,45 @@ L_UndeadDebugFive:
     mes "Options Limited to Time and Place.";
     menu
         "Get Ritual Items.", L_TeroganItems,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugSix:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Audit Quest", L_AuditQuest,
+        "Alacrius Unknown", L_Reset,
+        "Alacrius Known", L_QuestStart,
+        "Underworld Key known", L_KnowKey,
+        "Underworld Key Mats", L_MatsKey,
+        "Underworld Key made", L_CraftKey,
+        "Warp to Alacrius", L_Warp,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugSeven:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Audit Quest", L_AuditQuest,
+        "Alacrius Unknown", L_Reset,
+        "Alacrius Known", L_QuestStart,
+        "Quill of Binding known", L_KnowQuill,
+        "Quill of Binding Mats", L_MatsQuill,
+        "Quill of Binding made", L_CraftQuill,
+        "Warp to Alacrius", L_Warp,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugEight:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Audit Quest", L_AuditQuest,
+        "Alacrius Unknown", L_Reset,
+        "Alacrius Known", L_QuestStart,
+        "Blood Ink known", L_KnowInk,
+        "Blood Ink mats", L_MatsInk,
+        "Warp to Blood Ink maker", L_MakeInk,
+        "Warp to Alacrius", L_Warp,
         "Nevermind.", L_Close;
 
 L_AuditQuest:
@@ -150,12 +200,22 @@ L_KnowKey:
     goto L_Warp;
 
 L_MatsKey:
+    if ((checkweight("CryptKey", 10) == 0) 
+        || (checkweight("Bone", 25) == 0) 
+        || (checkweight("Skull", 25) == 0) 
+        || (checkweight("Soul", 5) == 0) 
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
     getitem "CryptKey", 10;
     getitem "Bone", 25;
     getitem "Skull", 25;
     getitem "Soul", 5;
     set Zeny, Zeny + 20000;
     goto L_Warp;
+
+L_MakeKey:
+    warp "027-2.gat", 69, 77;
+    goto L_Close;
 
 L_CraftKey:
     set @state, 1;
@@ -176,12 +236,22 @@ L_KnowQuill:
     goto L_Warp;
 
 L_MatsQuill:
+    if ((checkweight("RedDye", 10) == 0) 
+        || (checkweight("YellowDye", 10) == 0) 
+        || (checkweight("WhiteFur", 20) == 0) 
+        || (checkweight("YetiClaw", 20) == 0) 
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
     getitem "RedDye", 10;
     getitem "YellowDye", 10;
     getitem "WhiteFur", 20;
     getitem "YetiClaw", 20;
     set Zeny, Zeny + 20000;
     goto L_Warp;
+
+L_MakeQuill:
+    warp "048-2.gat", 114, 74;
+    goto L_Close;
 
 L_CraftQuill:
     set @state, 1;
@@ -202,12 +272,22 @@ L_KnowInk:
     goto L_Warp;
 
 L_MatsInk:
+    if ((checkweight("BlackScorpionStinger", 20) == 0) 
+        || (checkweight("MountainSnakeEgg", 10) == 0) 
+        || (checkweight("MaggotSlime", 20) == 0) 
+        || (checkweight("JarofOwnBlood", 5) == 0) 
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
     getitem "BlackScorpionStinger", 20;
     getitem "MountainSnakeEgg", 10;
     getitem "MaggotSlime", 20;
     getitem "JarofOwnBlood", 5;
     set Zeny, Zeny + 20000;
     goto L_Warp;
+
+L_MakeInk:
+    warp "024-2.gat", 21, 20;
+    goto L_Close;
 
 L_CraftInk:
     set @state, 1;
@@ -291,7 +371,17 @@ L_ReturnWarp:
     warp @warpmap$,@warpx,@warpy;
     goto L_Close;
 
+L_Die:
+    percentheal -100, 0;
+    goto L_Close;
+
 L_KrukanItems:
+    if ((checkweight("Soul", 1) == 0) 
+        || (checkweight("Skull", 5) == 0) 
+        || (checkweight("DarkCrystal", 5) == 0) 
+        || (checkweight("Bone", 5) == 0) 
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
     getitem "Soul", 1;
     getitem "Skull", 5;
     getitem "DarkCrystal", 5;
@@ -299,6 +389,12 @@ L_KrukanItems:
     goto L_Main;
 
 L_RazhaItems:
+    if ((checkweight("Soul", 3) == 0) 
+        || (checkweight("RottenRags", 5) == 0) 
+        || (checkweight("UndeadEye", 5) == 0) 
+        || (checkweight("UndeadEar", 5) == 0) 
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
     getitem "Soul", 3;
     getitem "RottenRags", 5;
     getitem "UndeadEye", 5;
@@ -306,6 +402,12 @@ L_RazhaItems:
     goto L_Main;
 
 L_TeroganItems:
+    if ((checkweight("Soul", 5) == 0) 
+        || (checkweight("DiseasedHeart", 5) == 0) 
+        || (checkweight("UndeadEye", 5) == 0) 
+        || (checkweight("UndeadEar", 5) == 0) 
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
     getitem "Soul", 5;
     getitem "DiseasedHeart", 5;
     getitem "UndeadEye", 5;
@@ -318,6 +420,9 @@ L_Close:
     cleararray @Ys[0], 0, 7;
     set @x, 0;
     set @y, 0;
+    set @warpmap$, 0;
+    set @warpx, 0;
+    set @warpy, 0;
     set @state, 0;
     set @craftkey, 0;
     set @craftquill, 0;
@@ -370,6 +475,30 @@ S_Update_Var:
 027-5.gat,72,26,0|script|UndeadDebug5|155,
 {
     set @undeaddebug, 5;
+    callfunc "UndeadDebug";
+    end;   
+}
+
+// Debug for Cerhan
+027-2.gat,71,77,0|script|UndeadDebug6|155,
+{
+    set @undeaddebug, 6;
+    callfunc "UndeadDebug";
+    end;   
+}
+
+// Debug for Markie Desod
+048-2.gat,116,74,0|script|UndeadDebug7|155,
+{
+    set @undeaddebug, 7;
+    callfunc "UndeadDebug";
+    end;   
+}
+
+// Debug for Rygial
+024-2.gat,23,20,0|script|UndeadDebug8|155,
+{
+    set @undeaddebug, 8;
     callfunc "UndeadDebug";
     end;   
 }
