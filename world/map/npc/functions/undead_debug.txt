@@ -150,10 +150,10 @@ L_KnowKey:
     goto L_Warp;
 
 L_MatsKey:
-    additem "CryptKey", 10;
-    additem "Bone", 25;
-    additem "Skull", 25;
-    additem "Soul", 5;
+    getitem "CryptKey", 10;
+    getitem "Bone", 25;
+    getitem "Skull", 25;
+    getitem "Soul", 5;
     set Zeny, Zeny + 20000;
     goto L_Warp;
 
@@ -176,10 +176,10 @@ L_KnowQuill:
     goto L_Warp;
 
 L_MatsQuill:
-    additem "RedDye", 10;
-    additem "YellowDye", 10;
-    additem "WhiteFur", 20;
-    additem "YetiClaw", 20;
+    getitem "RedDye", 10;
+    getitem "YellowDye", 10;
+    getitem "WhiteFur", 20;
+    getitem "YetiClaw", 20;
     set Zeny, Zeny + 20000;
     goto L_Warp;
 
@@ -202,10 +202,10 @@ L_KnowInk:
     goto L_Warp;
 
 L_MatsInk:
-    addtem "BlackScorpionStinger", 20;
-    additem "MountainSnakeEgg", 10;
-    additem "MaggotSlime", 20;
-    additem "JarofOwnBlood", 5;
+    getitem "BlackScorpionStinger", 20;
+    getitem "MountainSnakeEgg", 10;
+    getitem "MaggotSlime", 20;
+    getitem "JarofOwnBlood", 5;
     set Zeny, Zeny + 20000;
     goto L_Warp;
 
