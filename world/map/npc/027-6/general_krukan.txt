@@ -96,7 +96,7 @@ L_CryptLogic:
     if ($@CRYPT_FIGHT1_ROUND_PEN > 60)
         set $@CRYPT_FIGHT1_ROUND_PEN, 60;
     if ($@CRYPT_FIGHT1_PLAYER_COUNT <= 0)
-        goto L_CleanUp;
+        goto L_CleanUpLosers;
     set $@CRYPT_FIGHT1_SUMMONS_ROUND_TIMER, $@CRYPT_FIGHT1_SUMMONS_ROUND_TIMER + 5; // Advance 5 seconds
     if (mobcount("027-6.gat", "General Krukan::OnPetDeath") < 0)
         goto L_NextWave;
@@ -166,6 +166,19 @@ OnTick:
 
 OnPetDeath:
     set $@CRYPT_FIGHT1_SUMMONS_COUNT, $@CRYPT_FIGHT1_SUMMONS_COUNT - 1;
+    end;
+
+L_CleanUpLosers:
+    set $@CRYPT_FIGHT1, 0;
+    set $@CRYPT_FIGHT1_PLAYER_COUNT, 0;
+    set $@CRYPT_FIGHT1_WAVE, 0;
+    set $@CRYPT_FIGHT1_SUMMONS_ROUND_TIMER, 0;
+    set $@CRYPT_FIGHT1_SUMMONS_COUNT, 0;
+    set $@CRYPT_FIGHT1_ROUND_PEN, 0;
+    set $@CRYPT_FIGHT1_SUMMONS_NUMBER, 0;
+    killmonster "027-6.gat", "General Krukan::OnPetDeath";
+    stopnpctimer;
+    setnpctimer 0;
     end;
 
 L_CleanUp:

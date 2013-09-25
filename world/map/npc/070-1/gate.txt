@@ -4,6 +4,9 @@
 {
 
     set @gatebind, ((CRYPT_Quest & NIBBLE_4_MASK) >> NIBBLE_4_SHIFT);
+    //set @gatebind, (GATES >> BIT_0_SHIFT);
+    //set GATES, GATES | (@gatebind << BIT_0_SHIFT);
+    //           (VAR & (1 << 30))
 
     if(@gatebind > 0)
         end;

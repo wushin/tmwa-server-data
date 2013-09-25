@@ -74,8 +74,8 @@ L_RitualLeft:
     set $@CRYPT_FIGHT3_WAVE, 0;
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, 2;
     set $@CRYPT_FIGHT3_PLAYER_COUNT, getmapusers("027-8.gat");
-    areamonster "027-8.gat", 43, 39, 58, 60, "", 1036, 1, "General Terogan#Main::OnPetDeath";
-    areamonster "027-8.gat", 20, 39, 35, 60, "", 1042, 1, "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, 1, "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 20, 39, 35, 60, "", 1075, 1, "General Terogan#Main::OnPetDeath";
 
     initnpctimer;
     warp "027-8", 27, 43;
@@ -105,8 +105,8 @@ L_RitualRight:
     set $@CRYPT_FIGHT3_WAVE, 0;
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, 2;
     set $@CRYPT_FIGHT3_PLAYER_COUNT, getmapusers("027-8.gat");
-    areamonster "027-8.gat", 43, 39, 58, 60, "", 1036, 1, "General Terogan#Main::OnPetDeath";
-    areamonster "027-8.gat", 20, 39, 35, 60, "", 1042, 1, "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, 1, "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 20, 39, 35, 60, "", 1075, 1, "General Terogan#Main::OnPetDeath";
 
     initnpctimer;
     goto L_Announce;
@@ -143,7 +143,7 @@ L_CryptLogic:
     if ($@CRYPT_FIGHT3_ROUND_PEN > 60)
         set $@CRYPT_FIGHT3_ROUND_PEN, 60;
     if ($@CRYPT_FIGHT3_PLAYER_COUNT <= 0)
-        goto L_CleanUp;
+        goto L_CleanUpLosers;
     set $@CRYPT_FIGHT3_SUMMONS_ROUND_TIMER, $@CRYPT_FIGHT3_SUMMONS_ROUND_TIMER + 5; // Advance 5 seconds
     if (mobcount("027-8.gat", "General Terogan#Main::OnPetDeath") < 0)
         goto L_NextWave;
@@ -169,29 +169,29 @@ L_NextWave:
 
 L_SummonNuke:
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_WAVE*2 + $@CRYPT_FIGHT3_PLAYER_COUNT*4;
-    areamonster "027-8.gat", 0, 0, 79, 84, "", 1036, $@CRYPT_FIGHT3_WAVE*2 + $@CRYPT_FIGHT3_PLAYER_COUNT*4, "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 0, 0, 79, 84, "", 1111, $@CRYPT_FIGHT3_WAVE*2 + $@CRYPT_FIGHT3_PLAYER_COUNT*4, "General Terogan#Main::OnPetDeath";
     goto L_Announce;
 
 L_WeakSummons:
     set $@CRYPT_FIGHT3_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT3_WAVE) + (2 * $@CRYPT_FIGHT3_PLAYER_COUNT))/2;
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_SUMMONS_NUMBER;
 
-    areamonster "027-8.gat", 43, 39, 58, 60, "", 1036, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
-    areamonster "027-8.gat", 20, 39, 35, 60, "", 1045, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 20, 39, 35, 60, "", 1074, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
     goto L_Announce;
 
 L_StrongSummons:
     set $@CRYPT_FIGHT3_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT3_WAVE) + (2 * $@CRYPT_FIGHT3_PLAYER_COUNT))/2;
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_SUMMONS_NUMBER;
 
-    areamonster "027-8.gat", 43, 39, 58, 60, "", 1036, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
-    areamonster "027-8.gat", 20, 39, 35, 60, "", 1042, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 20, 39, 35, 60, "", 1075, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
     goto L_Announce;
 
 L_BossSummons:
     set $@CRYPT_FIGHT3_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT3_WAVE) + (2 * $@CRYPT_FIGHT3_PLAYER_COUNT))/2;
-    areamonster "027-8.gat", 43, 39, 58, 60, "", 1036, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
-    areamonster "027-8.gat", 20, 39, 35, 60, "", 1042, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
+    areamonster "027-8.gat", 20, 39, 35, 60, "", 1075, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
     areamonster "027-8.gat", 43, 39, 58, 60, "", 1117, 1, "General Terogan#Main::OnPetDeath";
     areamonster "027-8.gat", 20, 39, 35, 60, "", 1117, 1, "General Terogan#Main::OnPetDeath";
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_SUMMONS_NUMBER + 2;
@@ -214,6 +214,19 @@ OnTick:
 
 OnPetDeath:
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT - 1;
+    end;
+
+L_CleanUpLosers:
+    set $@CRYPT_FIGHT3, 0;
+    set $@CRYPT_FIGHT3_PLAYER_COUNT, 0;
+    set $@CRYPT_FIGHT3_WAVE, 0;
+    set $@CRYPT_FIGHT3_SUMMONS_ROUND_TIMER, 0;
+    set $@CRYPT_FIGHT3_SUMMONS_COUNT, 0;
+    set $@CRYPT_FIGHT3_ROUND_PEN, 0;
+    set $@CRYPT_FIGHT3_SUMMONS_NUMBER, 0;
+    killmonster "027-8.gat", "General Terogan#Main::OnPetDeath";
+    stopnpctimer;
+    setnpctimer 0;
     end;
 
 L_CleanUp:

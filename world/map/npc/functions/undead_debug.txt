@@ -4,15 +4,17 @@
 // Alacrius, Crypts Entrance 027-2
 // 1 - Knows about items and where to get them
 // Styx, Last Chance Island 070-1
-// 2 - Investigated Reaper/Wife
-// 3 - Beat Reaper Once
+// 2 - Investigated Town
+// 3 - Investigated Wife
+// 4 - Investigated Reaper
+// 5 - Beat Reaper Once
 // NIBBLE_1 -
 // Cerhan, GY Inn, 027-2
 // 1 - Knows Materials
 // 2 - Got Underworld Key
 // --- Bound to UnderWorld ---
 // X
-// 3 - X talked to
+// 3 - X talked to 
 // NIBBLE_2 -
 // Markie Desod, Blue Sage Mansion, 048-2
 // 1 - Knows Reagents
