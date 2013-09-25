@@ -1,4 +1,4 @@
-// Reaper
+// Reaper Lobby
 
 070-2.gat,142,79,0|script|Reaper#Lobby|379,
 {
@@ -24,6 +24,7 @@ L_FightStarted:
     goto L_Close;
 
 L_AskReaper:
+    mes "\"NOT WRITTEN YET\"";
     goto L_Close;
 
 L_Close:

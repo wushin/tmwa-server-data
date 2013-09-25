@@ -4,6 +4,7 @@
 // Alacrius, Crypts Entrance 027-2
 // 1 - Knows about items and where to get them
 // Styx, Last Chance Island 070-1
+// (Unfinsihed)
 // 2 - Investigated Town
 // 3 - Investigated Wife
 // 4 - Investigated Reaper
@@ -64,6 +65,8 @@ L_Main:
         goto L_UndeadDebugSeven;
     if (@undeaddebug == 8)
         goto L_UndeadDebugEight;
+    if (@undeaddebug == 9)
+        goto L_UndeadDebugNine;
     goto L_Close;
 
 L_UndeadDebugOne:
@@ -85,7 +88,9 @@ L_UndeadDebugOne:
         "Blood Ink mats", L_MatsInk,
         "Warp to Blood Ink maker", L_MakeInk,
         "Blood Ink made", L_CraftInk,
+        "All Items Made", L_CraftAll,
         "Book of Dead", L_BookOfDead,
+        "Bound to Underworld", L_BindSoul,
         "Die!", L_Die,
         "Nevermind.", L_Close;
 
@@ -159,6 +164,19 @@ L_UndeadDebugEight:
         "Blood Ink mats", L_MatsInk,
         "Warp to Blood Ink maker", L_MakeInk,
         "Warp to Alacrius", L_Warp,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugNine:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Audit Quest", L_AuditQuest,
+        "Set Boss Points", L_AddBossPoints,
+        "Souls", L_GetSouls,
+        "Book of Dead", L_BookOfDead,
+        "Bound to Underworld", L_BindSoul,
+        "Escape to GY Inn.", L_Warp,
+        "Die!", L_Die,
         "Nevermind.", L_Close;
 
 L_AuditQuest:
@@ -302,6 +320,29 @@ L_CraftInk:
     callsub S_Update_Var;
     goto L_Warp;
 
+L_CraftAll:
+    set @state, 1;
+    set @gatebind, 0;
+    getinventorylist;
+    if ((checkweight("QuillOfBinding", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "QuillOfBinding", 1;
+    set @craftquill, 2;
+    callsub S_Update_Var;
+    getinventorylist;
+    if ((checkweight("BloodInk", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "BloodInk", 1;
+    set @craftink, 2;
+    callsub S_Update_Var;
+    getinventorylist;
+    if ((checkweight("UnderworldKey", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "UnderworldKey", 1;
+    set @craftkey, 2;
+    callsub S_Update_Var;
+    goto L_Warp;
+
 L_InventoryNoSpace:
     mes "\"Drop some weight then come back.\"";
     goto L_Close;
@@ -314,7 +355,25 @@ L_AddBossPoints:
     goto L_Main;
 
 L_BookOfDead:
+    set @state, 1;
     set @gatebind, 0;
+    getinventorylist;
+    if ((checkweight("QuillOfBinding", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "QuillOfBinding", 1;
+    set @craftquill, 2;
+    callsub S_Update_Var;
+    getinventorylist;
+    if ((checkweight("BloodInk", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "BloodInk", 1;
+    set @craftink, 2;
+    callsub S_Update_Var;
+    getinventorylist;
+    if ((checkweight("UnderworldKey", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "UnderworldKey", 1;
+    set @craftkey, 2;
     callsub S_Update_Var;
     callfunc "ClearVariables";
     set @map$, "009-1.gat";
@@ -416,6 +475,12 @@ L_TeroganItems:
     getitem "UndeadEar", 5;
     goto L_Main;
 
+L_GetSouls:
+    if (checkweight("Soul", 5) == 0)
+        goto L_InventoryNoSpace;
+    getitem "Soul", 5;
+    goto L_Main;
+
 L_Close:
     set @map$, "";
     cleararray @Xs[0], 0, 7;
@@ -501,6 +566,14 @@ S_Update_Var:
 024-2.gat,23,20,0|script|UndeadDebug8|155,
 {
     set @undeaddebug, 8;
+    callfunc "UndeadDebug";
+    end;   
+}
+
+// Debug for Reaper
+070-2.gat,140,80,0|script|UndeadDebug9|155,
+{
+    set @undeaddebug, 9;
     callfunc "UndeadDebug";
     end;   
 }
