@@ -1,0 +1,2 @@
+070-2.gat|mapflag|no_player_drops
+070-2.gat|mapflag|town
