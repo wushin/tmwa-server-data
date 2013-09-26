@@ -59,7 +59,7 @@ L_Ritual:
     set $@CRYPT_FIGHT2_SUMMONS_COUNT, 2;
     set $@CRYPT_FIGHT2_PLAYER_COUNT, getmapusers("027-7.gat");
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1036, 1, "General Razha::OnPetDeath";
-    areamonster "027-7.gat", 0, 0, 79, 84, "", 1042, 1, "General Razha::OnPetDeath";
+    areamonster "027-7.gat", 0, 0, 79, 84, "", 1111, 1, "General Razha::OnPetDeath";
 
     initnpctimer;
     goto L_Announce;
@@ -127,7 +127,7 @@ L_SummonNuke:
 
 L_WeakSummons:
     set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/2;
-    set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + $@CRYPT_FIGHT2_SUMMONS_NUMBER;
+    set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2) + ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2);
 
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1045, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
@@ -135,18 +135,19 @@ L_WeakSummons:
 
 L_StrongSummons:
     set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/2;
-    set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + $@CRYPT_FIGHT2_SUMMONS_NUMBER;
+    set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2) + ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2);
 
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
-    areamonster "027-7.gat", 0, 0, 79, 84, "", 1042, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
+    areamonster "027-7.gat", 0, 0, 79, 84, "", 1111, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
     goto L_Announce;
 
 L_BossSummons:
     set $@CRYPT_FIGHT2_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT2_WAVE) + (2 * $@CRYPT_FIGHT2_PLAYER_COUNT))/2;
+    set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2) + ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2);
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1036, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
-    areamonster "027-7.gat", 0, 0, 79, 84, "", 1042, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
+    areamonster "027-7.gat", 0, 0, 79, 84, "", 1111, ($@CRYPT_FIGHT2_SUMMONS_NUMBER/2), "General Razha::OnPetDeath";
     areamonster "027-7.gat", 0, 0, 79, 84, "", 1116, 1, "General Razha::OnPetDeath";
-    set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + $@CRYPT_FIGHT2_SUMMONS_NUMBER + 1;
+    set $@CRYPT_FIGHT2_SUMMONS_COUNT, $@CRYPT_FIGHT2_SUMMONS_COUNT + 1;
     goto L_Announce;
 
 L_Announce:

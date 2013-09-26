@@ -59,6 +59,8 @@ L_RitualLeft:
         || (countitem("UndeadEye") < @TEROGAN_UNDEAD_EYE_REQ) 
         || (countitem("UndeadEar") < @TEROGAN_UNDEAD_EAR_REQ) )
         goto L_MissingReagents;
+    if (getareausers("027-8", 43, 39, 58, 60) == 0)
+        goto L_NeedOther;
     delitem "Soul", @TEROGAN_SOUL_REQ;
     delitem "RottenRags", @TEROGAN_DISEASED_HEART_REQ;
     delitem "UndeadEye", @TEROGAN_UNDEAD_EYE_REQ;
@@ -89,6 +91,8 @@ L_RitualRight:
         || (countitem("UndeadEye") < @TEROGAN_UNDEAD_EYE_REQ) 
         || (countitem("UndeadEar") < @TEROGAN_UNDEAD_EAR_REQ) )
         goto L_MissingReagents;
+    if (getareausers("027-8", 20, 39, 35, 60) == 0)
+        goto L_NeedOther;
     delitem "Soul", @TEROGAN_SOUL_REQ;
     delitem "RottenRags", @TEROGAN_DISEASED_HEART_REQ;
     delitem "UndeadEye", @TEROGAN_UNDEAD_EYE_REQ;
@@ -113,6 +117,10 @@ L_RitualRight:
 
 L_Summons:
     goto L_Close;
+
+L_NeedOther:
+    mes "You need at least one other person in the the other chamber to start.";
+    goto L_TomeMain;
 
 L_ToWeak:
     mes "You try to perform the ritual but nothing happens. You don't seem experienced enough.";
@@ -174,7 +182,7 @@ L_SummonNuke:
 
 L_WeakSummons:
     set $@CRYPT_FIGHT3_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT3_WAVE) + (2 * $@CRYPT_FIGHT3_PLAYER_COUNT))/2;
-    set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_SUMMONS_NUMBER;
+    set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2) + ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2);
 
     areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
     areamonster "027-8.gat", 20, 39, 35, 60, "", 1074, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
@@ -182,7 +190,7 @@ L_WeakSummons:
 
 L_StrongSummons:
     set $@CRYPT_FIGHT3_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT3_WAVE) + (2 * $@CRYPT_FIGHT3_PLAYER_COUNT))/2;
-    set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_SUMMONS_NUMBER;
+    set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2) + ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2);
 
     areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
     areamonster "027-8.gat", 20, 39, 35, 60, "", 1075, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
@@ -190,11 +198,12 @@ L_StrongSummons:
 
 L_BossSummons:
     set $@CRYPT_FIGHT3_SUMMONS_NUMBER, (5 + (1 * $@CRYPT_FIGHT3_WAVE) + (2 * $@CRYPT_FIGHT3_PLAYER_COUNT))/2;
+    set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_SUMMONS_NUMBER;
     areamonster "027-8.gat", 43, 39, 58, 60, "", 1111, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
     areamonster "027-8.gat", 20, 39, 35, 60, "", 1075, ($@CRYPT_FIGHT3_SUMMONS_NUMBER/2), "General Terogan#Main::OnPetDeath";
     areamonster "027-8.gat", 43, 39, 58, 60, "", 1117, 1, "General Terogan#Main::OnPetDeath";
     areamonster "027-8.gat", 20, 39, 35, 60, "", 1117, 1, "General Terogan#Main::OnPetDeath";
-    set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + $@CRYPT_FIGHT3_SUMMONS_NUMBER + 2;
+    set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT + 2;
     goto L_Announce;
 
 L_Announce:
