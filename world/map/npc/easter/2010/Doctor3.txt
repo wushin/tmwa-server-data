@@ -112,8 +112,8 @@ L_stones_poltergeist:
     set @c, @c + 1;
 
 L_stones_soul:
-    if (countitem("JackOSoul") < 1) goto L_stones_heart;
-    set @menuitems$[@c], "A Jack O Soul?";
+    if (countitem("Soul") < 1) goto L_stones_heart;
+    set @menuitems$[@c], "A Soul?";
     set @menuid[@c], E10_STONES_SOUL;
     set @c, @c + 1;
 
@@ -221,8 +221,8 @@ L_stones_offer_poltergeist:
     goto L_stones_thanks;
 
 L_stones_offer_soul:
-    if (countitem("JackOSoul") < 1) goto L_stones_noitem;
-    delitem "JackOSoul", 1;
+    if (countitem("Soul") < 1) goto L_stones_noitem;
+    delitem "Soul", 1;
     goto L_stones_nothanks;
 
 L_stones_offer_heart:
