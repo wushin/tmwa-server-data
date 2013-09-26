@@ -28,7 +28,7 @@ _MOBCOUNT_ZOMBIES:
     set @state, ((QUEST_Graveyard_Inn & @Graveyard_Inn_MASK) >> @Graveyard_Inn_SHIFT);
 
     if (@state != 1)
-        goto L_Return;       
+        goto L_Return;
     set @ring, @ring + 1;
     if (@ring < 10)
         goto L_Return;

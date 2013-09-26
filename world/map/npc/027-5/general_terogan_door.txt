@@ -1,4 +1,4 @@
-// Mini-Boss 
+// Mini-Boss
 // General Terogan
 
 027-5.gat,70,25,0|script|#GeneralDoor3|35,1,0

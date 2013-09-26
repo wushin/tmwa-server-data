@@ -1,4 +1,4 @@
-// Alchemy Profession Aparatus. 
+// Alchemy Profession Aparatus.
 
 070-2.gat,49,62,0|script|Alchemy Lab#1|400,
 {

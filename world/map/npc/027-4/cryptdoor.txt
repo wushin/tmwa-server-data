@@ -3,7 +3,7 @@
 027-4.gat,108,94,0|script|#CryptDoor1|45,0,0,
 {
     // Need Underworld Key made by Cerhan
-    if (countitem("UnderworldKey") == 0) 
+    if (countitem("UnderworldKey") == 0)
         goto L_NoKey;
     mes "Open the Crypt Door?";
     menu

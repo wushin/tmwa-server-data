@@ -1,4 +1,4 @@
-// author: Jenalya, wushin 
+// author: Jenalya, wushin
 // Based off Cindy Fight
 // General Terogan Fight
 
@@ -55,8 +55,8 @@ L_RitualLeft:
     if (BaseLevel < @minlevel)
         goto L_ToWeak;
     if ( (countitem("Soul") < @TEROGAN_SOUL_REQ)
-        || (countitem("RottenRags") < @TEROGAN_DISEASED_HEART_REQ) 
-        || (countitem("UndeadEye") < @TEROGAN_UNDEAD_EYE_REQ) 
+        || (countitem("RottenRags") < @TEROGAN_DISEASED_HEART_REQ)
+        || (countitem("UndeadEye") < @TEROGAN_UNDEAD_EYE_REQ)
         || (countitem("UndeadEar") < @TEROGAN_UNDEAD_EAR_REQ) )
         goto L_MissingReagents;
     if (getareausers("027-8", 43, 39, 58, 60) == 0)
@@ -87,8 +87,8 @@ L_RitualRight:
     if (BaseLevel < @minlevel)
         goto L_ToWeak;
     if ( (countitem("Soul") < @TEROGAN_SOUL_REQ)
-        || (countitem("RottenRags") < @TEROGAN_DISEASED_HEART_REQ) 
-        || (countitem("UndeadEye") < @TEROGAN_UNDEAD_EYE_REQ) 
+        || (countitem("RottenRags") < @TEROGAN_DISEASED_HEART_REQ)
+        || (countitem("UndeadEye") < @TEROGAN_UNDEAD_EYE_REQ)
         || (countitem("UndeadEar") < @TEROGAN_UNDEAD_EAR_REQ) )
         goto L_MissingReagents;
     if (getareausers("027-8", 20, 39, 35, 60) == 0)
@@ -271,7 +271,7 @@ L_End:
     end;
 
 OnInit:
-    setarray $@CRYPT_FIGHT3_MESSAGES$, 
+    setarray $@CRYPT_FIGHT3_MESSAGES$,
         "General Terogan : Haha, Thank you mortal. You have released me from my prison. To show my graditude you can die swiftly at my hands and become part of my undead army. MUhahahahaha! Minions, Dispose of these Adventurers!",
         "General Terogan : Ha, Looks like your tougher then I thought.",
         "General Terogan : and here I thought I wasn't going to enjoy this.",

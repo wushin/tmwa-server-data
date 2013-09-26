@@ -1,7 +1,7 @@
 // Author: Jenalya, Wushin
 // CRYPT_Quest
 // NIBBLE_0 - (See Alacrius)
-// NIBBLE_1 
+// NIBBLE_1
 // 1 - knows materials
 // 2 - key made
 
@@ -44,7 +44,7 @@ L_UnderWorldKey:
         "Yes, this place is really strange. Im going to have another look around.", L_Close;
 
 L_MakeUKey:
-    if ( (Zeny < @CRYPT_GOLD_REQ) 
+    if ( (Zeny < @CRYPT_GOLD_REQ)
         || (countitem("CryptKey") < @CRYPT_KEY_REQ)
         || (countitem("Bone") < @CRYPT_BONE_REQ)
         || (countitem("Skull") < @CRYPT_SKULL_REQ)

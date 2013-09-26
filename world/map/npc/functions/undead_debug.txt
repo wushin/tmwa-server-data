@@ -15,7 +15,7 @@
 // 2 - Got Underworld Key
 // --- Bound to UnderWorld ---
 // X
-// 3 - X talked to 
+// 3 - X talked to
 // NIBBLE_2 -
 // Markie Desod, Blue Sage Mansion, 048-2
 // 1 - Knows Reagents
@@ -31,7 +31,7 @@
 // Z
 // 3 - Z talked to
 // NIBBLE 4
-// Gate 
+// Gate
 // 1 - Bound to Underworld
 // NIBBLE 5
 // Empty
@@ -220,10 +220,10 @@ L_KnowKey:
     goto L_Warp;
 
 L_MatsKey:
-    if ((checkweight("CryptKey", 10) == 0) 
-        || (checkweight("Bone", 25) == 0) 
-        || (checkweight("Skull", 25) == 0) 
-        || (checkweight("Soul", 5) == 0) 
+    if ((checkweight("CryptKey", 10) == 0)
+        || (checkweight("Bone", 25) == 0)
+        || (checkweight("Skull", 25) == 0)
+        || (checkweight("Soul", 5) == 0)
         || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
     getitem "CryptKey", 10;
@@ -256,10 +256,10 @@ L_KnowQuill:
     goto L_Warp;
 
 L_MatsQuill:
-    if ((checkweight("RedDye", 10) == 0) 
-        || (checkweight("YellowDye", 10) == 0) 
-        || (checkweight("WhiteFur", 20) == 0) 
-        || (checkweight("YetiClaw", 20) == 0) 
+    if ((checkweight("RedDye", 10) == 0)
+        || (checkweight("YellowDye", 10) == 0)
+        || (checkweight("WhiteFur", 20) == 0)
+        || (checkweight("YetiClaw", 20) == 0)
         || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
     getitem "RedDye", 10;
@@ -292,10 +292,10 @@ L_KnowInk:
     goto L_Warp;
 
 L_MatsInk:
-    if ((checkweight("BlackScorpionStinger", 20) == 0) 
-        || (checkweight("MountainSnakeEgg", 10) == 0) 
-        || (checkweight("MaggotSlime", 20) == 0) 
-        || (checkweight("JarofOwnBlood", 5) == 0) 
+    if ((checkweight("BlackScorpionStinger", 20) == 0)
+        || (checkweight("MountainSnakeEgg", 10) == 0)
+        || (checkweight("MaggotSlime", 20) == 0)
+        || (checkweight("JarofOwnBlood", 5) == 0)
         || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
     getitem "BlackScorpionStinger", 20;
@@ -437,10 +437,10 @@ L_Die:
     goto L_Close;
 
 L_KrukanItems:
-    if ((checkweight("Soul", 1) == 0) 
-        || (checkweight("Skull", 5) == 0) 
-        || (checkweight("DarkCrystal", 5) == 0) 
-        || (checkweight("Bone", 5) == 0) 
+    if ((checkweight("Soul", 1) == 0)
+        || (checkweight("Skull", 5) == 0)
+        || (checkweight("DarkCrystal", 5) == 0)
+        || (checkweight("Bone", 5) == 0)
         || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
     getitem "Soul", 1;
@@ -450,10 +450,10 @@ L_KrukanItems:
     goto L_Main;
 
 L_RazhaItems:
-    if ((checkweight("Soul", 3) == 0) 
-        || (checkweight("RottenRags", 5) == 0) 
-        || (checkweight("UndeadEye", 5) == 0) 
-        || (checkweight("UndeadEar", 5) == 0) 
+    if ((checkweight("Soul", 3) == 0)
+        || (checkweight("RottenRags", 5) == 0)
+        || (checkweight("UndeadEye", 5) == 0)
+        || (checkweight("UndeadEar", 5) == 0)
         || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
     getitem "Soul", 3;
@@ -463,10 +463,10 @@ L_RazhaItems:
     goto L_Main;
 
 L_TeroganItems:
-    if ((checkweight("Soul", 5) == 0) 
-        || (checkweight("DiseasedHeart", 5) == 0) 
-        || (checkweight("UndeadEye", 5) == 0) 
-        || (checkweight("UndeadEar", 5) == 0) 
+    if ((checkweight("Soul", 5) == 0)
+        || (checkweight("DiseasedHeart", 5) == 0)
+        || (checkweight("UndeadEye", 5) == 0)
+        || (checkweight("UndeadEar", 5) == 0)
         || (@inventorylist_count == 100))
         goto L_InventoryNoSpace;
     getitem "Soul", 5;
@@ -511,7 +511,7 @@ S_Update_Var:
 {
     set @undeaddebug, 1;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for underworld
@@ -519,7 +519,7 @@ S_Update_Var:
 {
     set @undeaddebug, 2;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for Krukan
@@ -527,7 +527,7 @@ S_Update_Var:
 {
     set @undeaddebug, 3;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for Razha
@@ -535,7 +535,7 @@ S_Update_Var:
 {
     set @undeaddebug, 4;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for Terogan
@@ -543,7 +543,7 @@ S_Update_Var:
 {
     set @undeaddebug, 5;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for Cerhan
@@ -551,7 +551,7 @@ S_Update_Var:
 {
     set @undeaddebug, 6;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for Markie Desod
@@ -559,7 +559,7 @@ S_Update_Var:
 {
     set @undeaddebug, 7;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for Rygial
@@ -567,7 +567,7 @@ S_Update_Var:
 {
     set @undeaddebug, 8;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }
 
 // Debug for Reaper
@@ -575,5 +575,5 @@ S_Update_Var:
 {
     set @undeaddebug, 9;
     callfunc "UndeadDebug";
-    end;   
+    end;
 }

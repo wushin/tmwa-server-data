@@ -1,4 +1,4 @@
-// Mini-Boss 
+// Mini-Boss
 // General Razha
 
 027-4.gat,73,76,0|script|#GeneralDoor2|35,1,0

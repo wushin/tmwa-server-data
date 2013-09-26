@@ -1,8 +1,8 @@
-// Players have to feed souls into the pool or take damage 
+// Players have to feed souls into the pool or take damage
 // Candor eske battle with Undead Mobs
 // Lobby is on 070-2 Reaper's Sanctum
 // Add in dead party member spawning a mob
-// author: Jenalya, wushin 
+// author: Jenalya, wushin
 // Based off Cindy Fight
 // Reaper Fight
 
@@ -257,7 +257,7 @@ S_Update_Var:
     return;
 
 OnInit:
-    setarray $@REAPER_FIGHT_MESSAGES$, 
+    setarray $@REAPER_FIGHT_MESSAGES$,
         "Reaper : Haha, Thank you mortal. You have released me from my prison. To show my graditude you can die swiftly at my hands and become part of my undead army. MUhahahahaha! Minions, Dispose of these Adventurers!",
         "Reaper : Ha, Looks like your tougher then I thought.",
         "Reaper : and here I thought I wasn't going to enjoy this.",
@@ -292,21 +292,21 @@ L_OneSoul:
     delitem "Soul", 1;
     set $@REAPER_FIGHT_SOUL_COUNT, $@REAPER_FIGHT_SOUL_COUNT + 1;
     goto L_SoulMain;
-    
+
 L_FiveSoul:
     if(countitem("Soul") < 5)
         goto L_NotEnoughSoul;
     delitem "Soul", 5;
     set $@REAPER_FIGHT_SOUL_COUNT, $@REAPER_FIGHT_SOUL_COUNT + 5;
     goto L_SoulMain;
-    
+
 L_TenSoul:
     if(countitem("Soul") < 10)
         goto L_NotEnoughSoul;
     delitem "Soul", 10;
     set $@REAPER_FIGHT_SOUL_COUNT, $@REAPER_FIGHT_SOUL_COUNT + 10;
     goto L_SoulMain;
-    
+
 L_TwentySoul:
     if(countitem("Soul") < 20)
         goto L_NotEnoughSoul;
@@ -341,21 +341,21 @@ L_OneSoul:
     delitem "Soul", 1;
     set $@REAPER_FIGHT_SOUL_COUNT, $@REAPER_FIGHT_SOUL_COUNT + 1;
     goto L_SoulMain;
-    
+
 L_FiveSoul:
     if(countitem("Soul") < 5)
         goto L_NotEnoughSoul;
     delitem "Soul", 5;
     set $@REAPER_FIGHT_SOUL_COUNT, $@REAPER_FIGHT_SOUL_COUNT + 5;
     goto L_SoulMain;
-    
+
 L_TenSoul:
     if(countitem("Soul") < 10)
         goto L_NotEnoughSoul;
     delitem "Soul", 10;
     set $@REAPER_FIGHT_SOUL_COUNT, $@REAPER_FIGHT_SOUL_COUNT + 10;
     goto L_SoulMain;
-    
+
 L_TwentySoul:
     if(countitem("Soul") < 20)
         goto L_NotEnoughSoul;
