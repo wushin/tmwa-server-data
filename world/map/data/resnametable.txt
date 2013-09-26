@@ -70,6 +70,10 @@
 027-2.gat#027-2.wlk#
 027-3.gat#027-3.wlk#
 027-4.gat#027-4.wlk#
+027-5.gat#027-5.wlk#
+027-6.gat#027-6.wlk#
+027-7.gat#027-7.wlk#
+027-8.gat#027-8.wlk#
 028-1.gat#028-1.wlk#
 028-3.gat#028-3.wlk#
 029-1.gat#029-1.wlk#
@@ -107,4 +111,7 @@
 056-1.gat#056-1.wlk#
 056-2.gat#056-2.wlk#
 057-1.gat#057-1.wlk#
+070-1.gat#070-1.wlk#
+070-2.gat#070-2.wlk#
+070-3.gat#070-3.wlk#
 botcheck.gat#botcheck.wlk#
