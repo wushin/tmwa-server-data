@@ -51,7 +51,7 @@ L_Ritual:
     next;
     mes "A cold shiver runs down your spine as you feel something manifesting out of the void.";
     if ($@CRYPT_FIGHT2 != 0)
-        goto L_Summons;
+        goto L_Close;
 
     // initialize fight
     set $@CRYPT_FIGHT2, 1;
@@ -63,9 +63,6 @@ L_Ritual:
 
     initnpctimer;
     goto L_Announce;
-
-L_Summons:
-    goto L_Close;
 
 L_ToWeak:
     mes "You try to perform the ritual but nothing happens. You don't seem experienced enough.";

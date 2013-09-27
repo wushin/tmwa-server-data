@@ -6,6 +6,7 @@
 {
     if ($@CRYPT_FIGHT3 != 0)
         end;
+        close;
 
     set @TEROGAN_SOUL_REQ, 5;
     set @TEROGAN_DISEASED_HEART_REQ, 5;
@@ -69,7 +70,7 @@ L_RitualLeft:
     next;
     mes "A cold shiver runs down your spine as you feel something manifesting out of the void.";
     if ($@CRYPT_FIGHT3 != 0)
-        goto L_Summons;
+        goto L_Close;
 
     // initialize fight
     set $@CRYPT_FIGHT3, 1;
@@ -102,7 +103,7 @@ L_RitualRight:
     mes "A cold shiver runs down your spine as you feel something manifesting out of the void.";
     warp "027-8", 51, 43;
     if ($@CRYPT_FIGHT3 != 0)
-        goto L_Summons;
+        goto L_Close;
 
     // initialize fight
     set $@CRYPT_FIGHT3, 1;
@@ -114,9 +115,6 @@ L_RitualRight:
 
     initnpctimer;
     goto L_Announce;
-
-L_Summons:
-    goto L_Close;
 
 L_NeedOther:
     mes "You need at least one other person in the the other chamber to start.";
@@ -145,6 +143,7 @@ L_Return_1:
     set $@CRYPT_FIGHT3_PLAYER_COUNT, 0;
     areatimer "027-8.gat", 0, 0, 79, 84, 10, "General Terogan#Main::OnTick";
     end;
+    close;
 
 L_CryptLogic:
     set $@CRYPT_FIGHT3_ROUND_PEN, $@CRYPT_FIGHT3_PLAYER_COUNT;
@@ -217,13 +216,17 @@ L_Announce:
 
 // Called on each player once every 5 seconds
 OnTick:
-    if (isdead()) end;
+    if (isdead())
+        end;
+        close;
     set $@CRYPT_FIGHT3_PLAYER_COUNT, $@CRYPT_FIGHT3_PLAYER_COUNT + 1;
     end;
+    close;
 
 OnPetDeath:
     set $@CRYPT_FIGHT3_SUMMONS_COUNT, $@CRYPT_FIGHT3_SUMMONS_COUNT - 1;
     end;
+    close;
 
 L_CleanUpLosers:
     set $@CRYPT_FIGHT3, 0;
@@ -237,6 +240,7 @@ L_CleanUpLosers:
     stopnpctimer;
     setnpctimer 0;
     end;
+    close;
 
 L_CleanUp:
     areatimer "027-8.gat", 0, 0, 79, 84, 10, "General Terogan#Main::OnReward";
@@ -251,9 +255,12 @@ L_CleanUp:
     stopnpctimer;
     setnpctimer 0;
     end;
+    close;
 
 OnReward:
-    if (isdead()) end;
+    if (isdead()) 
+        end;
+        close;
     set @bonus, (BaseLevel/2);
     set DailyQuestBonus, DailyQuestBonus + @bonus;
     message strcharinfo(0), "You feel a temporary rush of power and zest for action. " + @bonus + " daily bonus gained." ;
@@ -269,6 +276,7 @@ L_End:
     set @TEROGAN_UNDEAD_EYE_REQ, 0;
     set @TEROGAN_UNDEAD_EAR_REQ, 0;
     end;
+    close;
 
 OnInit:
     setarray $@CRYPT_FIGHT3_MESSAGES$,
@@ -285,19 +293,24 @@ OnInit:
         "General Terogan : Looks like if you want something done right you have to do it yourself.",
         "General Terogan : Charge!.";
     end;
+    close;
 }
 
 027-8.gat,27,41,0|script|General Terogan#Exit1|400,
 {
     if ($@CRYPT_FIGHT3 != 0)
         end;
+        close;
     warp "027-8", 38, 29;
     end;
+    close;
 }
 027-8.gat,51,41,0|script|General Terogan#Exit2|400,
 {
     if ($@CRYPT_FIGHT3 != 0)
         end;
+        close;
     warp "027-8", 38, 29;
     end;
+    close;
 }

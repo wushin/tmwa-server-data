@@ -387,6 +387,24 @@ L_BookOfDead:
     goto L_SaveWarp;
 
 L_BindSoul:
+    set @state, 1;
+    getinventorylist;
+    if ((checkweight("QuillOfBinding", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "QuillOfBinding", 1;
+    set @craftquill, 2;
+    callsub S_Update_Var;
+    getinventorylist;
+    if ((checkweight("BloodInk", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "BloodInk", 1;
+    set @craftink, 2;
+    callsub S_Update_Var;
+    getinventorylist;
+    if ((checkweight("UnderworldKey", 1) == 0) || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "UnderworldKey", 1;
+    set @craftkey, 2;
     callfunc "ClearVariables";
     set @gatebind, 1;
     callsub S_Update_Var;

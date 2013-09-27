@@ -9,7 +9,7 @@
     menu
         "I want to challenge you to a contest.", L_StartFight,
         "I would like to ask you something..", L_AskReaper,
-        "Umm... Sorry... *back away slowly*", L_Close;
+        "Umm... Sorry... [back away slowly]", L_Close;
 
 L_StartFight:
     if ($@REAPER_FIGHT != 0)

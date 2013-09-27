@@ -50,9 +50,6 @@ L_MakeUKey:
         || (countitem("Skull") < @CRYPT_SKULL_REQ)
         || (countitem("Soul") < @CRYPT_SOUL_REQ) )
         goto L_MissingItems;
-    getinventorylist;
-    if ((checkweight("UnderworldKey", 1) == 0) || (@inventorylist_count == 100))
-        goto L_InventoryNoSpace;
     delitem "CryptKey", @CRYPT_KEY_REQ;
     delitem "Bone", @CRYPT_BONE_REQ;
     delitem "Skull", @CRYPT_SKULL_REQ;

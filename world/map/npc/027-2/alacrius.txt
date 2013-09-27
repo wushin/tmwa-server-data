@@ -12,13 +12,10 @@
     mes "[Alacrius]";
     mes "\"Hello, I'm Alacrius. \"";
     next;
-    mes "[Alacrius]";
     mes "\"A very long time ago, I figured a way to cheat death and the limits of time and space. You may think it is evil, but I did it because of true love... \"";
     next;
-    mes "[Alacrius]";
     mes "\"The reaper kidnapped my beloved wife, and took her to the underworld.  I had to find a way to stop him, and as time went by, I became what you can see now... But if you dare to cheat death, time and space you'll have to pay a high price... \"";
     next;
-    mes "[Alacrius]";
     mes "\"Being away from time and space doesn't allow me to try to save my beloved wife... I need your help. Do you think you have what it takes to handle the powerful monsters in the Underworld? \"";
     next;
     menu

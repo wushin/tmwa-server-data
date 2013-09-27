@@ -61,8 +61,6 @@ L_CraftQuill:
         || (countitem("YetiClaw") < @CRYPT_YETICLAW_REQ) )
         goto L_MissingItems;
     getinventorylist;
-    if ((checkweight("QuillOfBinding", 1) == 0) || (@inventorylist_count == 100))
-        goto L_Full_Inv;
     delitem "RedDye", @CRYPT_REDDYE_REQ;
     delitem "YellowDye", @CRYPT_YELLOWDYE_REQ;
     delitem "WhiteFur", @CRYPT_FUR_REQ;

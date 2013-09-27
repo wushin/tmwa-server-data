@@ -10,6 +10,7 @@
 
     if(@gatebind > 0)
         end;
+        close;
 
     mes "Once you pass this point Your soul will be bound to this place.";
     mes "Are you sure you are ready to go?";

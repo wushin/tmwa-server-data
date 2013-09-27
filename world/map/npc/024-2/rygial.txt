@@ -16,7 +16,7 @@
     set @CRYPT_JARSOFBLOOD_REQ, 5;
 
     if (isin("024-2.gat", 33, 22, 60, 28))
-        end;
+        close;
 
     mes "[Rygial]";
     mes "\"Ho there traveler! Welcome to the Tulimshar School of Magic.\"";
@@ -60,9 +60,6 @@ L_MakeInk:
         || (countitem("MaggotSlime") < @CRYPT_MSLIME_REQ)
         || (countitem("JarofOwnBlood") < @CRYPT_JARSOFBLOOD_REQ) )
         goto L_MissingItems;
-    getinventorylist;
-    if ((checkweight("BloodInk", 1) == 0) || (@inventorylist_count == 100))
-        goto L_InventoryNoSpace;
     delitem "BlackScorpionStinger", @CRYPT_BLSCROP_REQ;
     delitem "MountainSnakeEgg", @CRYPT_MOUNTEGG_REQ;
     delitem "MaggotSlime", @CRYPT_MSLIME_REQ;

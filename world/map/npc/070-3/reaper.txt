@@ -84,7 +84,7 @@ L_NextWave:
         goto L_CleanUp;
     if ($@REAPER_FIGHT_WAVE < 4)
         goto L_WeakSummons;
-    if ( ($@REAPER_FIGHT_WAVE < 12) && ($@REAPER_FIGHT_WAVE >= 4) )
+    if ( ($@REAPER_FIGHT_WAVE < 15) && ($@REAPER_FIGHT_WAVE >= 4) )
         goto L_StrongSummons;
     if ($@REAPER_FIGHT_WAVE == 15)
         goto L_BossSummons;
@@ -168,6 +168,7 @@ L_CleanUpLosers:
     setnpctimer 0;
     enablenpc "Reaper#Starter";
     end;
+    close;
 
 L_CleanUp:
     areatimer "070-3.gat", 0, 0, 79, 84, 10, "Reaper#Main::OnReward";
@@ -183,6 +184,7 @@ L_CleanUp:
     setnpctimer 0;
     enablenpc "Reaper#Starter";
     end;
+    close;
 
 OnReward:
     if (isdead()) end;
@@ -250,6 +252,7 @@ L_End:
     set @minlevel, 0;
     set $@REAPER_FIGHT_SOUL_COUNT, 0;
     end;
+    close;
 
 S_Update_Var:
     set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_0_MASK) | (@state << NIBBLE_0_SHIFT));
@@ -267,10 +270,14 @@ OnInit:
         "Reaper : Well at least you will make a good addition to my army.",
         "Reaper : To the Abyss with you already!",
         "Reaper : How about you try a different approach and kill them already!",
+        "Reaper : Charge!",
+        "Reaper : Any day now!",
+        "Reaper : More of them are coming!",
+        "Reaper : and here I thought I was going to enjoy this...",
         "Reaper : Minions! Last chance or it's back to being part of an ossuary for you!",
-        "Reaper : Looks like if you want something done right you have to do it yourself.",
-        "Reaper : Charge!.";
+        "Reaper : Looks like if you want something done right you have to do it yourself.";
     end;
+    close;
 }
 
 070-3.gat,55,33,0|script|SoulPool#1|400,
