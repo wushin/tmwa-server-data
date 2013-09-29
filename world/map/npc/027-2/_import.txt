@@ -18,4 +18,5 @@ npc: npc/027-2/husband.txt
 npc: npc/027-2/innkeeper.txt
 npc: npc/027-2/lover.txt
 npc: npc/027-2/testnpcs.txt
+npc: npc/027-2/thurston.txt
 npc: npc/027-2/werewolf.txt

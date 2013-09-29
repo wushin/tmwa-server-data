@@ -2,3 +2,29 @@
 // If taken too long to serve, quest failed.
 // Always a chance for them to turn hostile.
 
+// NPC Chef
+070-2.gat,35,57,0|script|Bone Meal|300,
+{
+    end;
+}
+// NPCS Patrons
+070-2.gat,35,77,0|script|Patron#1|380,
+{
+    end;
+}
+070-2.gat,48,82,0|script|Patron#2|380,
+{
+    end;
+}
+070-2.gat,32,86,0|script|Patron#3|380,
+{
+    end;
+}
+070-2.gat,49,86,0|script|Patron#4|380,
+{
+    end;
+}
+070-2.gat,44,91,0|script|Patron#5|380,
+{
+    end;
+}
