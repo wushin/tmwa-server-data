@@ -1,30 +1,76 @@
 // Group of wasted Underworld patrons want to be served.
 // If taken too long to serve, quest failed.
-// Always a chance for them to turn hostile.
+// Get the order wrong they turn hostile.
 
 // NPC Chef
 070-2.gat,35,57,0|script|Bone Meal|300,
 {
+    // Chef reads order array
+    // @orders
     end;
 }
 // NPCS Patrons
 070-2.gat,35,77,0|script|Patron#1|380,
 {
-    end;
+    set $@PATRON, 1;
+    set $@PATRONOFFSET, 0;
+    callfunc "GetOrder";
+    close;
 }
 070-2.gat,48,82,0|script|Patron#2|380,
 {
-    end;
+    set $@PATRON, 2;
+    set $@PATRONOFFSET, 3;
+    callfunc "GetOrder";
+    close;
 }
 070-2.gat,32,86,0|script|Patron#3|380,
 {
-    end;
+    set $@PATRON, 3;
+    set $@PATRONOFFSET, 6;
+    callfunc "GetOrder";
+    close;
 }
 070-2.gat,49,86,0|script|Patron#4|380,
 {
-    end;
+    set $@PATRON, 4;
+    set $@PATRONOFFSET, 9;
+    callfunc "GetOrder";
+    close;
 }
 070-2.gat,44,91,0|script|Patron#5|380,
 {
-    end;
+    set $@PATRON, 5;
+    set $@PATRONOFFSET, 12;
+    callfunc "GetOrder";
+    close;
+}
+
+function|script|GetOrder|,
+{
+    set $@ORDER_ITEM_COUNT, 3;
+    set @local_count, 0;
+    setarray $@MENU_ITEMS$,"RoastedMaggot","ZombieNachos","LadyFingers","JellAhh","Snapple","BeetleJuice","GutBuster","BloodWine";
+    goto CheckOrder;
+
+L_CheckOrder:
+    
+    goto L_PlaceOrder:
+
+L_AlreadyOrder:
+    mes "\"Is my food ready?\"";
+    menu
+        "Yes.", L_Serve,
+        "No.", L_Anger;
+
+L_PlaceOrder:
+    if (@local_count < $@ORDER_ITEM_COUNT)
+        set @orders[(@local_count + $@PATRONOFFSET)]$, $@MENU_ITEMS[rand(getarraysize($@MENU_ITEMS$)]$;
+        set @local_count, @local_count + 1;
+        goto L_PlaceOrder;
+    return;
+
+L_Serve:
+
+L_Anger:
 }
