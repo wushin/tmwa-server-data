@@ -1,76 +1,145 @@
 // Group of wasted Underworld patrons want to be served.
 // If taken too long to serve, quest failed.
 // Get the order wrong they turn hostile.
+// Novel Idea: Universal Timer
+//
+// Config:
+//
+// QUEST_Orders
+// NIBBLE{0,4}: $@Patron 
+//     {0,7}: @MenuItem
+//     BIT
+//         4: @OrderServe
+// NIBBLE 6: @Meal
+//     {0,7}: @ShiftProgress
+//     BIT
+//         4: @OrderServe
+// NIBBLE 7:
+//     0-15: @Karma
+//
+// QUEST_Timer, @gettimetick(2)
+// QUEST_TimerSet
+// BIT
+//    0: Lock
+//    1: Miriam
+//    2: Orders
+//
 
-// NPC Chef
-070-2.gat,35,57,0|script|Bone Meal|300,
+function|script|GetMeal|,
 {
-    // Chef reads order array
-    // @orders
-    end;
-}
-// NPCS Patrons
-070-2.gat,35,77,0|script|Patron#1|380,
-{
-    set $@PATRON, 1;
-    set $@PATRONOFFSET, 0;
-    callfunc "GetOrder";
-    close;
-}
-070-2.gat,48,82,0|script|Patron#2|380,
-{
-    set $@PATRON, 2;
-    set $@PATRONOFFSET, 3;
-    callfunc "GetOrder";
-    close;
-}
-070-2.gat,32,86,0|script|Patron#3|380,
-{
-    set $@PATRON, 3;
-    set $@PATRONOFFSET, 6;
-    callfunc "GetOrder";
-    close;
-}
-070-2.gat,49,86,0|script|Patron#4|380,
-{
-    set $@PATRON, 4;
-    set $@PATRONOFFSET, 9;
-    callfunc "GetOrder";
-    close;
-}
-070-2.gat,44,91,0|script|Patron#5|380,
-{
-    set $@PATRON, 5;
-    set $@PATRONOFFSET, 12;
-    callfunc "GetOrder";
-    close;
+    goto L_Return;
+
+L_Return:
+    return;
+
+OnInit:
+    setarray $@menu_items$, "RoastedMaggot", "ZombieNachos", "LadyFingers", "JellAhh", "Snapple", "BeetleJuice", "GutBuster", "BloodWine";
+    // saying + hint to current karma
+    setarray $@shift_progress$, "",
+                                
 }
 
 function|script|GetOrder|,
 {
+
     set $@ORDER_ITEM_COUNT, 3;
-    set @local_count, 0;
-    setarray $@MENU_ITEMS$,"RoastedMaggot","ZombieNachos","LadyFingers","JellAhh","Snapple","BeetleJuice","GutBuster","BloodWine";
+    set @local_count, (@ORDER_ITEM_COUNT * $@PATRON);
     goto CheckOrder;
 
-L_CheckOrder:
-    
-    goto L_PlaceOrder:
+L_NoOrder:
+    mes "[Patron]";
+    mes "\"I'm ready to order\"";
+    next;
 
 L_AlreadyOrder:
+    mes "[Patron]";
     mes "\"Is my food ready?\"";
     menu
-        "Yes.", L_Serve,
+        "Yes.", L_ServeOrder,
         "No.", L_Anger;
 
 L_PlaceOrder:
     if (@local_count < $@ORDER_ITEM_COUNT)
-        set @orders[(@local_count + $@PATRONOFFSET)]$, $@MENU_ITEMS[rand(getarraysize($@MENU_ITEMS$)]$;
-        set @local_count, @local_count + 1;
-        goto L_PlaceOrder;
-    return;
+        goto L_PlaceOrderItem;
+    goto L_Return;
 
-L_Serve:
+L_PlaceOrderItem:
+    set @orders, @orders | (rand(7) << @local_count);
+    set @local_count, @local_count + 1;
+    goto L_PlaceOrder;
+
+L_ServeOrder:
+    if (@local_count < $@ORDER_ITEM_COUNT)
+    goto L_Return;
 
 L_Anger:
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
+070-2.gat,40,57,0|script|Chef Debug|300,
+{
+    set @orders, ((ORDERS & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
+    message strcharinfo(0), @orders;
+    if (@orders == 8) 
+        goto L_already_begun;
+
+    mes "this is the beginning"; 
+    set ORDERS, (ORDERS & ~(NIBBLE_0_MASK) | (8 << NIBBLE_0_SHIFT));
+    goto L_Close;
+
+L_already_begun:
+    mes "Sucess!";
+    set ORDERS, (ORDERS & ~(NIBBLE_0_MASK) | (0 << NIBBLE_0_SHIFT));
+    goto L_Close;
+
+L_Close:
+    close;
+
+OnInit:
+    if (debug)
+        end;
+    disablenpc "Chef Debug";
+    end;
+}
+
+// NPC Chef
+070-2.gat,35,57,0|script|Bone Meal|300,
+{
+    callfunc "GetMeal";
+    end;
+}
+// NPCS Patrons
+070-2.gat,35,77,0|script|Patron#0|380,
+{
+    set $@PATRON, 0;
+    callfunc "GetOrder";
+    close;
+}
+070-2.gat,48,82,0|script|Patron#1|380,
+{
+    set $@PATRON_MASK, 0;
+    set $@PATRON_SHIFT, 0;
+    callfunc "GetOrder";
+    close;
+}
+070-2.gat,32,86,0|script|Patron#2|380,
+{
+    set $@PATRON, 2;
+    callfunc "GetOrder";
+    close;
+}
+070-2.gat,49,86,0|script|Patron#3|380,
+{
+    set $@PATRON, 3;
+    callfunc "GetOrder";
+    close;
+}
+070-2.gat,44,91,0|script|Patron#4|380,
+{
+    set $@PATRON, 4;
+    callfunc "GetOrder";
+    close;
 }
