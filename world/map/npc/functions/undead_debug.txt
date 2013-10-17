@@ -1,0 +1,114 @@
+// Debug Mini-Bosses
+
+function|script|UndeadDebug|,
+{
+
+L_Main:
+    if (@undeaddebug == 1)
+        goto L_UndeadDebugOne;
+    if (@undeaddebug == 2)
+        goto L_UndeadDebugTwo;
+    if (@undeaddebug == 3)
+        goto L_UndeadDebugThree;
+    goto L_Close;
+
+L_UndeadDebugOne:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Get Ritual Items.", L_KrukanItems,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugTwo:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Get Ritual Items.", L_RazhaItems,
+        "Nevermind.", L_Close;
+
+L_UndeadDebugThree:
+    mes "Reset your self to the various states.";
+    mes "Options Limited to Time and Place.";
+    menu
+        "Get Ritual Items.", L_TeroganItems,
+        "Nevermind.", L_Close;
+
+L_InventoryNoSpace:
+    mes "\"Drop some weight then come back.\"";
+    goto L_Close;
+
+L_KrukanItems:
+    if ((checkweight("Soul", 1) == 0)
+        || (checkweight("Skull", 5) == 0)
+        || (checkweight("DarkCrystal", 5) == 0)
+        || (checkweight("Bone", 5) == 0)
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "Soul", 1;
+    getitem "Skull", 5;
+    getitem "DarkCrystal", 5;
+    getitem "Bone", 5;
+    goto L_Main;
+
+L_RazhaItems:
+    if ((checkweight("Soul", 3) == 0)
+        || (checkweight("RottenRags", 5) == 0)
+        || (checkweight("UndeadEye", 5) == 0)
+        || (checkweight("UndeadEar", 5) == 0)
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "Soul", 3;
+    getitem "RottenRags", 5;
+    getitem "UndeadEye", 5;
+    getitem "UndeadEar", 5;
+    goto L_Main;
+
+L_TeroganItems:
+    if ((checkweight("Soul", 5) == 0)
+        || (checkweight("DiseasedHeart", 5) == 0)
+        || (checkweight("UndeadEye", 5) == 0)
+        || (checkweight("UndeadEar", 5) == 0)
+        || (@inventorylist_count == 100))
+        goto L_InventoryNoSpace;
+    getitem "Soul", 5;
+    getitem "DiseasedHeart", 5;
+    getitem "UndeadEye", 5;
+    getitem "UndeadEar", 5;
+    goto L_Main;
+
+L_Close:
+    set @undeaddebug, 0;
+    close;
+
+S_Update_Var:
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_0_MASK) | (@state << NIBBLE_0_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_1_MASK) | (@craftkey << NIBBLE_1_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_2_MASK) | (@craftquill << NIBBLE_2_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_3_MASK) | (@craftink << NIBBLE_3_SHIFT));
+    set CRYPT_Quest, (CRYPT_Quest & ~(NIBBLE_4_MASK) | (@gatebind << NIBBLE_4_SHIFT));
+    return;
+}
+
+// Debug for Krukan
+027-3.gat,84,89,0|script|UndeadDebug1|155,
+{
+    set @undeaddebug, 1;
+    callfunc "UndeadDebug";
+    end;
+}
+
+// Debug for Razha
+027-4.gat,76,79,0|script|UndeadDebug2|155,
+{
+    set @undeaddebug, 2;
+    callfunc "UndeadDebug";
+    end;
+}
+
+// Debug for Terogan
+027-5.gat,72,26,0|script|UndeadDebug3|155,
+{
+    set @undeaddebug, 3;
+    callfunc "UndeadDebug";
+    end;
+}

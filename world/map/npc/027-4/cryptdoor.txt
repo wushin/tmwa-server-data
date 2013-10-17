@@ -1,0 +1,8 @@
+// A locked door to the Underworld
+
+027-4.gat,108,94,0|script|#CryptDoor1|45,0,0,
+{
+OnTouch:
+    message strcharinfo(0), "This door appears locked by magical forces.";
+    end;
+}
