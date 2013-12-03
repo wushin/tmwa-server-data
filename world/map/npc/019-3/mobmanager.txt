@@ -1,0 +1,40 @@
+// Spawns mobs
+
+019-3.gat,0,0,0|script|SpawnManager19_3|-1,
+{
+    end; // just to be secure
+
+OnInit:
+    set $@019_3_CANDIEDSLIME_MONSTER_MAX_NUMBER,10;
+    set $@019_3_CANDIEDSLIME_MOMSTER_ID,1111;
+    set $@019_3_CANDIEDSLIME_MONSTER_SPAWN_X1,24;
+    set $@019_3_CANDIEDSLIME_MONSTER_SPAWN_Y1,24;
+    set $@019_3_CANDIEDSLIME_MONSTER_SPAWN_X2,123;
+    set $@019_3_CANDIEDSLIME_MONSTER_SPAWN_Y2,101;
+    set $@019_3_CANDIEDSLIME_month,gettime(6);
+    set $@019_3_CANDIEDSLIME_monster_number,0;
+    if (debug >= 2) end;
+    initnpctimer;
+    if ($@019_3_CANDIEDSLIME_month == 12 || $@019_3_CANDIEDSLIME_month == 1 || $@019_3_CANDIEDSLIME_month == 2) goto L_Init_Spawn;
+    end;
+
+L_Init_Spawn:
+    areamonster "019-3.gat", $@019_3_CANDIEDSLIME_MONSTER_SPAWN_X1, $@019_3_CANDIEDSLIME_MONSTER_SPAWN_Y1, $@019_3_CANDIEDSLIME_MONSTER_SPAWN_X2, $@019_3_CANDIEDSLIME_MONSTER_SPAWN_Y2, "Santa Slime", $@019_3_CANDIEDSLIME_MOMSTER_ID, $@019_3_CANDIEDSLIME_MONSTER_MAX_NUMBER, "SpawnManager::OnMonsterDeath";
+    set $@monster_number,$@019_3_CANDIEDSLIME_MONSTER_MAX_NUMBER;
+    end;
+
+L_Spawn:
+    areamonster "019-3.gat", $@019_3_CANDIEDSLIME_MONSTER_SPAWN_X1, $@019_3_CANDIEDSLIME_MONSTER_SPAWN_Y1, $@019_3_CANDIEDSLIME_MONSTER_SPAWN_X2, $@019_3_CANDIEDSLIME_MONSTER_SPAWN_Y2, "Santa Slime", $@019_3_CANDIEDSLIME_MOMSTER_ID, 1, "SpawnManager::OnMonsterDeath";
+    set $@019_3_CANDIEDSLIME_monster_number,$@019_3_CANDIEDSLIME_monster_number+1;
+    end;
+
+OnTimer20000:
+    initnpctimer;
+    set $@019_3_CANDIEDSLIME_month,gettime(6);
+    if (($@019_3_CANDIEDSLIME_month == 12 || $@019_3_CANDIEDSLIME_month == 1 || $@019_3_CANDIEDSLIME_month == 2) && $@019_3_CANDIEDSLIME_monster_number < $@019_3_CANDIEDSLIME_MONSTER_MAX_NUMBER) goto L_Spawn;
+    end;
+
+OnMonsterDeath:
+    set $@019_3_CANDIEDSLIME_monster_number,$@019_3_CANDIEDSLIME_monster_number-1;
+    end;
+}

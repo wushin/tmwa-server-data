@@ -1,0 +1,10 @@
+030-2.gat,87,41,0|script|Eljas|328,
+{
+    mes "[Eljas]";
+    mes "\" Hello! Did you come to learn about the magic researches we're doing? Or about Christmas?\"";
+    mes "\" If it's about Christmas then i regret to inform you that the workshop is closed this year\""; next;
+    mes "\" If it's about our magical researches then that's a whole different matter.\""; next;
+    mes "\" Naturally that's a much more interesting topic anyway isn't it? Well, the most astonishing discovery in our recent researches is a complex combination of Transmutation, Astral and Nature Magic to animate wooden figurines. Did you notice the Guards around the house? Originally those were simple nutcrackers, carved out of wood by our talented carpenters. With the results of our magic researches, we were able to transform them into animated beings, acting rudimentary self-determined and capable to perform simple tasks. At the moment we can keep them animated for an unlimited time, as long as the caster stays in range.\""; next;
+    mes"\"Goodbye\"";
+    close;
+}

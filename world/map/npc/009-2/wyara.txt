@@ -41,6 +41,8 @@
 L_Main:
     if (!@has_magic && (MAGIC_FLAGS & MFLAG_TOUCHED_MANASEED))
         menu
+            "I have your fifty cloths.", L_Cloth,
+            "What can you do to make sure living wood has a good soul?", L_Christmas,
             "What do you know about...", L_Question,
             "Can you help me use the mana seed?", L_Q_manaseed_unabsorbed,
             "Can you help me learn magic?", L_Magic,
@@ -48,6 +50,8 @@ L_Main:
             "Bye!", -;
     if (!(!@has_magic && (MAGIC_FLAGS & MFLAG_TOUCHED_MANASEED)))
         menu
+            "I have your fifty cloths.", L_Cloth,
+            "What can you do to make sure living wood has a good soul?", L_Christmas,
             "What do you know about...", L_Question,
             "Can you help me learn magic?", L_Magic,
             "I would like to buy potions.", L_Shop,
@@ -79,7 +83,19 @@ L_Question:
     next;
     goto L_Main;
 
+L_Christmas:
+    mes "[Wyara the Witch]";
+    mes "\" I can help you but i need fifty cloths.\"";
+    next;
+    goto L_Main;
 
+L_Cloth:
+    delitem "CottonCloth", 50;
+    mes "[Wyara the Witch]";
+    mes "\"Okay you need to feed your wood creature cherry cake and say #talasin.\"";
+    next;
+    goto L_Main;
+    
 L_Q_astralsoul:
     mes "[Wyara the Witch]";
     mes "\"The astral soul skill? Yes, I have heard about that. It can be taught by old and wise mages usually.\"";

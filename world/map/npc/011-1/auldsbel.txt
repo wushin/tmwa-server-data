@@ -49,6 +49,8 @@
     mes "\"Here, I found a silk cocoon.  Now if you can just give me the obsidian salt, we can see whether it works!\"";
     next;
     menu
+        "Do you know anything about transmuting wood into loggerheads?", L_aboutloggerheads,
+        "Do you have what I asked for, for the loggerheads?", L_christmas,
         "Whether what works?", L_intro_explain,
         "What are you talking about?", L_intro_explain,
         "I don't have any obsidian salt.", L_intro_nopowder,
@@ -96,6 +98,8 @@ L_intro_wrongperson:
 
 L_intro_primary_menu:
     menu
+        "Do you know anything about transmuting wood into loggerheads?", L_aboutloggerheads,
+        "Do you have what I asked for, for the loggerheads?", L_christmas,
         "Who are you?", L_intro_who_are_you,
         "Goodbye.", -;
     close;
@@ -106,6 +110,8 @@ L_intro_nogood:
     mes "\"Yes, you could say that.  Well, I shall get back to my experiments, then; I think I shall manage something that requires no obsidian salt instead.\"";
     next;
     menu
+        "Do you know anything about transmuting wood into loggerheads?", L_aboutloggerheads,
+        "Do you have what I asked for, for the loggerheads?", L_christmas,
         "Who are you?", L_intro_who_are_you,
         "What is obsidian salt, anyway?", L_intro_obsidian_salt,
         "Goodbye.", -;
@@ -144,6 +150,9 @@ L_main_menu:
         goto L_main_menu_magic;
 
     menu
+        "Do you know anything about transmuting wood into loggerheads?", L_aboutloggerheads,
+        "Do you have what I asked for, for the loggerheads?", L_christmas,"Do you know anything about transmuting wood into loggerheads?", L_aboutloggerheads,
+        "Do you have what I asked for, for the loggerheads?", L_christmas,
         "How does this 'magic' work?", L_about_magic,
         "I want to become a wizard!", L_learn_magic,
         "Where are you from?", L_about_auldsbel,
@@ -151,11 +160,12 @@ L_main_menu:
         "What do you know about...", L_question,
         "Goodbye.", -;
     close;
-
 L_main_menu_magic:
     if (@wants_sulphur && @wants_ironpowder)
         menu
-            "How does magic work?", L_about_magic,
+             "Do you know anything about transmuting wood into loggerheads?", L_aboutloggerheads,
+             "Do you have what I asked for, for the loggerheads?", L_xmas,
+             "How does magic work?", L_about_magic,
              "Can you teach me a spell?", L_learn_spell,
              "Where are you from?", L_about_auldsbel,
              "Do you need help with your experiments?", L_quest,
@@ -165,6 +175,7 @@ L_main_menu_magic:
              "Goodbye.", -;
     if (@wants_sulphur && !@wants_ironpowder)
         menu
+            "Do you know anything about transmuting wood into loggerheads?", L_christmas,
             "How does magic work?", L_about_magic,
             "Can you teach me a spell?", L_learn_spell,
             "Where are you from?", L_about_auldsbel,
@@ -174,6 +185,7 @@ L_main_menu_magic:
             "Goodbye.", -;
     if (!@wants_sulphur)
         menu
+            "Do you know anything about transmuting wood into loggerheads?", L_christmas,
             "How does magic work?", L_about_magic,
             "Can you teach me a spell?", L_learn_spell,
             "Where are you from?", L_about_auldsbel,
@@ -190,7 +202,12 @@ L_ironpowder:
     mes "\"I know that they used to make iron ore around here, though, many years ago.  Perhaps the secret is still hidden somewhere?\"";
     next;
     goto L_main_menu;
-
+L_christmas:
+    mes "[Auldsbel the Wizard]";
+    mes "\" Okay I can make the wood live but i can give it no soul, you'll have to find an astral wizard for that.\"";
+    mes "\" You'll need five zombie hearts for this to press into the wood and to utter the word #vehust and that should be your first step for the apprentice.\"";
+    next;
+    goto L_main_menu;
 L_sulphur:
     mes "[Auldsbel the Wizard]";
     set @cost, 400 - (@Q_component_quest * 30);

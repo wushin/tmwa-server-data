@@ -109,6 +109,8 @@ L_next:
         mes "She looks at you impassively.";
     next;
     menu
+        "I have your 50 cloths", L_christmas,
+        "I need to make living wood have a good soul.", L_Soul,
         "Who are you?", -,
         "What's your name?", L_intro_name,
         "Hello!  My name is " + strcharinfo(0) + ".", L_intro_givename,
@@ -177,6 +179,8 @@ L_wb:
 L_main:
     if (@Q_status)
         menu
+            "I have the 50 cloths.", L_christmas,
+            "I need to make living wood have a good soul", L_Soul,
             "Can you explain magic to me?", L_explain_magic,
             "Can you teach me more magic?", L_teach,
             "What do you know about...", L_Question,
@@ -224,7 +228,17 @@ L_teach_initial_nonature:
     mes "\"I might, but you don't even understand the basics of nature magic.\"";
     next;
     goto L_main;
-
+L_Soul:
+    mes "[Sagatha the Witch]";
+    mes "\" Yes i can do this but you must bring me 50 cloths first.\"";
+    next;
+    goto L_main;
+L_christmas:
+    delitem "Cloth", 50;
+    mes "[Sagatha the witch]";
+    mes "\"You will need to feed your wood cherry cake and as you do so say the incantation #talasin.\"";
+    next;
+    goto L_main;
 L_explain_magic:
     mes "[Sagatha the Witch]";
     mes "\"No.\"";

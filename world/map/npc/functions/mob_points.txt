@@ -146,6 +146,9 @@ function|script|MobPoints|,
 // Reinboo
     if (@mobID == 1094)
         set @value, 3;
+// Santaboo
+    if (@mobID == 1112)
+        set @value, 3;
 
     if (@value == 0)
         goto L_end;

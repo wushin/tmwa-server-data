@@ -4,7 +4,12 @@
 019-1.gat,74,75,0|script|Santa's Helper|105,
 {
     callfunc "ClearVariables";
-    if (FLAGS & FLAG_SANTAS_HELPER) goto L_Done;
+    set @purple_amount, 25;
+    set @blue_amount, 20;
+    set @green_amount, 5;
+
+    if (XMASDONE) goto L_Done;
+    if (FLAGS & FLAG_SANTAS_HELPER) goto L_Continue;
     if ((gettime(6) == 12) || ((gettime(6) == 1) && (gettime(5) < 7))) goto L_Quest;
 
     mes "[Santa's Helper]";
@@ -17,10 +22,6 @@
     goto L_Close;
 
 L_Quest:
-    set @purple_amount, 25;
-    set @blue_amount, 20;
-    set @green_amount, 5;
-
     mes "[Santa's Helper]";
     mes "\"Hello my young friend.";
     mes "Would you like to help me?\"";
@@ -54,8 +55,15 @@ L_Y:
     delitem "PurplePresentBox", @purple_amount;
     delitem "BluePresentBox", @blue_amount;
     delitem "GreenPresentBox", @green_amount;
+    if (FLAGS & FLAG_SANTAS_HELPER)
+        goto L_KnitCap;
     getitem "TurtleneckSweater", 1;
     set FLAGS, FLAGS | FLAG_SANTAS_HELPER;
+    goto L_Close;
+
+L_KnitCap:
+    getitem "KnitCap", 1;
+    set XMASDONE, 1;
     goto L_Close;
 
 L_R:
@@ -77,6 +85,20 @@ L_NoItem:
     mes "\"You dont seem to have enough presents.\"";
     goto L_Close;
 
+L_Continue:
+    mes "[Santa's Helper]";
+    mes "\"Those Nasty Monsters have stolen my presents again!\"";
+    next;
+    mes "Would you like to help me?\"";
+    mes "If you help me, I'll give you something very nice\"";
+    next;
+
+L_ContinueMenu:
+    menu
+        "I have some present boxes", L_Y,
+        "Hmm, see you later", L_N,
+        "What you need exactly?", L_R;
+    
 L_Done:
     mes "[Santa's Helper]";
     mes "\"All the children got their Christmas presents.";

@@ -1,0 +1,27 @@
+030-2.gat,90,42,0|script|Valjas|330,
+{
+    mes "[Valjas]";
+    mes "\" Workshop is closed.\"";
+    close;
+}
+
+030-2.gat,91,42,0|script|Halas|330,
+{
+    mes "[Halas]";
+    mes "\" Workshop is closed.\"";
+    close;
+}
+
+030-2.gat,92,42,0|script|Kilis|330,
+{
+    mes "[Kilis]";
+    mes "\" Workshop is closed.\"";
+    close;
+}
+
+030-2.gat,78,44,0|script|Milis|330,
+{
+    mes "[Milis]";
+    mes "\" Thank you for your help.\"";
+    close;
+}
