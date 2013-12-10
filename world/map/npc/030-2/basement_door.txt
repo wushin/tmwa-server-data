@@ -1,0 +1,26 @@
+// Annual Xmas Escape Hatch
+030-2.gat,48,44,0|script|#BasementDoor|45,0,0,
+{
+    if(@xmas_time == 2)
+        goto L_NotActive;
+    if(XMASTIME & (1 << 31))
+        goto L_XmasMain;
+    goto L_NotActive;
+
+L_XmasMain:
+    mes "Decend into the caves?";
+    menu
+        "Yes.", L_Open,
+        "No.", L_Close;
+
+L_Open:
+    warp "030-3.gat",100,50;
+    goto L_Close;
+
+L_NotActive:
+    message strcharinfo(0), "This door appears locked by magical forces.";
+    end;
+
+L_Close:
+    close;
+}

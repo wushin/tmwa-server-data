@@ -37,15 +37,13 @@
     mes "\"I've mastered several schools of magic and fought the Yeti in Kaizei.\"";
     next;
     mes "\"The path of magic is a long and difficult one.\"";
-        menu
-            "I need a soul for a wooden creature", L_Deal,
-    L_Close;
+    goto L_Close;
+
 L_Magic:
     mes "[Pauline]";
     mes "\"Ah. I see you are skilled in the Art of Astral Magic.\"";
     mes "\"Who taught you?\"";
     menu
-        "I need a soul for a wooden creature", L_Deal,
         "I learnt it myself!", -,
         "Sagatha is my teacher.", L_Sagatha,
         "You must be mistaken.", L_Close;
@@ -150,10 +148,7 @@ L_DidNotWorkMouboo:
     mes "[Pauline]";
     mes "\"It seems you did not tell me the correct ingredients. Come back when you find the correct ones.\"";
     goto L_Close;
-L_christmas:
-    mes"[Pauline]";
-    mes"\"Okay but it will cost you for me to divulge this knowledge. I need 50 roots come back with them and we will talk.\"";
-    goto L_Close;
+
 L_Pass1Mouboo:
     if (@pauline_ingredient2$ == "MoubooFigurine")
         goto L_TrySpellMouboo;
@@ -234,11 +229,7 @@ L_MoreMagic:
     mes "[Pauline]";
     mes "\"Thanks for telling me the ingredients. As soon as I find out more about those wall paintings I will let you know.\"";
     goto L_Close;
-L_Deal:
-    delitem "Root", 50;
-    mes "[Pauline]";
-    mes "\" To give your wood a soul is a dangerous thing. You will never know if it is good or evil. The only person that could fix that would probably be Sagatha. For the spell you will need three roots and three pearls. Burn the roots at the edge of your wood then crush the pearls and sprinkle them over the fire saying #galalathad. That should do it.\"";
-    goto L_Close;
+
 L_Wrong:
     mes "The Witch looks at you and snorts.";
     mes "[Pauline]";

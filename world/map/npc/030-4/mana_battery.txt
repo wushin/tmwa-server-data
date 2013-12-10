@@ -1,0 +1,24 @@
+// Annual Xmas Battle
+// Author: Chayenne, wushin
+
+030-4.gat,32,21,0|script|Chest|400,
+{
+    callfunc "XmasTime";
+
+    if(@xmas_state == 6)
+        goto L_Battle;
+    goto L_Close;
+
+L_Battle:
+    mes "[Bomb]";
+    mes "\"Someone set us up the bomb.\"";
+    mes "\"Event Begins.\"";
+    next;
+    set @xmas_state, 7;
+    callfunc "XmasSetState";
+    warp "030-2",152,21;
+    goto L_Close;
+
+L_Close:
+    close;
+}

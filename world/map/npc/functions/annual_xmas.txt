@@ -1,0 +1,382 @@
+// This file is part of Christmas Event 
+// author: Jenalya, Chayenne, cinderweb, wushin
+
+// NPC behavior depending on time:
+// No Event Time: The event didn't start yet or already ended - the house is closed and the outside NPCs give generic dialogue
+// Event Time: Christmas preparation is in progress, main quest can be done
+// Reward Time: Christmas is over, if the main quest was finished, the reward can be taken
+// for now variable xmas used
+// Main quest states: XMASTIME
+// NIBBLE_0
+// 0: Not On Quest or Not Xmas
+// 1: Elijas ask you to get list 
+// 2: Return Completed List
+//   Na: Alters it, gets thrown out, Orum/Warrick Communicates with them.
+//   Ni: Gets asked to see Avalia.
+// 3: Sabotage / Save
+//   Na/Ni: Helper Quests
+// 4: Mana Battery Reagents
+// 5: Boss Fight
+// 6: Reward
+// 7: Done.
+// 8: 
+// 9-15: Unused
+// Nibble_1: @xmas_karma, Event Behavior
+// 0-15: 0: Naughty, 15: Nice
+// List BITS:
+// 8: 021-1.gat,87,66,0|script|Ayasha|258
+// 9: 021-1.gat,63,107,0|script|Latif|262
+// 10: 021-1.gat,123,116,0|script|Charda|260
+// 11: 021-1.gat,78,87,0|script|Faris|259
+// 12: 021-1.gat,98,25,0|script|Rasin|263
+// 13: 021-1.gat,155,25,0|script|Ghada|265
+// 14: 025-1.gat,80,88,0|script|Rossy|114
+// 15: 001-2.gat,76,59,0|script|Kadiya|174
+// Helper Bits
+// 16: Bedding End
+// 17: Bedding Starts
+// 18: Glitter End
+// 19: Glitter Start
+// 20: Storage Helper
+// 21: Roasted Acorns
+// 22: Santa's Helper 1
+// 23: Santa's Helper 2
+// 24:
+// 25:
+// 26: Hard Mode Boss
+// 27: Regular Mode Boss
+// 28: Perfect Helpers
+// 29: Prefect List
+// 30: Helper Bit
+// 31: Side Choosen: Naughty vs. Nice
+
+-|script|#XmasConfig|-1,
+{
+OnInit:
+    // Event Runs until Reward Period.
+    // Getting Reward sets XMASTIME to 0 for next year.
+    // Month Start/End
+    set $@xmas_start_month, 12;
+    set $@xmas_end_month, 1;
+    // Reward Day Start/End
+    set $@xmas_reward_start_day, 25;
+    set $@xmas_reward_end_day, 6;
+    // Time Levels
+    set $@xmas_no_event_time, 0;
+    set $@xmas_event_time, 1;
+    set $@xmas_reward_time, 2;
+    // Turn Off debug
+    set $@xmas_debug, 4;
+    // Santa's Helper
+    set $@sh_purple_amount, 25;
+    set $@sh_blue_amount, 20;
+    set $@sh_green_amount, 5;
+    // Bedding 
+    set $@bedding_amount, 10;
+    // Boxes
+    set $@log_amount, 2;
+    // Wrap
+    set $@reed_amount, 2;
+    set $@water_amount, 1;
+    // Wrap Dye Amounts
+    set $@poa_amount, 2;
+    set $@wrap_yellow_amount, 2;
+    set $@wrap_ltblue_amount, 2;
+    set $@wrap_purple_amount, 2;
+    set $@wrap_green_amount, 2;
+    // Present Return
+    set $@present_amount, 5;
+    // Shipping
+    set $@wrap_amount, 1;
+    set $@empty_box_amount, 1;
+    set $@ship_present_amount, 1;
+    // Glitter
+    set $@red_amount, 5;
+    set $@yellow_amount, 5;
+    // Storage
+    set $@candy_amount, 3;
+    set $@shocker_amount, 3;
+    // Naughty Quest
+    set $@NaughtyRare$, "Root";
+    set $@NaughtyUncommon$, "NutcrackerHat";
+    set $@evil_core_dark_crystal, 1;
+    set $@evil_core_iron_potions, 4;
+    set $@evil_core_emerald_powders, 10;
+    // Nice Quest
+    set $@NiceRare$, "Acorn";
+    set $@NiceUncommon$, "NutcrackerHat";
+    set $@power_core_shock_sweet_amount, 1;
+    set $@power_core_empty_bottles, 4;
+    set $@power_core_emerald_powders, 10;
+}
+
+function|script|XmasTime|,
+{
+    set @xmas_state, ((XMASTIME & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
+    set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
+    set @xmas_side, (XMASTIME & (1 << 31));
+
+    if($@xmas_debug == $@xmas_event_time)
+        goto L_EventTime;
+    if($@xmas_debug == $@xmas_reward_time)
+        goto L_RewardTime;
+    if($@xmas_debug == $@xmas_no_event_time)
+        goto L_NoEventTime;
+
+    if(gettime(6) == $@xmas_start_month && gettime(5) < $@xmas_reward_start_day)
+        goto L_EventTime;
+    if((gettime(6) == $@xmas_start_month && gettime(5) >= $@xmas_reward_start_day)
+        || (gettime(6) == $@xmas_end_month && gettime(5) <= $@xmas_reward_end_day))
+        goto L_RewardTime;
+
+L_NoEventTime:
+    set @xmas_time, $@xmas_no_event_time;
+    return;
+
+L_EventTime:
+    set @xmas_time, $@xmas_event_time;
+    return;
+
+L_RewardTime:
+    set @xmas_time, $@xmas_reward_time;
+    return;
+}
+
+function|script|XmasNaughty|,
+{
+    if((@xmas_karma - @karma_bonus) > 0)
+        set @xmas_karma, (@xmas_karma - @karma_bonus);
+    set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
+    set @xmas_karma, 0;
+    set @karma_bonus, 0;
+    return;
+}
+
+function|script|XmasNice|,
+{
+    if((@xmas_karma + @karma_bonus) < 16)
+        set @xmas_karma, (@karma_bonus + @xmas_karma);
+    set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
+    set @xmas_karma, 0;
+    set @karma_bonus, 0;
+    return;
+}
+
+function|script|XmasSetState|,
+{
+    set XMASTIME, (XMASTIME & ~(NIBBLE_0_MASK) | (@xmas_state << NIBBLE_0_SHIFT));
+    set @xmas_state, 0;
+    return;
+}
+
+function|script|XmasSetSide|,
+{
+    set XMASTIME, XMASTIME | (1 << 31);
+    return;
+}
+
+function|script|ThrowOutTheBum|,
+{
+    callfunc "XmasTime";
+    if(XMASTIME & (1 << 31))
+        goto L_NaughtyStatus;
+    goto L_Return;
+
+L_NaughtyStatus:
+    if(@xmas_state > 2)
+        goto L_Warp;
+    goto L_Hint;
+
+L_Hint:
+    message strcharinfo(0), "I said get out, We've no time for your kind here.";
+    mes "[Orum's Homunculus]";
+    mes "\"What are you doing? Come See me in the Caves Below.\"";
+    mes "\"I said go north till you reach the snoman. Then head into the cave to the east.\"";
+    warp "030-1",99,55;
+    close;
+
+L_Warp:
+    message strcharinfo(0), "I said get out, We've no time for your kind here.";
+    warp "030-1",99,55;
+    end;
+
+L_Return:
+    return;
+}
+
+function|script|XmasCheckList|,
+{
+    set @xmas_list_count, 0;
+    if(XMASTIME & (1 << 8))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(XMASTIME & (1 << 9))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(XMASTIME & (1 << 10))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(XMASTIME & (1 << 11))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(XMASTIME & (1 << 12))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(XMASTIME & (1 << 13))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(XMASTIME & (1 << 14))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(XMASTIME & (1 << 15))
+        set @xmas_list_count, (@xmas_list_count + 1);
+    if(@xmas_list_count == 3)
+        goto L_PerfectList;
+    if(@xmas_list_count > 3)
+        goto L_LooksGood;
+    goto L_Return;
+
+L_PerfectList:
+    set XMASTIME, XMASTIME | (1 << 29);
+    goto L_LooksGood;
+
+L_LooksGood:
+    if(@xmas_state == 1)
+        goto L_SetListState;
+    goto L_Return;
+
+L_SetListState:
+    set @xmas_state, 2;
+    callfunc "XmasSetState";
+    goto L_Return;
+
+L_Return:
+    set @xmas_list_count, 0;
+    return;
+}
+
+function|script|XmasList|,
+{
+    callfunc "XmasTime";
+
+    if(@xmas_state == 1)
+        goto L_QuestTime;
+    goto L_Return;
+
+L_QuestTime:
+    if(XMASTIME & (1 << $@npc_bit))
+        goto L_Return;
+    goto L_GetList;
+
+L_GetList:
+    message strcharinfo(0), strcharinfo(0) + "I've come to get your list to deliver it to the Christmas Inn.";
+    message strcharinfo(0), "Here is my list. Make sure it gets delivered please!";
+    set XMASTIME, XMASTIME | (1 << $@npc_bit);
+    callfunc "XmasNice";
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
+function|script|XmasHelperPoints|,
+{
+    callfunc "XmasTime";
+    set @xmas_helper_count, 0;
+    if(XMASTIME & (1 << 16))
+        set @xmas_helper_count, (@xmas_helper_count + 1);
+    if(XMASTIME & (1 << 18))
+        set @xmas_helper_count, (@xmas_helper_count + 1);
+    if(XMASTIME & (1 << 20))
+        set @xmas_helper_count, (@xmas_helper_count + 1);
+    if(XMASTIME & (1 << 21))
+        set @xmas_helper_count, (@xmas_helper_count + 1);
+    if(XMASTIME & (1 << 23))
+        set @xmas_helper_count, (@xmas_helper_count + 1);
+    if(@xmas_helper_count == 4)
+        goto L_PerfectHelpers;
+    if(@xmas_helper_count > 1)
+        goto L_HelperDone;
+    goto L_Return;
+
+L_PerfectHelpers:
+    set XMASTIME, XMASTIME | (1 << 28);
+    goto L_Return;
+
+L_HelperDone:
+    if(@xmas_state == 3)
+        goto L_SetHelperState;
+    goto L_Return;
+
+L_SetHelperState:
+    set @xmas_state, 4;
+    callfunc "XmasSetState";
+    goto L_Return;
+
+L_Return:
+    set @xmas_helper_count, 0;
+    return;
+}
+
+function|script|XmasReward|,
+{
+    // Random Reward Generator Based off 2 arrays Naughty and Nice;
+    end;
+}
+
+function|script|XmasDebug|,
+{
+    mes "What do you want to do?";
+    menu
+        "Set time.", L_Time,
+        "Set quest state.", L_XmasState,
+        "Reset complete quest state.", -,
+        "Do nothing.", L_Close;
+
+    set XMASTIME, 0;
+    goto L_Close;
+
+L_Time:
+    menu
+        "Event time.", -,
+        "Reward time.", -,
+        "No event time.", -,
+        "Clear time.", -;
+
+    if (@menu == 1)
+        set $@xmas_debug, $@xmas_event_time;
+    if (@menu == 2)
+        set $@xmas_debug, $@xmas_reward_time;
+    if (@menu == 3)
+        set $@xmas_debug, $@xmas_no_event_time;
+    if (@menu == 4)
+        set $@xmas_debug, 4;
+
+    goto L_Close;
+
+L_XmasState:
+    mes "Quest state?";
+    input @xmas_state;
+    callfunc "XmasSetState";
+    goto L_Close;
+
+L_XmasKarma:
+    mes "Karma (0-15) 0: Naughty, 15: Good";
+    input @xmas_karma;
+    set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
+    goto L_CLose;
+
+L_Close:
+    set @xmas_state, 0;
+    set @xmas_time, 0;
+    set @xmas_karma, 0;
+    close;
+}
+
+030-1.gat,91,48,0|script|Debug#1|105,
+{
+   callfunc "XmasDebug";
+}
+
+030-2.gat,193,62,0|script|Debug#2|105,
+{
+   callfunc "XmasDebug";
+}
+
+030-3.gat,26,26,0|script|Debug#3|105,
+{
+   callfunc "XmasDebug";
+}

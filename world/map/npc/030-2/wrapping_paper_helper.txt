@@ -1,0 +1,123 @@
+// author: Jenalya, wushin
+// Reino asks for reed bundles and water to make wrapping paper
+// also for some dyes to make them colorful
+// later he can be asked for those papers to wrap boxes
+
+030-2.gat,140,31,0|script|Reino|328,
+{
+    callfunc "XmasTime";
+
+    if(@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_OffSeason;
+
+L_OffSeason:
+    mes "[Reino]";
+    mes "\"Hrmm... I forgot what the real color of my hand was... \"";
+    goto L_Close;
+    
+L_XmasMain:
+    if (XMASTIME & (1 << 30)) goto L_Helping;
+
+    mes "[Reino]";
+    mes "\"Excuse me, but please don't interrupt. We're all very busy.\"";
+    goto L_Close;
+
+L_Helping:
+    mes "[Reino]";
+    mes "\"Oh, I see you're here to help. Maybe you can assist me with a problem we have.";
+    mes "We're nearly out of wrapping paper for the present boxes.";
+    mes "That's very very bad. Can you imagine how it would look if the presents didn't have wrapping paper?\"";
+    next;
+    mes "\"So, eh, I can only give you some of the remaining wrapping paper if you bring me the needed material to make new wrapping paper.";
+    mes "For making one roll of wrapping paper, I need " + $@reed_amount + " Reed Bundles, " + $@water_amount + " Bottle of Water and some dye to make it colored.\"";
+    next;
+L_Again:
+    mes "\"Let's see... These are the regulations for wrapping paper colors and designs for this year. Tell me which you want.\"";
+    mes "He shows you an official looking piece of paper.";
+    menu
+        "White dotted (2 Piles of Ash)",L_White,
+        "Yellow dotted (2 Yellow Dyes)",L_Yellow,
+        "Blue dotted (2 Light Blue Dyes)",L_Blue,
+        "Purple striped (2 Purple Dye)",L_Purple,
+        "Green (2 Green Dye)",L_Green,
+        "Why do you have a regulation for wrapping papers?!",L_Regulation,
+        "I'm on my way.",L_Close;
+
+L_White:
+    if ((countitem("ReedBundle") < $@reed_amount) || (countitem("BottleOfWater") < $@water_amount) || (countitem("PileOfAsh") < 2))
+        goto L_NoItems;
+    delitem "ReedBundle", $@reed_amount;
+    delitem "BottleOfWater", $@water_amount;
+    delitem "PileOfAsh", $@poa_amount;
+    getitem "WhiteWrap", 1;
+    mes "[Reino]";
+    mes "\"This one is classical.\"";
+    goto L_MadePaper;
+
+L_Yellow:
+    if ((countitem("ReedBundle") < $@reed_amount) || (countitem("BottleOfWater") < $@water_amount) || (countitem("YellowDye") < $@wrap_yellow_amount))
+        goto L_NoItems;
+    delitem "ReedBundle", $@reed_amount;
+    delitem "BottleOfWater", $@water_amount;
+    delitem "YellowDye", $@wrap_yellow_amount;
+    getitem "YellowWrap", 1;
+    mes "[Reino]";
+    mes "\"Right, bright paper brings good vibes.\"";
+    goto L_MadePaper;
+
+L_LightBlue:
+    if ((countitem("ReedBundle") < $@reed_amount) || (countitem("BottleOfWater") < $@water_amount) || (countitem("LightBlueDye") < $@wrap_ltblue_amount))
+        goto L_NoItems;
+    delitem "ReedBundle", $@reed_amount;
+    delitem "BottleOfWater", $@water_amount;
+    delitem "LightBlueDye", $@wrap_ltblue_amount;
+    getitem "BlueWrap", 1;
+    mes "[Reino]";
+    mes "\"Plain and simple. Here.\"";
+    goto L_MadePaper;
+
+L_Purple:
+    if ((countitem("ReedBundle") < $@reed_amount) || (countitem("BottleOfWater") < $@water_amount) || (countitem("PurpleDye") < $@wrap_purple_amount))
+        goto L_NoItems;
+    delitem "ReedBundle", $@reed_amount;
+    delitem "BottleOfWater", $@water_amount;
+    delitem "PurpleDye", $@wrap_purple_amount;
+    getitem "PurpleWrap", 1;
+    mes "[Reino]";
+    mes "\"Mh, personally I don't like it that much, but here you go.\"";
+    goto L_MadePaper;
+
+L_Green:
+    if ((countitem("ReedBundle") < $@reed_amount) || (countitem("BottleOfWater") < $@water_amount) || (countitem("GreenDye") < $@wrap_green_amount))
+        goto L_NoItems;
+    delitem "ReedBundle", $@reed_amount;
+    delitem "BottleOfWater", $@water_amount;
+    delitem "GreenDye", $@wrap_green_amount;
+    getitem "GreenWrap", 1;
+    mes "[Reino]";
+    mes "\"Yeah, this is really Christmas-styled.\"";
+    goto L_MadePaper;
+
+L_MadePaper:
+    next;
+    mes "\"Do you need more wrapping paper?\"";
+    menu
+        "Yes.",L_Again,
+        "No, I have all I need.",L_Close;
+
+L_Regulation:
+    mes "Reino seems irritated.";
+    mes "[Reino]";
+    mes "\"Well, because, ah - there would be total chaos without regulations!";
+    mes "You know, this Christmas business requires a lot of coordination. Things have to be well-ordered.\"";
+    goto L_Close;
+
+L_NoItems:
+    mes "[Reino]";
+    mes "\"Oh? It seems you don't have the required items.\"";
+    goto L_Close;
+
+L_Close:
+    close;
+}

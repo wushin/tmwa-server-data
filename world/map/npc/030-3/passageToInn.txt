@@ -1,0 +1,75 @@
+// Annual Xmas 
+// Author: Chayenne, wushin
+//Secret passage to a trapdoor in Santa's Inn Basement, 
+//can only be used if on evil path 
+
+030-3.gat,100,49,0|script|SmallCrack#XmasPassage|400,0,1,
+{
+    callfunc "XmasTime";
+
+    if(XMASTIME & (1 << 31))
+        goto L_XmasMain;
+    goto L_NotActive;
+
+L_NotActive:
+    mes "You don't notice anything special";
+    goto L_Close;
+
+L_XmasMain:
+    mes "You notice a small creak in the wall, what do you want to do?";
+    next;
+   
+L_EnterDialogue:
+    menu
+      "Nothing.", L_Close,
+      "Bang my head against it repeatedly.", L_Tux9th,
+      "Oh, not very much, I do not see anynthing there", L_Close,
+      "Hit it with my strong fist", L_Enter;
+
+L_Tux9th:
+   itemheal  - Hp / 2 , 0;
+   message strcharinfo(0), "Ouch, that hurt!";
+   setlook LOOK_HAIR_STYLE, rand(20);
+   if @sabotage >= 4 goto L_QueryWarp;
+   goto L_Fail;
+ 
+L_Enter:
+   if (@sabotage < 4) goto L_Fail;
+   if (getequipid(equip_hand1) > 0 || getequipid(equip_hand2) > 0) goto L_Sword;
+   if (getequipid(equip_gloves) <= 0) goto L_Gloves;
+   goto L_QueryWarp;
+
+L_Sword:
+   mes "That is not your fist silly,";
+   mes "use your fist, alright?";
+   goto L_Close;
+
+L_Gloves:
+   mes "Wow! Next time you plan to hit a wall,";
+   mes "You had better equip some decent gloves in advance.";
+   itemheal  - Hp / 2 , 0;
+   message strcharinfo(0), "Ouch, that hurt!";
+   goto L_QueryWarp;
+
+L_QueryWarp:
+   mes "You gaze into a black hole, do you want to enter?";
+   mes " ";
+   menu
+      "Yes", L_Warp,
+      "No", L_Close;
+   goto L_Close;
+
+L_Warp:
+   warp "030-2.gat",47,44;
+   goto L_Close;
+
+L_Fail:
+   mes "Seems like that won't work out as you planned.";
+   goto L_Close;
+
+L_Close:
+    close;
+
+L_End:
+    end;
+}

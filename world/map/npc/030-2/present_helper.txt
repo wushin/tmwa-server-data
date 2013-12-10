@@ -1,0 +1,86 @@
+// Annual Xmas
+// Author: wushin
+// Present Reclaimation
+
+030-2.gat,47,82,0|script|Jonanthan|328,
+{
+    callfunc "XmasTime";
+
+    if(@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_OffSeason;
+
+L_OffSeason:
+    mes "[Jonathan]";
+    mes "\"Hello! Welcome to the reclaimation department.\"";
+    mes "\"Lucky all the presents stolen have been replaced. Save any you find. You never know what we will ne to replace next year.\"";
+    goto L_Close;
+
+L_XmasMain:
+    mes "[Jonathan]";
+    mes "\"Hello! Welcome to the reclaimation department.\"";
+
+    if(XMASTIME & (1 << 30)) goto L_Helping;
+
+    mes "\"We are incredibly busy right now, some monsters have stolen some of our presents.\"";
+    mes "\"I must tell Chief Warrick Immediately.\"";
+    goto L_Close;
+
+L_Helping:
+    mes "\"Here we take any presents stolen from us by those nasty monster.\"";
+    next;
+
+L_Main:
+    mes "\"Do you have any presents you would like to return?\"";
+    next;
+    menu
+        "I just wanted to say hello.",-,
+        "5 Purple present boxes.",L_Purple,
+        "5 Blue present boxes.",L_Blue,
+        "5 Green present boxes.",L_Green,
+        "5 Yellow present boxes.",L_Yellow,
+        "5 White present boxes.",L_White;
+    goto L_Close;
+
+L_Purple:
+    set @karma_bonus, 1;
+    set @present_name$, "PurplePresentBox";
+    goto L_RewardIncrease;
+
+L_Blue:
+    set @karma_bonus, 2;
+    set @present_name$, "BluePresentBox";
+    goto L_RewardIncrease;
+
+L_Green:
+    set @karma_bonus, 3;
+    set @present_name$, "GreenPresentBox";
+    goto L_RewardIncrease;
+
+L_Yellow:
+    set @karma_bonus, 4;
+    set @present_name$, "YellowPresentBox";
+    goto L_RewardIncrease;
+
+L_White:
+    set @karma_bonus, 5;
+    set @present_name$, "WhitePresentBox";
+    goto L_RewardIncrease;
+
+L_RewardIncrease:
+    if ($@present_amount > countitem(@present_name$))
+        goto L_NotEnough;
+    delitem @present_name$, $@present_amount;
+    callfunc "XmasNice";
+    goto L_Close;
+
+L_NotEnough:
+    mes "\"You don't have enough presents to return.\"";
+    goto L_Main;
+
+L_Close:
+    mes "\"See You later!\"";
+    set @present_name$, "";
+    close;
+}
+

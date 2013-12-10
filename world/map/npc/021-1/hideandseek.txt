@@ -24,6 +24,9 @@ OnInit:
 
 021-1.gat,87,66,0|script|Ayasha|258,
 {
+    set $@npc_bit, 8;
+    callfunc "XmasList";
+
     set @state, ((QUEST_NorthTulimshar & $@hideandseekNT_MASK) >> $@hideandseekNT_SHIFT);
 
     set @EXP, 75;
@@ -84,6 +87,8 @@ L_Close:
 
 021-1.gat,63,107,0|script|Latif|262,
 {
+    set $@npc_bit, 9;
+    callfunc "XmasList";
     set @state, ((QUEST_NorthTulimshar & $@hideandseekNT_MASK) >> $@hideandseekNT_SHIFT);
 
     set @EXP, 15;
@@ -139,6 +144,8 @@ L_Close:
 
 021-1.gat,123,116,0|script|Charda|260,
 {
+    set $@npc_bit, 10;
+    callfunc "XmasList";
     set @state, ((QUEST_NorthTulimshar & $@hideandseekNT_MASK) >> $@hideandseekNT_SHIFT);
 
     set @EXP, 15;
@@ -191,6 +198,8 @@ L_Close:
 
 021-1.gat,78,87,0|script|Faris|259,
 {
+    set $@npc_bit, 11;
+    callfunc "XmasList";
     set @state, ((QUEST_NorthTulimshar & $@hideandseekNT_MASK) >> $@hideandseekNT_SHIFT);
 
     set @EXP, 25;
@@ -239,6 +248,8 @@ L_Close:
 
 021-1.gat,98,25,0|script|Rasin|263,
 {
+    set $@npc_bit, 12;
+    callfunc "XmasList";
     set @state, ((QUEST_NorthTulimshar & $@hideandseekNT_MASK) >> $@hideandseekNT_SHIFT);
 
     set @EXP, 15;
@@ -278,6 +289,8 @@ L_Close:
 
 021-1.gat,155,25,0|script|Ghada|265,
 {
+    set $@npc_bit, 13;
+    callfunc "XmasList";
     set @state, ((QUEST_NorthTulimshar & $@hideandseekNT_MASK) >> $@hideandseekNT_SHIFT);
 
     set @EXP, 15;

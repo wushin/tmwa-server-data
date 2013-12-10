@@ -1,0 +1,102 @@
+// Annual Christmas
+// author: Jenalya, wushin
+
+030-2.gat,25,35,0|script|Vellamo|328,
+{
+    callfunc "XmasTime";
+
+    if(@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_OffSeason;
+
+L_OffSeason:
+    mes "[Vellamo]";
+    mes "\"Candy Stocks built back up. Be ready as we can the more we store the more they want...\"";
+    goto L_Close;
+
+L_XmasMain:
+    if (XMASTIME & (1 << 20)) goto L_Candy;
+    if (XMASTIME & (1 << 30)) goto L_Helping;
+
+    mes "[Vellamo]";
+    mes "\"Sorry, too busy to chat right now. The chief has got me working overtime for the holidays.\"";
+    close;
+
+L_Helping:
+    mes "[Vellamo]";
+    mes "\"Oh, hello. Visitors usually don't come down here in the basement. Here we store several things, materials for the presents, the finished presents, supplies.\"";
+    menu
+        "Nice. I have to go.", L_Close,
+        "Do you need help with anything?", -;
+    mes "[Vellamo]";
+    mes "\"Oh? You want to help us? Actually, there is one thing you could do. Did you see those weird slimes out there on the Snow Fields? Argh, I hate those creatures, last year they invaded the entire basement...\"";
+    next;
+    mes "\"However, this year they tried again, but I was able to hold them off. They just managed to devour most of our Candy supplies.\"";
+    next;
+    mes "\"So in case you find some of the Candies, feel free to bring them back. Ismo will give you some reward for them.\"";
+    set XMASTIME, XMASTIME | (1 << 20);
+    goto L_Close;
+
+L_Candy:
+    mes "[Vellamo]";
+    mes "\"Ah, welcome back. When you have found some of the Candy, please give it to Ismo.\"";
+    goto L_Close;
+
+L_Close:
+    close;
+}
+
+030-2.gat,33,29,0|script|Ismo|329,
+{
+    callfunc "XmasTime";
+
+    if(@xmas_time == 2)
+        goto L_OffSeason;
+    if(XMASTIME & (1 << 20))
+        goto L_Helping;
+    goto L_OffSeason;
+
+L_OffSeason:
+    mes "[Ismo]";
+    mes "\"Hello. I'm helping Vellamo. He's the storage administrator.\"";
+    goto L_Close;
+
+L_Helping:
+    mes "[Ismo]";
+    mes "\"Did you get back some Candy from the slimes?\"";
+    next;
+    menu
+        "Give Candies.", L_Candy,
+        "Give Shock Sweet.(What? how mean!).", L_ShockSweet;
+
+L_ShockSweet:
+    set @dq_level, 30;
+    set @dq_cost, 12;
+    set @dq_count, $@shocker_amount;
+    set @dq_name$, "ShockSweet";
+    set @dq_friendly_name$, "Shock Sweet";
+    set @dq_money, 2000;
+    set @dq_exp, 600;
+
+    callfunc "DailyQuest";
+    set @karma_bonus, 1;
+    callfunc "XmasNaughty";
+    goto L_Close;
+
+L_Candy:
+    set @dq_level, 30;
+    set @dq_cost, 12;
+    set @dq_count, $@candy_amount;
+    set @dq_name$, "Candy";
+    set @dq_friendly_name$, "Candies";
+    set @dq_money, 500;
+    set @dq_exp, 200;
+
+    callfunc "DailyQuest";
+    set @karma_bonus, 1;
+    callfunc "XmasNice";
+    goto L_Close;
+
+L_Close:
+    close;
+}

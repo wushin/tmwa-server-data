@@ -1,0 +1,28 @@
+// Annual Xmas Boss Fight Door
+030-2.gat,153,21,0|script|#DarkDoor|45,0,0,
+{
+    callfunc "XmasTime";
+
+    if(@xmas_time == 2)
+        goto L_NotActive;
+    if(@xmas_state > 5)
+        goto L_XmasMain;
+    goto L_NotActive;
+
+L_XmasMain:
+    mes "Open the warehouse door?";
+    menu
+        "Yes, I feel brave.", L_Open,
+        "No, It's quite nice out here.", L_Close;
+
+L_Open:
+    warp "030-4.gat",55,55;
+    goto L_Close;
+
+L_NotActive:
+    message strcharinfo(0), "This door appears locked by magical forces.";
+    end;
+
+L_Close:
+    close;
+}

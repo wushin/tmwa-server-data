@@ -1,0 +1,23 @@
+// Annual Xmas Bouncers
+
+030-2.gat,85,43,0|script|Valjas|330,
+{
+    callfunc "ThrowOutTheBum";
+    close;
+}
+
+030-2.gat,89,43,0|script|Halas|330,
+{
+    callfunc "ThrowOutTheBum";
+    close;
+}
+
+030-2.gat,89,84,0|script|Kilis|330,5,2,
+{
+L_Main:
+    callfunc "ThrowOutTheBum";
+    close;
+
+OnTouch:
+    goto L_Main;
+}

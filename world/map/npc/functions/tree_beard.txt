@@ -1,0 +1,66 @@
+
+020-1.gat,90,78,0|script|#Tree|380,
+{
+    end;
+}
+
+020-1.gat,90,78,0|script|#XmasTree|379,
+{
+    end;
+}
+
+009-1.gat,54,38,0|script|#TreeNoSnow|382,
+{
+    end;
+}
+
+009-1.gat,54,38,0|script|#XmasTreeNoSnow|381,
+{
+    end;
+}
+
+001-1.gat,41,45,0|script|#PalmTree|384,
+{
+    end;
+}
+
+001-1.gat,41,45,0|script|#XmasPalmTree|383,
+{
+    end;
+}
+
+-|script|#TreeMasterNivalis|-1,
+{
+OnInit:
+    callfunc "replaceTree";
+    end;
+}
+
+function|script|replaceTree|,
+{
+    if((gettime(6) == 12) || (gettime(6) == 1 && gettime(5) < 6))
+        goto L_XmasTree;
+    goto L_Tree;
+
+L_XmasTree:
+    disablenpc "#Tree";
+    enablenpc "#XmasTree";
+    disablenpc "#TreeNoSnow";
+    enablenpc "#XmasTreeNoSnow";
+    disablenpc "#PalmTree";
+    enablenpc "#XmasPalmTree";
+    goto L_End;
+
+L_Tree:
+    disablenpc "#XmasTree";
+    enablenpc "#Tree";
+    disablenpc "#XmasTreeNoSnow";
+    enablenpc "#TreeNoSnow";
+    disablenpc "#XmasPalmTree";
+    enablenpc "#PalmTree";
+    goto L_End;
+
+L_End:
+    end;
+}
+

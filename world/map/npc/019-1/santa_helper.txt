@@ -1,16 +1,15 @@
 // Author: accoring to git history probably Jaxad
+// and extended by wushin to be included in the annual
 // quest made seasonal and adapted to new scripting standards by Jenalya
 
 019-1.gat,74,75,0|script|Santa's Helper|105,
 {
     callfunc "ClearVariables";
-    set @purple_amount, 25;
-    set @blue_amount, 20;
-    set @green_amount, 5;
+    callfunc "XmasTime";
 
-    if (XMASDONE) goto L_Done;
-    if (FLAGS & FLAG_SANTAS_HELPER) goto L_Continue;
-    if ((gettime(6) == 12) || ((gettime(6) == 1) && (gettime(5) < 7))) goto L_Quest;
+    if ((@xmas_time) && (XMASTIME & (1 << 22))) goto L_Done;
+    if ((@xmas_time) && (XMASTIME & (1 << 23))) goto L_Continue;
+    if (@xmas_time) goto L_Quest;
 
     mes "[Santa's Helper]";
     mes "\"Ah, isn't it peaceful here? Around Christmas time we always have problems with some slimy monsters.";
@@ -41,37 +40,41 @@ L_Y:
     mes "[Santa's Helper]";
     mes "\"Hmm, let me check what you have.\"";
     next;
-    if (countitem("PurplePresentBox") < @purple_amount)
+    if (countitem("PurplePresentBox") < $@sh_purple_amount)
         goto L_NoItem;
-    if (countitem("BluePresentBox") < @blue_amount)
+    if (countitem("BluePresentBox") < $@sh_blue_amount)
         goto L_NoItem;
-    if (countitem("GreenPresentBox") < @green_amount)
+    if (countitem("GreenPresentBox") < $@sh_green_amount)
         goto L_NoItem;
     getinventorylist;
     if (@inventorylist_count > 99)
         goto L_TooMany;
     mes "[Santa's Helper]";
     mes "\"Great! Here is something for you\"";
-    delitem "PurplePresentBox", @purple_amount;
-    delitem "BluePresentBox", @blue_amount;
-    delitem "GreenPresentBox", @green_amount;
-    if (FLAGS & FLAG_SANTAS_HELPER)
+    delitem "PurplePresentBox", $@sh_purple_amount;
+    delitem "BluePresentBox", $@sh_blue_amount;
+    delitem "GreenPresentBox", $@sh_green_amount;
+    if (XMASTIME & (1 << 23))
         goto L_KnitCap;
     getitem "TurtleneckSweater", 1;
-    set FLAGS, FLAGS | FLAG_SANTAS_HELPER;
+    set XMASTIME, (XMASTIME & (1 << 23));
+    set @karma_bonus, 1;
+    callfunc "XmasNice";
     goto L_Close;
 
 L_KnitCap:
     getitem "KnitCap", 1;
-    set XMASDONE, 1;
+    set XMASTIME, (XMASTIME & (1 << 22));
+    set @karma_bonus, 1;
+    callfunc "XmasNice";
     goto L_Close;
 
 L_R:
     mes "[Santa's Helper]";
     mes "\"I need:";
-    mes @purple_amount + " Purple Present Boxes";
-    mes @blue_amount + " Blue Present Boxes";
-    mes @green_amount + " Green Present Boxes\"";
+    mes $@sh_purple_amount + " Purple Present Boxes";
+    mes $@sh_blue_amount + " Blue Present Boxes";
+    mes $@sh_green_amount + " Green Present Boxes\"";
     next;
     goto L_M;
 
@@ -111,8 +114,5 @@ L_TooMany:
     goto L_Close;
 
 L_Close:
-    set @purple_amount, 0;
-    set @blue_amount, 0;
-    set @green_amount, 0;
     close;
 }
