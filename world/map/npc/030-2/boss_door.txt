@@ -1,11 +1,9 @@
 // Annual Xmas Boss Fight Door
 030-2.gat,153,21,0|script|#DarkDoor|45,0,0,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 2)
-        goto L_NotActive;
-    if(@xmas_state > 5)
+    if(@boss_door_state)
         goto L_XmasMain;
     goto L_NotActive;
 

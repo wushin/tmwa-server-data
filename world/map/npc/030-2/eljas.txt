@@ -4,20 +4,20 @@
 030-2.gat,87,41,0|script|Eljas|328,5,1,
 {
     callfunc "XmasHelperPoints";
-    callfunc "XmasTime";
+    callfunc "XmasStates";
     callfunc "ThrowOutTheBum";
 
 L_Start:
-    if(@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_OffSeason;
 
 L_XmasMain:
-    if (@xmas_state == 1)
+    if (@xmas_state == $@xmas_list_gather_state)
         goto L_HaveList;
-    if (@xmas_state == 2)
+    if (@xmas_state == $@xmas_list_complete_state)
         goto L_SantasList;
-    if (@xmas_state > 2)
+    if (@xmas_state > $@xmas_list_complete_state)
         goto L_OffSeason;
     goto L_NeedList;
 
@@ -27,6 +27,7 @@ L_HaveList:
     next;
     mes "\"What brings you here?\"";
     menu
+        "What were the names again?", L_ListNames,
         "I have Santa's List.", L_SantasList,
         "I have Santa's List.(Fake List)", L_SantasFakeList,
         "Christmas.", L_Christmas,
@@ -64,12 +65,17 @@ L_StartQuest:
     mes "\"If you can find these children, please bring thier lists back.\"";
     mes "\"Come back and see me when your done.\"";
     next;
-    set @xmas_state, 1;
+    set @xmas_state, $@main_quest_start;
     callfunc "XmasSetState";
     goto L_Close;
 
+L_ListNames:
+    mes "\"The missing lists are Ayasha, Latif, Charda, Faris, Rasin, Ghada, Rossy, Kadiya\"";
+    mes "\"If you can find these children, please bring thier lists back.\"";
+    goto L_Close;
+
 L_SantasList:
-    if(@xmas_state == 1)
+    if(@xmas_state == $@main_quest_start)
         goto L_NotComplete;
     mes "\"Please take The List to Chief Warrick on the next floor.\"";
     set @karma_bonus, @xmas_list_count;
@@ -77,7 +83,7 @@ L_SantasList:
     goto L_Close;
 
 L_SantasFakeList:
-    if(@xmas_state == 1)
+    if(@xmas_state == $@main_quest_start)
         goto L_NotComplete;
     mes "\"What a second... whats that aura...\"";
     mes "\"THIS ISN'T THE REAL LIST!\"";
@@ -89,7 +95,7 @@ L_SantasFakeList:
 
 L_NotComplete:
     mes "\"Hrmm... Even I can tell thats not the amount we are missing.\"";
-    goto L_HaveList;
+    goto L_ListNames;
 
 L_Christmas:
     mes "\"All year round we work hard to make toys and repair our help for each years event.\"";
@@ -124,9 +130,9 @@ L_End:
     end;
 
 OnTouch:
-    callfunc "XmasTime";
+    callfunc "XmasStates";
     callfunc "ThrowOutTheBum";
-    if((@xmas_state > 1) || (@xmas_time == 2))
+    if((@xmas_state > $@main_quest_start) || ($@xmas_time == $@xmas_list_complete_state))
         goto L_End;
     goto L_Start;
 }

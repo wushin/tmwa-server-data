@@ -5,9 +5,9 @@
 
 030-3.gat,100,49,0|script|SmallCrack#XmasPassage|400,0,1,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(XMASTIME & (1 << 31))
+    if(@basement_passage)
         goto L_XmasMain;
     goto L_NotActive;
 
@@ -34,7 +34,7 @@ L_Tux9th:
    goto L_Fail;
  
 L_Enter:
-   if (@sabotage < 4) goto L_Fail;
+   if (@xmas_state > 3) goto L_Fail;
    if (getequipid(equip_hand1) > 0 || getequipid(equip_hand2) > 0) goto L_Sword;
    if (getequipid(equip_gloves) <= 0) goto L_Gloves;
    goto L_QueryWarp;

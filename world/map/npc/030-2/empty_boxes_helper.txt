@@ -5,9 +5,9 @@
 
 030-2.gat,140,41,0|script|Urmas|328,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -17,7 +17,7 @@ L_OffSeason:
     goto L_Close;
 
 L_XmasMain:
-    if (XMASTIME & (1 << 30)) goto L_Helping;
+    if (@helper_bit) goto L_Helping;
 
     mes "[Urmas]";
     mes "\"Don't stand in the way! We have some serious problems here.\"";
@@ -31,17 +31,17 @@ L_Helping:
     next;
     mes "\"However, we need to fix it. I have only a few boxes left.";
     mes "Bring me some wood, so I can make new boxes out of it.";
-    mes $@log_amount + " Raw Logs will do for one box.\"";
-    if (countitem("RawLog") < $@log_amount)
+    mes $@xmas_log_amount + " Raw Logs will do for one box.\"";
+    if (countitem("RawLog") < $@xmas_log_amount)
         goto L_Close;
     next;
     mes "\"How many boxes do you need?\"";
     input @amount;
     if (@amount <= 0)
         goto L_Close;
-    if (countitem("RawLog") < @amount*$@log_amount)
+    if (countitem("RawLog") < @amount*$@xmas_log_amount)
         goto L_NoItems;
-    delitem "RawLog", @amount*$@log_amount;
+    delitem "RawLog", @amount*$@xmas_log_amount;
     mes "[Urmas]";
     mes "\"Alright! Good job, kid. I'll start to make some more boxes now.";
     mes "Here, take this in the meanwhile and put some toys in it.\"";

@@ -3,7 +3,7 @@
 
 030-4.gat,32,21,0|script|Chest|400,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
     if(@xmas_state == 6)
         goto L_Battle;

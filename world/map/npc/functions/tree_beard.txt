@@ -1,4 +1,4 @@
-
+// Annual Xmas Environment changes
 020-1.gat,90,78,0|script|#Tree|380,
 {
     end;
@@ -29,16 +29,18 @@
     end;
 }
 
--|script|#TreeMasterNivalis|-1,
+function|script|XmasSpawnManager|,
 {
-OnInit:
-    callfunc "replaceTree";
-    end;
+    cmdothernpc "SpawnManager19_1", "XmasSpawn";
+    cmdothernpc "SpawnManager19_3", "XmasSpawn";
+    cmdothernpc "SpawnManager30_1", "XmasSpawn";
+    cmdothernpc "SpawnManager30_3", "XmasSpawn";
+    return;
 }
 
-function|script|replaceTree|,
+function|script|ReplaceTrees|,
 {
-    if((gettime(6) == 12) || (gettime(6) == 1 && gettime(5) < 6))
+    if($@xmas_time)
         goto L_XmasTree;
     goto L_Tree;
 
@@ -49,7 +51,7 @@ L_XmasTree:
     enablenpc "#XmasTreeNoSnow";
     disablenpc "#PalmTree";
     enablenpc "#XmasPalmTree";
-    goto L_End;
+    goto L_Return;
 
 L_Tree:
     disablenpc "#XmasTree";
@@ -58,9 +60,8 @@ L_Tree:
     enablenpc "#TreeNoSnow";
     disablenpc "#XmasPalmTree";
     enablenpc "#PalmTree";
-    goto L_End;
+    goto L_Return;
 
-L_End:
-    end;
+L_Return:
+    return;
 }
-

@@ -4,9 +4,9 @@
 
 030-2.gat,47,82,0|script|Jonanthan|328,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -20,7 +20,7 @@ L_XmasMain:
     mes "[Jonathan]";
     mes "\"Hello! Welcome to the reclaimation department.\"";
 
-    if(XMASTIME & (1 << 30)) goto L_Helping;
+    if(@helper_bit) goto L_Helping;
 
     mes "\"We are incredibly busy right now, some monsters have stolen some of our presents.\"";
     mes "\"I must tell Chief Warrick Immediately.\"";
@@ -35,42 +35,42 @@ L_Main:
     next;
     menu
         "I just wanted to say hello.",-,
-        "5 Purple present boxes.",L_Purple,
-        "5 Blue present boxes.",L_Blue,
-        "5 Green present boxes.",L_Green,
-        "5 Yellow present boxes.",L_Yellow,
-        "5 White present boxes.",L_White;
+        $@xmas_present_amount + " Purple present boxes.",L_Purple,
+        $@xmas_present_amount + " Blue present boxes.",L_Blue,
+        $@xmas_present_amount + " Green present boxes.",L_Green,
+        $@xmas_present_amount + " Yellow present boxes.",L_Yellow,
+        $@xmas_present_amount + " White present boxes.",L_White;
     goto L_Close;
 
 L_Purple:
-    set @karma_bonus, 1;
+    set @karma_bonus, $@default_karma_bonus;
     set @present_name$, "PurplePresentBox";
     goto L_RewardIncrease;
 
 L_Blue:
-    set @karma_bonus, 2;
+    set @karma_bonus, $@default_karma_bonus;
     set @present_name$, "BluePresentBox";
     goto L_RewardIncrease;
 
 L_Green:
-    set @karma_bonus, 3;
+    set @karma_bonus, $@default_karma_bonus;
     set @present_name$, "GreenPresentBox";
     goto L_RewardIncrease;
 
 L_Yellow:
-    set @karma_bonus, 4;
+    set @karma_bonus, 2;
     set @present_name$, "YellowPresentBox";
     goto L_RewardIncrease;
 
 L_White:
-    set @karma_bonus, 5;
+    set @karma_bonus, 2;
     set @present_name$, "WhitePresentBox";
     goto L_RewardIncrease;
 
 L_RewardIncrease:
-    if ($@present_amount > countitem(@present_name$))
+    if ($@xmas_present_amount > countitem(@present_name$))
         goto L_NotEnough;
-    delitem @present_name$, $@present_amount;
+    delitem @present_name$, $@xmas_present_amount;
     callfunc "XmasNice";
     goto L_Close;
 

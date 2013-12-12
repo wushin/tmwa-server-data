@@ -5,11 +5,11 @@
 019-1.gat,74,75,0|script|Santa's Helper|105,
 {
     callfunc "ClearVariables";
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if ((@xmas_time) && (XMASTIME & (1 << 22))) goto L_Done;
-    if ((@xmas_time) && (XMASTIME & (1 << 23))) goto L_Continue;
-    if (@xmas_time) goto L_Quest;
+    if (($@xmas_time) && (@sh_cap)) goto L_Done;
+    if (($@xmas_time) && (@sh_sweater)) goto L_Continue;
+    if ($@xmas_time) goto L_Quest;
 
     mes "[Santa's Helper]";
     mes "\"Ah, isn't it peaceful here? Around Christmas time we always have problems with some slimy monsters.";
@@ -54,17 +54,17 @@ L_Y:
     delitem "PurplePresentBox", $@sh_purple_amount;
     delitem "BluePresentBox", $@sh_blue_amount;
     delitem "GreenPresentBox", $@sh_green_amount;
-    if (XMASTIME & (1 << 23))
+    if (@sh_sweater)
         goto L_KnitCap;
     getitem "TurtleneckSweater", 1;
-    set XMASTIME, (XMASTIME & (1 << 23));
+    set XMASTIME, XMASTIME | $@sh_bit_sweater;
     set @karma_bonus, 1;
     callfunc "XmasNice";
     goto L_Close;
 
 L_KnitCap:
     getitem "KnitCap", 1;
-    set XMASTIME, (XMASTIME & (1 << 22));
+    set XMASTIME, XMASTIME | $@sh_bit_cap;
     set @karma_bonus, 1;
     callfunc "XmasNice";
     goto L_Close;

@@ -3,9 +3,9 @@
 
 030-2.gat,25,35,0|script|Vellamo|328,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -15,8 +15,8 @@ L_OffSeason:
     goto L_Close;
 
 L_XmasMain:
-    if (XMASTIME & (1 << 20)) goto L_Candy;
-    if (XMASTIME & (1 << 30)) goto L_Helping;
+    if (XMASTIME & $@helper_bit_storage) goto L_Candy;
+    if (@helper_bit) goto L_Helping;
 
     mes "[Vellamo]";
     mes "\"Sorry, too busy to chat right now. The chief has got me working overtime for the holidays.\"";
@@ -34,7 +34,7 @@ L_Helping:
     mes "\"However, this year they tried again, but I was able to hold them off. They just managed to devour most of our Candy supplies.\"";
     next;
     mes "\"So in case you find some of the Candies, feel free to bring them back. Ismo will give you some reward for them.\"";
-    set XMASTIME, XMASTIME | (1 << 20);
+    set XMASTIME, XMASTIME | ($@helper_bit_storage);
     goto L_Close;
 
 L_Candy:
@@ -48,11 +48,11 @@ L_Close:
 
 030-2.gat,33,29,0|script|Ismo|329,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 2)
+    if($@xmas_time == $@xmas_reward_time)
         goto L_OffSeason;
-    if(XMASTIME & (1 << 20))
+    if(XMASTIME & $@helper_bit_storage)
         goto L_Helping;
     goto L_OffSeason;
 
@@ -66,34 +66,34 @@ L_Helping:
     mes "\"Did you get back some Candy from the slimes?\"";
     next;
     menu
-        "Give Candies.", L_Candy,
-        "Give Shock Sweet.(What? how mean!).", L_ShockSweet;
+        "Give " + $@xmas_good_friendly_name, L_GoodCandy,
+        "Give " + $@xmas_bad_friendly_name$ + "(What? how mean!).", L_BadCandy;
 
-L_ShockSweet:
-    set @dq_level, 30;
-    set @dq_cost, 12;
-    set @dq_count, $@shocker_amount;
-    set @dq_name$, "ShockSweet";
-    set @dq_friendly_name$, "Shock Sweet";
-    set @dq_money, 2000;
-    set @dq_exp, 600;
+L_BadCandy:
+    set @dq_level, $@xmas_bad_level;
+    set @dq_cost, $@xmas_bad_cost;
+    set @dq_count, $@xmas_bad_count;
+    set @dq_name$, $@xmas_bad_name;
+    set @dq_friendly_name$, $@xmas_bad_friendly_name$;
+    set @dq_money, $@xmas_bad_money;
+    set @dq_exp, $@xmas_bad_exp;
 
     callfunc "DailyQuest";
-    set @karma_bonus, 1;
+    set @karma_bonus, $@default_karma_bonus;
     callfunc "XmasNaughty";
     goto L_Close;
 
-L_Candy:
-    set @dq_level, 30;
-    set @dq_cost, 12;
-    set @dq_count, $@candy_amount;
-    set @dq_name$, "Candy";
-    set @dq_friendly_name$, "Candies";
-    set @dq_money, 500;
-    set @dq_exp, 200;
+L_GoodCandy:
+    set @dq_level, $@xmas_good_level;
+    set @dq_cost, $@xmas_good_cost;
+    set @dq_count, $@xmas_good_count;
+    set @dq_name$, $@xmas_good_name;
+    set @dq_friendly_name$, $@xmas_good_friendly_name$;
+    set @dq_money, $@xmas_good_money;
+    set @dq_exp, $@xmas_good_exp;
 
     callfunc "DailyQuest";
-    set @karma_bonus, 1;
+    set @karma_bonus, $@default_karma_bonus;
     callfunc "XmasNice";
     goto L_Close;
 

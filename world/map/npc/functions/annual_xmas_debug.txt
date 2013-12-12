@@ -1,0 +1,82 @@
+// This file is part of Christmas Event 
+// author: Jenalya, Chayenne, cinderweb, wushin
+// please see #XmasConfig
+
+function|script|XmasDebug|,
+{
+    mes "What do you want to do?";
+    menu
+        "Set time.", L_Time,
+        "Set quest state.", L_XmasState,
+        "Reset complete quest state.", -,
+        "Do nothing.", L_Close;
+
+    set XMASTIME, 0;
+    goto L_Close;
+
+L_Time:
+    menu
+        "Event time.", -,
+        "Reward time.", -,
+        "Not Event time.", -;
+
+    if (@menu == 1)
+        set $@xmas_time, $@xmas_event_time;
+    if (@menu == 2)
+        set $@xmas_time, $@xmas_reward_time;
+    if (@menu == 3)
+        set $@xmas_time, $@xmas_no_event_time;
+
+    callfunc "ReplaceTrees";
+    callfunc "XmasSpawnManager";
+    goto L_Close;
+
+L_XmasState:
+    mes "Quest state?";
+    input @xmas_state;
+    callfunc "XmasSetState";
+    goto L_Close;
+
+L_XmasKarma:
+    mes "Karma (0-15) 0: Naughty, 15: Good";
+    input @xmas_karma;
+    set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
+    goto L_CLose;
+
+L_Close:
+    set @xmas_state, 0;
+    set @xmas_karma, 0;
+    close;
+}
+
+030-1.gat,91,48,0|script|XmasDebug#1|105,
+{
+   callfunc "XmasDebug";
+
+OnInit:
+   if(!(debug))
+       disablenpc "XmasDebug#1";
+}
+
+030-2.gat,193,62,0|script|XmasDebug#2|105,
+{
+   callfunc "XmasDebug";
+
+OnInit:
+   if(!(debug))
+       disablenpc "XmasDebug#1";
+}
+
+030-3.gat,26,26,0|script|XmasDebug#3|105,
+{
+   callfunc "XmasDebug";
+
+OnInit:
+   if(!(debug))
+       disablenpc "XmasDebug#1";
+}
+
+botcheck.gat,26,28,0|script|XmasDebug#4|105,
+{
+   callfunc "XmasDebug";
+}

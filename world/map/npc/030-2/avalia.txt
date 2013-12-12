@@ -4,9 +4,9 @@
 030-2.gat,198,61,0|script|Avalia|356,
 {
     callfunc "XmasHelperPoints";
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -17,13 +17,13 @@ L_OffSeason:
     close;
 
 L_XmasMain:
-    if(@xmas_state == 2) goto L_ListReturn;
-    if(@xmas_state == 3) goto L_HelperQuest;
-    if(@xmas_state == 4) goto L_ManaBattery;
-    if(@xmas_state == 5) goto L_PowerReagents;
-    if(@xmas_state == 6) goto L_Quick;
-    if(@xmas_state == 7) goto L_Reward;
-    if(@xmas_state > 7) goto L_Thanks;
+    if(@xmas_state == $@xmas_list_complete_state) goto L_ListReturn;
+    if(@xmas_state == $@xmas_helpers_start_state) goto L_HelperQuest;
+    if(@xmas_state == $@xmas_helpers_done_state) goto L_ManaBattery;
+    if(@xmas_state == $@main_quest_reagents_start) goto L_PowerReagents;
+    if(@xmas_state == $@main_quest_reagents_done) goto L_Quick;
+    if(@xmas_state == $@main_quest_reward_state) goto L_Reward;
+    if(@xmas_state > $@main_quest_reward_state) goto L_Thanks;
     goto L_OffSeason;
 
 L_ListReturn:
@@ -55,7 +55,7 @@ L_ListReturn:
 L_Start:
     mes "\"Ok, go check in with Chief Warrick. You might have to presist a bit but he will let you help.\"";
     mes "\"Once you have completed this task come back and talk to me. As he reports to me.\"";
-    set @xmas_state, 3;
+    set @xmas_state, $@xmas_helpers_start_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -68,7 +68,7 @@ L_HelperQuest:
         "I'd better get back to helping.", L_Close;
 
 L_Continue:
-    if(@xmas_state == 4)
+    if(@xmas_state == $@xmas_helpers_done_state)
         goto L_ManaBattery;
     goto L_NotHelpEnough;
 
@@ -82,7 +82,7 @@ L_ManaBattery:
     mes "\"I'm going to need " + $@power_core_emerald_powders + " Emerald Powders, " + $@power_core_empty_bottles + " Empty Bottles, " + $@power_core_shock_sweet_amount + " Shock Sweet \"";
     next;
     mes "\"When you have gathered the required materials please come back and see me.\"";
-    set @xmas_state, 5;
+    set @xmas_state, $@main_quest_reagents_start;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -102,11 +102,8 @@ L_PowerReagents:
         "No.", L_Enough;
 
 L_CheckReagents:
-    if(countitem("ShockSweet") == 0)
-        goto L_Enough;
-    if(countitem("EmptyBottle") < 4)
-        goto L_Enough;
-    if(countitem("EmeraldPowder") < 10)
+    callfunc "CheckReagents";
+    if(!(@xmas_state == $@main_quest_reagents_done))
         goto L_Enough;
     mes "\"Huzzah!, you have all the required components!\"";
     mes "\"Now I can create a ManaBattery to power the Nutcrackers from a central location.\"";
@@ -146,7 +143,7 @@ L_CheckReagents:
     mes "\"I'm in no condition to go anywhere.\"";
     mes "\"Take the Mana Battery and install it in the warehouse.\"";
     mes "\"It's found behind Chief Warrick\"";
-    set @xmas_state, 6;
+    set @xmas_state, $@boss_door_open_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -160,9 +157,8 @@ L_Reward:
     mes "[Avalia]";
     mes "\"Thanks for all the help.\"";
     mes "\"Take this as a token of my gratitude.\"";
-    // Xmas Uncommon Reward
-    getitem $@NiceUncommon$, 1;
-    set @xmas_state, 8;
+    getitem $@quest_side_zero_uncommon$, 1;
+    set @xmas_state, $@main_quest_reward_done;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -171,10 +167,6 @@ L_Thanks:
     mes "\"Please feel free to continue to help us while we prepare your reward.\"";
     goto L_Close;
      
-L_Enough:
-    mes "\" I'm sorry but could you come back when you have the components?\""; 
-    goto L_Close;
-
 L_ThankYou:
     mes "\"We can't thank you enough for restoring the nutcrackers humanity.\"";
     goto L_Close;
@@ -185,9 +177,9 @@ L_Close:
 
 030-2.gat,190,64,0|script|Milis|330,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -198,13 +190,13 @@ L_OffSeason:
     close;
 
 L_XmasMain:
-    if(@xmas_state > 7)
+    if(@xmas_state >= $@main_quest_reward_start)
         goto L_Reward;
     goto L_NoResponse;
 
 L_Reward:
     mes "[Milis]";
-    mes "\"Thanks for you help!\"";
+    mes "\"Thanks for you help! I a REAL MAN, once again.\"";
     goto L_Close;
 
 L_NoResponse:

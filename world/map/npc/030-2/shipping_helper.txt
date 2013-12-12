@@ -24,9 +24,9 @@
 
 function|script|helpersPacking|,
 {
-    callfunc "XmasTime";
+    callfunc "XmasStates";
 
-    if(@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -39,7 +39,7 @@ L_XmasMain:
     mes "[" + $@npc_name$ + "]";
     mes "Hello, hello, hello!";
 
-    if(XMASTIME & (1 << 30)) goto L_Helping;
+    if(@helper_bit) goto L_Helping;
 
     mes "\"Real busy now, gotta go or the boss will have my head. Back to work knuckleheads!\"";
     goto L_Close;
@@ -87,16 +87,16 @@ L_White:
     goto L_Gift;
 
 L_Gift:
-    if ($@wrap_amount > countitem(@wrap$))
+    if ($@xmas_wrap_amount > countitem(@wrap$))
         goto L_NotEnough;
-    if ($@empty_box_amount > countitem("OpenPresentBox"))
+    if ($@xmas_empty_box_amount > countitem("OpenPresentBox"))
         goto L_NotEnough;
     getinventorylist;
     if (@inventorylist_count > 100)
         goto L_FullInv;
-    delitem "OpenPresentBox", $@empty_box_amount;
-    delitem @wrap$, $@wrap_amount;
-    getitem @present_name$, $@ship_present_amount;
+    delitem "OpenPresentBox", $@xmas_empty_box_amount;
+    delitem @wrap$, $@xmas_wrap_amount;
+    getitem @present_name$, $@xmas_ship_present_amount;
     goto L_Give;
 
 L_Give:

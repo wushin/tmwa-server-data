@@ -1,9 +1,9 @@
 // Annual Xmas Escape Hatch
 030-2.gat,48,44,0|script|#BasementDoor|45,0,0,
 {
-    if(@xmas_time == 2)
-        goto L_NotActive;
-    if(XMASTIME & (1 << 31))
+    callfunc "XmasStates";
+
+    if(@basement_passage)
         goto L_XmasMain;
     goto L_NotActive;
 
