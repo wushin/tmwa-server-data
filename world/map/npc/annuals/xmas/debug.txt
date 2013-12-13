@@ -78,5 +78,11 @@ OnInit:
 
 botcheck.gat,26,28,0|script|XmasDebug#4|105,
 {
+   if(getgmlevel() < 40 & !(debug))
+       goto L_End;
+
    callfunc "XmasDebug";
+
+L_End:
+   end;
 }

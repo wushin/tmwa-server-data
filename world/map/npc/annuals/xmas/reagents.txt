@@ -43,3 +43,9 @@ L_AllReagents:
     close;
     end;
 }
+
+function|script|ListReagents|,
+{
+    // dynamic reagent list
+    end;
+}
