@@ -17,13 +17,14 @@ L_OffSeason:
     close;
 
 L_XmasMain:
-    if(@xmas_state == $@xmas_list_complete_state) goto L_ListReturn;
-    if(@xmas_state == $@xmas_helpers_start_state) goto L_HelperQuest;
-    if(@xmas_state == $@xmas_helpers_done_state) goto L_ManaBattery;
-    if(@xmas_state == $@main_quest_reagents_start) goto L_PowerReagents;
-    if(@xmas_state == $@main_quest_reagents_done) goto L_Quick;
-    if(@xmas_state == $@main_quest_reward_state) goto L_Reward;
-    if(@xmas_state > $@main_quest_reward_state) goto L_Thanks;
+    if(@xmas_list_deliver) goto L_ListReturn;
+    if(@helper_start_state) goto L_HelperQuest;
+    if(@helper_done_state) goto L_HelperQuest;
+    if(@reagent_start_state) goto L_ManaBattery;
+    if(@reagent_done_state) goto L_PowerReagents;
+    if(@xmas_reward_start_state) goto L_Reward;
+    if(@xmas_reward_start_state) goto L_Thanks;
+    if(@boss_door_state) goto L_Quick;
     goto L_OffSeason;
 
 L_ListReturn:
@@ -68,7 +69,7 @@ L_HelperQuest:
         "I'd better get back to helping.", L_Close;
 
 L_Continue:
-    if(@xmas_state == $@xmas_helpers_done_state)
+    if(@helper_done_state)
         goto L_ManaBattery;
     goto L_NotHelpEnough;
 
@@ -77,12 +78,13 @@ L_NotHelpEnough:
     goto L_Close;
 
 L_ManaBattery:
+    // Needs to be function
     mes "\"Now that we are caught up on the holidays and I've finished my research, I know what is needed to make the spell permanent.\"";
     next;
     mes "\"I'm going to need " + $@power_core_emerald_powders + " Emerald Powders, " + $@power_core_empty_bottles + " Empty Bottles, " + $@power_core_shock_sweet_amount + " Shock Sweet \"";
     next;
     mes "\"When you have gathered the required materials please come back and see me.\"";
-    set @xmas_state, $@main_quest_reagents_start;
+    set @xmas_state, $@xmas_reagents_start;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -103,7 +105,7 @@ L_PowerReagents:
 
 L_CheckReagents:
     callfunc "CheckReagents";
-    if(!(@xmas_state == $@main_quest_reagents_done))
+    if(!(@reagent_done_state))
         goto L_Enough;
     mes "\"Huzzah!, you have all the required components!\"";
     mes "\"Now I can create a ManaBattery to power the Nutcrackers from a central location.\"";
@@ -190,7 +192,7 @@ L_OffSeason:
     close;
 
 L_XmasMain:
-    if(@xmas_state >= $@main_quest_reward_start)
+    if(@xmas_reward_start_state || @xmas_reward_done_state)
         goto L_Reward;
     goto L_NoResponse;
 

@@ -1,0 +1,79 @@
+// This file is part of Christmas Event 
+// author: Jenalya, Chayenne, cinderweb, wushin
+// please see #XmasConfig
+
+function|script|XmasNaughty|,
+{
+    set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
+    if((@xmas_karma - @karma_bonus) > 0)
+        set @xmas_karma, (@xmas_karma - @karma_bonus);
+    set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
+    set @karma_bonus, 0;
+    return;
+}
+
+function|script|XmasNice|,
+{
+    set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
+    if((@xmas_karma + @karma_bonus) < 16)
+        set @xmas_karma, (@karma_bonus + @xmas_karma);
+    set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
+    set @karma_bonus, 0;
+    return;
+}
+
+function|script|XmasSetState|,
+{
+    set XMASTIME, (XMASTIME & ~(NIBBLE_0_MASK) | (@xmas_state << NIBBLE_0_SHIFT));
+    return;
+}
+
+function|script|XmasSetSide|,
+{
+    set XMASTIME, XMASTIME | $@xmas_side_bit;
+    return;
+}
+
+function|script|XmasReward|,
+{
+    if($@xmas_time == $@xmas_reward_time)
+        goto L_FinalGift;
+    goto L_NotTime;
+
+L_FinalGift:
+    // Random Reward Generator Based off 2 arrays Naughty and Nice;
+    // Check side
+    // get karma
+    // 50 +/- karma depending on side
+    // Plus Perfects/Hard mode
+    // Give X presents by trees.
+    // Remember to clear that shit for next year.
+    end;
+
+L_NotTime:
+    end;
+}
+
+function|script|XmasCheckOld|,
+{
+    set @xmas_key_loop, 0;
+
+L_Loop:
+    if($@xmas_time_key_old[@xmas_key_loop] == XMASYEAR)
+        goto L_OldMatch;
+    goto L_KeyLoopAgain;
+
+L_OldMatch:
+    set XMASTIME, 0;
+    set XMASYEAR, $@xmas_time_key;
+    goto L_Return;
+
+L_LoopAgain:
+    if(@xmas_key_loop == getarraysize($@xmas_time_key_old))
+        goto L_return;
+    set @xmas_helper_loop, (@xmas_helper_loop + 1);
+    goto L_Loop;
+
+L_Return:
+    return;
+}

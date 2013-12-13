@@ -1,0 +1,45 @@
+// This file is part of Christmas Event 
+// author: Jenalya, Chayenne, cinderweb, wushin
+// please see #XmasConfig
+
+function|script|CheckReagents|,
+{
+    set @xmas_reagent_loop, 0;
+
+    if(@xmas_side)
+        goto L_OneLoop;
+    goto L_ZeroLoop;
+
+L_ZeroLoop:
+    if(countitem($@quest_side_zero_reagents$[@xmas_reagent_loop]) == @quest_side_zero_reagents_amounts[@xmas_reagent_loop])
+        goto L_ZeroLoopAgain;
+    goto L_NotEnough;
+
+L_ZeroLoopAgain:
+    if(@xmas_reagent_loop == getarraysize($@quest_side_zero_reagents$))
+        goto L_AllReagents;
+    set @xmas_reagent_loop, (@xmas_reagent_loop + 1);
+    goto L_ZeroLoop;
+
+L_OneLoop:
+    if(countitem($@quest_side_one_reagents$[@xmas_reagent_loop]) == @quest_side_one_reagents_amounts[@xmas_reagent_loop])
+        goto L_OneLoopAgain;
+    goto L_NotEnough;
+
+L_OneLoopAgain:
+    if(@xmas_reagent_loop == getarraysize($@quest_side_one_reagents$))
+        goto L_AllReagents;
+    set @xmas_reagent_loop, (@xmas_reagent_loop + 1);
+    goto L_OneLoop;
+
+L_NotEnough:
+    mes "\" I'm sorry but could you come back when you have the components?\"";
+    close;
+    end;
+
+L_AllReagents:
+    set @xmas_state, $@xmas_reagents_done;
+    callfunc "XmasSetState";
+    close;
+    end;
+}

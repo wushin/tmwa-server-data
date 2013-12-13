@@ -3,7 +3,7 @@
 
 030-2.gat,87,41,0|script|Eljas|328,5,1,
 {
-    callfunc "XmasHelperPoints";
+    callfunc "XmasCheckList";
     callfunc "XmasStates";
     callfunc "ThrowOutTheBum";
 
@@ -13,9 +13,9 @@ L_Start:
     goto L_OffSeason;
 
 L_XmasMain:
-    if (@xmas_state == $@xmas_list_gather_state)
+    if (@xmas_gather_list)
         goto L_HaveList;
-    if (@xmas_state == $@xmas_list_complete_state)
+    if (@xmas_list_complete)
         goto L_SantasList;
     if (@xmas_state > $@xmas_list_complete_state)
         goto L_OffSeason;
@@ -65,7 +65,7 @@ L_StartQuest:
     mes "\"If you can find these children, please bring thier lists back.\"";
     mes "\"Come back and see me when your done.\"";
     next;
-    set @xmas_state, $@main_quest_start;
+    set @xmas_state, $@xmas_list_gather_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -75,15 +75,17 @@ L_ListNames:
     goto L_Close;
 
 L_SantasList:
-    if(@xmas_state == $@main_quest_start)
+    if(!(@xmas_list_complete))
         goto L_NotComplete;
     mes "\"Please take The List to Chief Warrick on the next floor.\"";
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNice";
+    set @xmas_state, $@xmas_list_deliver_list;
+    callfunc "XmasSetState";
     goto L_Close;
 
 L_SantasFakeList:
-    if(@xmas_state == $@main_quest_start)
+    if(!(@xmas_list_complete))
         goto L_NotComplete;
     mes "\"What a second... whats that aura...\"";
     mes "\"THIS ISN'T THE REAL LIST!\"";
@@ -91,6 +93,8 @@ L_SantasFakeList:
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNaughty";
     callfunc "XmasSetSide";
+    set @xmas_state, $@xmas_list_deliver_list;
+    callfunc "XmasSetState";
     goto L_NotWelcome;
 
 L_NotComplete:
@@ -132,7 +136,7 @@ L_End:
 OnTouch:
     callfunc "XmasStates";
     callfunc "ThrowOutTheBum";
-    if((@xmas_state > $@main_quest_start) || ($@xmas_time == $@xmas_list_complete_state))
+    if((@xmas_state > $@xmas_list_gather_state) || !($@xmas_time))
         goto L_End;
     goto L_Start;
 }

@@ -58,14 +58,14 @@ L_Y:
         goto L_KnitCap;
     getitem "TurtleneckSweater", 1;
     set XMASTIME, XMASTIME | $@sh_bit_sweater;
-    set @karma_bonus, 1;
+    set @karma_bonus, $default_karma_bonus;
     callfunc "XmasNice";
     goto L_Close;
 
 L_KnitCap:
     getitem "KnitCap", 1;
     set XMASTIME, XMASTIME | $@sh_bit_cap;
-    set @karma_bonus, 1;
+    set @karma_bonus, $default_karma_bonus;
     callfunc "XmasNice";
     goto L_Close;
 

@@ -80,77 +80,74 @@ OnInit:
     // Main Quest Settings
     // Bit used to Set Which one of the 2 quests you are on
     set $@xmas_side_bit, (1 << 31);
-    set $@default_karma_bonus, 1;
+    set $@xmas_karma_bonus, 1;
 
     // Basement Passage way
-    set $@basement_passage, (1 << 24);
+    set $@xmas_basement_passage, (1 << 24);
     // Thrown Out
     set $@xmas_thrown_out_bit, (1 << 25);
 
-    // Quest Start
-    set $@main_quest_start, 1;
-    set $@main_quest_reagents_start, 5;
-    set $@main_quest_reagents_done, 6;
+    // Quest Start (@xmas_state)
+    set $@xmas_list_gather_state, 1;
+    set $@xmas_list_complete_state, 2;
+    set $@xmas_list_deliver_list, 3;
+    // Helper SubQuest 
+    set $@xmas_helpers_start_state, 4;
+    set $@xmas_helpers_done_state, 5;
+    // Reagents
+    set $@xmas_reagents_start, 6;
+    set $@xmas_reagents_done, 7;
     // Boss Door State
-    set $@boss_door_open_state, 7;
+    set $@xmas_boss_door_open_state, 8;
     // Reward State
-    set $@main_quest_reward_start, 8;
-    set $@main_quest_reward_done, 9;
+    set $@xmas_reward_start, 9;
+    set $@xmas_reward_done, 10;
 
     // Quest Side 0 Settings
-    set $@quest_side_zero_rare$, "Acorn";
-    set $@quest_side_zero_uncommon$, "NutcrackerHat";
-    setarray $@quest_side_zero_reagents$, "ShockSweet", "EmptyBottle", "EmeraldPowder";
-    setarray $@quest_side_zero_reagents_amounts, 1, 4, 10;
-    if(getarraysize($@quest_side_zero_reagents_amounts) != getarraysize($@quest_side_zero_reagents$))
+    set $@xmas_zero_rare$, "Acorn";
+    set $@xmas_zero_uncommon$, "NutcrackerHat";
+    setarray $@xmas_zero_reagents$, "ShockSweet", "EmptyBottle", "EmeraldPowder";
+    setarray $@xmas_zero_reagents_amounts, 1, 4, 10;
+    if(getarraysize($@xmas_zero_reagents_amounts) != getarraysize($@xmas_zero_reagents$))
         gmcommand @mapexit;
 
     // Quest Side 1 Settings
-    set $@quest_side_one_rare$, "Acorn";
-    set $@quest_side_one_uncommon$, "NutcrackerHat";
-    setarray $@quest_side_one_reagents$, "DarkCrystal", "IronPotion", "EmeraldPowder";
-    setarray $@quest_side_one_reagents_amounts, 1, 4, 10;
-    if(getarraysize($@quest_side_one_reagents_amounts) != getarraysize($@quest_side_one_reagents$))
+    set $@xmas_one_rare$, "Acorn";
+    set $@xmas_one_uncommon$, "NutcrackerHat";
+    setarray $@xmas_one_reagents$, "DarkCrystal", "IronPotion", "EmeraldPowder";
+    setarray $@xmas_one_reagents_amounts, 1, 4, 10;
+    if(getarraysize($@xmas_one_reagents_amounts) != getarraysize($@xmas_one_reagents$))
         gmcommand @mapexit;
-
-    // List SubQuest
-    set $@xmas_list_gather_state, 1;
-    set $@xmas_list_complete_state, 2;
-
-    // Helper SubQuest 
-    set $@xmas_helpers_start_state, 3;
-    set $@xmas_helpers_done_state, 4;
 
     // List Bits
-    set $@all_list_bit, (1 << 29);
-    setarray $@child_list, (1 << 8), (1 << 9), (1 << 10), (1 << 11), (1 << 12), (1 << 13), (1 << 14), (1 << 15);
-    setarray $@child_list_name$, "Ayasha", "Latif", "Charda", "Faris", "Rasin", "Ghada", "Rossy", "Kadiya";
-    set $@perfect_list_count, getarraysize($@child_list);
-    set $@required_list_count, (getarraysize($@child_list) / 2);
-
-    // If child_list arrays are fudged then kill the map server
-    if(getarraysize($@child_list) != getarraysize($@child_list_name$))
+    set $@xmas_list_perfect_bit, (1 << 29);
+    setarray $@xmas_child_list, (1 << 8), (1 << 9), (1 << 10), (1 << 11), (1 << 12), (1 << 13), (1 << 14), (1 << 15);
+    setarray $@xmas_child_list_name$, "Ayasha", "Latif", "Charda", "Faris", "Rasin", "Ghada", "Rossy", "Kadiya";
+    if(getarraysize($@xmas_child_list) != getarraysize($@xmas_child_list_name$))
         gmcommand @mapexit;
 
+    set $@xmas_perfect_list_count, getarraysize($@xmas_child_list);
+    set $@xmas_required_list_count, (getarraysize($@xmas_child_list) / 2);
+
     // Santa's Helper
-    set $@sh_bit_sweater, (1 << 22);
-    set $@sh_bit_cap, (1 << 23);
-    set $@sh_purple_amount, 25;
-    set $@sh_blue_amount, 20;
-    set $@sh_green_amount, 5;
+    set $@xmas_sh_bit_sweater, (1 << 22);
+    set $@xmas_sh_bit_cap, (1 << 23);
+    set $@xmas_sh_purple_amount, 25;
+    set $@xmas_sh_blue_amount, 20;
+    set $@xmas_sh_green_amount, 5;
 
     // Main Helper Bit
-    set $@main_helper_bit, (1 << 30);
-    set $@all_helpers_bit, (1 << 28);
+    set $@xmas_helper_bit, (1 << 30);
+    set $@xmas_all_helpers_bit, (1 << 28);
 
     // Acorns
-    set $@helper_bit_acorns, (1 << 21);
+    set $@xmas_helper_bit_acorns, (1 << 21);
     set $@xmas_acorn_amount, 10;
     set $@xmas_iron_potion_amount, 1;
 
     // Bedding 
-    set $@helper_bit_bed_starts, (1 << 16);
-    set $@helper_bit_bed_ends, (1 << 17);
+    set $@xmas_helper_bit_bed_starts, (1 << 16);
+    set $@xmas_helper_bit_bed_ends, (1 << 17);
     set $@xmas_bedding_amount, 10;
 
     // Boxes
@@ -177,13 +174,13 @@ OnInit:
     set $@xmas_ship_present_amount, 1;
 
     // Glitter
-    set $@helper_bit_glitter_starts, (1 << 18);
-    set $@helper_bit_glitter_ends, (1 << 19);
+    set $@xmas_helper_bit_glitter_starts, (1 << 18);
+    set $@xmas_helper_bit_glitter_ends, (1 << 19);
     set $@xmas_red_amount, 5;
     set $@xmas_yellow_amount, 5;
 
     // Storage (Daily Xmas)
-    set $@helper_bit_storage, (1 << 20);
+    set $@xmas_helper_bit_storage, (1 << 20);
     // Good Daily Ammounts
     set $@xmas_good_level, 30;
     set $@xmas_good_cost, 12;
@@ -201,10 +198,10 @@ OnInit:
     set $@xmas_bad_money, 500;
     set $@xmas_bad__exp, 200;
 
-    // Helpers Flags needed to set $@all_helpers_bit
-    setarray $@helper_list, $@helper_bit_bed_ends, $@helper_bit_glitter_ends, $@helper_bit_storage, $@helper_bit_acorns, $@sh_bit_cap;
-    set $@perfect_helpers_count, getarraysize($@helper_list);
-    set $@required_helpers_count, (getarraysize($@helper_list) / 2);
+    // Helpers Flags needed to set $@xmas_all_helpers_bit
+    setarray $@xmas_helper_list, $@xmas_helper_bit_bed_ends, $@xmas_helper_bit_glitter_ends, $@xmas_helper_bit_storage, $@xmas_helper_bit_acorns, $@xmas_sh_bit_cap;
+    set $@xmas_perfect_helpers_count, getarraysize($@xmas_helper_list);
+    set $@xmas_required_helpers_count, (getarraysize($@xmas_helper_list) / 2);
 
     if($@xmas_debug == $@xmas_event_time)
         goto L_EventTime;
