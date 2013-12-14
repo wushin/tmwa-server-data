@@ -13,7 +13,7 @@ L_Start:
     goto L_OffSeason;
 
 L_XmasMain:
-    if (@xmas_gather_list)
+    if (@xmas_list_gather)
         goto L_HaveList;
     if (@xmas_list_complete)
         goto L_SantasList;
@@ -136,7 +136,7 @@ L_End:
 OnTouch:
     callfunc "XmasStates";
     callfunc "ThrowOutTheBum";
-    if((@xmas_state > $@xmas_list_gather_state) || !($@xmas_time))
+    if((@xmas_state >= $@xmas_list_gather_state) || !($@xmas_time))
         goto L_End;
     goto L_Start;
 }

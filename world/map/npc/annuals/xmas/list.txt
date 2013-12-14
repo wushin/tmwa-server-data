@@ -8,7 +8,7 @@ function|script|XmasCheckList|,
     set @xmas_list_loop, 0;
 
 L_Loop:
-    if(XMASTIME & $@child_list[@xmas_list_loop])
+    if(XMASTIME & $@xmas_child_list[@xmas_list_loop])
         goto L_AddOne;
     goto L_LoopAgain;
 
@@ -17,20 +17,20 @@ L_AddOne:
     goto L_LoopAgain;
 
 L_LoopAgain:
-    if(@xmas_list_loop == getarraysize($@child_list))
+    if(@xmas_list_loop == getarraysize($@xmas_child_list))
         goto L_ListTally;
     set @xmas_list_loop, (@xmas_list_loop + 1);
     goto L_Loop;
 
 L_ListTally:
-    if(@xmas_list_count == $@perfect_list_count)
+    if(@xmas_list_count == $@xmas_perfect_list_count)
         goto L_PerfectList;
-    if(@xmas_list_count > $@required_list_count)
+    if(@xmas_list_count > $@xmas_required_list_count)
         goto L_SetListState;
     goto L_Return;
 
 L_PerfectList:
-    set XMASTIME, XMASTIME | $@all_lists_bit;
+    set XMASTIME, XMASTIME | $@xmas_all_lists_bit;
     goto L_SetListState;
 
 L_SetListState:
@@ -53,7 +53,7 @@ function|script|XmasList|,
     goto L_Return;
 
 L_QuestTime:
-    if(XMASTIME & $@child_list[$@child_number])
+    if(XMASTIME & $@xmas_child_list[$@child_number])
         goto L_Return;
     goto L_GetList;
 
@@ -66,8 +66,8 @@ L_List:
     mes "[" + $@child_list_name$[$@child_number] + "]";
     mes "Here is my list. Make sure it gets delivered please!";
     next;
-    set XMASTIME, XMASTIME | $@child_list[$@child_number];
-    set @karma_bonus, $@default_karma_bonus;
+    set XMASTIME, XMASTIME | $@xmas_child_list[$@child_number];
+    set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNice";
     menu
         "I really should be going.", L_Return;
