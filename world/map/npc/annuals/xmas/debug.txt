@@ -6,12 +6,56 @@ function|script|XmasDebug|,
 {
     mes "What do you want to do?";
     menu
-        "Set time.", L_Time,
-        "Set quest state.", L_XmasState,
-        "Reset complete quest state.", -,
+        "Debug Vars", L_DebugVars,
+        "Set Event Time.", L_Time,
+        "Set Quest State.", L_XmasState,
+        "Reset Quest State.", L_Reset,
+        "Set Old Event Flag.", L_LastReset,
         "Do nothing.", L_Close;
 
+L_DebugVars:
+    callfunc "XmasStates";
+    mes XMASYEAR;
+    next;
+    mes "xmas_state: " + @xmas_state;
+    mes "xmas_karma: " + @xmas_karma;
+    mes "xmas_side: " + @xmas_side;
+    next;
+    mes "xmas_list_gather: " + @xmas_list_gather;
+    mes "xmas_list_complete: " + @xmas_list_complete;
+    mes "xmas_list_deliver: " + @xmas_list_deliver;
+    mes "xmas_helper_start_state: " + @xmas_helper_start_state;
+    mes "xmas_helper_done_state: " + @xmas_helper_done_state;
+    mes "xmas_reagent_start_state: " + @xmas_reagent_start_state;
+    mes "xmas_reagent_done_state: " + @xmas_reagent_done_state;
+    mes "xmas_boss_door_state: " + @xmas_boss_door_state;
+    mes "xmas_reward_start_state: " + @xmas_reward_start_state;
+    mes "xmas_reward_done_state: " + @xmas_reward_done_state;
+    next;
+    mes "xmas_basement_passage: " + @xmas_basement_passage;
+    mes "xmas_thrown_out: " + @xmas_thrown_out;
+    next;
+    mes "xmas_sweater: " + @xmas_sweater;
+    mes "xmas_cap: " + @xmas_cap;
+    next;
+    mes "xmas_all_lists: " + @xmas_all_lists;
+    next;
+    mes "xmas_helper_bit: " + @xmas_helper_bit;
+    mes "xmas_all_helpers: " + @xmas_all_helpers;
+    mes "xmas_helper_acorn: " + @xmas_helper_acorn;
+    mes "xmas_helper_bedding: " + @xmas_helper_bedding;
+    mes "xmas_helper_glitter: " + @xmas_helper_glitter;
+    mes "xmas_helper_storage: " + @xmas_helper_storage;
+    goto L_Close;
+
+L_LastReset:
+    set XMASTIME, 255;
+    set XMASYEAR, 2012;
+    goto L_Close;
+
+L_Reset:
     set XMASTIME, 0;
+    set XMASYEAR, 2013;
     goto L_Close;
 
 L_Time:

@@ -5,4 +5,3 @@ npc: npc/030-3/_mobs.txt
 npc: npc/030-3/_warps.txt
 npc: npc/030-3/mobmanager.txt
 npc: npc/030-3/orum_homunculus.txt
-npc: npc/030-3/passageToInn.txt

@@ -74,8 +74,8 @@ OnInit:
     set $@xmas_debug, 0;
 
     // Xmas Key Identifier
-    set $@xmas_time_key, "nutcracker";
-    setarray $@xmas_time_key_old, "";
+    set $@xmas_time_key, 2013;
+    setarray $@xmas_time_key_old, 2012;
 
     // Main Quest Settings
     // Bit used to Set Which one of the 2 quests you are on
