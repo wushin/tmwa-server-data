@@ -4,17 +4,16 @@
 
 function|script|ThrowOutTheBum|,
 {
-    if(@xmas_side)
+    if(@xmas_thrown_out)
         goto L_SideOut;
     goto L_Return;
 
 L_SideOut:
-    if(@xmas_thrown_out)
+    if(@xmas_helper_start_state)
         goto L_Warp;
     goto L_Hint;
 
 L_Hint:
-    // callfunct "ThrownOutHint";
     message strcharinfo(0), "I said get out, We've no time for your kind here.";
     mes "[Orum's Homunculus]";
     mes "\"What are you doing? Come See me in the Caves Below.\"";
@@ -47,7 +46,7 @@ L_XmasMain:
         "No, It's quite nice out here.", L_Close;
 
 L_Open:
-    warp "030-4.gat",55,55;
+    warp "030-4.gat",34,48;
     goto L_Close;
 
 L_NotActive:
@@ -84,10 +83,9 @@ L_EnterDialogue:
       "Hit it with my strong fist", L_Enter;
 
 L_Tux9th:
-   itemheal  - Hp / 2 , 0;
+   itemheal -20, 0;
    message strcharinfo(0), "Ouch, that hurt!";
    setlook LOOK_HAIR_STYLE, rand(20);
-   if(@xmas_basement_passage) goto L_QueryWarp;
    goto L_Fail;
  
 L_Enter:
@@ -103,7 +101,7 @@ L_Sword:
 L_Gloves:
    mes "Wow! Next time you plan to hit a wall,";
    mes "You had better equip some decent gloves in advance.";
-   itemheal  - Hp / 2 , 0;
+   itemheal -20, 0;
    message strcharinfo(0), "Ouch, that hurt!";
    goto L_QueryWarp;
 

@@ -104,6 +104,7 @@ L_PowerReagents:
 L_CheckReagents:
     if(!(@xmas_reagent_done_state))
         goto L_NotEnough;
+    callfunc "DeleteReagents";
     mes "\"Huzzah!, you have all the required components!\"";
     mes "\"Now I can create a ManaBattery to power the Nutcrackers from a central location.\"";
     mes "\"Our sages will now be free to perform other tasks. Oh boy the holidays are going to get easy again!\"";

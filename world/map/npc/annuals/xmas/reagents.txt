@@ -12,7 +12,7 @@ function|script|CheckReagents|,
     goto L_ZeroLoop;
 
 L_ZeroLoop:
-    if(countitem($@xmas_zero_reagents$[@xmas_reagent_loop]) == $@xmas_zero_reagents_amounts[@xmas_reagent_loop])
+    if(countitem($@xmas_zero_reagents$[@xmas_reagent_loop]) >= $@xmas_zero_reagents_amounts[@xmas_reagent_loop])
         goto L_ZeroLoopAgain;
     goto L_Return;
 
@@ -23,7 +23,8 @@ L_ZeroLoopAgain:
     goto L_ZeroLoop;
 
 L_OneLoop:
-    if(countitem($@xmas_one_reagents$[@xmas_reagent_loop]) == $@xmas_one_reagents_amounts[@xmas_reagent_loop])
+    debugmes $@xmas_one_reagents_amounts[@xmas_reagent_loop];
+    if(countitem($@xmas_one_reagents$[@xmas_reagent_loop]) >= $@xmas_one_reagents_amounts[@xmas_reagent_loop])
         goto L_OneLoopAgain;
     goto L_Return;
 
@@ -37,6 +38,35 @@ L_AllReagents:
     set @xmas_state, $@xmas_reagents_done;
     callfunc "XmasSetState";
     goto L_Return;
+
+L_Return:
+    return;
+}
+
+function|script|DeleteReagents|,
+{
+    set @xmas_reagent_loop, 0;
+    if(@xmas_side)
+        goto L_OneLoop;
+    goto L_ZeroLoop;
+
+L_ZeroLoop:
+    delitem $@xmas_zero_reagents$[@xmas_reagent_loop], $@xmas_zero_reagents_amounts[@xmas_reagent_loop];
+
+L_ZeroLoopAgain:
+    if((@xmas_reagent_loop + 1) == getarraysize($@xmas_zero_reagents$))
+        goto L_Return;
+    set @xmas_reagent_loop, (@xmas_reagent_loop + 1);
+    goto L_ZeroLoop;
+
+L_OneLoop:
+    delitem $@xmas_one_reagents$[@xmas_reagent_loop], $@xmas_one_reagents_amounts[@xmas_reagent_loop];
+
+L_OneLoopAgain:
+    if((@xmas_reagent_loop + 1) == getarraysize($@xmas_one_reagents$))
+        goto L_Return;
+    set @xmas_reagent_loop, (@xmas_reagent_loop + 1);
+    goto L_OneLoop;
 
 L_Return:
     return;
