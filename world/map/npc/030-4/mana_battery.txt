@@ -5,7 +5,7 @@
 {
     callfunc "XmasStates";
 
-    if(@xmas_state == 6)
+    if(@xmas_boss_door_state)
         goto L_Battle;
     goto L_Close;
 
@@ -14,11 +14,13 @@ L_Battle:
     mes "\"Someone set us up the bomb.\"";
     mes "\"Event Begins.\"";
     next;
-    set @xmas_state, 7;
+    if(@xmas_reward_start_state) 
+        goto L_Close;
+    set @xmas_state, $@xmas_reward_start;
     callfunc "XmasSetState";
-    warp "030-2",152,21;
     goto L_Close;
 
 L_Close:
+    warp "030-2",152,98;
     close;
 }

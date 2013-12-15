@@ -34,6 +34,12 @@ function|script|XmasSetSide|,
     return;
 }
 
+function|script|XmasThrowOut|,
+{
+    set XMASTIME, XMASTIME | $@xmas_thrown_out_bit;
+    return;
+}
+
 function|script|XmasReward|,
 {
     if($@xmas_time == $@xmas_reward_time)

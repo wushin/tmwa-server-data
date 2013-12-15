@@ -10,7 +10,7 @@
     goto L_End;
 
 L_XmasMain:
-    if(@xmas_state == 2)
+    if(@xmas_state == $@xmas_list_deliver_state)
         goto L_Telepathy;
     goto L_End;
 
@@ -33,7 +33,7 @@ L_End:
     goto L_End;
 
 L_XmasMain:
-    if(@xmas_state == 2)
+    if(@xmas_state == $@xmas_list_deliver_state)
         goto L_Telepathy;
     goto L_End;
 
@@ -56,7 +56,7 @@ L_End:
     goto L_End;
 
 L_XmasMain:
-    if(@xmas_state == 2)
+    if(@xmas_state == $@xmas_list_deliver_state)
         goto L_Telepathy;
     goto L_End;
 
@@ -79,7 +79,7 @@ L_End:
     goto L_End;
 
 L_XmasMain:
-    if(@xmas_state == 2)
+    if(@xmas_state == $@xmas_list_deliver_state)
         goto L_Telepathy;
     goto L_End;
 
@@ -102,7 +102,7 @@ L_End:
     goto L_End;
 
 L_XmasMain:
-    if(@xmas_state == 2)
+    if(@xmas_state == $@xmas_list_deliver_state)
         goto L_Telepathy;
     goto L_End;
 
@@ -125,7 +125,7 @@ L_End:
     goto L_End;
 
 L_XmasMain:
-    if(@xmas_state == 2)
+    if(@xmas_state == $@xmas_list_deliver_state)
         goto L_Telepathy;
     goto L_End;
 
@@ -148,7 +148,7 @@ L_End:
     goto L_End;
 
 L_XmasMain:
-    if(@xmas_state == 2)
+    if(@xmas_state == $@xmas_list_deliver_state)
         goto L_Telepathy;
     goto L_End;
 
@@ -165,6 +165,7 @@ L_End:
 030-3.gat,28,28,0|script|Orum's Homunculus|385,
 {
     callfunc "XmasHelperPoints";
+    callfunc "CheckReagents";
     callfunc "XmasStates";
 
     if($@xmas_time)
@@ -175,13 +176,14 @@ L_OffSeason:
     end;
 
 L_XmasMain:
-    if(@xmas_state == 2) goto L_ListReturn;
-    if(@xmas_state == 3) goto L_HelperQuest;
-    if(@xmas_state == 4) goto L_ManaBattery;
-    if(@xmas_state == 5) goto L_PowerReagents;
-    if(@xmas_state == 6) goto L_Quick;
-    if(@xmas_state == 7) goto L_Reward;
-    if(@xmas_state > 7) goto L_Thanks;
+    if(@xmas_reward_done_state) goto L_Thanks;
+    if(@xmas_reward_start_state) goto L_Reward;
+    if(@xmas_boss_door_state) goto L_Quick;
+    if(@xmas_reagent_done_state) goto L_PowerReagents;
+    if(@xmas_reagent_start_state) goto L_PowerReagents;
+    if(@xmas_helper_done_state) goto L_HelperQuest;
+    if(@xmas_helper_start_state) goto L_HelperQuest;
+    if(@xmas_list_deliver) goto L_ListReturn;
     goto L_OffSeason;
 
 L_ListReturn:
@@ -211,7 +213,8 @@ L_ListReturn:
 
 L_Start:
     mes "\"Report Back to me once this is done.\"";
-    set @xmas_state, 3;
+    set XMASTIME, XMASTIME | $@xmas_basement_passage;
+    set @xmas_state, $@xmas_helpers_start_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -224,7 +227,7 @@ L_HelperQuest:
         "I'd better break some things.", L_Close;
 
 L_Continue:
-    if(@xmas_state == 4)
+    if(@xmas_helper_done_state)
         goto L_ManaBattery;
     goto L_NotHelpEnough;
 
@@ -235,16 +238,14 @@ L_NotHelpEnough:
 L_ManaBattery:
     mes "\"Now that we set back the holiday, It's time for the next step in my plan.\"";
     next;
-    mes "\"I'm going to need " + $@evil_core_emerald_powders + " Emerald Powders, " + $@evil_core_iron_potions + " Iron Potions, " + $@evil_core_dark_crystal + " Dark Crystal \"";
-    next;
+    callfunc "ListReagents";
     mes "\"When you have gathered the required materials please come back and see me.\"";
-    set @xmas_state, 5;
+    set @xmas_state, $@xmas_reagents_start;
     callfunc "XmasSetState";
     goto L_Close;
 
 L_IngredientList:
-    mes "\"I'm going to need " + $@evil_core_emerald_powders + " Emerald Powders, " + $@evil_core_iron_potions + " Iron Potions, " + $@evil_core_dark_crystal + " Dark Crystal \"";
-    next;
+    callfunc "ListReagents";
     mes "\"When you have gathered the required materials please come back and see me.\"";
     goto L_Close;
 
@@ -254,15 +255,11 @@ L_PowerReagents:
     menu
         "Yes.", L_CheckReagents,
         "What were they again?", L_IngredientList,
-        "No.", L_Enough;
+        "No.", L_NotEnough;
 
 L_CheckReagents:
-    if(countitem("DarkCrystal") == 0)
-        goto L_Enough;
-    if(countitem("IronPotions") < 4)
-        goto L_Enough;
-    if(countitem("EmeraldPowder") < 10)
-        goto L_Enough;
+    if(!(@xmas_reagent_done_state))
+        goto L_NotEnough;
     mes "\"YES! you have all the required components!\"";
     mes "\"Now I can create a mind link to the mana battery and control the nutcrackers\"";
     next;
@@ -298,7 +295,7 @@ L_CheckReagents:
     mes "\"I'm in no condition to go anywhere.\"";
     mes "\"Take the Mana Battery and install it in the warehouse.\"";
     mes "\"It's found behind Chief Warrick\"";
-    set @xmas_state, 6;
+    set @xmas_state, $@xmas_boss_door_open_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -311,9 +308,8 @@ L_Quick:
 L_Reward:
     mes "[Orum's Homunculus]";
     mes "\"Revenge is best served cold..\"";
-    // Xmas Uncommon Reward
-    getitem $@NiceUncommon$, 1;
-    set @xmas_state, 8;
+    getitem $@xmas_one_uncommon$, 1;
+    set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -322,7 +318,7 @@ L_Thanks:
     mes "\"Please feel free to continue to sabotage whats left of the Inn while I prepare your reward.\"";
     goto L_Close;
      
-L_Enough:
+L_NotEnough:
     mes "\"Come back with the components or not at all.\""; 
     goto L_Close;
 

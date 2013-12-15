@@ -4,6 +4,7 @@
 030-2.gat,198,61,0|script|Avalia|356,
 {
     callfunc "XmasHelperPoints";
+    callfunc "CheckReagents";
     callfunc "XmasStates";
 
     if($@xmas_time == $@xmas_event_time)
@@ -17,7 +18,7 @@ L_OffSeason:
     close;
 
 L_XmasMain:
-    if(@xmas_reward_start_state) goto L_Thanks;
+    if(@xmas_reward_done_state) goto L_Thanks;
     if(@xmas_reward_start_state) goto L_Reward;
     if(@xmas_boss_door_state) goto L_Quick;
     if(@xmas_reagent_done_state) goto L_PowerReagents;
@@ -98,12 +99,11 @@ L_PowerReagents:
     menu
         "Yes.", L_CheckReagents,
         "What were they again?", L_IngredientList,
-        "No.", L_Enough;
+        "No.", L_NotEnough;
 
 L_CheckReagents:
-    callfunc "CheckReagents";
     if(!(@xmas_reagent_done_state))
-        goto L_Enough;
+        goto L_NotEnough;
     mes "\"Huzzah!, you have all the required components!\"";
     mes "\"Now I can create a ManaBattery to power the Nutcrackers from a central location.\"";
     mes "\"Our sages will now be free to perform other tasks. Oh boy the holidays are going to get easy again!\"";
@@ -144,6 +144,10 @@ L_CheckReagents:
     mes "\"It's found behind Chief Warrick\"";
     set @xmas_state, $@xmas_boss_door_open_state;
     callfunc "XmasSetState";
+    goto L_Close;
+
+L_NotEnough:
+    mes "\"I need all the reagents before Santa Visits. Come back and see me when you have them.\"";
     goto L_Close;
 
 L_Quick:

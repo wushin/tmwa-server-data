@@ -7,8 +7,8 @@
     callfunc "ClearVariables";
     callfunc "XmasStates";
 
-    if (($@xmas_time) && (@sh_cap)) goto L_Done;
-    if (($@xmas_time) && (@sh_sweater)) goto L_Continue;
+    if (($@xmas_time) && (@xmas_cap)) goto L_Done;
+    if (($@xmas_time) && (@xmas_sweater)) goto L_Continue;
     if ($@xmas_time) goto L_Quest;
 
     mes "[Santa's Helper]";
@@ -40,41 +40,41 @@ L_Y:
     mes "[Santa's Helper]";
     mes "\"Hmm, let me check what you have.\"";
     next;
-    if (countitem("PurplePresentBox") < $@sh_purple_amount)
+    if (countitem("PurplePresentBox") < $@xmas_sh_purple_amount)
         goto L_NoItem;
-    if (countitem("BluePresentBox") < $@sh_blue_amount)
+    if (countitem("BluePresentBox") < $@xmas_sh_blue_amount)
         goto L_NoItem;
-    if (countitem("GreenPresentBox") < $@sh_green_amount)
+    if (countitem("GreenPresentBox") < $@xmas_sh_green_amount)
         goto L_NoItem;
     getinventorylist;
     if (@inventorylist_count > 99)
         goto L_TooMany;
     mes "[Santa's Helper]";
     mes "\"Great! Here is something for you\"";
-    delitem "PurplePresentBox", $@sh_purple_amount;
-    delitem "BluePresentBox", $@sh_blue_amount;
-    delitem "GreenPresentBox", $@sh_green_amount;
-    if (@sh_sweater)
+    delitem "PurplePresentBox", $@xmas_sh_purple_amount;
+    delitem "BluePresentBox", $@xmas_sh_blue_amount;
+    delitem "GreenPresentBox", $@xmas_sh_green_amount;
+    if (@xmas_sweater)
         goto L_KnitCap;
     getitem "TurtleneckSweater", 1;
-    set XMASTIME, XMASTIME | $@sh_bit_sweater;
-    set @karma_bonus, $default_karma_bonus;
+    set XMASTIME, XMASTIME | $@xmas_sh_bit_sweater;
+    set @karma_bonus, $xmas_karma_bonus;
     callfunc "XmasNice";
     goto L_Close;
 
 L_KnitCap:
     getitem "KnitCap", 1;
-    set XMASTIME, XMASTIME | $@sh_bit_cap;
-    set @karma_bonus, $default_karma_bonus;
+    set XMASTIME, XMASTIME | $@xmas_sh_bit_cap;
+    set @karma_bonus, $xmas_karma_bonus;
     callfunc "XmasNice";
     goto L_Close;
 
 L_R:
     mes "[Santa's Helper]";
     mes "\"I need:";
-    mes $@sh_purple_amount + " Purple Present Boxes";
-    mes $@sh_blue_amount + " Blue Present Boxes";
-    mes $@sh_green_amount + " Green Present Boxes\"";
+    mes $@xmas_sh_purple_amount + " Purple Present Boxes";
+    mes $@xmas_sh_blue_amount + " Blue Present Boxes";
+    mes $@xmas_sh_green_amount + " Green Present Boxes\"";
     next;
     goto L_M;
 

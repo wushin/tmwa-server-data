@@ -59,7 +59,6 @@ L_Fur:
     if (countitem("WhiteFur") < $@xmas_bedding_amount)
         goto L_NoItems;
     delitem "WhiteFur", $@xmas_bedding_amount;
-    set XMASTIME, XMASTIME &~ $@xmas_helper_bit_bed_starts;
     set XMASTIME, XMASTIME | $@xmas_helper_bit_bed_ends;
     set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNice";
@@ -71,6 +70,7 @@ L_Cloth:
     if (countitem("CottonCloth") < $@xmas_bedding_amount)
         goto L_NoItems;
     delitem "CottonCloth", $@xmas_bedding_amount;
+    set XMASTIME, XMASTIME &~ $@xmas_helper_bit_bed_starts;
     set XMASTIME, XMASTIME | $@xmas_helper_bit_bed_ends;
     set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNaughty";
