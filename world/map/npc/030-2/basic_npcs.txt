@@ -3,7 +3,7 @@
 
 // In the office
 
-030-2.gat,37,77,0|script|Oswal|328,
+030-2.gat,37,81,0|script|Oswal|328,
 {
     mes "[Oswal]";
     mes "\"Welcome. I hope you enjoy your visit in Santa's residence. You already saw the workshop where the Christmas presents are crafted, right?\"";

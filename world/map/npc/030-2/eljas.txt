@@ -13,12 +13,14 @@ L_Start:
     goto L_OffSeason;
 
 L_XmasMain:
+    if (@xmas_state > $@xmas_list_deliver_state)
+        goto L_OffSeason;
+    if (@xmas_list_deliver)
+        goto L_SeeChief;
+    if (@xmas_list_complete)
+        goto L_HaveList;
     if (@xmas_list_gather)
         goto L_HaveList;
-    if (@xmas_list_complete)
-        goto L_SantasList;
-    if (@xmas_state > $@xmas_list_complete_state)
-        goto L_OffSeason;
     goto L_NeedList;
 
 L_HaveList:
@@ -80,7 +82,7 @@ L_SantasList:
     mes "\"Please take The List to Chief Warrick on the next floor.\"";
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNice";
-    set @xmas_state, $@xmas_list_deliver_list;
+    set @xmas_state, $@xmas_list_deliver_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -93,13 +95,17 @@ L_SantasFakeList:
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNaughty";
     callfunc "XmasSetSide";
-    set @xmas_state, $@xmas_list_deliver_list;
+    set @xmas_state, $@xmas_list_deliver_state;
     callfunc "XmasSetState";
     goto L_NotWelcome;
 
 L_NotComplete:
     mes "\"Hrmm... Even I can tell thats not the amount we are missing.\"";
     goto L_ListNames;
+
+L_SeeChief:
+    mes "\"Please take The List to Chief Warrick on the next floor.\"";
+    goto L_Close;
 
 L_Christmas:
     mes "\"All year round we work hard to make toys and repair our help for each years event.\"";

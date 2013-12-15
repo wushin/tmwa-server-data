@@ -39,7 +39,7 @@ L_XmasMain:
     mes "[" + $@npc_name$ + "]";
     mes "Hello, hello, hello!";
 
-    if(@helper_bit) goto L_Helping;
+    if(@xmas_helper_bit) goto L_Helping;
 
     mes "\"Real busy now, gotta go or the boss will have my head. Back to work knuckleheads!\"";
     goto L_Close;

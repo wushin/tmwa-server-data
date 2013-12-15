@@ -76,7 +76,7 @@ L_SetYear:
     goto L_Return;
 
 L_LoopAgain:
-    if(@xmas_key_loop == getarraysize($@xmas_time_key_old))
+    if((@xmas_key_loop + 1) == getarraysize($@xmas_time_key_old))
         goto L_Return;
     set @xmas_key_loop, (@xmas_key_loop + 1);
     goto L_Loop;

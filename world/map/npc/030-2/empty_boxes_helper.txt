@@ -17,7 +17,7 @@ L_OffSeason:
     goto L_Close;
 
 L_XmasMain:
-    if (@helper_bit) goto L_Helping;
+    if (@xmas_helper_bit) goto L_Helping;
 
     mes "[Urmas]";
     mes "\"Don't stand in the way! We have some serious problems here.\"";

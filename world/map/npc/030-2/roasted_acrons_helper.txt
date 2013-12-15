@@ -7,7 +7,7 @@
 
     if($@xmas_time == $@xmas_reward_time)
         goto L_OffSeason;
-    if(@xmas_state > $@xmas_helpers_start_state)
+    if(@xmas_state >= $@xmas_helpers_start_state)
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -27,7 +27,7 @@ L_XmasMain:
 
     mes "[Verneri]";
     mes "\"Well, if you get some Acorns and Iron Potions, we can do that.\"";
-    mes "\"With one Iron Potion we can ice about " + $@acornAmount + " Acorns.\"";
+    mes "\"With one Iron Potion we can ice about " + $@xmas_acorn_amount + " Acorns.\"";
     next;
     mes "[Verneri]";
     mes "\"Do you have everything we need? Shall we start?\"";
@@ -36,11 +36,11 @@ L_XmasMain:
         "I need to get the ingredients.", L_Close;
 
 L_Roast:
-    if (countitem("Acorn") < $@acornAmount || countitem("IronPotion") < $@xmas_iron_potion_amount)
+    if (countitem("Acorn") < $@xmas_acorn_amount || countitem("IronPotion") < $@xmas_iron_potion_amount)
         goto L_NoItems;
 
     delitem "IronPotion", $@xmas_iron_potion_amount;
-    delitem "Acorn", $@acornAmount;
+    delitem "Acorn", $@xmas_acorn_amount;
 
     mes "Verneri takes the Iron Potion and the Acorns from you. He pours the potion into some bowl and adds the Acorns.";
     mes "Then he puts the bowl over the fire, stirring it every now and then. After a while it starts to smell really tasty.";
@@ -52,10 +52,10 @@ L_Roast:
 
     mes "[Verneri]";
     mes "\"Ouch, hot. But tasty! Some of them might be burnt, I'll throw those away.\"";
-    set XMASTIME, XMASTIME | $@helper_bit_acorns;
-    set @karma_bonus, $@default_karma_bonus;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit_acorns;
+    set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNice";
-    getitem "RoastedAcorn", rand($@acornAmount);
+    getitem "RoastedAcorn", rand($@xmas_acorn_amount);
     menu
         "Let's roast some more.", L_Roast,
         "Thank you.", L_Close;
@@ -69,7 +69,7 @@ L_RoastAcornAgain:
 
 L_NoItems:
     mes "[Verneri]";
-    mes "\"You need to bring at least one Iron Potion and " + $@acornAmount + " Acorns.\"";
+    mes "\"You need to bring at least one Iron Potion and " + $@xmas_acorn_amount + " Acorns.\"";
     goto L_Close;
 
 L_Close:

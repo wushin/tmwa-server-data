@@ -36,7 +36,7 @@ L_Return:
 {
     callfunc "XmasStates";
 
-    if(@boss_door_state)
+    if(@xmas_boss_door_state)
         goto L_XmasMain;
     goto L_NotActive;
 
@@ -64,7 +64,7 @@ L_Close:
 {
     callfunc "XmasStates";
 
-    if(@basement_passage)
+    if(@xmas_basement_passage)
         goto L_XmasMain;
     goto L_NotActive;
 
@@ -87,7 +87,7 @@ L_Tux9th:
    itemheal  - Hp / 2 , 0;
    message strcharinfo(0), "Ouch, that hurt!";
    setlook LOOK_HAIR_STYLE, rand(20);
-   if(@basement_passage) goto L_QueryWarp;
+   if(@xmas_basement_passage) goto L_QueryWarp;
    goto L_Fail;
  
 L_Enter:
@@ -132,7 +132,7 @@ L_Close:
 {
     callfunc "XmasStates";
 
-    if(@basement_passage)
+    if(@xmas_basement_passage)
         goto L_XmasMain;
     goto L_NotActive;
 

@@ -7,6 +7,9 @@ function|script|XmasCheckList|,
     set @xmas_list_count, 0;
     set @xmas_list_loop, 0;
 
+    if(@xmas_list_complete)
+        goto L_Return;
+
 L_Loop:
     if(XMASTIME & $@xmas_child_list[@xmas_list_loop])
         goto L_AddOne;
@@ -17,7 +20,7 @@ L_AddOne:
     goto L_LoopAgain;
 
 L_LoopAgain:
-    if(@xmas_list_loop == getarraysize($@xmas_child_list))
+    if((@xmas_list_loop + 1) == getarraysize($@xmas_child_list))
         goto L_ListTally;
     set @xmas_list_loop, (@xmas_list_loop + 1);
     goto L_Loop;
@@ -48,7 +51,7 @@ function|script|XmasList|,
 {
     callfunc "XmasStates";
 
-    if(@xmas_gather_list)
+    if(@xmas_list_gather)
         goto L_QuestTime;
     goto L_Return;
 
@@ -63,7 +66,7 @@ L_GetList:
         "Actaully, what have you got to say.", L_Return;
 
 L_List:
-    mes "[" + $@child_list_name$[$@child_number] + "]";
+    mes "[" + $@xmas_child_list_name$[$@child_number] + "]";
     mes "Here is my list. Make sure it gets delivered please!";
     next;
     set XMASTIME, XMASTIME | $@xmas_child_list[$@child_number];

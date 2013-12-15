@@ -90,7 +90,7 @@ OnInit:
     // Quest Start (@xmas_state)
     set $@xmas_list_gather_state, 1;
     set $@xmas_list_complete_state, 2;
-    set $@xmas_list_deliver_list, 3;
+    set $@xmas_list_deliver_state, 3;
     // Helper SubQuest 
     set $@xmas_helpers_start_state, 4;
     set $@xmas_helpers_done_state, 5;
@@ -185,18 +185,19 @@ OnInit:
     set $@xmas_good_level, 30;
     set $@xmas_good_cost, 12;
     set $@xmas_good_count, 3;
-    set $@xmas_good_name$, "ShockSweet";
-    set $@xmas_good_friendly_name$, "Shock Sweet";
-    set $@xmas_good_money, 2000;
-    set $@xmas_good__exp, 600;
+    set $@xmas_good_name$, "Candy";
+    set $@xmas_good_friendly_name$, "Candies";
+    set $@xmas_good_money, 500;
+    set $@xmas_good_exp, 200;
+
     // Bad Daily Ammounts
     set $@xmas_bad_level, 30;
     set $@xmas_bad_cost, 12;
     set $@xmas_bad_count, 3;
-    set $@xmas_bad_name$, "Candy";
-    set $@xmas_bad_friendly_name$, "Candies";
-    set $@xmas_bad_money, 500;
-    set $@xmas_bad__exp, 200;
+    set $@xmas_bad_name$, "ShockSweet";
+    set $@xmas_bad_friendly_name$, "ShockSweet";
+    set $@xmas_bad_money, 2000;
+    set $@xmas_bad_exp, 500;
 
     // Helpers Flags needed to set $@xmas_all_helpers_bit
     setarray $@xmas_helper_list, $@xmas_helper_bit_bed_ends, $@xmas_helper_bit_glitter_ends, $@xmas_helper_bit_storage, $@xmas_helper_bit_acorns, $@xmas_sh_bit_cap;

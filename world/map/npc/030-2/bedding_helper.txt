@@ -18,9 +18,9 @@ L_OffSeason:
     goto L_Close;
 
 L_XmasMain:
-    if (XMASTIME & $@helper_bit_bed_ends) goto L_Done;
-    if (XMASTIME & $@helper_bit_bed_starts) goto L_Bedding;
-    if (@helper_bit) goto L_Helping;
+    if (XMASTIME & $@xmas_helper_bit_bed_ends) goto L_Done;
+    if (XMASTIME & $@xmas_helper_bit_bed_starts) goto L_Bedding;
+    if (@xmas_helper_bit) goto L_Helping;
 
     mes "[Osmo]";
     mes "\"What? Uh, excuse me, I have some work to do.\"";
@@ -34,7 +34,7 @@ L_Helping:
     mes "[Osmo]";
     mes "\"Take care that it's real White Fur.";
     mes "Other materials tend to go out of place in the present box, leaving the fragile content unprotected from any pushes.\"";
-    set XMASTIME, XMASTIME | $@helper_bit_bed_starts;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit_bed_starts;
     goto L_Close;
 
 L_Bedding:
@@ -59,9 +59,9 @@ L_Fur:
     if (countitem("WhiteFur") < $@xmas_bedding_amount)
         goto L_NoItems;
     delitem "WhiteFur", $@xmas_bedding_amount;
-    set XMASTIME, XMASTIME &~ $@helper_bit_bed_starts;
-    set XMASTIME, XMASTIME | $@helper_bit_bed_ends;
-    set @karma_bonus, $@default_karma_bonus;
+    set XMASTIME, XMASTIME &~ $@xmas_helper_bit_bed_starts;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit_bed_ends;
+    set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNice";
     mes "[Osmo]";
     mes "\"Wonderful! Thanks for your effort.\"";
@@ -71,8 +71,8 @@ L_Cloth:
     if (countitem("CottonCloth") < $@xmas_bedding_amount)
         goto L_NoItems;
     delitem "CottonCloth", $@xmas_bedding_amount;
-    set XMASTIME, XMASTIME | $@helper_bit_bed_ends;
-    set @karma_bonus, $@default_karma_bonus;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit_bed_ends;
+    set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNaughty";
     mes "He doesn't notice that you're giving him Cotton Cloth.";
     mes "[Osmo]";
@@ -81,9 +81,9 @@ L_Cloth:
 
 L_Done:
     mes "[Osmo]";
-    if (@helper_bedding)
+    if (@xmas_helper_bedding)
         mes "\"The Fur you brought me isn't working very well.\"";
-    if (!(@helper_bedding))
+    if (!(@xmas_helper_bedding))
         mes "\"Thanks for helping out with the bedding material.\"";
     goto L_Close;
 

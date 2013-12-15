@@ -4,8 +4,6 @@
 
 030-2.gat,127,42,0|script|Chief Warrick|329,
 {
-    callfunc "XmasHelperPoints";
-    callfunc "XmasCheckList";
     callfunc "XmasStates";
 
     if($@xmas_time == $@xmas_event_time)
@@ -18,12 +16,12 @@ L_OffSeason:
     goto L_Close;
 
 L_XmasMain:
-    if(@helper_bit)
+    if (@xmas_helper_bit)
         goto L_HelpStatus;
-    if (@xmas_state == $@xmas_list_complete_state)
-        goto L_Avalia;
-    if (@xmas_state == $@xmas_helpers_start_state)
+    if (@xmas_helper_start_state)
         goto L_Helping;
+    if (@xmas_list_deliver)
+        goto L_Avalia;
     goto L_NoHelp;
 
 L_Helping:
@@ -60,7 +58,7 @@ L_Helping:
     mes "Go to the helpers all over the house and ask them what is needed.";
     mes "This will show you're hired as a co-helper.\"";
     mes "He stabs your chest with his finger and leaves a blinking mark.";
-    set XMASTIME, XMASTIME | $@main_helper_bit;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit;
     goto L_Close;
 
 L_HelpStatus:
@@ -69,13 +67,13 @@ L_HelpStatus:
         mes "\"I hope you're doing well.\"";
     if (!(@xmas_karma))
         mes "\"It seems we're catching up with the tasks to do, thanks to your help.\"";
-    if (@all_helpers)
+    if (@xmas_all_helpers)
         mes "\"The helpers are happy for the extra help.\"";
-    if (!(@all_helpers))
+    if (!(@xmas_all_helpers))
         mes "\"My workers are so stressed.\"";
-    if (@all_lists)
+    if (@xmas_all_lists)
         mes "\"I think all the children will be happy this year.\"";
-    if (!(@all_lists))
+    if (!(@xmas_all_lists))
         mes "\"I wonder how this season will turn out.\"";
     goto L_Close;
 

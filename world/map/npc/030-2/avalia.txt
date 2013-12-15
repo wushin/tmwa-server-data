@@ -17,14 +17,14 @@ L_OffSeason:
     close;
 
 L_XmasMain:
-    if(@xmas_list_deliver) goto L_ListReturn;
-    if(@helper_start_state) goto L_HelperQuest;
-    if(@helper_done_state) goto L_HelperQuest;
-    if(@reagent_start_state) goto L_ManaBattery;
-    if(@reagent_done_state) goto L_PowerReagents;
-    if(@xmas_reward_start_state) goto L_Reward;
     if(@xmas_reward_start_state) goto L_Thanks;
-    if(@boss_door_state) goto L_Quick;
+    if(@xmas_reward_start_state) goto L_Reward;
+    if(@xmas_boss_door_state) goto L_Quick;
+    if(@xmas_reagent_done_state) goto L_PowerReagents;
+    if(@xmas_reagent_start_state) goto L_PowerReagents;
+    if(@xmas_helper_done_state) goto L_HelperQuest;
+    if(@xmas_helper_start_state) goto L_HelperQuest;
+    if(@xmas_list_deliver) goto L_ListReturn;
     goto L_OffSeason;
 
 L_ListReturn:
@@ -69,7 +69,7 @@ L_HelperQuest:
         "I'd better get back to helping.", L_Close;
 
 L_Continue:
-    if(@helper_done_state)
+    if(@xmas_helper_done_state)
         goto L_ManaBattery;
     goto L_NotHelpEnough;
 
@@ -78,19 +78,16 @@ L_NotHelpEnough:
     goto L_Close;
 
 L_ManaBattery:
-    // Needs to be function
     mes "\"Now that we are caught up on the holidays and I've finished my research, I know what is needed to make the spell permanent.\"";
     next;
-    mes "\"I'm going to need " + $@power_core_emerald_powders + " Emerald Powders, " + $@power_core_empty_bottles + " Empty Bottles, " + $@power_core_shock_sweet_amount + " Shock Sweet \"";
-    next;
+    callfunc "ListReagents";
     mes "\"When you have gathered the required materials please come back and see me.\"";
     set @xmas_state, $@xmas_reagents_start;
     callfunc "XmasSetState";
     goto L_Close;
 
 L_IngredientList:
-    mes "\"I'm going to need " + $@power_core_emerald_powders + " Emerald Powders, " + $@power_core_empty_bottles + " Empty Bottles, " + $@power_core_shock_sweet_amount + " Shock Sweet \"";
-    next;
+    callfunc "ListReagents";
     mes "\"When you have gathered the required materials please come back and see me.\"";
     goto L_Close;
 
@@ -105,7 +102,7 @@ L_PowerReagents:
 
 L_CheckReagents:
     callfunc "CheckReagents";
-    if(!(@reagent_done_state))
+    if(!(@xmas_reagent_done_state))
         goto L_Enough;
     mes "\"Huzzah!, you have all the required components!\"";
     mes "\"Now I can create a ManaBattery to power the Nutcrackers from a central location.\"";
@@ -145,7 +142,7 @@ L_CheckReagents:
     mes "\"I'm in no condition to go anywhere.\"";
     mes "\"Take the Mana Battery and install it in the warehouse.\"";
     mes "\"It's found behind Chief Warrick\"";
-    set @xmas_state, $@boss_door_open_state;
+    set @xmas_state, $@xmas_boss_door_open_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -159,8 +156,8 @@ L_Reward:
     mes "[Avalia]";
     mes "\"Thanks for all the help.\"";
     mes "\"Take this as a token of my gratitude.\"";
-    getitem $@quest_side_zero_uncommon$, 1;
-    set @xmas_state, $@main_quest_reward_done;
+    getitem $@xmas_zero_uncommon$, 1;
+    set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -192,7 +189,7 @@ L_OffSeason:
     close;
 
 L_XmasMain:
-    if(@xmas_reward_start_state || @xmas_reward_done_state)
+    if(@xmas_reward_start_state)
         goto L_Reward;
     goto L_NoResponse;
 

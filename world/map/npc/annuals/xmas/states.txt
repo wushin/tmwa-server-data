@@ -11,15 +11,15 @@ function|script|XmasStates|,
     set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
     set @xmas_side, XMASTIME & $@xmas_side_bit;
 
-    set @xmas_list_gather, (@xmas_state == $@xmas_list_gather_state);
-    set @xmas_list_complete, (@xmas_state == $@xmas_list_complete_state);
-    set @xmas_list_deliver, (@xmas_state == $@xmas_list_deliver_list);
-    set @xmas_helper_start_state, (@xmas_state == $@xmas_helpers_start_state);
-    set @xmas_helper_done_state, (@xmas_state == $@xmas_helpers_done_state);
-    set @xmas_reagent_start_state, (@xmas_state == $@xmas_reagents_start);
-    set @xmas_reagent_done_state, (@xmas_state == $@xmas_reagents_done);
+    set @xmas_list_gather, (@xmas_state >= $@xmas_list_gather_state);
+    set @xmas_list_complete, (@xmas_state >= $@xmas_list_complete_state);
+    set @xmas_list_deliver, (@xmas_state >= $@xmas_list_deliver_state);
+    set @xmas_helper_start_state, (@xmas_state >= $@xmas_helpers_start_state);
+    set @xmas_helper_done_state, (@xmas_state >= $@xmas_helpers_done_state);
+    set @xmas_reagent_start_state, (@xmas_state >= $@xmas_reagents_start);
+    set @xmas_reagent_done_state, (@xmas_state >= $@xmas_reagents_done);
     set @xmas_boss_door_state, (@xmas_state >= $@xmas_boss_door_open_state);
-    set @xmas_reward_start_state, (@xmas_state == $@xmas_reward_start);
+    set @xmas_reward_start_state, (@xmas_state >= $@xmas_reward_start);
     set @xmas_reward_done_state, (@xmas_state > $@xmas_reward_start);
 
     // Basement Passage

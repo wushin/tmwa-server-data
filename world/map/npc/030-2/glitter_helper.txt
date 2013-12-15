@@ -17,9 +17,9 @@ L_OffSeason:
     goto L_Close;
 
 L_XmasMain:
-    if (XMASTIME & $@helper_bit_glitter_ends) goto L_Done;
-    if (XMASTIME & $@helper_bit_glitter_starts) goto L_Powder;
-    if (@helper_bit) goto L_Helping;
+    if (XMASTIME & $@xmas_helper_bit_glitter_ends) goto L_Done;
+    if (XMASTIME & $@xmas_helper_bit_glitter_starts) goto L_Powder;
+    if (@xmas_helper_bit) goto L_Helping;
 
     mes "[Veneri]";
     mes "\"Mh? Excuse me, I'm very busy right now.\"";
@@ -33,7 +33,7 @@ L_Helping:
     mes "[Veneri]";
     mes "\"But make sure it is really gempowder and not some kind of cheap replacement.";
     mes "You know, our decoration glitter is intensified by some magic, and that only works with real gempowders. Otherwise it'll lose its effect after a while.\"";
-    set XMASTIME, XMASTIME | $@helper_bit_glitter_starts;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit_glitter_starts;
     goto L_Close;
 
 L_Powder:
@@ -59,8 +59,8 @@ L_GemPowders:
         goto L_NoItems;
     delitem "RubyPowder", $@xmas_red_amount;
     delitem "TopazPowder", $@xmas_yellow_amount;
-    set XMASTIME, XMASTIME | $@helper_bit_glitter_ends;
-    set @karma_bonus, $@default_karma_bonus;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit_glitter_ends;
+    set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNice";
     mes "[Veneri]";
     mes "\"Excellent! Thank you very much.\"";
@@ -71,9 +71,9 @@ L_FakePowders:
         goto L_NoItems;
     delitem "RedPowder", $@xmas_red_amount;
     delitem "YellowPowder", $@xmas_yellow_amount;
-    set XMASTIME, XMASTIME | $@helper_bit_glitter_ends;
-    set XMASTIME, XMASTIME &~ $@helper_bit_glitter_starts;
-    set @karma_bonus, $@default_karma_bonus;
+    set XMASTIME, XMASTIME | $@xmas_helper_bit_glitter_ends;
+    set XMASTIME, XMASTIME &~ $@xmas_helper_bit_glitter_starts;
+    set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNaughty";
     mes "He doesn't notice that you're giving him fake powders.";
     mes "[Veneri]";
@@ -82,9 +82,9 @@ L_FakePowders:
 
 L_Done:
     mes "[Veneri]";
-    if (@helper_glitter)
+    if (@xmas_helper_glitter)
         mes "\"Even after your help, the powder still isn't working right. Maybe it got wet.\"";
-    if (!(@helper_glitter))
+    if (!(@xmas_helper_glitter))
         mes "\"Thanks for bringing the powders.\"";
     goto L_Close;
 
