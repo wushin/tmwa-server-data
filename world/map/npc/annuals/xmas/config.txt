@@ -43,8 +43,8 @@
 // 23: Santa's Helper 2
 // 24: Basement Passage
 // 25: Thrown Out
-// 26: Hard Mode Boss
-// 27: Regular Mode Boss
+// 26: Boss started Once by Player
+// 27: Boss won on hard mode
 // 28: Perfect Helpers
 // 29: Prefect List
 // 30: Helper Bit
@@ -102,7 +102,18 @@ OnInit:
     // Reward State
     set $@xmas_reward_start, 9;
     set $@xmas_reward_done, 10;
-
+    // Boss Fight State
+    set $@XmasBattleStatus, 0;
+    // Boss Fight Required Level for Hard Mode
+    set $@BossHardLevel, 70;
+    set $@xmas_boss_start_bit, (1 << 26);
+    set $@xmas_boss_hero_bit, (1 << 27);
+    set $@xmas_boss_start_shift, 26;
+    set $@xmas_boss_hero_shift, 27;
+    setarray $@xmas_boss_req$, "DarkCrystal", "IronPotion";
+    setarray $@xmas_boss_amount, 10, 15;
+    if(getarraysize($@xmas_boss_amount) != getarraysize($@xmas_boss_req$))
+        gmcommand @mapexit;
     // Quest Side 0 Settings
     set $@xmas_zero_rare$, "Acorn";
     set $@xmas_zero_uncommon$, "NutcrackerHat";
@@ -196,11 +207,15 @@ OnInit:
     set $@xmas_bad_level, 30;
     set $@xmas_bad_cost, 12;
     set $@xmas_bad_count, 3;
+
     set $@xmas_bad_name$, "ShockSweet";
     set $@xmas_bad_friendly_name$, "ShockSweet";
     set $@xmas_bad_money, 2000;
     set $@xmas_bad_exp, 500;
-
+    
+    //Boss Fight Reward
+    set $@xmas_boss_bp, 50;
+    
     // Helpers Flags needed to set $@xmas_all_helpers_bit
     setarray $@xmas_helper_list, $@xmas_helper_bit_bed_ends, $@xmas_helper_bit_glitter_ends, $@xmas_helper_bit_storage, $@xmas_helper_bit_acorns, $@xmas_sh_bit_cap;
     set $@xmas_perfect_helpers_count, getarraysize($@xmas_helper_list);
@@ -232,5 +247,5 @@ L_RewardTime:
 L_Return:
     callfunc "ReplaceTrees";
     callfunc "XmasSpawnManager";
-    return;
+    end;
 }

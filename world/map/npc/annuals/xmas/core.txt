@@ -37,6 +37,17 @@ function|script|XmasSetSide|,
 function|script|XmasThrowOut|,
 {
     set XMASTIME, XMASTIME | $@xmas_thrown_out_bit;
+}
+
+function|script|XmasSetBossStart|,
+{
+    set XMASTIME, XMASTIME | $@xmas_boss_start_bit;
+    return;
+}
+
+function|script|XmasSetBossHero|,
+{
+    set XMASTIME, XMASTIME | $@xmas_boss_hero_bit;
     return;
 }
 
