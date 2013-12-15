@@ -5,7 +5,7 @@
 function|script|XmasNaughty|,
 {
     set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
-    if((@xmas_karma - @karma_bonus) > 0)
+    if((@xmas_karma - @karma_bonus) >= 0)
         set @xmas_karma, (@xmas_karma - @karma_bonus);
     set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
     set @karma_bonus, 0;
