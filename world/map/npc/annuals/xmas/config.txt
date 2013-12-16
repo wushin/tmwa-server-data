@@ -55,16 +55,16 @@
 OnInit:
     // Xmas Key Identifier Set through Botcheck Debug
     if(!($XMAS_TIME_KEY))
-        set $XMAS_TIME_KEY, 2013;
+        setarray $XMAS_TIME_KEY, 12,1,25,6,2013;
 
     // Event Runs until Reward Period.
     // Month Start/End
-    set $@xmas_start_month, 12;
-    set $@xmas_end_month, 1;
+    set $@xmas_start_month, $XMAS_TIME_KEY[0];
+    set $@xmas_end_month, $XMAS_TIME_KEY[1];
 
     // Reward Day Start/End
-    set $@xmas_reward_start_day, 25;
-    set $@xmas_reward_end_day, 6;
+    set $@xmas_reward_start_day, $XMAS_TIME_KEY[2];
+    set $@xmas_reward_end_day, $XMAS_TIME_KEY[3];
 
     // Time Settings
     set $@xmas_no_event_time, 0;
@@ -77,6 +77,7 @@ OnInit:
     // Main Quest Settings
     // Bit used to Set Which one of the 2 quests you are on
     set $@xmas_side_bit, (1 << 31);
+    set $@xmas_base_bonus_xp, 4;
     set $@xmas_karma_bonus, 1;
 
     // Basement Passage way
