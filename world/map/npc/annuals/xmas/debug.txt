@@ -73,6 +73,7 @@ L_Time:
 
     callfunc "ReplaceTrees";
     callfunc "XmasSpawnManager";
+    callfunc "PresentHandler";
     goto L_Close;
 
 L_XmasState:
@@ -129,4 +130,13 @@ botcheck.gat,26,28,0|script|XmasDebug#4|105,
 
 L_End:
    end;
+}
+
+020-1.gat,86,76,0|script|XmasDebug#5|105,
+{
+   callfunc "XmasDebug";
+
+OnInit:
+   if(!(debug))
+       disablenpc "XmasDebug#1";
 }

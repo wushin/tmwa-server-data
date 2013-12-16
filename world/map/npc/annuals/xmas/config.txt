@@ -232,5 +232,6 @@ L_RewardTime:
 L_Return:
     callfunc "ReplaceTrees";
     callfunc "XmasSpawnManager";
+    callfunc "PresentHandler";
     return;
 }
