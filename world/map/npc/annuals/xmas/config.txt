@@ -210,7 +210,7 @@ OnInit:
     set $@xmas_bad_count, 3;
 
     set $@xmas_bad_name$, "ShockSweet";
-    set $@xmas_bad_friendly_name$, "ShockSweet";
+    set $@xmas_bad_friendly_name$, "Shock Sweet";
     set $@xmas_bad_money, 2000;
     set $@xmas_bad_exp, 500;
     

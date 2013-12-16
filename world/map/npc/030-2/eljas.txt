@@ -93,6 +93,7 @@ L_SantasFakeList:
     mes "\"What a second... whats that aura...\"";
     mes "\"THIS ISN'T THE REAL LIST!\"";
     mes "\"Gaurds! Toss this Naughty one outside!\"";
+    next;
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNaughty";
     callfunc "XmasSetSide";
