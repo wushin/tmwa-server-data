@@ -21,7 +21,6 @@ function|script|XmasStates|,
     set @xmas_boss_door_state, (@xmas_state >= $@xmas_boss_door_open_state);
     set @xmas_reward_start_state, (@xmas_state >= $@xmas_reward_start);
     set @xmas_reward_done_state, (@xmas_state >= $@xmas_reward_done);
-
     // Basement Passage
     set @xmas_basement_passage, XMASTIME & $@xmas_basement_passage;
     // Thrown Out
@@ -43,5 +42,8 @@ function|script|XmasStates|,
     set @xmas_helper_glitter, XMASTIME & $@xmas_helper_bit_glitter_starts;
     // Storage
     set @xmas_helper_storage, XMASTIME & $@xmas_helper_bit_storage;
+    // Bosses
+    set @xmas_boss_start, XMASTIME & $@xmas_boss_start_bit;
+    set @xmas_boss_hero, XMASTIME & $@xmas_boss_hero_bit;
     return;
 }
