@@ -33,14 +33,14 @@ L_ListReturn:
     mes "\"This had better be important, I've got enough to worry about.\"";
     menu
         "Sorry for interrupting, but I've been sent up here with The List", -;
-    mes "She Stares blankly at you for a bit...";
+    mes "She stares blankly at you for a bit...";
     next;
     mes "\"YAHOO!!\"";
     next;
-    mes "\"One Problem down only a few more to go.\"";
+    mes "\"One problem down only a few more to go.\"";
     next;
     mes "\"Since you have already been so helpful, I was wondering if you could continue to do so?\"";
-    mes "\"I do have the power to reward you hansomely.\"";
+    mes "\"I do have the power to reward you handsomely.\"";
     next;
     mes "\"You see this nutcracker here beside me? He is different from the rest. He had a will of his own. It started shortly after we installed the new power core.\"";
     next;

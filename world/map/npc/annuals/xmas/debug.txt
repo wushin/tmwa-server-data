@@ -96,32 +96,54 @@ L_Close:
 
 030-1.gat,91,48,0|script|XmasDebug#1|105,
 {
-   callfunc "XmasDebug";
-
+    callfunc "XmasDebug";
+    goto L_end;
+    
 OnInit:
-   if(!(debug))
-       disablenpc "XmasDebug#1";
+    if(!(debug))
+        disablenpc "XmasDebug#1";
+L_end:
+    end;
 }
 
 030-2.gat,193,62,0|script|XmasDebug#2|105,
 {
-   callfunc "XmasDebug";
-
+    callfunc "XmasDebug";
+    goto L_end;
+    
 OnInit:
-   if(!(debug))
-       disablenpc "XmasDebug#1";
+    if(!(debug))
+        disablenpc "XmasDebug#1";
+L_end:
+    end;
 }
 
 030-3.gat,26,26,0|script|XmasDebug#3|105,
 {
    callfunc "XmasDebug";
+   goto L_end;
 
 OnInit:
    if(!(debug))
        disablenpc "XmasDebug#1";
+L_end:
+   end;
 }
 
-botcheck.gat,26,28,0|script|XmasDebug#4|105,
+030-4.gat,30,30,0|script|XmasDebug#4|111,
+{
+    callfunc "XmasDebug";
+    goto L_end;
+    
+OnInit:
+    if(!(debug))
+        disablenpc "XmasDebug#1";
+L_end:
+    end;
+}
+
+
+botcheck.gat,26,28,0|script|XmasDebug#5|105,
 {
    if(getgmlevel() < 40 & !(debug))
        goto L_End;
@@ -132,7 +154,7 @@ L_End:
    end;
 }
 
-020-1.gat,86,76,0|script|XmasDebug#5|105,
+020-1.gat,86,76,0|script|XmasDebug#6|105,
 {
    callfunc "XmasDebug";
 
