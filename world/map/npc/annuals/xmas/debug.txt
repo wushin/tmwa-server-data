@@ -146,7 +146,7 @@ L_SetAllHelpers:
 L_Close:
     set @xmas_state, 0;
     set @xmas_karma, 0;
-    set @xmas_hard_mode, 0
+    set @xmas_hard_mode, 0;
     set @xmas_time_key_smonth, 0;
     set @xmas_time_key_emonth, 0;
     set @xmas_time_key_rsday, 0;

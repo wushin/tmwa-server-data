@@ -117,7 +117,7 @@ OnInit:
     if(getarraysize($@xmas_boss_amount) != getarraysize($@xmas_boss_req$))
         gmcommand @mapexit;
     // Main Quest rewards
-    setarray $@xmas_rare_reward$, "Acorn", "Acorn";
+    setarray $@xmas_rare_reward$, "UglyXmasSweater", "RedStockings";
     set $@xmas_uncommon_reward$, "NutcrackerHat";
     // Quest Side 0 Settings
     setarray $@xmas_zero_reagents$, "ShockSweet", "EmptyBottle", "EmeraldPowder";
