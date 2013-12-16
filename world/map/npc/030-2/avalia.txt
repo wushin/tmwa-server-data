@@ -7,7 +7,7 @@
     callfunc "CheckReagents";
     callfunc "XmasStates";
 
-    if($@xmas_time == $@xmas_event_time)
+    if(($@xmas_time == $@xmas_event_time) && !(@xmas_side))
         goto L_XmasMain;
     goto L_OffSeason;
 
@@ -163,7 +163,7 @@ L_Reward:
     mes "[Avalia]";
     mes "\"Thanks for all the help.\"";
     mes "\"Take this as a token of my gratitude.\"";
-    getitem $@xmas_zero_uncommon$, 1;
+    getitem $@xmas_uncommon_reward$, 1;
     set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
     callfunc "XmasXpReward";

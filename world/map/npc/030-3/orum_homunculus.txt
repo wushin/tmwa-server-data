@@ -176,13 +176,13 @@ L_OffSeason:
     end;
 
 L_XmasMain:
-    if(@xmas_reward_done_state) goto L_Thanks;
-    if(@xmas_reward_start_state) goto L_Reward;
-    if(@xmas_boss_door_state) goto L_Quick;
-    if(@xmas_reagent_done_state) goto L_PowerReagents;
-    if(@xmas_reagent_start_state) goto L_PowerReagents;
-    if(@xmas_helper_done_state) goto L_HelperQuest;
-    if(@xmas_helper_start_state) goto L_HelperQuest;
+    if((@xmas_reward_done_state) && (@xmas_side)) goto L_Thanks;
+    if((@xmas_reward_start_state) && (@xmas_side)) goto L_Reward;
+    if((@xmas_boss_door_state) && (@xmas_side)) goto L_Quick;
+    if((@xmas_reagent_done_state) && (@xmas_side)) goto L_PowerReagents;
+    if((@xmas_reagent_start_state) && (@xmas_side)) goto L_PowerReagents;
+    if((@xmas_helper_done_state) && (@xmas_side)) goto L_HelperQuest;
+    if((@xmas_helper_start_state) && (@xmas_side)) goto L_HelperQuest;
     if(@xmas_list_deliver) goto L_ListReturn;
     goto L_OffSeason;
 
@@ -190,7 +190,7 @@ L_ListReturn:
     mes "[Orum's Homunculus]";
     mes "\"This had better be important, I've got enough to worry about.\"";
     menu
-        "Sorry for interrupting, but I've been sent up here with The List", -;
+        "Sorry for interrupting, but I've been came down here with The List", -;
     mes "he Stares blankly at you for a bit...";
     next;
     mes "\"MUHAHAHAHAHAHAA!!\"";
@@ -213,6 +213,8 @@ L_ListReturn:
 
 L_Start:
     mes "\"Report Back to me once this is done.\"";
+    callfunc "XmasThrowOut";
+    callfunc "XmasSetSide";
     set XMASTIME, XMASTIME | $@xmas_basement_passage;
     set @xmas_state, $@xmas_helpers_start_state;
     callfunc "XmasSetState";
@@ -311,7 +313,7 @@ L_Quick:
 L_Reward:
     mes "[Orum's Homunculus]";
     mes "\"Revenge is best served cold..\"";
-    getitem $@xmas_one_uncommon$, 1;
+    getitem $@xmas_uncommon_reward$, 1;
     set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
     callfunc "XmasXpReward";

@@ -6,7 +6,18 @@ function|script|XmasNaughty|,
 {
     set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
     if((@xmas_karma - @karma_bonus) >= 0)
-        set @xmas_karma, (@xmas_karma - @karma_bonus);
+        goto L_SetNaughty;
+    goto L_ResetNaughty;
+
+L_SetNaughty:
+    set @xmas_karma, (@xmas_karma - @karma_bonus);
+    goto L_Return;
+
+L_ResetNaughty:
+    set @xmas_karma, 0;
+    goto L_Return;
+
+L_Return:
     set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
     set @karma_bonus, 0;
     return;
@@ -16,7 +27,18 @@ function|script|XmasNice|,
 {
     set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
     if((@xmas_karma + @karma_bonus) < 16)
-        set @xmas_karma, (@karma_bonus + @xmas_karma);
+        goto L_SetNice;
+    goto L_ResetNice;
+
+L_SetNice:
+    set @xmas_karma, (@karma_bonus + @xmas_karma);
+    goto L_Return;
+
+L_ResetNice:
+    set @xmas_karma, 15;
+    goto L_Return;
+
+L_Return:
     set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
     set @karma_bonus, 0;
     return;
@@ -71,20 +93,67 @@ function|script|XmasSetBossHero|,
 
 function|script|XmasReward|,
 {
-    if($@xmas_time == $@xmas_reward_time)
+    if(($@xmas_time == $@xmas_reward_time) && (@xmas_reward_start_state))
         goto L_FinalGift;
-    goto L_NotTime;
+    goto L_Return;
 
 L_FinalGift:
-    // Random Reward Generator Based off 2 arrays Naughty and Nice;
-    // Check side
-    // get karma
-    // 50 +/- karma depending on side
-    // Plus Perfects/Hard mode
-    // Give X presents by trees.
-    end;
+    set @xmas_endgame, 0;
+    set @xmas_reward_side, 0;
+    set @xmas_reward_tally, 0;
+    // @xmas_karma is dealt with based on side and xmas_karma
+    if(@xmas_side)
+        goto L_SetSide;
+    goto L_NotSetSide;
 
-L_NotTime:
+L_SetSide:
+    set @xmas_reward_side, 1;
+    set @xmas_reward_tally, (@xmas_reward_tally + ($@xmas_reward_max_karma - @xmas_karma));
+    goto L_SetRewardBonus;
+
+L_NotSetSide:
+    set @xmas_reward_tally, (@xmas_reward_tally + @xmas_karma);
+    goto L_SetRewardBonus;
+
+L_SetRewardBonus:
+    if(@xmas_boss_hero)
+        set @xmas_reward_tally, (@xmas_reward_tally + $@xmas_reward_hero_boss);
+    if(@xmas_all_helpers)
+        set @xmas_reward_tally, (@xmas_reward_tally + $@xmas_reward_all_helpers);
+    if(@xmas_all_lists)
+        set @xmas_reward_tally, (@xmas_reward_tally + $@xmas_reward_all_lists);
+
+    set @xmas_reward, (rand((@xmas_reward_tally + (readparam(bLuk) / 10)) * 2));
+    if(BaseLevel < 99)
+        goto L_EndGameReward;
+    goto L_LevelingReward;
+
+L_EndGameReward:
+    set BOSS_POINTS, BOSS_POINTS + rand(@xmas_reward * 2);
+    goto L_XmasPrize;
+
+L_LevelingReward:
+    if(@xmas_reward == 100)
+        goto L_XmasLevel;
+    goto L_XmasExp;
+
+L_XmasLevel:
+    gmcommand "@blvl 1";
+    goto L_XmasPrize;
+
+L_XmasExp:
+    getexp (@xmas_reward * BaseLevel * ((BaseLevel + 10)/10)), 0;
+    goto L_XmasPrize;
+
+L_XmasPrize:
+    set @xmas_reward, (@xmas_reward + ((BaseLevel + 10)/10));
+    if(@xmas_reward >= 90)
+        getitem $@xmas_rare_reward$[@xmas_reward_side], 1;
+    if(@xmas_reward < 90)
+        getitem $@xmas_uncommon_reward$[@xmas_reward_side], 1;
+    goto L_Return;
+
+L_Return:
     end;
 }
 

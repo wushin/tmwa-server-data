@@ -79,6 +79,10 @@ OnInit:
     set $@xmas_side_bit, (1 << 31);
     set $@xmas_base_bonus_xp, 4;
     set $@xmas_karma_bonus, 1;
+    set $@xmas_reward_max_karma, 15;
+    set $@xmas_reward_hero_boss, 15;
+    set $@xmas_reward_all_lists, 10;
+    set $@xmas_reward_all_helpers, 10;
 
     // Basement Passage way
     set $@xmas_basement_passage, (1 << 24);
@@ -112,9 +116,10 @@ OnInit:
     setarray $@xmas_boss_amount, 10, 15;
     if(getarraysize($@xmas_boss_amount) != getarraysize($@xmas_boss_req$))
         gmcommand @mapexit;
+    // Main Quest rewards
+    setarray $@xmas_rare_reward$, "Acorn", "Acorn";
+    set $@xmas_uncommon_reward$, "NutcrackerHat";
     // Quest Side 0 Settings
-    set $@xmas_zero_rare$, "Acorn";
-    set $@xmas_zero_uncommon$, "NutcrackerHat";
     setarray $@xmas_zero_reagents$, "ShockSweet", "EmptyBottle", "EmeraldPowder";
     setarray $@xmas_zero_reagents_names$, "ShockSweet", "Empty Bottles", "Emerald Powders";
     setarray $@xmas_zero_reagents_amounts, 1, 4, 10;
@@ -122,8 +127,6 @@ OnInit:
         gmcommand @mapexit;
 
     // Quest Side 1 Settings
-    set $@xmas_one_rare$, "Acorn";
-    set $@xmas_one_uncommon$, "NutcrackerHat";
     setarray $@xmas_one_reagents$, "DarkCrystal", "IronPotion", "EmeraldPowder";
     setarray $@xmas_one_reagents_names$, "Dark Crystal", "Iron Potions", "Emerald Powders";
     setarray $@xmas_one_reagents_amounts, 1, 4, 10;
