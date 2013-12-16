@@ -24,10 +24,9 @@ function|script|XmasNice|,
 
 function|script|XmasSetState|,
 {
-//    set $@xmas_bonus_xp, 4;
 //    if (BASE_LEVEL >= 10)
-//        getexp ((BASE_LEVEL / 10) * ($@xmas_bonus_xp * BASE_LEVEL)), 0;
-//    getexp ($@xmas_bonus_xp * BASE_LEVEL), 0;
+//        getexp ((BASE_LEVEL / 10) * ($@xmas_base_bonus_xp * BASE_LEVEL)), 0;
+//    getexp ($@xmas_base_bonus_xp * BASE_LEVEL), 0;
     set XMASTIME, (XMASTIME & ~(NIBBLE_0_MASK) | (@xmas_state << NIBBLE_0_SHIFT));
     return;
 }
@@ -76,12 +75,12 @@ L_NotTime:
 
 function|script|XmasCheckOld|,
 {
-    if(XMASYEAR == $XMAS_TIME_KEY)
+    if(XMASYEAR == $XMAS_TIME_KEY[4])
         goto L_Return;
 
 L_OldMatch:
     set XMASTIME, 0;
-    set XMASYEAR, $XMAS_TIME_KEY;
+    set XMASYEAR, $XMAS_TIME_KEY[4];
     goto L_Return;
 
 L_Return:
