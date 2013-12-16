@@ -26,10 +26,10 @@
     callfunc "XmasStates";
     set @xmas_battle_side, 0;
     if (@xmas_side != 0) set @xmas_battle_side, 1;
-    if ($@XmasBattleStatus > 0) goto L_BattleInProgress;
-    if (@xmas_state < 6) goto L_ThrowOut;
-    if ((@xmas_boss_start > 0) && (@xmas_state > 6)) goto L_Helper;
-    if (@xmas_state == 6) goto L_InitiateBattle;
+    if ($@XmasBattleStatus) goto L_BattleInProgress;
+    if (@xmas_state < $@xmas_boss_door_open_state) goto L_ThrowOut;
+    if ((@xmas_boss_start) && (@xmas_state > $@xmas_boss_door_open_state) goto L_Helper;
+    if (@xmas_state == $@xmas_boss_door_open_state) goto L_InitiateBattle;
     goto L_InitiateBattle;
     
 L_InitiateBattle:
@@ -71,12 +71,12 @@ L_BattleGood:
     goto L_Close;
     
 L_StartGood:
-    if ($@XmasBattleStatus != 0) goto L_BattleInProgress;
+    if ($@XmasBattleStatus) goto L_BattleInProgress;
     set $@XmasBattleStatus, 1;
     goto L_Start;
     
 L_StartGoodHard:
-    if ($@XmasBattleStatus != 0) goto L_BattleInProgress;
+    if ($@XmasBattleStatus) goto L_BattleInProgress;
     callsub S_CheckHardReq;
     delitem $@xmas_boss_req$[ @xmas_battle_side ], $@xmas_boss_amount[ @xmas_battle_side ];
     mes "You pour a handfull of " + $@xmas_boss_req$[@xmas_battle_side] + " over the Mana Battery.";
@@ -84,12 +84,12 @@ L_StartGoodHard:
     goto L_Start;
     
 L_StartBad:
-    if ($@XmasBattleStatus != 0) goto L_BattleInProgress;
+    if ($@XmasBattleStatus) goto L_BattleInProgress;
     set $@XmasBattleStatus, 3;
     goto L_Start;
     
 L_StartBadHard:
-    if ($@XmasBattleStatus != 0) goto L_BattleInProgress;
+    if ($@XmasBattleStatus) goto L_BattleInProgress;
     callsub S_CheckHardReq;
     delitem $@xmas_boss_req$[ @xmas_battle_side ], $@xmas_boss_amount[ @xmas_battle_side ];
     mes "You pour a handfull of " + $@xmas_boss_req$[@xmas_battle_side] + " over the Mana Battery.";
@@ -145,7 +145,7 @@ L_Close:
     // per NPC logic
 OnTimer5000:
     setnpctimer 0;
-    if ($@XmasBattleStatus != 0) goto L_CaveLogic;
+    if ($@XmasBattleStatus) goto L_CaveLogic;
     
 L_Return_1:
     set $@XmasBossPlayerCount, 0;
@@ -245,8 +245,8 @@ OnReward:
     if (($@XmasBattleStatus % 2) == 0) set XMASTIME, XMASTIME | $@xmas_boss_hero_bit;
     message strcharinfo(0), "You feel a temporary rush of power and zest for action. " + @bonus + " daily bonus gained.";
     set @xmas_state, (XMASTIME & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT;
-    if (@xmas_state != 6) goto L_End;
-    set @xmas_state, 7;
+    if (@xmas_state != $@xmas_boss_door_open_state ) goto L_End;
+    set @xmas_state, $@xmas_boss_door_open_state + 1;
     callfunc "XmasSetState";
     set @xmas_state, 0;
     set @karma_bonus, $@xmas_boss_bonus;
