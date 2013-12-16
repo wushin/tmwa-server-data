@@ -85,6 +85,7 @@ L_ManaBattery:
     mes "\"When you have gathered the required materials please come back and see me.\"";
     set @xmas_state, $@xmas_reagents_start;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_IngredientList:
@@ -145,6 +146,7 @@ L_CheckReagents:
     mes "\"It's found behind Chief Warrick\"";
     set @xmas_state, $@xmas_boss_door_open_state;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_NotEnough:
@@ -164,6 +166,7 @@ L_Reward:
     getitem $@xmas_zero_uncommon$, 1;
     set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_Thanks:

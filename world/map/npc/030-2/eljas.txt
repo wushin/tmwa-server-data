@@ -84,6 +84,7 @@ L_SantasList:
     callfunc "XmasNice";
     set @xmas_state, $@xmas_list_deliver_state;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_SantasFakeList:
@@ -98,6 +99,7 @@ L_SantasFakeList:
     callfunc "XmasThrowOut";
     set @xmas_state, $@xmas_list_deliver_state;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_NotWelcome;
 
 L_NotComplete:

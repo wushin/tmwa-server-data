@@ -22,11 +22,26 @@ function|script|XmasNice|,
     return;
 }
 
+function|script|XmasXpReward|,
+{
+    if (BaseLevel >= 10)
+        goto L_HigherLevel;
+    goto L_LowLevel;
+
+L_HigherLevel:
+    getexp ((BaseLevel / 10) * ($@xmas_base_bonus_xp * BaseLevel)), 0;
+    goto L_Return;
+
+L_LowLevel:
+    getexp ($@xmas_base_bonus_xp * BaseLevel), 0;
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
 function|script|XmasSetState|,
 {
-//    if (BASE_LEVEL >= 10)
-//        getexp ((BASE_LEVEL / 10) * ($@xmas_base_bonus_xp * BASE_LEVEL)), 0;
-//    getexp ($@xmas_base_bonus_xp * BASE_LEVEL), 0;
     set XMASTIME, (XMASTIME & ~(NIBBLE_0_MASK) | (@xmas_state << NIBBLE_0_SHIFT));
     return;
 }

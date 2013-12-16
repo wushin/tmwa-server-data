@@ -62,6 +62,7 @@ L_GemPowders:
     set XMASTIME, XMASTIME | $@xmas_helper_bit_glitter_ends;
     set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNice";
+    callfunc "XmasXpReward";
     mes "[Veneri]";
     mes "\"Excellent! Thank you very much.\"";
     goto L_Close;
@@ -75,6 +76,7 @@ L_FakePowders:
     set XMASTIME, XMASTIME &~ $@xmas_helper_bit_glitter_starts;
     set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNaughty";
+    callfunc "XmasXpReward";
     mes "He doesn't notice that you're giving him fake powders.";
     mes "[Veneri]";
     mes "\"Excellent! Thank you very much.\"";
