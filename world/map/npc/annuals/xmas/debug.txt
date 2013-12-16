@@ -6,6 +6,7 @@ function|script|XmasDebug|,
 {
     mes "What do you want to do?";
     menu
+        "Xmas Time Key Change.", L_XmasTimeKey,
         "Debug Vars", L_DebugVars,
         "Set Event Time.", L_Time,
         "Set Quest State.", L_XmasState,
@@ -55,7 +56,7 @@ L_LastReset:
 
 L_Reset:
     set XMASTIME, 0;
-    set XMASYEAR, 2013;
+    set XMASYEAR, $XMAS_TIME_KEY;
     goto L_Close;
 
 L_Time:
@@ -76,6 +77,12 @@ L_Time:
     callfunc "PresentHandler";
     goto L_Close;
 
+L_XmasTimeKey:
+    mes "Xmas Time Key Change.";
+    input @xmas_time_key;
+    set $XMAS_TIME_KEY, @xmas_time_key;
+    goto L_Close;
+
 L_XmasState:
     mes "Quest state?";
     input @xmas_state;
@@ -91,6 +98,7 @@ L_XmasKarma:
 L_Close:
     set @xmas_state, 0;
     set @xmas_karma, 0;
+    set @xmas_time_key, 0;
     close;
 }
 

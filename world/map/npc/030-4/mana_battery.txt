@@ -25,7 +25,7 @@
 {
     callfunc "XmasStates";
     set @xmas_battle_side, 0;
-    if (@xmas_side != 0) set @xmas_battle_side, 1;
+    if (@xmas_side) set @xmas_battle_side, 1;
     if ($@XmasBattleStatus) goto L_BattleInProgress;
     if (@xmas_state < $@xmas_boss_door_open_state) goto L_ThrowOut;
     if ((@xmas_boss_start) && (@xmas_state > $@xmas_boss_door_open_state)) goto L_Helper;
@@ -139,7 +139,6 @@ L_BattleInProgress:
     
 L_Close:
     callsub S_ClearVariables;
-    warp "030-2",152,98;
     close;
     
     // per NPC logic
