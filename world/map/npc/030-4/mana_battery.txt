@@ -28,7 +28,7 @@
     if (@xmas_side != 0) set @xmas_battle_side, 1;
     if ($@XmasBattleStatus) goto L_BattleInProgress;
     if (@xmas_state < $@xmas_boss_door_open_state) goto L_ThrowOut;
-    if ((@xmas_boss_start) && (@xmas_state > $@xmas_boss_door_open_state) goto L_Helper;
+    if ((@xmas_boss_start) && (@xmas_state > $@xmas_boss_door_open_state)) goto L_Helper;
     if (@xmas_state == $@xmas_boss_door_open_state) goto L_InitiateBattle;
     goto L_InitiateBattle;
     
