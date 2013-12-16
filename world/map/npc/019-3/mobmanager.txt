@@ -1,6 +1,6 @@
 // Spawns mobs
 
-019-3.gat,0,0,0|script|SpawnManager19_3|-1,
+019-3.gat,0,0,0|script|SpawnManager019_3|-1,
 {
     end; // just to be secure
 OnCommandXmasSpawn:

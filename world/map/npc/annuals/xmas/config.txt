@@ -53,10 +53,11 @@
 -|script|#XmasConfig|-1,
 {
 OnInit:
-    // Event Runs until Reward Period.
-    // Getting Reward sets XMASTIME to 0 for next year.
-    // Reward with XMASTIME == 0 acts like OffSeason
+    // Xmas Key Identifier Set through Botcheck Debug
+    if(!($XMAS_TIME_KEY))
+        set $XMAS_TIME_KEY, 2013;
 
+    // Event Runs until Reward Period.
     // Month Start/End
     set $@xmas_start_month, 12;
     set $@xmas_end_month, 1;
@@ -72,10 +73,6 @@ OnInit:
 
     // Xmas debug (sets time)
     set $@xmas_debug, 0;
-
-    // Xmas Key Identifier
-    set $@xmas_time_key, 2013;
-    setarray $@xmas_time_key_old, 2012;
 
     // Main Quest Settings
     // Bit used to Set Which one of the 2 quests you are on
@@ -247,5 +244,6 @@ L_RewardTime:
 L_Return:
     callfunc "ReplaceTrees";
     callfunc "XmasSpawnManager";
+    callfunc "PresentHandler";
     end;
 }
