@@ -72,6 +72,7 @@ L_List:
     set XMASTIME, XMASTIME | $@xmas_child_list[$@child_number];
     set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNice";
+    callfunc "XmasXpReward";
     menu
         "I really should be going.", L_Return;
 

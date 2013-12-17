@@ -84,6 +84,7 @@ L_SantasList:
     callfunc "XmasNice";
     set @xmas_state, $@xmas_list_deliver_state;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_SantasFakeList:
@@ -92,12 +93,14 @@ L_SantasFakeList:
     mes "\"What a second... whats that aura...\"";
     mes "\"THIS ISN'T THE REAL LIST!\"";
     mes "\"Gaurds! Toss this Naughty one outside!\"";
+    next;
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNaughty";
     callfunc "XmasSetSide";
     callfunc "XmasThrowOut";
     set @xmas_state, $@xmas_list_deliver_state;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_NotWelcome;
 
 L_NotComplete:

@@ -176,13 +176,13 @@ L_OffSeason:
     end;
 
 L_XmasMain:
-    if(@xmas_reward_done_state) goto L_Thanks;
-    if(@xmas_reward_start_state) goto L_Reward;
-    if(@xmas_boss_door_state) goto L_Quick;
-    if(@xmas_reagent_done_state) goto L_PowerReagents;
-    if(@xmas_reagent_start_state) goto L_PowerReagents;
-    if(@xmas_helper_done_state) goto L_HelperQuest;
-    if(@xmas_helper_start_state) goto L_HelperQuest;
+    if((@xmas_reward_done_state) && (@xmas_side)) goto L_Thanks;
+    if((@xmas_reward_start_state) && (@xmas_side)) goto L_Reward;
+    if((@xmas_boss_door_state) && (@xmas_side)) goto L_Quick;
+    if((@xmas_reagent_done_state) && (@xmas_side)) goto L_PowerReagents;
+    if((@xmas_reagent_start_state) && (@xmas_side)) goto L_PowerReagents;
+    if((@xmas_helper_done_state) && (@xmas_side)) goto L_HelperQuest;
+    if((@xmas_helper_start_state) && (@xmas_side)) goto L_HelperQuest;
     if(@xmas_list_deliver) goto L_ListReturn;
     goto L_OffSeason;
 
@@ -190,7 +190,7 @@ L_ListReturn:
     mes "[Orum's Homunculus]";
     mes "\"This had better be important, I've got enough to worry about.\"";
     menu
-        "Sorry for interrupting, but I've been sent up here with The List", -;
+        "Sorry for interrupting, but I've been came down here with The List", -;
     mes "he Stares blankly at you for a bit...";
     next;
     mes "\"MUHAHAHAHAHAHAA!!\"";
@@ -199,20 +199,26 @@ L_ListReturn:
     mes "\"I do have the power to reward you hansomely for your naughtiness.\"";
     next;
     mes "\"You see the Christmas Inn and it's insufferable happiness and joy they spread makes dark magic users sick.\"";
-    mes "\"Well this year I struck back. I managed to make it inside and snatch their mana battery that powers their precious Nutcrackers.\"";
+    mes "\"Well this year I struck back. I managed to make it inside and snatch their mana battery that powers their precious Nutcrackers. Then ruin their back stock with the Nutcrackers powered down.\"";
     next;
-    mes "\"I have more plans for that later. Help me smash the Christmas Inn once and for all.\"";
-    mes "\"But for now, Prove yourself, go back to the Inn and sabotage Santa's Helpers.\"";
+    mes "\"The sages showed up and had me tossed out. They created some kind of barrier to toss the naughties out.\"";
+    mes "\"They may have blocked my aura, but didn't crush my spirit. Mainly because those fools didn't discover my portal I created into the Inn's basement.\"";
     next;
-    mes "\"They have blocked my aura, but didn't find the portal I created into basement.\"";
-    mes "\"So far it has remained undetected. Head to the east in this cave.\"";
-    mes "\"Once there smash your fist into the small crack and you will be teleported into the basement of the inn\"";
+    mes "\"Muhahahaha\"";
+    next;
+    mes "\"I have more plans for both later. Maybe you can help me smash the Christmas Inn once and for all?\"";
+    next;
     menu
         "Sure.", L_Start,
         "No.", L_Close;
 
 L_Start:
-    mes "\"Report Back to me once this is done.\"";
+    callfunc "BadPowderList";
+    mes "\"So far basement portal has remained undetected. Head to the east in this cave to find it.\"";
+    mes "\"Once there smash your fist into the small crack and you will be teleported into the basement of the inn.\"";
+    mes "\"Now, Prove yourself, gather the required items and go back to the Inn to sabotage Santa's Helpers.\"";
+    callfunc "XmasThrowOut";
+    callfunc "XmasSetSide";
     set XMASTIME, XMASTIME | $@xmas_basement_passage;
     set @xmas_state, $@xmas_helpers_start_state;
     callfunc "XmasSetState";
@@ -223,8 +229,13 @@ L_HelperQuest:
     mes "\"Welcome Back!\"";
     mes "\"How is the Sabotage coming along?\"";
     menu
+        "I need some powders made.", L_MakePowders,
         "It's a mess.", L_Continue,
         "I'd better break some things.", L_Close;
+
+L_MakePowders:
+    callfunc "BadPowderMake";
+    goto L_Close;
 
 L_Continue:
     if(@xmas_helper_done_state)
@@ -242,6 +253,7 @@ L_ManaBattery:
     mes "\"When you have gathered the required materials please come back and see me.\"";
     set @xmas_state, $@xmas_reagents_start;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_IngredientList:
@@ -298,6 +310,7 @@ L_CheckReagents:
     mes "\"It's found behind Chief Warrick\"";
     set @xmas_state, $@xmas_boss_door_open_state;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_Quick:
@@ -309,9 +322,10 @@ L_Quick:
 L_Reward:
     mes "[Orum's Homunculus]";
     mes "\"Revenge is best served cold..\"";
-    getitem $@xmas_one_uncommon$, 1;
+    getitem $@xmas_uncommon_reward$, 1;
     set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
+    callfunc "XmasXpReward";
     goto L_Close;
 
 L_Thanks:

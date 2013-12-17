@@ -69,15 +69,6 @@ L_Return:
     return;
 }
 
-function|script|XmasSpawnManager|,
-{
-    cmdothernpc "SpawnManager19_1", "XmasSpawn";
-    cmdothernpc "SpawnManager19_3", "XmasSpawn";
-    cmdothernpc "SpawnManager30_1", "XmasSpawn";
-    cmdothernpc "SpawnManager30_3", "XmasSpawn";
-    return;
-}
-
 function|script|ReplaceTrees|,
 {
     if($@xmas_time)

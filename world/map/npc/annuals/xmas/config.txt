@@ -79,6 +79,10 @@ OnInit:
     set $@xmas_side_bit, (1 << 31);
     set $@xmas_base_bonus_xp, 4;
     set $@xmas_karma_bonus, 1;
+    set $@xmas_reward_max_karma, 15;
+    set $@xmas_reward_hero_boss, 15;
+    set $@xmas_reward_all_lists, 10;
+    set $@xmas_reward_all_helpers, 10;
 
     // Basement Passage way
     set $@xmas_basement_passage, (1 << 24);
@@ -112,9 +116,10 @@ OnInit:
     setarray $@xmas_boss_amount, 10, 15;
     if(getarraysize($@xmas_boss_amount) != getarraysize($@xmas_boss_req$))
         gmcommand @mapexit;
+    // Main Quest rewards
+    setarray $@xmas_rare_reward$, "UglyXmasSweater", "RedStockings";
+    set $@xmas_uncommon_reward$, "NutcrackerHat";
     // Quest Side 0 Settings
-    set $@xmas_zero_rare$, "Acorn";
-    set $@xmas_zero_uncommon$, "NutcrackerHat";
     setarray $@xmas_zero_reagents$, "ShockSweet", "EmptyBottle", "EmeraldPowder";
     setarray $@xmas_zero_reagents_names$, "ShockSweet", "Empty Bottles", "Emerald Powders";
     setarray $@xmas_zero_reagents_amounts, 1, 4, 10;
@@ -122,8 +127,6 @@ OnInit:
         gmcommand @mapexit;
 
     // Quest Side 1 Settings
-    set $@xmas_one_rare$, "Acorn";
-    set $@xmas_one_uncommon$, "NutcrackerHat";
     setarray $@xmas_one_reagents$, "DarkCrystal", "IronPotion", "EmeraldPowder";
     setarray $@xmas_one_reagents_names$, "Dark Crystal", "Iron Potions", "Emerald Powders";
     setarray $@xmas_one_reagents_amounts, 1, 4, 10;
@@ -207,7 +210,7 @@ OnInit:
     set $@xmas_bad_count, 3;
 
     set $@xmas_bad_name$, "ShockSweet";
-    set $@xmas_bad_friendly_name$, "ShockSweet";
+    set $@xmas_bad_friendly_name$, "Shock Sweet";
     set $@xmas_bad_money, 2000;
     set $@xmas_bad_exp, 500;
     
@@ -218,6 +221,21 @@ OnInit:
     setarray $@xmas_helper_list, $@xmas_helper_bit_bed_ends, $@xmas_helper_bit_glitter_ends, $@xmas_helper_bit_storage, $@xmas_helper_bit_acorns, $@xmas_sh_bit_cap;
     set $@xmas_perfect_helpers_count, getarraysize($@xmas_helper_list);
     set $@xmas_required_helpers_count, (getarraysize($@xmas_helper_list) / 2);
+
+    // MobManager
+    setarray $@xmas_mob_names$, "Candied Slime", "Candied Slime", "Santa Slime", "Candied Slime";
+    setarray $@xmas_mob_spawns, "1111", "1111", "1015", "1111";
+    setarray $@xmas_map_spawns$, "019-1.gat", "019-3.gat", "030-1.gat", "030-3.gat";
+    if(getarraysize($@xmas_mob_spawns) != getarraysize($@xmas_map_spawns$))
+        gmcommand @mapexit;
+    if(getarraysize($@xmas_mob_names$) != getarraysize($@xmas_map_spawns$))
+        gmcommand @mapexit;
+
+    set $@xmas_spawn_x1, 54;
+    set $@xmas_spawn_y1, 48;
+    set $@xmas_spawn_x2, 79;
+    set $@xmas_spawn_y2, 89;
+    set $@xmas_spawn_count, 4;
 
     if($@xmas_debug == $@xmas_event_time)
         goto L_EventTime;

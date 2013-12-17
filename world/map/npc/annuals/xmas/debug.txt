@@ -6,33 +6,28 @@ function|script|XmasDebug|,
 {
     mes "What do you want to do?";
     menu
-        "Xmas Time Key Change.", L_XmasTimeKey,
         "Debug Vars", L_DebugVars,
         "Set Event Time.", L_Time,
         "Set Quest State.", L_XmasState,
+        "Set Karma. [0-15] 15 Nice", L_XmasKarma,
+        "Set All Lists", L_SetAllLists,
+        "Set All Helpers", L_SetAllHelpers,
         "Reset Quest State.", L_Reset,
         "Set Old Event Flag.", L_LastReset,
+        "Xmas Time Key Change.", L_XmasTimeKey,
         "Do nothing.", L_Close;
 
 L_DebugVars:
     callfunc "XmasStates";
     mes "--Sever--";
-    next;
     mes "Event State: " + $@xmas_time;
-    mes "Event Start Month: " + $XMAS_TIME_KEY[0];
-    next;
-    mes "Event End Month: " + $XMAS_TIME_KEY[1];
-    next;
-    mes "Reward Start Day: " + $XMAS_TIME_KEY[2];
-    next;
-    mes "Reward End Day: " +$XMAS_TIME_KEY[3];
-    next;
+    mes "Event Start" + $XMAS_TIME_KEY[0] + "/1";
+    mes "Reward Start: " + $XMAS_TIME_KEY[0] + "/" + $XMAS_TIME_KEY[2];
+    mes "Event End: " + $XMAS_TIME_KEY[1] + "/" + $XMAS_TIME_KEY[3];
     mes "Event Time Key (year (CCYY)): " + $XMAS_TIME_KEY[4];
     next;
     mes "--Player--";
-    next;
-    mes "Event Time Key " + XMASYEAR;
-    next;
+    mes "Player Event Time Key " + XMASYEAR;
     mes "xmas_state: " + @xmas_state;
     mes "xmas_karma: " + @xmas_karma;
     mes "xmas_side: " + @xmas_side;
@@ -50,6 +45,7 @@ L_DebugVars:
     next;
     mes "xmas_basement_passage: " + @xmas_basement_passage;
     mes "xmas_thrown_out: " + @xmas_thrown_out;
+    mes "xmas_hard_mode: " + @xmas_hard_mode;
     next;
     mes "xmas_sweater: " + @xmas_sweater;
     mes "xmas_cap: " + @xmas_cap;
@@ -132,11 +128,24 @@ L_XmasKarma:
     mes "Karma (0-15) 0: Naughty, 15: Good";
     input @xmas_karma;
     set XMASTIME, (XMASTIME & ~(NIBBLE_1_MASK) | (@xmas_karma << NIBBLE_1_SHIFT));
-    goto L_CLose;
+    goto L_Close;
+
+L_SetAllLists:
+    set XMASTIME, XMASTIME | $@xmas_all_lists_bit;
+    set @xmas_state, $@xmas_list_complete_state;
+    callfunc "XmasSetState";
+    goto L_Close;
+
+L_SetAllHelpers:
+    set XMASTIME, XMASTIME | $@xmas_all_helpers_bit;
+    set @xmas_state, $@xmas_helpers_done_state;
+    callfunc "XmasSetState";
+    goto L_Close;
 
 L_Close:
     set @xmas_state, 0;
     set @xmas_karma, 0;
+    set @xmas_hard_mode, 0;
     set @xmas_time_key_smonth, 0;
     set @xmas_time_key_emonth, 0;
     set @xmas_time_key_rsday, 0;
