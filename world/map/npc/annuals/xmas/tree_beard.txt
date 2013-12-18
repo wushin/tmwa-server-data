@@ -47,6 +47,12 @@
     end;
 }
 
+function|script|SpawnMobs|,
+{
+    cmdothernpc "XmasSpawnManager", "SpawnStart";
+    return;
+}
+
 function|script|PresentHandler|,
 {
     if($@xmas_time == $@xmas_reward_time)

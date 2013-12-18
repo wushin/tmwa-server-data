@@ -223,19 +223,22 @@ OnInit:
     set $@xmas_required_helpers_count, (getarraysize($@xmas_helper_list) / 2);
 
     // MobManager
-    setarray $@xmas_mob_names$, "Candied Slime", "Candied Slime", "Santa Slime", "Candied Slime";
-    setarray $@xmas_mob_spawns, "1111", "1111", "1015", "1111";
+    setarray $@xmas_mob_names$, "Santa Slime", "Candied Slime", "Candied", "Candied Slime";
+    setarray $@xmas_mob_spawns, "1015", "1111", "1111", "1111";
+    setarray $@xmas_mob_counts, 10, 5, 5, 5;
     setarray $@xmas_map_spawns$, "019-1.gat", "019-3.gat", "030-1.gat", "030-3.gat";
     if(getarraysize($@xmas_mob_spawns) != getarraysize($@xmas_map_spawns$))
         gmcommand @mapexit;
     if(getarraysize($@xmas_mob_names$) != getarraysize($@xmas_map_spawns$))
+        gmcommand @mapexit;
+    if(getarraysize($@xmas_mob_counts) != getarraysize($@xmas_map_spawns$))
         gmcommand @mapexit;
 
     set $@xmas_spawn_x1, 54;
     set $@xmas_spawn_y1, 48;
     set $@xmas_spawn_x2, 79;
     set $@xmas_spawn_y2, 89;
-    set $@xmas_spawn_count, 4;
+    set $@xmas_respawn_count, 10;
 
     if($@xmas_debug == $@xmas_event_time)
         goto L_EventTime;
@@ -262,7 +265,7 @@ L_RewardTime:
 
 L_Return:
     callfunc "ReplaceTrees";
-    callfunc "XmasSpawnManager";
+    callfunc "SpawnMobs";
     callfunc "PresentHandler";
     end;
 }

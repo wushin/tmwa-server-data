@@ -84,7 +84,7 @@ L_Time:
         set $@xmas_time, $@xmas_no_event_time;
 
     callfunc "ReplaceTrees";
-    callfunc "XmasSpawnManager";
+    callfunc "SpawnMobs";
     callfunc "PresentHandler";
     goto L_Close;
 
