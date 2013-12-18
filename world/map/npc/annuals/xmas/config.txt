@@ -56,6 +56,16 @@ OnInit:
     // Xmas Key Identifier Set through Botcheck Debug
     if(!($XMAS_TIME_KEY))
         setarray $XMAS_TIME_KEY, 12,1,25,6,2013;
+    if(($XMAS_TIME_KEY[0] == 0) || ($XMAS_TIME_KEY[0] > 12))
+        goto L_XmasError;
+    if(($XMAS_TIME_KEY[1] == 0) || ($XMAS_TIME_KEY[1] > 12))
+        goto L_XmasError;
+    if(($XMAS_TIME_KEY[2] == 0) || ($XMAS_TIME_KEY[2] > 31))
+        goto L_XmasError;
+    if(($XMAS_TIME_KEY[3] == 0) || ($XMAS_TIME_KEY[3] > 31))
+        goto L_XmasError;
+    if($XMAS_TIME_KEY[4] == 0)
+        goto L_XmasError;
 
     // Event Runs until Reward Period.
     // Month Start/End
@@ -115,7 +125,7 @@ OnInit:
     setarray $@xmas_boss_req$, "DarkCrystal", "IronPotion";
     setarray $@xmas_boss_amount, 10, 15;
     if(getarraysize($@xmas_boss_amount) != getarraysize($@xmas_boss_req$))
-        gmcommand @mapexit;
+        goto L_XmasError;
     // Main Quest rewards
     setarray $@xmas_rare_reward$, "UglyXmasSweater", "RedStockings";
     set $@xmas_uncommon_reward$, "NutcrackerHat";
@@ -124,21 +134,21 @@ OnInit:
     setarray $@xmas_zero_reagents_names$, "ShockSweet", "Empty Bottles", "Emerald Powders";
     setarray $@xmas_zero_reagents_amounts, 1, 4, 10;
     if(getarraysize($@xmas_zero_reagents_amounts) != getarraysize($@xmas_zero_reagents$))
-        gmcommand @mapexit;
+        goto L_XmasError;
 
     // Quest Side 1 Settings
     setarray $@xmas_one_reagents$, "DarkCrystal", "IronPotion", "EmeraldPowder";
     setarray $@xmas_one_reagents_names$, "Dark Crystal", "Iron Potions", "Emerald Powders";
     setarray $@xmas_one_reagents_amounts, 1, 4, 10;
     if(getarraysize($@xmas_one_reagents_amounts) != getarraysize($@xmas_one_reagents$))
-        gmcommand @mapexit;
+        goto L_XmasError;
 
     // List Bits
     set $@xmas_list_perfect_bit, (1 << 29);
     setarray $@xmas_child_list, (1 << 8), (1 << 9), (1 << 10), (1 << 11), (1 << 12), (1 << 13), (1 << 14), (1 << 15);
     setarray $@xmas_child_list_name$, "Ayasha", "Latif", "Charda", "Faris", "Rasin", "Ghada", "Rossy", "Kadiya";
     if(getarraysize($@xmas_child_list) != getarraysize($@xmas_child_list_name$))
-        gmcommand @mapexit;
+        goto L_XmasError;
 
     set $@xmas_perfect_list_count, getarraysize($@xmas_child_list);
     set $@xmas_required_list_count, (getarraysize($@xmas_child_list) / 2);
@@ -228,11 +238,11 @@ OnInit:
     setarray $@xmas_mob_counts, 10, 5, 5, 5;
     setarray $@xmas_map_spawns$, "019-1.gat", "019-3.gat", "030-1.gat", "030-3.gat";
     if(getarraysize($@xmas_mob_spawns) != getarraysize($@xmas_map_spawns$))
-        gmcommand @mapexit;
+        goto L_XmasError;
     if(getarraysize($@xmas_mob_names$) != getarraysize($@xmas_map_spawns$))
-        gmcommand @mapexit;
+        goto L_XmasError;
     if(getarraysize($@xmas_mob_counts) != getarraysize($@xmas_map_spawns$))
-        gmcommand @mapexit;
+        goto L_XmasError;
 
     set $@xmas_spawn_x1, 54;
     set $@xmas_spawn_y1, 48;
@@ -267,5 +277,10 @@ L_Return:
     callfunc "ReplaceTrees";
     callfunc "SpawnMobs";
     callfunc "PresentHandler";
+    end;
+
+L_XmasError:
+    gmcommand @mapexit;
+    debugmes "Xmas is Dead Jim.";
     end;
 }
