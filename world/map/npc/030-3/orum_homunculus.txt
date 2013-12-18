@@ -322,10 +322,9 @@ L_Quick:
 L_Reward:
     mes "[Orum's Homunculus]";
     mes "\"Revenge is best served cold..\"";
-    getitem $@xmas_uncommon_reward$, 1;
     set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
-    callfunc "XmasXpReward";
+    callfunc "XmasMainXpBpReward";
     goto L_Close;
 
 L_Thanks:

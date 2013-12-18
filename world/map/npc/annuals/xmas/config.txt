@@ -127,8 +127,8 @@ OnInit:
     if(getarraysize($@xmas_boss_amount) != getarraysize($@xmas_boss_req$))
         goto L_XmasError;
     // Main Quest rewards
-    setarray $@xmas_rare_reward$, "UglyXmasSweater", "RedStockings";
-    set $@xmas_uncommon_reward$, "NutcrackerHat";
+    setarray $@xmas_rare_reward$, "DarkChristmasSweater", "FunkyChristmasSweater";
+    setarray $@xmas_uncommon_reward$, "NutcrackerHat", "AmberChristmasSweater", "RedStockings", "PinkChristmasSweater", "BlueChristmasSweater";
     // Quest Side 0 Settings
     setarray $@xmas_zero_reagents$, "ShockSweet", "EmptyBottle", "EmeraldPowder";
     setarray $@xmas_zero_reagents_names$, "ShockSweet", "Empty Bottles", "Emerald Powders";

@@ -92,13 +92,8 @@ function|script|XmasSetBossHero|,
     return;
 }
 
-function|script|XmasReward|,
+function|script|XmasSetReward|,
 {
-    if(($@xmas_time == $@xmas_reward_time) && (@xmas_reward_start_state))
-        goto L_FinalGift;
-    goto L_Return;
-
-L_FinalGift:
     set @xmas_endgame, 0;
     set @xmas_reward_side, 0;
     set @xmas_reward_tally, 0;
@@ -122,8 +117,14 @@ L_SetRewardBonus:
         set @xmas_reward_tally, (@xmas_reward_tally + $@xmas_reward_all_helpers);
     if(@xmas_all_lists)
         set @xmas_reward_tally, (@xmas_reward_tally + $@xmas_reward_all_lists);
-
     set @xmas_reward, (rand((@xmas_reward_tally + (readparam(bLuk) / 10)) * 2));
+    return;
+}
+
+function|script|XmasMainXpBpReward|,
+{
+    callfunc "XmasSetReward";
+
     if(BaseLevel < 99)
         goto L_EndGameReward;
     goto L_LevelingReward;
@@ -143,14 +144,24 @@ L_XmasLevel:
 
 L_XmasExp:
     getexp (@xmas_reward * BaseLevel * ((BaseLevel + 10)/10)), 0;
-    goto L_XmasPrize;
+    return;
+}
 
-L_XmasPrize:
+function|script|XmasMainItemReward|,
+{
+    callfunc "XmasSetReward";
+
+    if(($@xmas_time == $@xmas_reward_time) && (@xmas_reward_start_state))
+        goto L_FinalGift;
+    goto L_Return;
+
+L_FinalGift:
     set @xmas_reward, (@xmas_reward + ((BaseLevel + 10)/10));
+    set @xmas_uncommon_slot, rand((getarraysize($@xmas_uncommon_reward$) - 1));
     if(@xmas_reward >= 90)
         getitem $@xmas_rare_reward$[@xmas_reward_side], 1;
     if(@xmas_reward < 90)
-        getitem $@xmas_uncommon_reward$[@xmas_reward_side], 1;
+        getitem $@xmas_uncommon_reward$[@xmas_uncommon_slot], 1;
     goto L_Return;
 
 L_Return:
