@@ -13,7 +13,7 @@
 
 L_OffSeason:
     mes "[Veneri]";
-    mes "\"I should take this time off to go see the doctor in Hurnscald about whether or not I have Glitter Lung.\"";
+    mes "\"I should take this time off to go see the doctor in Hurnscald about whether or not I have glitter lung.\"";
     goto L_Close;
 
 L_XmasMain:
@@ -28,11 +28,10 @@ L_XmasMain:
 L_Helping:
     mes "[Veneri]";
     mes "\"Hello. We have some problems here. Something went wrong with the shipment of the ingredients for our decoration glitter.";
-    mes "Could you bring me " + $@xmas_red_amount + " Ruby Powders and " + $@xmas_yellow_amount + " Topaz Powders?\"";
+    mes "Would you be so kind and get me " + $@xmas_red_amount + " Ruby Powders and " + $@xmas_yellow_amount + " Topaz Powders?\"";
     next;
     mes "[Veneri]";
-    mes "\"But make sure it is really gempowder and not some kind of cheap replacement.";
-    mes "You know, our decoration glitter is intensified by some magic, and that only works with real gempowders. Otherwise it'll lose its effect after a while.\"";
+    mes "\"This material has proven to have the quality we need to make our christmas magic last until it can sparkle under every christmas tree. Sadly we made some bad experience in the past. Please make sure you only bring class A powders.\"";
     set XMASTIME, XMASTIME | $@xmas_helper_bit_glitter_starts;
     goto L_Close;
 
@@ -42,16 +41,16 @@ L_Powder:
     if ((countitem("RubyPowder") >= $@xmas_red_amount) && (countitem("TopazPowder") >= $@xmas_yellow_amount) && (countitem("RedPowder") >= $@xmas_red_amount) && (countitem("YellowPowder") >= $@xmas_yellow_amount))
         menu
             "Yeah, here it is. (Give the gem powders.)",L_GemPowders,
-            "Sure, here it is. (Give the fake powders.)",L_FakePowders,
-            "No, I'm still working on that.",L_Close;
+            "Sure, here you go. (Give the fake powders.)",L_FakePowders,
+            "No, I am still working on that.",L_Close;
     if ((countitem("RubyPowder") >= $@xmas_red_amount) && (countitem("TopazPowder") >= $@xmas_yellow_amount))
         menu
             "Yeah, here it is. (Give the gem powders.)",L_GemPowders,
-            "No, I'm still working on that.",L_Close;
+            "No, I am still working on that.",L_Close;
     if ((countitem("RedPowder") >= $@xmas_red_amount) && (countitem("YellowPowder") >= $@xmas_yellow_amount))
         menu
             "Sure, here it is. (Give the fake powders.)",L_FakePowders,
-            "No, I'm still working on that.",L_Close;
+            "No, I am still working on that.",L_Close;
     goto L_Close;
 
 L_GemPowders:
@@ -77,7 +76,7 @@ L_FakePowders:
     set @karma_bonus, $@xmas_karma_bonus;
     callfunc "XmasNaughty";
     callfunc "XmasXpReward";
-    mes "He doesn't notice that you're giving him fake powders.";
+    mes "It seems like he didn't notice that the powder you gave him is bogus.";
     mes "[Veneri]";
     mes "\"Excellent! Thank you very much.\"";
     goto L_Close;

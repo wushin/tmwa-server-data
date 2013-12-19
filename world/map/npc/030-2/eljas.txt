@@ -29,59 +29,62 @@ L_HaveList:
     next;
     mes "\"What brings you here?\"";
     menu
-        "What were the names again?", L_ListNames,
-        "I have Santa's List.", L_SantasList,
+        "What were the childrens names again?", L_ListNames,
+        "Look, I have Santa's List.", L_SantasList,
         "I have Santa's List.(Fake List)", L_SantasFakeList,
-        "Christmas.", L_Christmas,
-        "Magical Reasech.", L_Research,
-        "I have to go.", L_Close;
+        "Christmas?", L_Christmas,
+        "I am interested in Magical Resaech.", L_Research,
+        "Nothing, I have to go.", L_Close;
 
 L_NeedList:
     mes "[Eljas]";
-    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic happen.\"";
+    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic of the holidays happen.\"";
     next;
-    mes "\"What brings you here?\"";
+    mes "\"So what brings you here my dear?\"";
     menu
-        "Need any help this year?", L_StartQuest,
-        "Christmas.", L_Christmas,
-        "Magical Reasech.", L_Research,
-        "I have to go.", L_Close;
+        "Do you need any help this year?", L_StartQuest,
+        "It is Christmas and I am curious...", L_Christmas,
+        "Magical research.", L_Research,
+        "Mmh? Nothing, I have to go.", L_Close;
 
 L_OffSeason:
     mes "[Eljas]";
-    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic happen.\"";
+    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic of the holidays happen.\"";
     next;
-    mes "\"What brings you here?\"";
+    mes "\"And what brings you here?\"";
     menu
         "Christmas.", L_Christmas,
-        "Magical Reasech.", L_Research,
-        "I have to go.", L_Close;
+        "Magical research.", L_Research,
+        "Och, nothing. I have to go.", L_Close;
 
 L_StartQuest:
-    mes "\"Why yes we do.\"";
-    mes "\"It appears we are missing some of the list from the children in the world.\"";
+    mes "\"Why yes! Of courrse we do!\"";
+    next;
+    mes "\"It appears we are missing some of the wish list from the children from all over the Mana World.\"";
     mes "\"Let me check here...\"";
     next;
     mes "\"Ah ha, here we go.\"";
-    mes "\"The missing lists are;";
+    mes "\"The missing wish lists are:";
     callfunc "XmasListList";
-    mes "\"If you can find these children, please bring thier lists back.\"";
-    mes "\"Come back and see me when your done.\"";
+    mes "\"If you can find these children, please bring their lists back to me.\"";
+    mes "\"Thank you for helping out!\"";
+    mes "He looks up from his notes and gives you a broad smile";
     next;
     set @xmas_state, $@xmas_list_gather_state;
     callfunc "XmasSetState";
     goto L_Close;
 
 L_ListNames:
-    mes "\"The missing lists are;";
+    mes "He checks a piece of paper on his desk...";
+    mes "\"Mmh... the missing lists are:";
     callfunc "XmasListList";
-    mes "\"If you can find these children, please bring thier lists back.\"";
+    mes "\"If you can find these children, please bring their lists back.\"";
     goto L_Close;
 
 L_SantasList:
     if(!(@xmas_list_complete))
         goto L_NotComplete;
-    mes "\"Please take The List to Chief Warrick on the next floor.\"";
+    mes "\"Awesome! Now please take those lists to Chief Warrick on the next floor.\"";    
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNice";
     set @xmas_state, $@xmas_list_deliver_state;
@@ -92,9 +95,9 @@ L_SantasList:
 L_SantasFakeList:
     if(!(@xmas_list_complete))
         goto L_NotComplete;
-    mes "\"What a second... whats that aura...\"";
-    mes "\"THIS ISN'T THE REAL LIST!\"";
-    mes "\"Gaurds! Toss this Naughty one outside!\"";
+    mes "\"Wait a second... whats that aura...\"";
+    mes "\"THESE ARE NOT THE REAL LISTS!\"";
+    mes "\"Gaurds! Toss this naughty one outside!\"";
     next;
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNaughty";
@@ -106,16 +109,16 @@ L_SantasFakeList:
     goto L_NotWelcome;
 
 L_NotComplete:
-    mes "\"Hrmm... Even I can tell thats not the amount we are missing.\"";
+    mes "\"Hrmm... Even I can tell that you did not bring all the lists we are missing.\"";
     goto L_ListNames;
 
 L_SeeChief:
-    mes "\"Please take The List to Chief Warrick on the next floor.\"";
+    mes "\"Please take those lists to Chief Warrick on the next floor.\"";
     goto L_Close;
 
 L_Christmas:
     mes "\"All year round we work hard to make toys and repair our help for each years event.\"";
-    mes "\"Ask Chief Warrick on the next Floor, He's the shop foreman, people are always looking to him to find extra help.\"";
+    mes "\"Ask Chief Warrick on the next floor, He is the shop foreman, people are always looking to him to find extra help.\"";
     next;
     goto L_Close;
 

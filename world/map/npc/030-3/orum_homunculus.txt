@@ -17,7 +17,7 @@ L_XmasMain:
 L_Telepathy:
     mes "[Orum's Homunculus]";
     mes "\"Not that way!\"";
-    mes "\"Go through the southern most exit.\"";
+    mes "\"Use the southernmost exit.\"";
     close;
 
 L_End:
@@ -40,7 +40,7 @@ L_XmasMain:
 L_Telepathy:
     mes "[Orum's Homunculus]";
     mes "\"That is the long way!\"";
-    mes "\"Just go south from here to the southern most exit.\"";
+    mes "\"Just go south from here to the southernmost exit.\"";
     close;
 
 L_End:
@@ -62,8 +62,8 @@ L_XmasMain:
 
 L_Telepathy:
     mes "[Orum's Homunculus]";
-    mes "\"Ok, you are getting closer, I can feel it.!\"";
-    mes "\"Your heading in the right direction to the southern most exit.\"";
+    mes "\"Ok. You are getting closer, I can feel it!\"";
+    mes "\"You are heading in the right direction - to the southern most exit.\"";
     close;
 
 L_End:
@@ -108,8 +108,8 @@ L_XmasMain:
 
 L_Telepathy:
     mes "[Orum's Homunculus]";
-    mes "\"Wrong Way!\"";
-    mes "\"I'm in the north west corner.\"";
+    mes "\"Wrong way!\"";
+    mes "\"I'm in the northwestern corner.\"";
     close;
 
 L_End:
@@ -132,7 +132,7 @@ L_XmasMain:
 L_Telepathy:
     mes "[Orum's Homunculus]";
     mes "\"Wrong Way!\"";
-    mes "\"I'm in the north west corner.\"";
+    mes "\"I am in the northwestern corner.\"";
     close;
 
 L_End:
@@ -155,7 +155,7 @@ L_XmasMain:
 L_Telepathy:
     mes "[Orum's Homunculus]";
     mes "\"Wrong Way!\"";
-    mes "\"I'm in the north west corner.\"";
+    mes "\"I am in the northwestern corner.\"";
     close;
 
 L_End:
@@ -197,12 +197,12 @@ L_QuestStart:
         "No. I really have to go.", L_Close;
 
 L_GatherList:
-    mes "\"Good. You may have heard that some of the childrens lists are missing.\"";
-    mes "\"I sent a courier out to get the lists, but they have yet to return.\"";
+    mes "\"Good. You may have heard that some of the childrens wish lists are missing.\"";
+    mes "\"I sent a courier out to get their lists, but they have yet to return.\"";
     next;
-    mes "\"The missing children's names are;\"";
+    mes "\"Let's see the following children's lists are missing:\"";
     callfunc "XmasListList";
-    mes "\"Go now, come back and see with the lists.\"";
+    mes "\"Would you please go and take a look what happened to them? If you get a list, report back.\"";
     set @xmas_state, $@xmas_list_gather_state;
     callfunc "XmasSetState";
     goto L_Close;
@@ -211,14 +211,14 @@ L_HaveList:
     mes "[Orum's Homunculus]";
     mes "\"Have you got the missing lists?\"";
     menu
-        "What were the names again?", L_ListNames,
+        "What were those names again?", L_ListNames,
         "Yes.", L_SantasList,
-        "no.", L_Close;
+        "No.", L_Close;
 
 L_ListNames:
     mes "\"The missing children's names are;\"";
     callfunc "XmasListList";
-    mes "\"Go now, come back and see with the lists.\"";
+    mes "\"Go now, and come back when you have the lists.\"";
     goto L_Close;
 
 L_NotComplete:
@@ -230,7 +230,7 @@ L_SantasList:
         goto L_NotComplete;
     mes "\"Take the altered list to Elijas.\"";
     menu
-        "I don't know, this sounds kinda of naughty.",-;
+        "I don't know, this sounds kind of naughty.",-;
     mes "\"Do my bidding or I'll have no more words with you.\"";
     goto L_Close;
 
@@ -238,20 +238,20 @@ L_ListReturn:
     mes "[Orum's Homunculus]";
     mes "\"This had better be important, I've got enough to worry about.\"";
     menu
-        "Sorry for interrupting, but I've came down here because I delivered the fake list", -;
-    mes "he Stares blankly at you for a bit... ";
+        "Sorry for interrupting, but I've come down here because I delivered the fake list", -;
+    mes "he stares blankly at you for a bit... ";
     next;
     mes "\"MUHAHAHAHAHAHAA!!\"";
     next;
     mes "\"I see. Mighty naughty, I bet they tossed you out?\"";
     mes "\"I was wondering if you would have any interest in continuing to do so?\"";
-    mes "\"I do have the power to reward you hansomely for your naughtiness.\"";
+    mes "\"I do have the power to reward you handsomely for your naughtiness.\"";
     next;
     mes "\"You see the Christmas Inn and it's insufferable happiness and joy they spread makes dark magic users sick.\"";
-    mes "\"Well this year I struck back. I managed to make it inside and snatch their mana battery that powers their precious Nutcrackers. Then ruin their back stock with the Nutcrackers powered down.\"";
+    mes "\"Well this year I struck back. I managed to make it inside and snatch their mana battery that powers their precious nutcrackers. Then ruin their back stock with the nutcrackers powered down.\"";
     next;
-    mes "\"The sages showed up and had me tossed out. They created some kind of barrier to toss the naughties out.\"";
-    mes "\"They may have blocked my aura, but didn't crush my spirit. Mainly because those fools didn't discover my portal I created into the Inn's basement.\"";
+    mes "\"The sages showed up and had me tossed out. It seems like they also created some kind of barrier to toss our kind, saying those of a truely evil heart, out.\"";
+    mes "\"They may have blocked my aura, but surely didn't crush my spirit. Mainly because those fools didn't discover the portal I created into the Inn's basement.\"";
     next;
     mes "\"Muhahahaha\"";
     next;
@@ -263,9 +263,13 @@ L_ListReturn:
 
 L_Start:
     callfunc "SabotageList";
-    mes "\"So far basement portal has remained undetected. Head to the east in this cave to find it.\"";
+    mes "\"Excellent.\"";
+    mes "\"Now listen:\"";
+    next;
+    mes "\"So far my basement portal has remained undetected:";
+    mes "Head to the east in this cave to find it.\"";
     mes "\"Once there smash your fist into the small crack and you will be teleported into the basement of the inn.\"";
-    mes "\"Now, Prove yourself, gather the required items and go back to the Inn to sabotage Santa's Helpers.\"";
+    mes "\"Now, prove yourself, gather the required items and go back to the Inn to sabotage Santa's Helpers.\"";
     callfunc "XmasThrowOut";
     callfunc "XmasSetSide";
     set XMASTIME, XMASTIME | $@xmas_basement_passage;
@@ -275,8 +279,8 @@ L_Start:
 
 L_HelperQuest:
     mes "[Orum's Homunculus]";
-    mes "\"Welcome Back!\"";
-    mes "\"How is the Sabotage coming along?\"";
+    mes "\"Welcome back!\"";
+    mes "\"How is the sabotage coming along?\"";
     menu
         "I need some powders made.", L_MakePowders,
         "It's a mess.", L_Continue,
@@ -327,8 +331,8 @@ L_CheckReagents:
     next;
     mes "You watch as he puts equal amounts of emerald powder into each of the iron potions.";
     mes "He methodically crushes up the dark crystal and speads it amongst the potions.";
-    mes "He posisitions the four potions in a stand so all the openings are mostly facing each other.";
-    mes "He Begins to chant.";
+    mes "He positions the four potions in a stand so all the openings are mostly facing each other.";
+    mes "He begins to chant.";
     next;
     mes "[Orum's Homunculus]";
     mes "O";
@@ -355,6 +359,7 @@ L_CheckReagents:
     next;
     mes "\"Phew! That takes alot out of a person.\"";
     mes "\"I'm in no condition to go anywhere.\"";
+    next;
     mes "\"Take the Mana Battery and install it in the warehouse.\"";
     mes "\"It's found behind Chief Warrick\"";
     set @xmas_state, $@xmas_boss_door_open_state;
@@ -382,11 +387,11 @@ L_Thanks:
     goto L_Close;
      
 L_NotEnough:
-    mes "\"Come back with the components or not at all.\""; 
+    mes "\"Come back with the components or don't come back at all.\""; 
     goto L_Close;
 
 L_ThankYou:
-    mes "\"Now I'm the one in power of the Inn. You did well minion.\"";
+    mes "\"Now I'm the one in power of the Inn. You did well my minion.\"";
     goto L_Close;
 
 L_Close:
