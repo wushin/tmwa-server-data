@@ -31,16 +31,13 @@ L_Helping:
     next;
     mes "\"For this reason I have to ask you to leave and come back some at some more convenient time.\"";
     menu
-        "But I want to see Santa!",-,
-        "I'm so excited! This is really Santa's house?",-,
-        "This is not very friendly. Isn't Christmas about love and happiness and all?",-;
+        "Availa Sent me. She said you should have me help out.",-;
     mes "Warrick sighs.";
     next;
     mes "[Chief Warrick]";
-    mes "\"Usually we'd be more obliging. But this year - our preparations for Christmas -";
-    mes "Everything is going wrong, we're missing ingredients for the Christmas candy and material for the toys.";
-    mes "The lists about the good and bad kids got mixed up, everything is in utter confusion.";
-    mes "And to make matters worse some of the reinboos are missing!\"";
+    mes "\"Everything is going wrong, we're missing ingredients for the Christmas candy and material for the toys.";
+    mes "The lists got lost, we are running low on supplies, everything is in utter confusion.";
+    mes "And to make matters worse some of the presents are missing!\"";
     next;
     mes "\"Oh, please excuse me. I didn't mean to moan.";
     mes "However, as you can see we have to deal with some serious problems here.";
