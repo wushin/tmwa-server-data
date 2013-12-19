@@ -63,7 +63,8 @@ L_StartQuest:
     mes "\"Let me check here...\"";
     next;
     mes "\"Ah ha, here we go.\"";
-    mes "\"The missing lists are Ayasha, Latif, Charda, Faris, Rasin, Ghada, Rossy, Kadiya\"";
+    mes "\"The missing lists are;";
+    callfunc "XmasListList";
     mes "\"If you can find these children, please bring thier lists back.\"";
     mes "\"Come back and see me when your done.\"";
     next;
@@ -72,7 +73,8 @@ L_StartQuest:
     goto L_Close;
 
 L_ListNames:
-    mes "\"The missing lists are Ayasha, Latif, Charda, Faris, Rasin, Ghada, Rossy, Kadiya\"";
+    mes "\"The missing lists are;";
+    callfunc "XmasListList";
     mes "\"If you can find these children, please bring thier lists back.\"";
     goto L_Close;
 
