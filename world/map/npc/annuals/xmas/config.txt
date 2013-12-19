@@ -208,10 +208,10 @@ OnInit:
     set $@xmas_bad_cost, 12;
     set $@xmas_bad_count, 3;
 
-    set $@xmas_bad_name$, "ShockSweet";
-    set $@xmas_bad_friendly_name$, "Shock Sweet";
-    set $@xmas_bad_money, 2000;
-    set $@xmas_bad_exp, 500;
+    set $@xmas_bad_name$, "Apple";
+    set $@xmas_bad_friendly_name$, "Apples";
+    set $@xmas_bad_money, 500;
+    set $@xmas_bad_exp, 200;
     
     //Boss Fight Reward
     set $@xmas_boss_bp, 50;

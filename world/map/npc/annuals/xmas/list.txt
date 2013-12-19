@@ -80,3 +80,23 @@ L_Return:
     set @karma_bonus, 0;
     return;
 }
+
+function|script|XmasListList|,
+{
+    set @xmas_list_loop, 0;
+
+L_Loop:
+    mes "\"" + $@xmas_child_list_name$[@xmas_list_loop] + "\"";
+    next;
+    goto L_LoopAgain;
+
+L_LoopAgain:
+    if((@xmas_list_loop + 1) == getarraysize($@xmas_child_list_name$))
+        goto L_Return;
+    set @xmas_list_loop, (@xmas_list_loop + 1);
+    goto L_Loop;
+
+L_Return:
+    set @xmas_list_loop, 0;
+    return;
+}
