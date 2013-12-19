@@ -192,11 +192,11 @@ L_NextWave:
         areamonster "030-4.gat", 0, 0, 50, 50, "", 1114, $@XmasBossRound*2 + $@XmasBossPlayerCount*5, "AniManOMat::OnGuardDeath";
     //Normal Waves 1 to 10
     // Guard Amount doubles if on hard mode
-    set $@GuardAmount, 1 + (($@XmasBossRound * $@XmasBossPlayerCount / 2) * (1 + (($@XmasBattleStatus - 1) % 2))) / 2;
-    set $@SkullAmount, $@GuardAmount + ($@GuardAmount * $@GuardAmount) / 4;
+    set $@GuardAmount, 1 + (5 + ($@XmasBossRound) + (2 * $@XmasBossPlayerCount)) / 4;
+    set $@SkullAmount, 1 + ($@GuardAmount * $@GuardAmount) / 5;
     
-    if ($@GuardAmount > 10)
-        set $@GuardAmount, 10;
+    if ($@GuardAmount > 15)
+        set $@GuardAmount, 15;
     
     //Obliatory Guard Of Honour in the Southern Hallway
     areamonster "030-4.gat", 30, 43, 39, 49, "", 1114, $@GuardAmount, "AniManOMat::OnGuardDeath";
@@ -214,9 +214,9 @@ L_NextWave:
         areamonster "030-4.gat", 41, 32, 49, 49, "", 1109, $@SkullAmount, "AniManOMat::OnGuardDeath";
     //Candied Slimes for Nice Mode in Rooms 1 and 2
     if ($@XmasBattleStatus == 1 || $@XmasBattleStatus == 2)
-        areamonster "030-4.gat", 20, 21, 28, 28, "", 1111, $@XmasBossRound + ($@XmasBossRound / 2), "AniManOMat::OnGuardDeath";
+        areamonster "030-4.gat", 20, 21, 28, 28, "", 1111, $@XmasBossRound + 1, "AniManOMat::OnGuardDeath";
     if ($@XmasBattleStatus == 1 || $@XmasBattleStatus == 2)
-        areamonster "030-4.gat", 41, 21, 49, 28, "", 1111, $@XmasBossRound + ($@XmasBossRound / 2), "AniManOMat::OnGuardDeath";
+        areamonster "030-4.gat", 41, 21, 49, 28, "", 1111, $@XmasBossRound + 1, "AniManOMat::OnGuardDeath";
     //Bluepars for Easy mode in Naughty Variant in Rooms 3,4,5,6
     if ($@XmasBattleStatus == 3)
         areamonster "030-4.gat", 20, 32, 28, 49, "", 1107, $@SkullAmount, "AniManOMat::OnGuardDeath";
@@ -226,7 +226,7 @@ L_NextWave:
     if ($@XmasBattleStatus == 3 || $@XmasBattleStatus == 4)
         areamonster "030-4.gat", 20, 21, 28, 28, "", 1106, $@XmasBossRound + ($@XmasBossRound / 2), "AniManOMat::OnGuardDeath";
     if ($@XmasBattleStatus == 3 || $@XmasBattleStatus == 4)
-        areamonster "030-4.gat", 41, 21, 49, 28, "", 1106, $@XmasBossRound + ($@XmasBossRound / 2), "AniManOMat::OnGuardDeath";
+        areamonster "030-4.gat", 41, 21, 49, 28, "", 1106, $@XmasBossRound, "AniManOMat::OnGuardDeath";
 
     set $@msgnumber, (2 * $@XmasBossRound) + (($@XmasBattleStatus - 1) >> 1);
     set $@msg$, $@XmasBossMes$[ $@msgnumber ];
