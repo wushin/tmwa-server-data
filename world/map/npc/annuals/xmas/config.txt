@@ -208,8 +208,8 @@ OnInit:
     set $@xmas_bad_cost, 12;
     set $@xmas_bad_count, 3;
 
-    set $@xmas_bad_name$, "Apple";
-    set $@xmas_bad_friendly_name$, "Apples";
+    set $@xmas_bad_name$, "RedApple";
+    set $@xmas_bad_friendly_name$, "Red Apples";
     set $@xmas_bad_money, 500;
     set $@xmas_bad_exp, 200;
     

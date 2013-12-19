@@ -23,7 +23,6 @@ L_ZeroLoopAgain:
     goto L_ZeroLoop;
 
 L_OneLoop:
-    debugmes $@xmas_one_reagents_amounts[@xmas_reagent_loop];
     if(countitem($@xmas_one_reagents$[@xmas_reagent_loop]) >= $@xmas_one_reagents_amounts[@xmas_reagent_loop])
         goto L_OneLoopAgain;
     goto L_Return;
@@ -145,14 +144,14 @@ function|script|SabotageList|,
 {
     mes "\"I'll need you to gather me some items required to sabatoge the helpers.\"";
     next;
-    mes "\"To replace the glitter we will need get " + ($@xmas_red_amount + $@xmas_yellow_amount) + ", " + $@xmas_red_amount + " and " + $@xmas_yellow_amount + "\"";
+    mes "\"To replace the glitter we will need get " + ($@xmas_red_amount + $@xmas_yellow_amount) + " Piles of Ash, " + $@xmas_red_amount + " Red Dyes and " + $@xmas_yellow_amount + " Yellow Dyes\"";
     mes "\"Bring them here and I can instruct you how to mix them into a powder that will loose it's shine before it arrives. They will be too busy to notice at this time of year before it's already too late.\"";
     next;
-    mes "\"To replace the packing material we need to get some cotton cloth.\"";
+    mes "\"To replace the packing material we need to get some Cotton Cloth.\"";
     mes "\"That will will rattle of few cages, when the presents rattle and the gifts break.\"";
     next;
     mes "\"You can also give them " + $@xmas_bad_friendly_name$ + " for their candy storage.\"";
-    mes "\"That will take a bite into the holiday cheer.\"";
+    mes "\"That will take a bite out of their holiday cheer.\"";
     next;
     return;
 }
