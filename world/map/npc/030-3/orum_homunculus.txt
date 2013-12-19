@@ -1,0 +1,345 @@
+// Annual Xmas
+// Author: Wushin
+
+019-3.gat,79,26,0|script|#OrumTelepathy1|45,3,3,
+{
+    callfunc "XmasStates";
+
+    if($@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_End;
+
+L_XmasMain:
+    if(@xmas_state == $@xmas_list_deliver_state)
+        goto L_Telepathy;
+    goto L_End;
+
+L_Telepathy:
+    mes "[Orum's Homunculus]";
+    mes "\"Not that way!\"";
+    mes "\"Go through the southern most exit.\"";
+    close;
+
+L_End:
+    end;
+}
+
+019-3.gat,104,63,0|script|#OrumTelepathy2|45,1,1,
+{
+    callfunc "XmasStates";
+
+    if($@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_End;
+
+L_XmasMain:
+    if(@xmas_state == $@xmas_list_deliver_state)
+        goto L_Telepathy;
+    goto L_End;
+
+L_Telepathy:
+    mes "[Orum's Homunculus]";
+    mes "\"Thats the long way!\"";
+    mes "\"Just go south from here to the southern most exit.\"";
+    close;
+
+L_End:
+    end;
+}
+
+019-3.gat,102,91,0|script|#OrumTelepathy3|45,3,3,
+{
+    callfunc "XmasStates";
+
+    if($@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_End;
+
+L_XmasMain:
+    if(@xmas_state == $@xmas_list_deliver_state)
+        goto L_Telepathy;
+    goto L_End;
+
+L_Telepathy:
+    mes "[Orum's Homunculus]";
+    mes "\"Ok, you are getting closer, I can feel it.!\"";
+    mes "\"Your heading in the right direction to the southern most exit.\"";
+    close;
+
+L_End:
+    end;
+}
+
+019-3.gat,81,57,0|script|#OrumTelepathy4|45,3,3,
+{
+    callfunc "XmasStates";
+
+    if($@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_End;
+
+L_XmasMain:
+    if(@xmas_state == $@xmas_list_deliver_state)
+        goto L_Telepathy;
+    goto L_End;
+
+L_Telepathy:
+    mes "[Orum's Homunculus]";
+    mes "\"Ok, you are getting closer, I can feel it.!\"";
+    mes "\"Go take the south west path towards the brazier.\"";
+    close;
+
+L_End:
+    end;
+}
+
+030-3.gat,62,74,0|script|#OrumTelepathy5|45,1,1,
+{
+    callfunc "XmasStates";
+
+    if($@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_End;
+
+L_XmasMain:
+    if(@xmas_state == $@xmas_list_deliver_state)
+        goto L_Telepathy;
+    goto L_End;
+
+L_Telepathy:
+    mes "[Orum's Homunculus]";
+    mes "\"Wrong Way!\"";
+    mes "\"I'm in the north west corner.\"";
+    close;
+
+L_End:
+    end;
+}
+
+030-3.gat,48,73,0|script|#OrumTelepathy6|45,1,1,
+{
+    callfunc "XmasStates";
+
+    if($@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_End;
+
+L_XmasMain:
+    if(@xmas_state == $@xmas_list_deliver_state)
+        goto L_Telepathy;
+    goto L_End;
+
+L_Telepathy:
+    mes "[Orum's Homunculus]";
+    mes "\"Wrong Way!\"";
+    mes "\"I'm in the north west corner.\"";
+    close;
+
+L_End:
+    end;
+}
+
+030-3.gat,55,52,0|script|#OrumTelepathy7|45,1,1,
+{
+    callfunc "XmasStates";
+
+    if($@xmas_time == 1)
+        goto L_XmasMain;
+    goto L_End;
+
+L_XmasMain:
+    if(@xmas_state == $@xmas_list_deliver_state)
+        goto L_Telepathy;
+    goto L_End;
+
+L_Telepathy:
+    mes "[Orum's Homunculus]";
+    mes "\"Wrong Way!\"";
+    mes "\"I'm in the north west corner.\"";
+    close;
+
+L_End:
+    end;
+}
+
+030-3.gat,28,28,0|script|Orum's Homunculus|385,
+{
+    callfunc "XmasHelperPoints";
+    callfunc "CheckReagents";
+    callfunc "XmasStates";
+
+    if($@xmas_time)
+        goto L_XmasMain;
+    goto L_OffSeason;
+
+L_OffSeason:
+    end;
+
+L_XmasMain:
+    if((@xmas_reward_done_state) && (@xmas_side)) goto L_Thanks;
+    if((@xmas_reward_start_state) && (@xmas_side)) goto L_Reward;
+    if((@xmas_boss_door_state) && (@xmas_side)) goto L_Quick;
+    if((@xmas_reagent_done_state) && (@xmas_side)) goto L_PowerReagents;
+    if((@xmas_reagent_start_state) && (@xmas_side)) goto L_PowerReagents;
+    if((@xmas_helper_done_state) && (@xmas_side)) goto L_HelperQuest;
+    if((@xmas_helper_start_state) && (@xmas_side)) goto L_HelperQuest;
+    if(@xmas_list_deliver) goto L_ListReturn;
+    goto L_OffSeason;
+
+L_ListReturn:
+    mes "[Orum's Homunculus]";
+    mes "\"This had better be important, I've got enough to worry about.\"";
+    menu
+        "Sorry for interrupting, but I've been came down here with The List", -;
+    mes "he Stares blankly at you for a bit...";
+    next;
+    mes "\"MUHAHAHAHAHAHAA!!\"";
+    next;
+    mes "\"I see you kept the list for yourself. Mighty naughty, I was wondering if you could continue to do so?\"";
+    mes "\"I do have the power to reward you hansomely for your naughtiness.\"";
+    next;
+    mes "\"You see the Christmas Inn and it's insufferable happiness and joy they spread makes dark magic users sick.\"";
+    mes "\"Well this year I struck back. I managed to make it inside and snatch their mana battery that powers their precious Nutcrackers. Then ruin their back stock with the Nutcrackers powered down.\"";
+    next;
+    mes "\"The sages showed up and had me tossed out. They created some kind of barrier to toss the naughties out.\"";
+    mes "\"They may have blocked my aura, but didn't crush my spirit. Mainly because those fools didn't discover my portal I created into the Inn's basement.\"";
+    next;
+    mes "\"Muhahahaha\"";
+    next;
+    mes "\"I have more plans for both later. Maybe you can help me smash the Christmas Inn once and for all?\"";
+    next;
+    menu
+        "Sure.", L_Start,
+        "No.", L_Close;
+
+L_Start:
+    callfunc "BadPowderList";
+    mes "\"So far basement portal has remained undetected. Head to the east in this cave to find it.\"";
+    mes "\"Once there smash your fist into the small crack and you will be teleported into the basement of the inn.\"";
+    mes "\"Now, Prove yourself, gather the required items and go back to the Inn to sabotage Santa's Helpers.\"";
+    callfunc "XmasThrowOut";
+    callfunc "XmasSetSide";
+    set XMASTIME, XMASTIME | $@xmas_basement_passage;
+    set @xmas_state, $@xmas_helpers_start_state;
+    callfunc "XmasSetState";
+    goto L_Close;
+
+L_HelperQuest:
+    mes "[Orum's Homunculus]";
+    mes "\"Welcome Back!\"";
+    mes "\"How is the Sabotage coming along?\"";
+    menu
+        "I need some powders made.", L_MakePowders,
+        "It's a mess.", L_Continue,
+        "I'd better break some things.", L_Close;
+
+L_MakePowders:
+    callfunc "BadPowderMake";
+    goto L_Close;
+
+L_Continue:
+    if(@xmas_helper_done_state)
+        goto L_ManaBattery;
+    goto L_NotHelpEnough;
+
+L_NotHelpEnough:
+    mes "\"Hrmm... I'm still seeing too much activity up there. You better wreck some more havoc otherwise they might restore the power before us.\"";
+    goto L_Close;
+
+L_ManaBattery:
+    mes "\"Now that we set back the holiday, It's time for the next step in my plan.\"";
+    next;
+    callfunc "ListReagents";
+    mes "\"When you have gathered the required materials please come back and see me.\"";
+    set @xmas_state, $@xmas_reagents_start;
+    callfunc "XmasSetState";
+    callfunc "XmasXpReward";
+    goto L_Close;
+
+L_IngredientList:
+    callfunc "ListReagents";
+    mes "\"When you have gathered the required materials please come back and see me.\"";
+    goto L_Close;
+
+L_PowerReagents:
+    mes "[Orum's Homunculus]";
+    mes "\"Have you gotten the reagents?\"";
+    menu
+        "Yes.", L_CheckReagents,
+        "What were they again?", L_IngredientList,
+        "No.", L_NotEnough;
+
+L_CheckReagents:
+    if(!(@xmas_reagent_done_state))
+        goto L_NotEnough;
+    callfunc "DeleteReagents";
+    mes "\"YES! you have all the required components!\"";
+    mes "\"Now I can create a mind link to the mana battery and control the nutcrackers\"";
+    next;
+    mes "You watch as he puts equal amounts of emerald powder into each of the iron potions.";
+    mes "He methodically crushes up the dark crystal and speads it amongst the potions.";
+    mes "He posisitions the four potions in a stand so all the openings are mostly facing each other.";
+    mes "He Begins to chant.";
+    next;
+    mes "[Orum's Homunculus]";
+    mes "O";
+    next;
+    mes "wat";
+    next;
+    mes "goo";
+    next;
+    mes "siam";
+    next;
+    mes "The potions begin to pulse with mana.";
+    mes "He continues to chant";
+    next;
+    mes "[Orum's Homunculus]";
+    mes "Aye";
+    next;
+    mes "Am";
+    next;
+    mes "Knot";
+    next;
+    mes "Phunee";
+    next;
+    mes "Mana surges to life in the potions";
+    next;
+    mes "\"Phew! That takes alot out of a person.\"";
+    mes "\"I'm in no condition to go anywhere.\"";
+    mes "\"Take the Mana Battery and install it in the warehouse.\"";
+    mes "\"It's found behind Chief Warrick\"";
+    set @xmas_state, $@xmas_boss_door_open_state;
+    callfunc "XmasSetState";
+    callfunc "XmasXpReward";
+    goto L_Close;
+
+L_Quick:
+    mes "[Orum's Homunculus]";
+    mes "\"What are you still doing here?\"";
+    mes "\"Quickly, to the Warhouse.\"";
+    goto L_Close;
+
+L_Reward:
+    mes "[Orum's Homunculus]";
+    mes "\"Revenge is best served cold..\"";
+    set @xmas_state, $@xmas_reward_done;
+    callfunc "XmasSetState";
+    callfunc "XmasMainXpBpReward";
+    goto L_Close;
+
+L_Thanks:
+    mes "[Orum's Homunculus]";
+    mes "\"Please feel free to continue to sabotage whats left of the Inn while I prepare your reward.\"";
+    goto L_Close;
+     
+L_NotEnough:
+    mes "\"Come back with the components or not at all.\""; 
+    goto L_Close;
+
+L_ThankYou:
+    mes "\"Now I'm the one in power of the Inn. You did well minion.\"";
+    goto L_Close;
+
+L_Close:
+    close;
+}
