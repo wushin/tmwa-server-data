@@ -8,19 +8,7 @@
 // for now variable xmas used
 // Main quest states: XMASTIME
 // NIBBLE_0
-// 0: Not On Quest or Not Xmas
-// 1: Elijas ask you to get list 
-// 2: Return Completed List
-//   Na: Alters it, gets thrown out, Orum/Warrick Communicates with them.
-//   Ni: Gets asked to see Avalia.
-// 3: Sabotage / Save
-//   Na/Ni: Helper Quests
-// 4: Mana Battery Reagents
-// 5: Boss Fight
-// 6: Reward
-// 7: Done.
-// 8: 
-// 9-15: Unused
+// 0-15: Main Quest States
 // Nibble_1: @xmas_karma, Event Behavior
 // 0-15: 0: Naughty, 15: Nice
 // List BITS:
@@ -233,10 +221,10 @@ OnInit:
     set $@xmas_required_helpers_count, (getarraysize($@xmas_helper_list) / 2);
 
     // MobManager
-    setarray $@xmas_mob_names$, "Santa Slime", "Candied Slime", "Candied", "Candied Slime";
-    setarray $@xmas_mob_spawns, "1015", "1111", "1111", "1111";
-    setarray $@xmas_mob_counts, 10, 5, 5, 5;
-    setarray $@xmas_map_spawns$, "019-1.gat", "019-3.gat", "030-1.gat", "030-3.gat";
+    setarray $@xmas_mob_names$, "Santa Slime", "Candied Slime", "Candied Slime";
+    setarray $@xmas_mob_spawns, "1015", "1111", "1111";
+    setarray $@xmas_mob_counts, 10, 5, 5;
+    setarray $@xmas_map_spawns$, "019-1.gat", "019-3.gat", "030-3.gat";
     if(getarraysize($@xmas_mob_spawns) != getarraysize($@xmas_map_spawns$))
         goto L_XmasError;
     if(getarraysize($@xmas_mob_names$) != getarraysize($@xmas_map_spawns$))
@@ -248,7 +236,7 @@ OnInit:
     set $@xmas_spawn_y1, 48;
     set $@xmas_spawn_x2, 79;
     set $@xmas_spawn_y2, 89;
-    set $@xmas_respawn_count, 10;
+    set $@xmas_respawn_count, 9;
 
     if($@xmas_debug == $@xmas_event_time)
         goto L_EventTime;

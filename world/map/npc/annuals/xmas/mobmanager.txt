@@ -4,11 +4,10 @@
 {
 
 OnCommandSpawnStart:
-    if($@xmas_time)
-        goto L_InitSpawn;
-    goto L_StopTracking;
+    goto L_InitSpawn;
 
 L_InitSpawn:
+    initnpctimer;
     set $@xmas_current_count, 0;
     set $@xmas_map_loop, 0;
     goto L_StartLoop;
@@ -48,6 +47,7 @@ L_StopTracking:
     goto L_DespawnLoop;
 
 L_SelfDestruct:
+    stopnpctimer;
     disablenpc "XmasSpawnManager";
     goto L_End;
 
@@ -57,6 +57,10 @@ OnCommandTally:
     if (($@xmas_current_count < $@xmas_respawn_count) && !($@xmas_mob_lck))
         goto L_StartLoop;
     goto L_End;
+
+OnTimer110000:
+    initnpctimer;
+    goto L_StartLoop;
 
 L_End:
     set $@mob_count, 0;
