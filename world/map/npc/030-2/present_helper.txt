@@ -12,29 +12,29 @@
 
 L_OffSeason:
     mes "[Jonathan]";
-    mes "\"Hello! Welcome to the reclaimation department.\"";
-    mes "\"Lucky all the presents stolen have been replaced. Save any you find. You never know what we will ne to replace next year.\"";
+    mes "\"Hello! Welcome to the reclamation department.\"";
+    mes "\"Lucky all the presents stolen have been replaced. Save any you find. You never know what we will need to replace next year.\"";
     goto L_Close;
 
 L_XmasMain:
     mes "[Jonathan]";
-    mes "\"Hello! Welcome to the reclaimation department.\"";
+    mes "\"Hello! Welcome to the reclamation department.\"";
 
     if(@xmas_helper_bit) goto L_Helping;
 
-    mes "\"We are incredibly busy right now, some monsters have stolen some of our presents.\"";
-    mes "\"I must tell Chief Warrick Immediately.\"";
+    mes "\"We are incredibly busy right now, monsters have stolen some of our presents.\"";
+    mes "\"I must go inform Chief Warrick immediately.\"";
     goto L_Close;
 
 L_Helping:
-    mes "\"Here we take any presents stolen from us by those nasty monster.\"";
+    mes "\"Here we take back any presents stolen from us by those nasty creatures.\"";
     next;
 
 L_Main:
-    mes "\"Do you have any presents you would like to return?\"";
+    mes "\"Did you find any presents you would like to return?\"";
     next;
     menu
-        "I just wanted to say hello.",-,
+        "No, I just wanted to say hello.",-,
         $@xmas_present_amount + " Purple present boxes.",L_Purple,
         $@xmas_present_amount + " Blue present boxes.",L_Blue,
         $@xmas_present_amount + " Green present boxes.",L_Green,
@@ -75,7 +75,7 @@ L_RewardIncrease:
     goto L_Close;
 
 L_NotEnough:
-    mes "\"You don't have enough presents to return.\"";
+    mes "\"I am sorry, but you don't have enough presents to return.\"";
     goto L_Main;
 
 L_Close:

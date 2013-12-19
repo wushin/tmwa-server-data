@@ -13,7 +13,7 @@
 
 L_OffSeason:
     mes "[Avalia]";
-    mes "\"What are you doing in here, get out!\"";
+    mes "\"What are you doing in here? Get out!\"";
     warp "030-2.gat",88,80;
     close;
 
@@ -32,12 +32,12 @@ L_ListReturn:
     mes "[Avalia]";
     mes "\"This had better be important, I've got enough to worry about.\"";
     menu
-        "Sorry for interrupting, but I've been sent up here with The List", -;
+        "Sorry for interrupting, but I've been sent up here with the List", -;
     mes "She stares blankly at you for a bit...";
     next;
     mes "\"YAHOO!!\"";
     next;
-    mes "\"One problem down only a few more to go.\"";
+    mes "\"One problem down, only a few more to go.\"";
     next;
     mes "\"Since you have already been so helpful, I was wondering if you could continue to do so?\"";
     mes "\"I do have the power to reward you handsomely.\"";
@@ -49,13 +49,13 @@ L_ListReturn:
     mes "\"I wanted to show Santa and ask to if he knew how to help make it permanent, but Someone didn't approve. took away our central spell power core. Now all the nutcrackers are back to being mindless automatons. Now the Christmas Sages must use magic to animate them.\"";
     next;
     mes "\"Please you must help me find a way to restore our power core before Christmas. I want to show Santa Millis, so he can give him life permanently for me.\"";
-    mes "\"First I need time to do some more reaserch. Which means I need to spend less time helping with the holidays. Can you check with the helpers and make sure everything is going smoothly.?\"";
+    mes "\"First I need time to do some more reaserch. Which means I need to spend less time helping with the holidays. Can you check with the helpers and make sure everything is going smoothly.\"";
     menu
         "Sure.", L_Start,
         "No.", L_Close;
 
 L_Start:
-    mes "\"Ok, go check in with Chief Warrick. You might have to presist a bit but he will let you help.\"";
+    mes "\"Ok, go check in with Chief Warrick. You might have to persist a bit but he will let you help.\"";
     mes "\"Once you have completed this task come back and talk to me. As he reports to me.\"";
     set @xmas_state, $@xmas_helpers_start_state;
     callfunc "XmasSetState";
