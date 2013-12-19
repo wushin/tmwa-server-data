@@ -1,0 +1,154 @@
+// Annual Xmas and Year round info
+// Author: Jenalya, wushin
+
+030-2.gat,87,41,0|script|Eljas|328,5,1,
+{
+    callfunc "XmasCheckList";
+    callfunc "XmasStates";
+    callfunc "ThrowOutTheBum";
+
+L_Start:
+    if($@xmas_time == $@xmas_event_time)
+        goto L_XmasMain;
+    goto L_OffSeason;
+
+L_XmasMain:
+    if (@xmas_state > $@xmas_list_deliver_state)
+        goto L_OffSeason;
+    if (@xmas_list_deliver)
+        goto L_SeeChief;
+    if (@xmas_list_complete)
+        goto L_HaveList;
+    if (@xmas_list_gather)
+        goto L_HaveList;
+    goto L_NeedList;
+
+L_HaveList:
+    mes "[Eljas]";
+    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic happen.\"";
+    next;
+    mes "\"What brings you here?\"";
+    menu
+        "What were the names again?", L_ListNames,
+        "I have Santa's List.", L_SantasList,
+        "I have Santa's List.(Fake List)", L_SantasFakeList,
+        "Christmas.", L_Christmas,
+        "Magical Reasech.", L_Research,
+        "I have to go.", L_Close;
+
+L_NeedList:
+    mes "[Eljas]";
+    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic happen.\"";
+    next;
+    mes "\"What brings you here?\"";
+    menu
+        "Need any help this year?", L_StartQuest,
+        "Christmas.", L_Christmas,
+        "Magical Reasech.", L_Research,
+        "I have to go.", L_Close;
+
+L_OffSeason:
+    mes "[Eljas]";
+    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic happen.\"";
+    next;
+    mes "\"What brings you here?\"";
+    menu
+        "Christmas.", L_Christmas,
+        "Magical Reasech.", L_Research,
+        "I have to go.", L_Close;
+
+L_StartQuest:
+    mes "\"Why yes we do.\"";
+    mes "\"It appears we are missing some of the list from the children in the world.\"";
+    mes "\"Let me check here...\"";
+    next;
+    mes "\"Ah ha, here we go.\"";
+    mes "\"The missing lists are;";
+    callfunc "XmasListList";
+    mes "\"If you can find these children, please bring thier lists back.\"";
+    mes "\"Come back and see me when your done.\"";
+    next;
+    set @xmas_state, $@xmas_list_gather_state;
+    callfunc "XmasSetState";
+    goto L_Close;
+
+L_ListNames:
+    mes "\"The missing lists are;";
+    callfunc "XmasListList";
+    mes "\"If you can find these children, please bring thier lists back.\"";
+    goto L_Close;
+
+L_SantasList:
+    if(!(@xmas_list_complete))
+        goto L_NotComplete;
+    mes "\"Please take The List to Chief Warrick on the next floor.\"";
+    set @karma_bonus, @xmas_list_count;
+    callfunc "XmasNice";
+    set @xmas_state, $@xmas_list_deliver_state;
+    callfunc "XmasSetState";
+    callfunc "XmasXpReward";
+    goto L_Close;
+
+L_SantasFakeList:
+    if(!(@xmas_list_complete))
+        goto L_NotComplete;
+    mes "\"What a second... whats that aura...\"";
+    mes "\"THIS ISN'T THE REAL LIST!\"";
+    mes "\"Gaurds! Toss this Naughty one outside!\"";
+    next;
+    set @karma_bonus, @xmas_list_count;
+    callfunc "XmasNaughty";
+    callfunc "XmasSetSide";
+    callfunc "XmasThrowOut";
+    set @xmas_state, $@xmas_list_deliver_state;
+    callfunc "XmasSetState";
+    callfunc "XmasXpReward";
+    goto L_NotWelcome;
+
+L_NotComplete:
+    mes "\"Hrmm... Even I can tell thats not the amount we are missing.\"";
+    goto L_ListNames;
+
+L_SeeChief:
+    mes "\"Please take The List to Chief Warrick on the next floor.\"";
+    goto L_Close;
+
+L_Christmas:
+    mes "\"All year round we work hard to make toys and repair our help for each years event.\"";
+    mes "\"Ask Chief Warrick on the next Floor, He's the shop foreman, people are always looking to him to find extra help.\"";
+    next;
+    goto L_Close;
+
+L_Research:
+    mes "\"Well, the most astonishing discovery in our recent researches is a complex combination of Transmutation, Astral and Nature Magic to animate wooden figurines.\"";
+    mes "\"Did you notice the Guards around the house? Originally those were simple nutcrackers, carved out of wood by our talented carpenters.\"";
+    next;
+    mes "\"With the results of our magic researches, we were able to transform them into animated beings, acting rudimentary self-determined and capable to perform simple tasks.\"";
+    mes "\"At the moment we can keep them animated for an unlimited time, as long as the caster stays in range.\"";
+    next;
+    mes "\"If you want to learn more about the magic used speak with Avalia she is on the 4th floor in her private room.\"";
+    next;
+    goto L_Close;
+
+L_NotWelcome:
+    mes "... You hear a voice calling your name ... ";
+    mes "[Orum's Homunculus]";
+    mes "\"Come See me in the Caves Below.\"";
+    mes "\"go north till you reach the snoman. Then head into the cave to the east.\"";
+    warp "030-1",99,55;
+    close;
+
+L_Close:
+    mes"\"Goodbye\"";
+    close;
+
+L_End:
+    end;
+
+OnTouch:
+    callfunc "XmasStates";
+    callfunc "ThrowOutTheBum";
+    if((@xmas_state >= $@xmas_list_gather_state) || !($@xmas_time))
+        goto L_End;
+    goto L_Start;
+}
