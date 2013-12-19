@@ -62,12 +62,12 @@ L_QuestTime:
 
 L_GetList:
     menu
-        "I have come for your list", L_List,
-        "Actaully, what have you got to say.", L_Return;
+        "Hey, I have come to collect your wish list for Santa", L_List,
+        "Oh sorry, what were you going to say?", L_Return;
 
 L_List:
     mes "[" + $@xmas_child_list_name$[$@child_number] + "]";
-    mes "Here is my list. Make sure it gets delivered please!";
+    mes "Here is my list. Make sure it gets delivered, please!";
     next;
     set XMASTIME, XMASTIME | $@xmas_child_list[$@child_number];
     set @karma_bonus, $@xmas_karma_bonus;
