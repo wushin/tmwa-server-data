@@ -56,6 +56,9 @@ L_White:
     goto L_MadePaper;
 
 L_Yellow:
+    getinventorylist;
+    if (@inventorylist_count > 100)
+        goto L_FullInv;
     if ((countitem("ReedBundle") < $@xmas_reed_amount) || (countitem("BottleOfWater") < $@xmas_water_amount) || (countitem("YellowDye") < $@xmas_wrap_yellow_amount))
         goto L_NoItems;
     delitem "ReedBundle", $@xmas_reed_amount;
@@ -67,6 +70,9 @@ L_Yellow:
     goto L_MadePaper;
 
 L_LightBlue:
+    getinventorylist;
+    if (@inventorylist_count > 100)
+        goto L_FullInv;
     if ((countitem("ReedBundle") < $@xmas_reed_amount) || (countitem("BottleOfWater") < $@xmas_water_amount) || (countitem("LightBlueDye") < $@xmas_wrap_ltblue_amount))
         goto L_NoItems;
     delitem "ReedBundle", $@xmas_reed_amount;
@@ -78,6 +84,9 @@ L_LightBlue:
     goto L_MadePaper;
 
 L_Purple:
+    getinventorylist;
+    if (@inventorylist_count > 100)
+        goto L_FullInv;
     if ((countitem("ReedBundle") < $@xmas_reed_amount) || (countitem("BottleOfWater") < $@xmas_water_amount) || (countitem("PurpleDye") < $@xmas_wrap_purple_amount))
         goto L_NoItems;
     delitem "ReedBundle", $@xmas_reed_amount;
@@ -89,6 +98,9 @@ L_Purple:
     goto L_MadePaper;
 
 L_Green:
+    getinventorylist;
+    if (@inventorylist_count > 100)
+        goto L_FullInv;
     if ((countitem("ReedBundle") < $@xmas_reed_amount) || (countitem("BottleOfWater") < $@xmas_water_amount) || (countitem("GreenDye") < $@xmas_wrap_green_amount))
         goto L_NoItems;
     delitem "ReedBundle", $@xmas_reed_amount;
@@ -111,6 +123,10 @@ L_Regulation:
     mes "[Reino]";
     mes "\"Well, because, ah - there would be total chaos without regulations!";
     mes "You know, this Christmas business requires a lot of coordination. Things have to be well-ordered.\"";
+    goto L_Close;
+
+L_FullInv:
+    mes "\"You need some space to put the wrapping paper.\"";
     goto L_Close;
 
 L_NoItems:

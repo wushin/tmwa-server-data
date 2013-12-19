@@ -41,11 +41,18 @@ L_Helping:
         goto L_Close;
     if (countitem("RawLog") < @amount*$@xmas_log_amount)
         goto L_NoItems;
+    getinventorylist;
+    if (@inventorylist_count > 100)
+        goto L_FullInv;
     delitem "RawLog", @amount*$@xmas_log_amount;
     mes "[Urmas]";
     mes "\"Alright! Good job, kid. I'll start to make some more boxes now.";
     mes "Here, take this in the meanwhile and put some toys in it.\"";
     getitem "OpenPresentBox", @amount;
+    goto L_Close;
+
+L_FullInv:
+    mes "\"You need some space to put the Empty boxes.\"";
     goto L_Close;
 
 L_NoItems:

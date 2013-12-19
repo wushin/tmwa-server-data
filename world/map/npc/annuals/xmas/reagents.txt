@@ -114,6 +114,9 @@ function|script|BadPowderMake|,
         goto L_NotEnough;
     if(countitem("YellowDye") < $@xmas_yellow_amount)
         goto L_NotEnough;
+    getinventorylist;
+    if (@inventorylist_count > 100)
+        goto L_FullInv;
     goto L_MakePowder;
 
 L_MakePowder:
@@ -122,6 +125,11 @@ L_MakePowder:
     delitem "YellowDye", $@xmas_yellow_amount;
     getitem "RedPowder", $@xmas_red_amount;
     getitem "YellowPowder", $@xmas_yellow_amount;
+    goto L_Return;
+
+L_FullInv:
+    mes "\"... Excuse me but where did you expect you were going to hold these powders...\"";
+    mes "\"WAIT! no, I don't want to know. Just come back when you have some room.\"";
     goto L_Return;
 
 L_NotEnough:
