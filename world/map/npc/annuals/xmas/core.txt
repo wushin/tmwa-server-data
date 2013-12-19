@@ -125,13 +125,13 @@ function|script|XmasMainXpBpReward|,
 {
     callfunc "XmasSetReward";
 
-    if(BaseLevel < 99)
+    if(BaseLevel >= 99)
         goto L_EndGameReward;
     goto L_LevelingReward;
 
 L_EndGameReward:
     set BOSS_POINTS, BOSS_POINTS + rand(@xmas_reward * 2);
-    goto L_XmasPrize;
+    return;
 
 L_LevelingReward:
     if(@xmas_reward == 100)
@@ -178,7 +178,7 @@ L_FullInv:
     goto L_Return;
 
 L_Return:
-    end;
+    return;
 }
 
 function|script|XmasCheckOld|,
