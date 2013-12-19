@@ -61,9 +61,9 @@ L_Helping:
 L_HelpStatus:
     mes "[Chief Warrick]";
     if (@xmas_karma)
-        mes "\"I hope you're doing well.\"";
-    if (!(@xmas_karma))
         mes "\"It seems we're catching up with the tasks to do, thanks to your help.\"";
+    if (!(@xmas_karma))
+        mes "\"I hope you're doing well.\"";
     if (@xmas_all_helpers)
         mes "\"The helpers are happy for the extra help.\"";
     if (!(@xmas_all_helpers))

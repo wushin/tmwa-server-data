@@ -157,8 +157,8 @@ function|script|XmasMainItemReward|,
 
 L_FinalGift:
     mes "[To: " + strcharinfo(0) + "]";
-    mes "[From: " + $@xmas_present_from$[@xmas_side] + "]";
-    mes "O look, a present from " + $@xmas_present_from$[@xmas_side];
+    mes "[From: " + $@xmas_present_from$[@xmas_reward_side] + "]";
+    mes "O look, a present from " + $@xmas_present_from$[@xmas_reward_side];
     next;
     getinventorylist;
     if (@inventorylist_count > 100)

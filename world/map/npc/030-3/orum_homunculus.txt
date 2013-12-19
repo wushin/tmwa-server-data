@@ -39,7 +39,7 @@ L_XmasMain:
 
 L_Telepathy:
     mes "[Orum's Homunculus]";
-    mes "\"Thats the long way!\"";
+    mes "\"That is the long way!\"";
     mes "\"Just go south from here to the southern most exit.\"";
     close;
 
@@ -184,7 +184,8 @@ L_XmasMain:
     if((@xmas_helper_done_state) && (@xmas_side)) goto L_HelperQuest;
     if((@xmas_helper_start_state) && (@xmas_side)) goto L_HelperQuest;
     if(@xmas_list_deliver) goto L_ListReturn;
-    if((@xmas_list_gather || @xmas_list_complete)) goto L_HaveList;
+    if(@xmas_list_complete) goto L_SantasList;
+    if(@xmas_list_gather) goto L_HaveList;
     if($@xmas_time) goto L_QuestStart;
     goto L_OffSeason;
 
@@ -220,11 +221,14 @@ L_ListNames:
     mes "\"Go now, come back and see with the lists.\"";
     goto L_Close;
 
+L_NotComplete:
+    mes "\"This doesn't seem like enough names to work with. Come back when you have more.\"";
+    goto L_Close;
+
 L_SantasList:
     if(!(@xmas_list_complete))
         goto L_NotComplete;
-    mes "\"Muhahaha, One more favor to ask.\"";
-    mes "\"Take This Altered List to Elijas.\"";
+    mes "\"Take the altered list to Elijas.\"";
     menu
         "I don't know, this sounds kinda of naughty.",-;
     mes "\"Do my bidding or I'll have no more words with you.\"";
@@ -234,7 +238,7 @@ L_ListReturn:
     mes "[Orum's Homunculus]";
     mes "\"This had better be important, I've got enough to worry about.\"";
     menu
-        "Sorry for interrupting, but I've been came down here because I delivered the fake list", -;
+        "Sorry for interrupting, but I've came down here because I delivered the fake list", -;
     mes "he Stares blankly at you for a bit... ";
     next;
     mes "\"MUHAHAHAHAHAHAA!!\"";
@@ -258,7 +262,7 @@ L_ListReturn:
         "No.", L_Close;
 
 L_Start:
-    callfunc "BadPowderList";
+    callfunc "SabotageList";
     mes "\"So far basement portal has remained undetected. Head to the east in this cave to find it.\"";
     mes "\"Once there smash your fist into the small crack and you will be teleported into the basement of the inn.\"";
     mes "\"Now, Prove yourself, gather the required items and go back to the Inn to sabotage Santa's Helpers.\"";
@@ -361,7 +365,7 @@ L_CheckReagents:
 L_Quick:
     mes "[Orum's Homunculus]";
     mes "\"What are you still doing here?\"";
-    mes "\"Quickly, to the Warhouse.\"";
+    mes "\"Quickly, to the warehouse.\"";
     goto L_Close;
 
 L_Reward:
