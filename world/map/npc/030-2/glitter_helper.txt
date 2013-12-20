@@ -83,9 +83,9 @@ L_FakePowders:
 
 L_Done:
     mes "[Veneri]";
-    if (@xmas_helper_glitter)
-        mes "\"Even after your help, the powder still isn't working right. Maybe it got wet.\"";
     if (!(@xmas_helper_glitter))
+        mes "\"Even after your help, the powder still isn't working right. Maybe it got wet.\"";
+    if (@xmas_helper_glitter)
         mes "\"Thanks for bringing the powders.\"";
     goto L_Close;
 
