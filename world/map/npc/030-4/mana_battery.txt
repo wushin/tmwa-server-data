@@ -156,7 +156,7 @@ L_Repeat:
     delitem $@xmas_boss_req$[ @xmas_battle_side ], $@xmas_boss_amount[ @xmas_battle_side ];
     set $@XmasBattleStatus, 2 * ( $@xmas_battle_side ) + 2;
     goto L_Start;
-    
+
 L_Quit:
    warp "030-2",151,25;
    goto L_Close;
@@ -344,14 +344,14 @@ OnInit:
     "Orum's Homunculus : just lol.",
     "Avalia : Wow! You saved christmas.",
     "Orum's Homunculus : Yep, it's over... and strange enough you survived.";
-    
-    setarray $@xmas_final_announce$, 
-        "Avalia : Oh no, not only did you slay half my Guard of Honour, but also the issue was not fixed, try to install the battery again!", 
+
+    setarray $@xmas_final_announce$,
+        "Avalia : Oh no, not only did you slay half my Guard of Honour, but also the issue was not fixed, try to install the battery again!",
         "Orum's Homunculus : Boy are you lame. So what now? The battery is still not placed! Go try again!",
         "Avalia : W00t you actually made it through. I think now that the manabattery lost some of its abundant power this seems to have given those nutcrackers that didn't go crazy a good boost of life energy. Thank you for your help all and come see me for a reward.",
-        "Orum's Homunculus : Good. They are dead. Now GET OUT OF THERE, this bomb is dangerous!"; 
+        "Orum's Homunculus : Good. They are dead. Now GET OUT OF THERE, this bomb is dangerous!";
     end;
-    
+
 S_Announce:
     mapannounce "030-4.gat", $@msg$, 0;
     mapannounce "030-3.gat", $@msg$, 0;
