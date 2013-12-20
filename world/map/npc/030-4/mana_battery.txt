@@ -3,7 +3,7 @@
 
 // Variables:
 // @xmas_battle_side: if set its "naughty path" if not set "nice path"
-// XmasBattleStatus: 
+// XmasBattleStatus:
 // 0 battle not started
 // 1 battle easy good
 // 2 battle hard good
@@ -36,13 +36,13 @@
     if (@xmas_state == $@xmas_boss_door_open_state)
         goto L_InitiateBattle;
     goto L_InitiateBattle;
-    
+ 
 L_InitiateBattle:
     callfunc "XmasSetBossStart";
-    if(@xmas_battle_side) 
+    if(@xmas_battle_side)
         goto L_BattleBad;
     goto L_BattleGood;
-    
+
 L_BattleBad:
     mes "[Orum's Homunculus]";
     mes "\"So this is where this whole shallow charade will end...\"";
@@ -65,10 +65,10 @@ L_BattleBad:
     mes "[Orum]";
     mes "\"Ok. now this should be enough.\"";
     mes "\"Get out of here, before the bomb explodes!.\"";
-    menu 
+    menu
         "Agreed.", L_StartBad,
         "You know what? If I pull this lever this should become HUGE!", L_StartBadHard;
-    
+ 
 L_BattleGood:
     mes "You stare into a box that even through your unexperienced eyes looks less than secure to harbour such a powerful device as the mana battery is.";
     menu 
@@ -76,13 +76,13 @@ L_BattleGood:
         "No WAY! I am not going to put my life in danger", L_Close,
         "Ok that does it, I am going to leave! I cannot be responsible for blowing up the entire mana world.", L_Coward,
         "I studied magic and this looks all wrong.", L_StartGoodHard;
-    
+ 
 L_StartGood:
     if ($@XmasBattleStatus)
         goto L_BattleInProgress;
     set $@XmasBattleStatus, 1;
     goto L_Start;
-    
+
 L_StartGoodHard:
     if ($@XmasBattleStatus)
         goto L_BattleInProgress;
@@ -91,13 +91,13 @@ L_StartGoodHard:
     mes "You pour a handfull of " + $@xmas_boss_req$[@xmas_battle_side] + " over the Mana Battery.";
     set $@XmasBattleStatus, 2;
     goto L_Start;
-    
+ 
 L_StartBad:
     if ($@XmasBattleStatus)
         goto L_BattleInProgress;
     set $@XmasBattleStatus, 3;
     goto L_Start;
-    
+
 L_StartBadHard:
     if ($@XmasBattleStatus)
         goto L_BattleInProgress;
@@ -106,7 +106,7 @@ L_StartBadHard:
     mes "You pour a handfull of " + $@xmas_boss_req$[@xmas_battle_side] + " over the Mana Battery.";
     set $@XmasBattleStatus, 4;
     goto L_Start;
-    
+ 
 L_Start:
     mes "You struggle a little with your task, since the mana battery doesn't seem to fit in as smooth as you expected it.";
     next;
@@ -115,60 +115,60 @@ L_Start:
     mes "Now it is glowing wildly";
     next;
     mes "it seems like this will not turn out as planned, Look this Guard of Honour is going crazy!";
-    next; 
+    next;
     npctalk "The Guards are out of control!";
-    
+
     set $@XmasBossRound, 0;
     set $@XmasBossPlayerCount, getmapusers("030-4.gat");
     areamonster "030-4.gat", 20, 21, 40, 40, "", 1114, 1, "AniManOMat::OnGuardDeath";
     initnpctimer;
     goto L_Close;
-    
+
 L_ThrowOut:
     // if the player didnt get a bomb yet
     mes "This looks dangerous. Come back when you are prepared";
     warp "030-2",151,25;
     next;
     goto L_Close;
-    
-L_Coward: 
+
+L_Coward:
     //Player chose to cancel
     mes "What a pitty now you still have a bomb in your hands but...";
     mes "As you wish.";
     next;
     warp "030-2",151,25;
     goto L_Close;
-    
+
 L_Helper:
     //Player used up his own chance to start
     mes "mmh the AniManOMat is empty again, maybe we should try with a different mana battery.";
     menu
         "No I prefer to leave now, get me out of here.", L_Quit,
-        "Why would I do that? Aaaah... Nevermind.", -; 
+        "Why would I do that? Aaaah... Nevermind.", -;
     goto L_Close;
 
 L_Quit:
    warp "030-2",151,25;
    goto L_Close;
-    
+ 
 L_BattleInProgress:
     mes "The mana battery looks like it is about to explode. You better take cover!";
     goto L_Close;
-    
+ 
 L_Close:
     callsub S_ClearVariables;
     close;
-    
+
     // per NPC logic
 OnTimer5000:
     setnpctimer 0;
     if ($@XmasBattleStatus) goto L_CaveLogic;
-    
+
 L_Return_1:
     set $@XmasBossPlayerCount, 0;
     areatimer "030-4.gat", 0, 0, 60, 60, 10, "AniManOMat::OnTick";
     end;
-    
+
 L_CaveLogic:
     if ($@XmasBossPlayerCount < 1)
         goto L_AllDead;
@@ -178,7 +178,7 @@ L_CaveLogic:
     if ($@BombTimer >= 120)
         goto L_NextWave;
     goto L_Return_1;
-    
+
 L_NextWave:
     set $@BombTimer, 0;
     set $@XmasBossRound, $@XmasBossRound + 1;
@@ -194,10 +194,10 @@ L_NextWave:
     // Guard Amount doubles if on hard mode
     set $@GuardAmount, 1 + (8 + ($@XmasBossRound) + (2 * $@XmasBossPlayerCount)) / 8;
     set $@SkullAmount, 1 + ($@GuardAmount * $@GuardAmount) / 5;
-    
+ 
     if ($@GuardAmount > 15)
         set $@GuardAmount, 15;
-    
+
     //Obliatory Guard Of Honour in the Southern Hallway
     areamonster "030-4.gat", 30, 43, 39, 49, "", 1114, $@GuardAmount, "AniManOMat::OnGuardDeath";
     //CopperSlimes, I love Copper Slimes anywhere anytime
@@ -239,7 +239,7 @@ L_NextWave:
     mapannounce "030-1.gat", $@msg$, 0;
     set $@msg$, "";
     goto L_Return_1;
-    
+ 
 OnTick:
     if (isdead()) end;
     set $@XmasBossPlayerCount, $@XmasBossPlayerCount + 1;
@@ -247,10 +247,10 @@ OnTick:
 
 OnAll1:
     end;
-    
+ 
 OnGuardDeath:
     end;
-    
+
 L_AllDead:
     set $@msg$, $@xmas_final_announce$[ ($@XmasBattleStatus - 1) / 2 ];
     callsub S_Announce;
@@ -260,7 +260,7 @@ L_Finished:
     set $@msg$, $@xmas_final_announce$[ (($@XmasBattleStatus - 1) / 2) + 2 ];
     callsub S_Announce;
     goto L_CleanUp;
-    
+
 L_CleanUp:
     areatimer "030-4.gat", 0, 0, 50, 50, 10, "AniManOMat::OnReward";
     set $@XmasBattleStatus, 0;
@@ -273,7 +273,7 @@ L_CleanUp:
     stopnpctimer;
     setnpctimer 0;
     end;
-    
+
 OnReward:
     if (isdead())
         end;
@@ -294,17 +294,17 @@ OnReward:
 L_End:
     if ((($@XmasBattleStatus - 1) / 2) == 0) goto L_EndNice;
     goto L_EndNaughty;
-    
+
 L_EndNaughty:
     callfunc "XmasNaughty";
     callsub S_ClearVariables;
     end;
-    
+
 L_EndNice:
     callfunc "XmasNice";
     callsub S_ClearVariables;
     end;
-    
+
 OnInit:
     setarray $@XmasBossMes$,
     "", // unused
@@ -349,7 +349,6 @@ S_Announce:
     set $@msg$, "";
     return;
 
-    
 S_CheckHardReq:
     if (BaseLevel < $@BossHardLevel)
         goto L_NotHighEnough;

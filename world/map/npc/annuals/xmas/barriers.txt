@@ -1,4 +1,4 @@
-// This file is part of Christmas Event 
+// This file is part of Christmas Event
 // author: Jenalya, Chayenne, cinderweb, wushin
 // please see #XmasConfig
 
@@ -55,8 +55,8 @@ L_BattleInProgress:
     mes "You can hear shouts and screams of despair from behind the door. But trying to open it fails.";
     next;
     mes "You will have to wait till someone from the inside opens the door again.";
-    goto L_Close;    
-    
+    goto L_Close;
+
 L_NotActive:
     message strcharinfo(0), "This door appears locked by magical forces.";
     end;
@@ -95,7 +95,7 @@ L_Tux9th:
    message strcharinfo(0), "Ouch, that hurt!";
    setlook LOOK_HAIR_STYLE, rand(20);
    goto L_Fail;
- 
+
 L_Enter:
    if (getequipid(equip_hand1) > 0 || getequipid(equip_hand2) > 0) goto L_Sword;
    if (getequipid(equip_gloves) <= 0) goto L_Gloves;

@@ -101,7 +101,7 @@ L_ContinueMenu:
         "I have some present boxes", L_Y,
         "Hmm, see you later", L_N,
         "What you need exactly?", L_R;
-    
+
 L_Done:
     mes "[Santa's Helper]";
     mes "\"All the children got their Christmas presents.";

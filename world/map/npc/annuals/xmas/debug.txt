@@ -1,4 +1,4 @@
-// This file is part of Christmas Event 
+// This file is part of Christmas Event
 // author: Jenalya, Chayenne, cinderweb, wushin
 // please see #XmasConfig
 
@@ -158,7 +158,7 @@ L_Close:
 {
     callfunc "XmasDebug";
     goto L_end;
-    
+
 OnInit:
     if(!(debug))
         disablenpc "XmasDebug#1";
@@ -170,7 +170,7 @@ L_end:
 {
     callfunc "XmasDebug";
     goto L_end;
-    
+ 
 OnInit:
     if(!(debug))
         disablenpc "XmasDebug#1";
@@ -194,7 +194,7 @@ L_end:
 {
     callfunc "XmasDebug";
     goto L_end;
-    
+ 
 OnInit:
     if(!(debug))
         disablenpc "XmasDebug#1";

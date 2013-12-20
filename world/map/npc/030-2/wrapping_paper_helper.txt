@@ -15,7 +15,7 @@ L_OffSeason:
     mes "[Reino]";
     mes "\"Hrmm... I forgot what the real color of my hand was... \"";
     goto L_Close;
-    
+
 L_XmasMain:
     if (@xmas_helper_bit) goto L_Helping;
 

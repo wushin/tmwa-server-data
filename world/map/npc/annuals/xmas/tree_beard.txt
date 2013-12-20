@@ -65,7 +65,7 @@ L_DeliverPresents:
     enablenpc "Present#3";
     goto L_Return;
 
-L_DisablePresents:    
+L_DisablePresents:
     disablenpc "Present#1";
     disablenpc "Present#2";
     disablenpc "Present#3";

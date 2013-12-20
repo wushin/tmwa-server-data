@@ -1,4 +1,4 @@
-// This file is part of Christmas Event 
+// This file is part of Christmas Event
 // author: Jenalya, Chayenne, cinderweb, wushin
 
 // NPC behavior depending on time:
@@ -91,7 +91,7 @@ OnInit:
     set $@xmas_list_gather_state, 1;
     set $@xmas_list_complete_state, 2;
     set $@xmas_list_deliver_state, 3;
-    // Helper SubQuest 
+    // Helper SubQuest
     set $@xmas_helpers_start_state, 4;
     set $@xmas_helpers_done_state, 5;
     // Reagents
@@ -158,7 +158,7 @@ OnInit:
     set $@xmas_acorn_amount, 10;
     set $@xmas_iron_potion_amount, 1;
 
-    // Bedding 
+    // Bedding
     set $@xmas_helper_bit_bed_starts, (1 << 16);
     set $@xmas_helper_bit_bed_ends, (1 << 17);
     set $@xmas_bedding_amount, 10;
@@ -212,10 +212,10 @@ OnInit:
     set $@xmas_bad_friendly_name$, "Red Apples";
     set $@xmas_bad_money, 500;
     set $@xmas_bad_exp, 200;
-    
+
     //Boss Fight Reward
     set $@xmas_boss_bp, 50;
-    
+
     // Helpers Flags needed to set $@xmas_all_helpers_bit
     setarray $@xmas_helper_list, $@xmas_helper_bit_bed_ends, $@xmas_helper_bit_glitter_ends, $@xmas_helper_bit_storage, $@xmas_helper_bit_acorns, $@xmas_sh_bit_cap;
     set $@xmas_perfect_helpers_count, getarraysize($@xmas_helper_list);

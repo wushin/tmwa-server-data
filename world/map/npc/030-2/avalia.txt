@@ -172,7 +172,7 @@ L_Thanks:
     mes "[Avalia]";
     mes "\"Please feel free to continue to help us while we prepare your reward.\"";
     goto L_Close;
-     
+
 L_ThankYou:
     mes "\"We can't thank you enough for restoring the nutcrackers humanity.\"";
     goto L_Close;
