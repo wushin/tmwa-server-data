@@ -192,7 +192,7 @@ L_NextWave:
         areamonster "030-4.gat", 0, 0, 50, 50, "", 1114, $@XmasBossRound*2 + $@XmasBossPlayerCount*5, "AniManOMat::OnGuardDeath";
     //Normal Waves 1 to 10
     // Guard Amount doubles if on hard mode
-    set $@GuardAmount, 1 + (6 + ($@XmasBossRound) + (2 * $@XmasBossPlayerCount)) / 6;
+    set $@GuardAmount, 1 + (8 + ($@XmasBossRound) + (2 * $@XmasBossPlayerCount)) / 8;
     set $@SkullAmount, 1 + ($@GuardAmount * $@GuardAmount) / 5;
     
     if ($@GuardAmount > 15)

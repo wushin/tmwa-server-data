@@ -52,7 +52,7 @@ L_Helping:
     goto L_Close;
 
 L_FullInv:
-    mes "\"You need some space to put the Empty boxes.\"";
+    mes "\"You need some space to put the empty boxes.\"";
     goto L_Close;
 
 L_NoItems:

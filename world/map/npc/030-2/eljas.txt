@@ -33,7 +33,7 @@ L_HaveList:
         "Look, I have Santa's List.", L_SantasList,
         "I have Santa's List.(Fake List)", L_SantasFakeList,
         "Christmas?", L_Christmas,
-        "I am interested in Magical Resaech.", L_Research,
+        "I am interested in magical research.", L_Research,
         "Nothing, I have to go.", L_Close;
 
 L_NeedList:
@@ -56,7 +56,7 @@ L_OffSeason:
         "Och, nothing. I have to go.", L_Close;
 
 L_StartQuest:
-    mes "\"Why yes! Of courrse we do!\"";
+    mes "\"Why yes! Of course we do!\"";
     next;
     mes "\"It appears we are missing some of the wish list from the children from all over the Mana World.\"";
     mes "\"Let me check here...\"";
