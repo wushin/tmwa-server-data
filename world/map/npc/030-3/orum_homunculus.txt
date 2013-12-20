@@ -269,9 +269,11 @@ L_Start:
     mes "\"So far my basement portal has remained undetected:";
     mes "Head to the east in this cave to find it.\"";
     mes "\"Once there smash your fist into the small crack and you will be teleported into the basement of the inn.\"";
+    mes "\"Let me fake the mark Chief Warrick uses to identify his helpers. Don't get to close to the gaurds they might spot you.\"";
     mes "\"Now, prove yourself, gather the required items and go back to the Inn to sabotage Santa's Helpers.\"";
     callfunc "XmasThrowOut";
     callfunc "XmasSetSide";
+    set XMASTIME, XMASTIME | $@xmas_helper_bit;
     set XMASTIME, XMASTIME | $@xmas_basement_passage;
     set @xmas_state, $@xmas_helpers_start_state;
     callfunc "XmasSetState";
