@@ -47,6 +47,7 @@ L_XmasMain:
 
 L_Open:
     if ($@XmasBattleStatus) goto L_BattleInProgress;
+    mes "You get the strange sensation that this might go terribly wrong. You had better bring some of your strongest comrades to help you in that case.";
     warp "030-4.gat",34,48;
     goto L_Close;
 
