@@ -119,6 +119,7 @@ L_Start:
     mes "it seems like this will not turn out as planned, Look this Guard of Honour is going crazy!";
     next;
     npctalk "The Guards are out of control!";
+    npctalk $@XmasBattleStatus;
 
     set $@XmasBossRound, 0;
     set $@XmasBossPlayerCount, getmapusers("030-4.gat");
@@ -154,7 +155,7 @@ L_Repeat:
     //Player wants to try again on hard mode again
     callsub S_CheckHardReq;
     delitem $@xmas_boss_req$[ @xmas_battle_side ], $@xmas_boss_amount[ @xmas_battle_side ];
-    set $@XmasBattleStatus, 2 * ( $@xmas_battle_side ) + 2;
+    set $@XmasBattleStatus, (2 * (@xmas_battle_side)) + 2;
     goto L_Start;
     
 L_Quit:
@@ -241,13 +242,8 @@ L_NextWave:
     set $@msgnumber, (2 * $@XmasBossRound) + (($@XmasBattleStatus - 1) >> 1);
     set $@msg$, $@XmasBossMes$[ $@msgnumber ];
     set $@msgnumber, 0;
-    if ($@XmasBossRound > 10)
-    goto L_Return_1;
-    mapannounce "030-4.gat", $@msg$, 0;
-    mapannounce "030-3.gat", $@msg$, 0;
-    mapannounce "030-2.gat", $@msg$, 0;
-    mapannounce "030-1.gat", $@msg$, 0;
-    set $@msg$, "";
+    if ($@XmasBossRound > 10) goto L_Return_1;
+    callsub S_Announce;
     goto L_Return_1;
  
 OnTick:
@@ -300,6 +296,7 @@ OnReward:
     set @xmas_state, 0;
     set @karma_bonus, $@xmas_boss_bonus;
     message strcharinfo(0), "Wow, what happened here?.";
+    goto L_End;
 
 L_End:
     if ((($@XmasBattleStatus - 1) / 2) == 0) goto L_EndNice;
