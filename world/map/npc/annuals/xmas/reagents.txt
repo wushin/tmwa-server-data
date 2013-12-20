@@ -150,7 +150,7 @@ function|script|SabotageList|,
     mes "He bursts into a devilish laughter...";
     next;
     mes "\"mmh... To replace the packing material we also need to get some Cotton Cloth.\"";
-    mes "He makes a strange frown and clenches his theeth. It seems like he is talking to himself, not to you.";
+    mes "He makes a strange frown and clenches his teeth. It seems like he is talking to himself, not to you.";
     mes "\"Yes... That will rattle of few cages, when the presents rattle and the gifts break.\"";
     next;
     mes "\"You can also give them " + $@xmas_bad_friendly_name$ + " for their candy storage.\"";

@@ -269,7 +269,7 @@ L_Return:
     end;
 
 L_XmasError:
-    gmcommand @mapexit;
     debugmes "Xmas is Dead Jim.";
+    gmcommand "@mapexit";
     end;
 }
