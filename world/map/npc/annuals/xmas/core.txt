@@ -161,8 +161,9 @@ L_FinalGift:
     mes "O look, a present from " + $@xmas_present_from$[@xmas_reward_side];
     next;
     getinventorylist;
-    if (@inventorylist_count > 100)
+    if (@inventorylist_count == 100)
         goto L_FullInv;
+    //still missing checkweight
     set @xmas_reward, (@xmas_reward + ((BaseLevel + 10)/10));
     set @xmas_uncommon_slot, rand((getarraysize($@xmas_uncommon_reward$) - 1));
     if(@xmas_reward >= 90)

@@ -45,7 +45,7 @@ L_XmasMain:
     goto L_Close;
 
 L_Helping:
-    mes "\"I am " + $@npc_name$ + ". We are in charge of getting all the presents together, but we mess up and now all our supplies are ruined. Can ya help us out?\"";
+    mes "\"I am " + $@npc_name$ + ". We are in charge of getting all the presents together, but we messed up and now all our supplies are ruined. Can you help us out?\"";
     mes "\"We need wrapping paper and empty boxes! We can provide the gifts!\"";
     next;
 
@@ -53,7 +53,7 @@ L_Main:
     mes "\"Do you have any supplies we can use?\"";
     next;
     menu
-        "I just wanted to say hello.",-,
+        "What? err... I just wanted to say hello.",-,
         "Purple Wrapping Paper and an empty box.",L_Purple,
         "Blue Wrapping Paper and an empty box.",L_Blue,
         "Green Wrapping Paper and an empty box.",L_Green,
@@ -92,7 +92,7 @@ L_Gift:
     if ($@xmas_empty_box_amount > countitem("OpenPresentBox"))
         goto L_NotEnough;
     getinventorylist;
-    if (@inventorylist_count > 100)
+    if ((@inventorylist_count == 100) || (checkweight(@present_name$, $@xmas_wrap_reward) == 0))
         goto L_FullInv;
     delitem "OpenPresentBox", $@xmas_empty_box_amount;
     delitem @wrap$, $@xmas_wrap_amount;

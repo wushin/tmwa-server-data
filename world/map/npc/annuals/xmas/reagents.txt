@@ -147,7 +147,7 @@ function|script|SabotageList|,
     mes "\"Lets see... To replace the glitter I need you to get me " + ($@xmas_red_amount + $@xmas_yellow_amount) + " Piles of Ash, " + $@xmas_red_amount + " Red Dyes and " + $@xmas_yellow_amount + " Yellow Dyes\"";
     mes "\"Bring them here and I can instruct you how to mix them into fake glitter, a powder that will make them believe they have what they need but really they don't. It will loose it's shine before it arrives. They are way to self absorbed to notice the difference. And even if they notice... It will be too late!\"";
     next;
-    mes "He burst into a devilish laughter...";
+    mes "He bursts into a devilish laughter...";
     next;
     mes "\"mmh... To replace the packing material we also need to get some Cotton Cloth.\"";
     mes "He makes a strange frown and clenches his theeth. It seems like he is talking to himself, not to you.";

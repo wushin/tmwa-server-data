@@ -11,7 +11,7 @@
 
 L_OffSeason:
     mes "[Vellamo]";
-    mes "\"Candy Stocks built back up. Be ready as we can the more we store the more they want...\"";
+    mes "\"Candy Stock is built back up. Though... the more we store the more they want...\"";
     goto L_Close;
 
 L_XmasMain:
@@ -29,9 +29,9 @@ L_Helping:
         "Nice. I have to go.", L_Close,
         "Do you need help with anything?", -;
     mes "[Vellamo]";
-    mes "\"Oh? You want to help us? Actually, there is one thing you could do. Did you see those weird slimes out there on the Snow Fields? Argh, I hate those creatures, last year they invaded the entire basement...\"";
+    mes "\"Oh? You want to help us? Actually, there is one thing you could do. Did you see those weird slimes out there on the snow fields? Argh, I hate those creatures, last year they invaded the entire basement...\"";
     next;
-    mes "\"However, this year they tried again, but I was able to hold them off. They just managed to devour most of our Candy supplies.\"";
+    mes "\"However, this year they tried again, but I was able to hold them off. They just managed to devour most of our candy supplies.\"";
     next;
     mes "\"So in case you find some of the Candies, feel free to bring them back. Ismo will give you some reward for them.\"";
     set XMASTIME, XMASTIME | ($@xmas_helper_bit_storage);
@@ -39,7 +39,7 @@ L_Helping:
 
 L_Candy:
     mes "[Vellamo]";
-    mes "\"Ah, welcome back. When you have found some of the Candy, please give it to Ismo.\"";
+    mes "\"Ah, welcome back. When you have found some of the candy, please give it to Ismo.\"";
     goto L_Close;
 
 L_Close:
@@ -63,7 +63,7 @@ L_OffSeason:
 
 L_Helping:
     mes "[Ismo]";
-    mes "\"Did you get back some Candy from the slimes?\"";
+    mes "\"Did you get back some candy from the slimes?\"";
     next;
     menu
         "Give " + $@xmas_good_friendly_name$, L_GoodCandy,

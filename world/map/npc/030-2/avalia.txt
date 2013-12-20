@@ -30,9 +30,9 @@ L_XmasMain:
 
 L_ListReturn:
     mes "[Avalia]";
-    mes "\"This had better be important, I've got enough to worry about.\"";
+    mes "\"This had better be important, I have got enough to worry about.\"";
     menu
-        "Sorry for interrupting, but I've been sent up here with the List", -;
+        "Sorry for interrupting, but I have been sent up here with the List", -;
     mes "She stares blankly at you for a bit...";
     next;
     mes "\"YAHOO!!\"";
@@ -150,13 +150,13 @@ L_CheckReagents:
     goto L_Close;
 
 L_NotEnough:
-    mes "\"I need all the reagents before Santa Visits. Come back and see me when you have them.\"";
+    mes "\"I need all the reagents before Santa visits. Come back and see me when you have them.\"";
     goto L_Close;
 
 L_Quick:
     mes "[Avalia]";
     mes "\"What are you still doing here?\"";
-    mes "\"Quickly, to the Warhouse.\"";
+    mes "\"Quickly, to the warehouse.\"";
     goto L_Close;
 
 L_Reward:
