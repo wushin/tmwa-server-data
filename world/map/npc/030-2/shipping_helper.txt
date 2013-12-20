@@ -77,7 +77,7 @@ L_Green:
     goto L_Gift;
 
 L_Yellow:
-    set @wrap$, "GreenWrap";
+    set @wrap$, "YellowWrap";
     set @present_name$, "YellowPresentBox";
     goto L_Gift;
 
