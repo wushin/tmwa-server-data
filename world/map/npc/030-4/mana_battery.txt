@@ -67,7 +67,7 @@ L_BattleBad:
     mes "\"Get out of here, before the bomb explodes!.\"";
     menu
         "Agreed.", L_StartBad,
-        "You know what? If I pull this lever this should become HUGE!", L_StartBadHard;
+        "You know what? If I pull this lever this should become HUGE! (Beware! that's dangerous)", L_StartBadHard;
  
 L_BattleGood:
     mes "You stare into a box that even through your unexperienced eyes looks less than secure to harbour such a powerful device as the mana battery is.";
@@ -75,13 +75,15 @@ L_BattleGood:
         "Ok, this should be where the battery belongs.", L_StartGood,
         "No WAY! I am not going to put my life in danger", L_Close,
         "Ok that does it, I am going to leave! I cannot be responsible for blowing up the entire mana world.", L_Coward,
-        "I studied magic and this looks all wrong.", L_StartGoodHard;
+        "I studied magic and this looks all wrong. (Beware! that's dangerous)", L_StartGoodHard;
+    goto L_Close;
  
 L_StartGood:
     if ($@XmasBattleStatus)
         goto L_BattleInProgress;
     set $@XmasBattleStatus, 1;
     goto L_Start;
+    goto L_Close;
 
 L_StartGoodHard:
     if ($@XmasBattleStatus)
@@ -144,9 +146,17 @@ L_Helper:
     mes "mmh the AniManOMat is empty again, maybe we should try with a different mana battery.";
     menu
         "No I prefer to leave now, get me out of here.", L_Quit,
+        "Wait let me check if i can fix this ...", L_Repeat,
         "Why would I do that? Aaaah... Nevermind.", -;
     goto L_Close;
 
+L_Repeat:
+    //Player wants to try again on hard mode again
+    callsub S_CheckHardReq;
+    delitem $@xmas_boss_req$[ @xmas_battle_side ], $@xmas_boss_amount[ @xmas_battle_side ];
+    set $@XmasBattleStatus, 2 * ( $@xmas_battle_side ) + 2;
+    goto L_Start;
+    
 L_Quit:
    warp "030-2",151,25;
    goto L_Close;
