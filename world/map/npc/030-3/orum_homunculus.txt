@@ -385,7 +385,7 @@ L_Thanks:
     mes "[Orum's Homunculus]";
     mes "\"Please feel free to continue to sabotage whats left of the Inn while I prepare your reward.\"";
     goto L_Close;
-     
+
 L_NotEnough:
     mes "\"Come back with the components or don't come back at all.\""; 
     goto L_Close;

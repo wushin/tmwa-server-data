@@ -1,4 +1,4 @@
-// This file is part of Christmas Event 
+// This file is part of Christmas Event
 // author: Jenalya, Chayenne, cinderweb, wushin
 // please see #XmasConfig
 

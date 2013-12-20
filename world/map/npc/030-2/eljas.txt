@@ -82,7 +82,7 @@ L_ListNames:
 L_SantasList:
     if(!(@xmas_list_complete))
         goto L_NotComplete;
-    mes "\"Awesome! Now please take those lists to Chief Warrick on the next floor.\"";    
+    mes "\"Awesome! Now please take those lists to Chief Warrick on the next floor.\"";
     set @karma_bonus, @xmas_list_count;
     callfunc "XmasNice";
     set @xmas_state, $@xmas_list_deliver_state;
