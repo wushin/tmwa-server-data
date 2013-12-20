@@ -171,7 +171,7 @@ L_Return_1:
     
 L_CaveLogic:
     if ($@XmasBossPlayerCount < 1)
-        goto L_CleanUp;
+        goto L_AllDead;
     set $@BombTimer, $@BombTimer + 5; // Advance 5 seconds
     if (mobcount("030-4.gat", "AniManOMat::OnGuardDeath") <= 0)
         goto L_NextWave;
@@ -183,7 +183,7 @@ L_NextWave:
     set $@BombTimer, 0;
     set $@XmasBossRound, $@XmasBossRound + 1;
     if (($@XmasBossRound > 10)  && (mobcount("030-4.gat", "AniManOMat::OnGuardDeath") < 0))
-        goto L_CleanUp;
+        goto L_Finished;
     // Break/LastChance(s)
     if (($@XmasBossRound > 10)  && ($@XmasBossRound <= 12))
         goto L_Return_1;
@@ -251,6 +251,16 @@ OnAll1:
 OnGuardDeath:
     end;
     
+L_AllDead:
+    set $@msg$, $@xmas_final_announce$[ ($@XmasBattleStatus - 1) / 2 ];
+    callsub S_Announce;
+    goto L_CleanUp;
+
+L_Finished:
+    set $@msg$, $@xmas_final_announce$[ (($@XmasBattleStatus - 1) / 2) + 2 ];
+    callsub S_Announce;
+    goto L_CleanUp;
+    
 L_CleanUp:
     areatimer "030-4.gat", 0, 0, 50, 50, 10, "AniManOMat::OnReward";
     set $@XmasBattleStatus, 0;
@@ -295,7 +305,6 @@ L_EndNice:
     callsub S_ClearVariables;
     end;
     
-    
 OnInit:
     setarray $@XmasBossMes$,
     "", // unused
@@ -324,8 +333,23 @@ OnInit:
     "Orum's Homunculus : just lol.",
     "Avalia : Wow! You saved christmas.",
     "Orum's Homunculus : Yep, it's over... and strange enough you survived.";
+    
+    setarray $@xmas_final_announce$, 
+        "Avalia : Oh no, not only did you slay half my Guard of Honour, but also the issue was not fixed, try to install the battery again!", 
+        "Orum's Homunculus : Boy are you lame. So what now? The battery is still not placed! Go try again!",
+        "Avalia : W00t you actually made it through. I think now that the manabattery lost some of its abundant power this seems to have given those nutcrackers that didn't go crazy a good boost of life energy. Thank you for your help all and come see me for a reward.",
+        "Orum's Homunculus : Good. They are dead. Now GET OUT OF THERE, this bomb is dangerous!"; 
     end;
-        
+    
+S_Announce:
+    mapannounce "030-4.gat", $@msg$, 0;
+    mapannounce "030-3.gat", $@msg$, 0;
+    mapannounce "030-2.gat", $@msg$, 0;
+    mapannounce "030-1.gat", $@msg$, 0;
+    set $@msg$, "";
+    return;
+
+    
 S_CheckHardReq:
     if (BaseLevel < $@BossHardLevel)
         goto L_NotHighEnough;
