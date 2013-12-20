@@ -316,6 +316,7 @@ L_EndNice:
     end;
 
 OnInit:
+    set $@XmasBattleStatus, 0;
     setarray $@XmasBossMes$,
     "", // unused
     "", // unused
