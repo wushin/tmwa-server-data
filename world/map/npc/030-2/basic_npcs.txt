@@ -49,12 +49,12 @@
     
 L_Interesting: 
     mes "[Akseli]";
-    mes "\"Good to hear that! Go look around, we have an open house policy all year.\"";
+    mes "\"Good to hear that! Go look around, talk with the other guys and girls, we have an open house policy all year.\"";
     goto L_Close;
 
 L_Rage:
     mes "[Akseli]";
-    mes "\"tsss... you young people cant get no satisfaction eh?\"";
+    mes "\"tsss... you young people can't get no satisfaction eh?\"";
     goto L_Close;
     
 L_Close:
