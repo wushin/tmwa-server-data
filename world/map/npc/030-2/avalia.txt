@@ -44,9 +44,9 @@ L_ListReturn:
     next;
     mes "\"You see this nutcracker here beside me? He is different from the rest. He had a will of his own. It started shortly after we installed the new power core.\"";
     next;
-    mes "\"At first, it was just magical research that had me keep him close to me. As time wore on, mine and his interactions became more initmate. I was hoping to get my research done before the Holidays.\"";
+    mes "\"At first, it was just magical research that had me keep him close to me. As time wore on, mine and his interactions became more intimate. I was hoping to get my research done before the Holidays.\"";
     next;
-    mes "\"I wanted to show Santa and ask to if he knew how to help make it permanent, but Someone didn't approve. took away our central spell power core. Now all the nutcrackers are back to being mindless automatons. Now the Christmas Sages must use magic to animate them.\"";
+    mes "\"I wanted to show Santa and ask to if he knew how to help make it permanent, but Someone didn't approve. Took away our central spell power core. Now all the nutcrackers are back to being mindless automatons. Now the Christmas Sages must use magic to animate them.\"";
     next;
     mes "\"Please you must help me find a way to restore our power core before Christmas. I want to show Santa Millis, so he can give him life permanently for me.\"";
     mes "\"First I need time to do some more reaserch. Which means I need to spend less time helping with the holidays. Can you check with the helpers and make sure everything is going smoothly.\"";
