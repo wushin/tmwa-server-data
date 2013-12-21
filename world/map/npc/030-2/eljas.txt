@@ -17,26 +17,72 @@ L_XmasMain:
         goto L_OffSeason;
     if (@xmas_list_deliver)
         goto L_SeeChief;
-    if (@xmas_list_complete)
-        goto L_HaveList;
-    if (@xmas_list_gather)
-        goto L_HaveList;
-    goto L_NeedList;
+    if (@xmas_list_both)
+        goto L_HaveList1;
+    if (@xmas_list_eljas)
+        goto L_HaveList2;
+    if (@xmas_list_orum)
+        goto L_NeedList1;
+    goto L_NeedList2;
 
-L_HaveList:
+L_HaveList1:
     mes "[Eljas]";
     mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic happen.\"";
     next;
     mes "\"What brings you here?\"";
+    next;
+    mes "...";
     menu
         "What were the childrens names again?", L_ListNames,
         "Look, I have Santa's List.", L_SantasList,
-        "I have Santa's List.(Fake List)", L_SantasFakeList,
+        "I have Santa's List.(follow Orum and his evil deeds)", L_SantasFakeList,
         "Christmas?", L_Christmas,
         "I am interested in magical research.", L_Research,
         "Nothing, I have to go.", L_Close;
+    goto L_Close;
 
-L_NeedList:
+L_HaveList2:
+    mes "Mmmmh he probably won't notice what lists you will bring him (Did you ever notice that he does not move at all?)";
+    mes "Haven't you always wondered what happens if you simply cheat?";
+    mes "Well ... It's a story as ancient as mankind.";
+    mes "If you break the rules that are tied to an environment you live in, you are likely to be punished";
+    mes "by them. So be careful what you do next, you might regret it...";
+    next;
+        menu
+        "What were the childrens names again?", L_ListNames,
+        "Look, I have Santa's List.", L_SantasList,
+        "I have Santa's List. (replace every wish with \"Christmas would die\" )", L_SantasFakeList,
+        "Christmas?", L_Christmas,
+        "I am interested in magical research.", L_Research,
+        "Nothing, I have to go.", L_Close;
+    goto L_Close;
+
+L_NeedList1:
+    mes "[Eljas]";
+    mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic of the holidays happen.\"";
+    next;
+    mes "\"So what brings you here my dear?\"";
+    menu
+        "Mmh? Nothing, I have to go.", L_Close,
+        "I heard you need help with some Wish lists?", -;
+    mes "\"True...\"";
+    next;
+    mes "\"It appears we are missing some of the wish list from the children from all over the Mana World.\"";
+    mes "\"Let me check here...\"";
+    next;
+    mes "\"Ah ha, here we go.\"";
+    mes "\"The missing wish lists are:";
+    callfunc "XmasListList";
+    mes "\"If you can find these children, please bring their lists back to me.\"";
+    mes "\"Thank you for helping out!\"";
+    mes "He looks up from his notes and gives you a broad smile";
+
+    set @xmas_state, $@xmas_list_both_state;
+    callfunc "XmasSetState";
+    goto L_Close;
+
+
+L_NeedList2:
     mes "[Eljas]";
     mes "\"Hello! Welcome to the Christmas Inn. We work all year around to make the magic of the holidays happen.\"";
     next;
@@ -68,7 +114,7 @@ L_StartQuest:
     mes "\"Thank you for helping out!\"";
     mes "He looks up from his notes and gives you a broad smile";
     next;
-    set @xmas_state, $@xmas_list_gather_state;
+    set @xmas_state, $@xmas_list_eljas_state;
     callfunc "XmasSetState";
     goto L_Close;
 
@@ -149,7 +195,7 @@ L_End:
 OnTouch:
     callfunc "XmasStates";
     callfunc "ThrowOutTheBum";
-    if((@xmas_state >= $@xmas_list_gather_state) || !($@xmas_time))
+    if((@xmas_list_gather) || !($@xmas_time))
         goto L_End;
     goto L_Start;
 }

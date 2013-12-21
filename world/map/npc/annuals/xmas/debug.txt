@@ -45,7 +45,7 @@ L_DebugVars:
     next;
     mes "xmas_basement_passage: " + @xmas_basement_passage;
     mes "xmas_thrown_out: " + @xmas_thrown_out;
-    mes "xmas_hard_mode: " + @xmas_hard_mode;
+    mes "xmas_hard_mode: " + @xmas_boss_hero;
     next;
     mes "xmas_sweater: " + @xmas_sweater;
     mes "xmas_cap: " + @xmas_cap;
@@ -89,6 +89,7 @@ L_Time:
     goto L_Close;
 
 L_XmasTimeKey:
+    if (getgmlevel() < 20) goto L_Close;
     mes "Xmas Time Key Change.";
     mes "Start Month?";
     input @xmas_time_key_smonth;
@@ -206,7 +207,7 @@ L_end:
 
 botcheck.gat,26,28,0|script|XmasDebug#5|105,
 {
-   if(getgmlevel() < 40 & !(debug))
+   if((getgmlevel() < 40) || !(debug))
        goto L_End;
 
    callfunc "XmasDebug";

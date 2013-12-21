@@ -145,7 +145,7 @@ L_Helper:
     mes "mmh the AniManOMat is empty again, maybe we should try with a different mana battery.";
     menu
         "No I prefer to leave now, get me out of here.", L_Quit,
-        "Wait let me check if i can fix this ...", L_Repeat,
+        "Wait let me check if i can fix this ...(Beware!)", L_Repeat,
         "Why would I do that? Aaaah... Nevermind.", -;
     goto L_Close;
 
