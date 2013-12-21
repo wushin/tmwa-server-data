@@ -119,8 +119,6 @@ L_Start:
     mes "it seems like this will not turn out as planned, Look this Guard of Honour is going crazy!";
     next;
     npctalk "The Guards are out of control!";
-    npctalk $@XmasBattleStatus;
-
     set $@XmasBossRound, 0;
     set $@XmasBossPlayerCount, getmapusers("030-4.gat");
     areamonster "030-4.gat", 20, 21, 40, 40, "", 1114, 1, "AniManOMat::OnGuardDeath";
@@ -200,11 +198,11 @@ L_NextWave:
         goto L_Return_1;
     //KillerWaves
     if ($@XmasBossRound > 12)
-        areamonster "030-4.gat", 0, 0, 50, 50, "", 1114, $@XmasBossRound*2 + $@XmasBossPlayerCount*5, "AniManOMat::OnGuardDeath";
+        areamonster "030-4.gat", 0, 0, 50, 50, "", 1114, $@XmasBossRound*2 + $@XmasBossPlayerCount*3, "AniManOMat::OnGuardDeath";
     //Normal Waves 1 to 10
     // Guard Amount doubles if on hard mode
     set $@GuardAmount, 1 + (8 + ($@XmasBossRound) + (2 * $@XmasBossPlayerCount)) / 8;
-    set $@SkullAmount, 1 + ($@GuardAmount * $@GuardAmount) / 5;
+    set $@SkullAmount, 1 + ($@GuardAmount * $@GuardAmount) / 4;
  
     if ($@GuardAmount > 15)
         set $@GuardAmount, 15;
@@ -225,9 +223,9 @@ L_NextWave:
         areamonster "030-4.gat", 41, 32, 49, 49, "", 1109, $@SkullAmount, "AniManOMat::OnGuardDeath";
     //Candied Slimes for Nice Mode in Rooms 1 and 2
     if ($@XmasBattleStatus == 1 || $@XmasBattleStatus == 2)
-        areamonster "030-4.gat", 20, 21, 28, 28, "", 1111, $@XmasBossRound + 1, "AniManOMat::OnGuardDeath";
+        areamonster "030-4.gat", 20, 21, 28, 28, "", 1111, ($@XmasBossRound / 2) + 1, "AniManOMat::OnGuardDeath";
     if ($@XmasBattleStatus == 1 || $@XmasBattleStatus == 2)
-        areamonster "030-4.gat", 41, 21, 49, 28, "", 1111, $@XmasBossRound + 1, "AniManOMat::OnGuardDeath";
+        areamonster "030-4.gat", 41, 21, 49, 28, "", 1111, ($@XmasBossRound / 2) + 2, "AniManOMat::OnGuardDeath";
     //Bluepars for Easy mode in Naughty Variant in Rooms 3,4,5,6
     if ($@XmasBattleStatus == 3)
         areamonster "030-4.gat", 20, 32, 28, 49, "", 1107, $@SkullAmount, "AniManOMat::OnGuardDeath";

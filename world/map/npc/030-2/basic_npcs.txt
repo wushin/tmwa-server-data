@@ -40,11 +40,24 @@
     mes "[Akseli]";
     mes "\"Ah, a visitor! Do you enjoy your time in Santa's residence?\"";
     menu
-        "I'm confused, it's much bigger than from the outside.", -,
-        "Yes, it's really interesting.", -,
-        "It's ok.", -;
+        "I'm confused, it's much bigger than from the outside.", L_Close,
+        "Yes, it's really interesting.", L_Interesting,
+        "It's ok.", L_Rage;
     mes "[Akseli]";
     mes "\"Ah, yes, that's a magic technique almost all of the Sages use. The house is located in a shifted dimension.\"";
+    goto L_Close;
+    
+L_Interesting: 
+    mes "[Akseli]";
+    mes "\"Good to hear that! Go look around, talk with the other guys and girls, we have an open house policy all year.\"";
+    goto L_Close;
+
+L_Rage:
+    mes "[Akseli]";
+    mes "\"tsss... you young people can't get no satisfaction eh?\"";
+    goto L_Close;
+    
+L_Close:
     close;
 }
 
