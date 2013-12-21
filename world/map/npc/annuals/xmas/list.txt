@@ -4,13 +4,10 @@
 
 function|script|XmasCheckList|,
 {
-    //sets $@xmas_list_complete_state if most or all lists are found
-    //sets $@xmas_all_lists_bit if *all* lists are found
-    
     set @xmas_list_count, 0;
     set @xmas_list_loop, 0;
 
-    if(@xmas_list_complete)
+    if(@xmas_list_deliver)
         goto L_Return;
 
 L_Loop:
@@ -53,12 +50,11 @@ L_Return:
 function|script|XmasList|,
 {
     callfunc "XmasStates";
-    // set @xmas_list_gather, (@xmas_state >= $@xmas_list_gather_state);
-    // it is called by some child npcs, lists can be collected in all states after $@xmas_list_gather_state
-    // especially in none event time. if annuals/xmas/config is not loaded it should just presume the normal
-    // routine
-    if($@xmas_time != $@xmas_event_time) goto L_Return;
-    if(@xmas_list_gather) goto L_QuestTime;
+
+    if($@xmas_time != $@xmas_event_time)
+        goto L_Return;
+    if((@xmas_list_gather) && !(@xmas_list_complete)))
+        goto L_QuestTime;
     goto L_Return;
 
 L_QuestTime:
