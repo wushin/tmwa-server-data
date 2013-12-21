@@ -94,8 +94,8 @@ L_Main:
     set $@xmas_thrown_out_bit, (1 << 25);
 
     // Quest Start (@xmas_state)
-    set $@xmas_list_orum_state, 1;
-    set $@xmas_list_eljas_state, 2;
+    set $@xmas_list_path2_state, 1;
+    set $@xmas_list_path1_state, 2;
     set $@xmas_list_both_state, 3;
     set $@xmas_list_complete_state, 4;
     set $@xmas_list_deliver_state, 5;

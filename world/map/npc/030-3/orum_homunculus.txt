@@ -187,8 +187,8 @@ L_XmasMain:
     if(@xmas_list_deliver) goto L_ListReturn;
     if(@xmas_list_complete) goto L_SantasList;
     if(@xmas_list_both) goto L_HaveList2;
-    if(@xmas_list_eljas) goto L_QuestStart1;
-    if(@xmas_list_orum) goto L_HaveList2;
+    if(@xmas_list_path1) goto L_QuestStart1;
+    if(@xmas_list_path2) goto L_HaveList2;
     if($@xmas_time) goto L_QuestStart2;
     goto L_OffSeason;
 
@@ -221,7 +221,7 @@ L_QuestStart2:
     mes "\"Let's see the following children's lists are missing:\"";
     callfunc "XmasListList";
     mes "\"Would you please go and take a look what happened to them? If you get a list, report back.\"";
-    set @xmas_state, $@xmas_list_orum_state;
+    set @xmas_state, $@xmas_list_path2_state;
     callfunc "XmasSetState";
     goto L_Close;
 

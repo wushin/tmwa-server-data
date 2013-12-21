@@ -11,9 +11,9 @@ function|script|XmasStates|,
     set @xmas_karma, ((XMASTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
     set @xmas_side, XMASTIME & $@xmas_side_bit;
 
-    set @xmas_list_gather, (@xmas_state >= $@xmas_list_orum_state);
-    set @xmas_list_orum, (@xmas_state == $@xmas_list_orum_state);
-    set @xmas_list_eljas, (@xmas_state == $@xmas_list_eljas_state);
+    set @xmas_list_gather, (@xmas_state >= $@xmas_list_path2_state);
+    set @xmas_list_path2, (@xmas_state == $@xmas_list_path2_state);
+    set @xmas_list_path1, (@xmas_state == $@xmas_list_path1_state);
     set @xmas_list_both, (@xmas_state == $@xmas_list_both_state);
     set @xmas_list_complete, (@xmas_state >= $@xmas_list_complete_state);
     set @xmas_list_deliver, (@xmas_state >= $@xmas_list_deliver_state);

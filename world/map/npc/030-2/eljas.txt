@@ -19,9 +19,9 @@ L_XmasMain:
         goto L_SeeChief;
     if (@xmas_list_both)
         goto L_HaveList1;
-    if (@xmas_list_eljas)
+    if (@xmas_list_path1)
         goto L_HaveList2;
-    if (@xmas_list_orum)
+    if (@xmas_list_path2)
         goto L_NeedList1;
     goto L_NeedList2;
 
@@ -114,7 +114,7 @@ L_StartQuest:
     mes "\"Thank you for helping out!\"";
     mes "He looks up from his notes and gives you a broad smile";
     next;
-    set @xmas_state, $@xmas_list_eljas_state;
+    set @xmas_state, $@xmas_list_path1_state;
     callfunc "XmasSetState";
     goto L_Close;
 
