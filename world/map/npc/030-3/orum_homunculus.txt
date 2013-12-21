@@ -164,9 +164,10 @@ L_End:
 
 030-3.gat,28,28,0|script|Orum's Homunculus|385,
 {
+
+    callfunc "XmasStates";
     callfunc "XmasHelperPoints";
     callfunc "CheckReagents";
-    callfunc "XmasStates";
 
     if($@xmas_time)
         goto L_XmasMain;
@@ -185,29 +186,46 @@ L_XmasMain:
     if((@xmas_helper_start_state) && (@xmas_side)) goto L_HelperQuest;
     if(@xmas_list_deliver) goto L_ListReturn;
     if(@xmas_list_complete) goto L_SantasList;
-    if(@xmas_list_gather) goto L_HaveList;
-    if($@xmas_time) goto L_QuestStart;
+    if(@xmas_list_both) goto L_HaveList2;
+    if(@xmas_list_path1) goto L_QuestStart1;
+    if(@xmas_list_path2) goto L_HaveList2;
+    if($@xmas_time) goto L_QuestStart2;
     goto L_OffSeason;
 
-L_QuestStart:
+
+L_QuestStart1:
     mes "[Orum's Homunculus]";
     mes "\"Greetings traveler, Do you have any time to help me out?\"";
     menu
-        "Sure, I'm listening.", L_GatherList,
-        "No. I really have to go.", L_Close;
+        "No. I really have to go.", L_Close,
+        "Sure, I'm listening.", -;
+    mes "\"Good. You may have heard that some of the children's wish lists are missing.\"";
+    mes "\"I sent a courier out to get their lists, but they have yet to return.\"";
+    next;
+    mes "\"Let's see the following children's lists are still missing:\"";
+    callfunc "XmasListList";
+    mes "\"Would you please go and take a look what happened to them? If you can get hold of a list, report back. We surely know how to \"amend\" these things properly...\"";
+    set @xmas_state, $@xmas_list_both_state;
+    callfunc "XmasSetState";
+    goto L_Close;
 
-L_GatherList:
-    mes "\"Good. You may have heard that some of the childrens wish lists are missing.\"";
+L_QuestStart2:
+    mes "[Orum's Homunculus]";
+    mes "\"Greetings traveler, Do you have any time to help me out?\"";
+    menu
+        "No. I really have to go.", L_Close,
+        "Sure, I'm listening.", -;
+    mes "\"Good. You may have heard that some of the children's wish lists are missing.\"";
     mes "\"I sent a courier out to get their lists, but they have yet to return.\"";
     next;
     mes "\"Let's see the following children's lists are missing:\"";
     callfunc "XmasListList";
     mes "\"Would you please go and take a look what happened to them? If you get a list, report back.\"";
-    set @xmas_state, $@xmas_list_gather_state;
+    set @xmas_state, $@xmas_list_path2_state;
     callfunc "XmasSetState";
     goto L_Close;
 
-L_HaveList:
+L_HaveList2:
     mes "[Orum's Homunculus]";
     mes "\"Have you got the missing lists?\"";
     menu
@@ -389,7 +407,7 @@ L_Thanks:
     goto L_Close;
 
 L_NotEnough:
-    mes "\"Come back with the components or don't come back at all.\""; 
+    mes "\"Come back with the components or don't come back at all.\"";
     goto L_Close;
 
 L_ThankYou:

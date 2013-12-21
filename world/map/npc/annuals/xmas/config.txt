@@ -94,20 +94,22 @@ L_Main:
     set $@xmas_thrown_out_bit, (1 << 25);
 
     // Quest Start (@xmas_state)
-    set $@xmas_list_gather_state, 1;
-    set $@xmas_list_complete_state, 2;
-    set $@xmas_list_deliver_state, 3;
+    set $@xmas_list_path2_state, 1;
+    set $@xmas_list_path1_state, 2;
+    set $@xmas_list_both_state, 3;
+    set $@xmas_list_complete_state, 4;
+    set $@xmas_list_deliver_state, 5;
     // Helper SubQuest
-    set $@xmas_helpers_start_state, 4;
-    set $@xmas_helpers_done_state, 5;
+    set $@xmas_helpers_start_state, 6;
+    set $@xmas_helpers_done_state, 7;
     // Reagents
-    set $@xmas_reagents_start, 6;
-    set $@xmas_reagents_done, 7;
+    set $@xmas_reagents_start, 8;
+    set $@xmas_reagents_done, 9;
     // Boss Door State
-    set $@xmas_boss_door_open_state, 8;
+    set $@xmas_boss_door_open_state, 10;
     // Reward State
-    set $@xmas_reward_start, 9;
-    set $@xmas_reward_done, 10;
+    set $@xmas_reward_start, 11;
+    set $@xmas_reward_done, 12;
     // Boss Fight State
     set $@XmasBattleStatus, 0;
     // Boss Fight Required Level for Hard Mode

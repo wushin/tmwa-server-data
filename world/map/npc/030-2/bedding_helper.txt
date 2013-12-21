@@ -1,5 +1,5 @@
 // Annual Xmas
-// author: Jenalya, wushin
+// author: Jenalya, wushin, Chayenne
 // Osmo asks for some White Fur which is used for bedding some presents in the boxes
 // can be sabotaged by given Cloth instead
 

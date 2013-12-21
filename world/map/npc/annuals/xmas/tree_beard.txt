@@ -11,6 +11,7 @@
 
 020-1.gat,90,79,0|script|Present#1|386,
 {
+    callfunc "XmasStates";
     callfunc "XmasMainItemReward";
     close;
 }
@@ -27,6 +28,7 @@
 
 009-1.gat,54,39,0|script|Present#2|386,
 {
+    callfunc "XmasStates";
     callfunc "XmasMainItemReward";
     close;
 }
@@ -38,6 +40,7 @@
 
 001-1.gat,41,46,0|script|Present#3|386,
 {
+    callfunc "XmasStates";
     callfunc "XmasMainItemReward";
     close;
 }
