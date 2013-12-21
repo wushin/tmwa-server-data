@@ -40,7 +40,13 @@
 
 -|script|#XmasConfig|-1,
 {
+OnCommandRestartQuest:
+    goto L_Main;
+
 OnInit:
+    goto L_Main;
+
+L_Main:
     // Xmas Key Identifier Set through Botcheck Debug
     if(!($XMAS_TIME_KEY))
         setarray $XMAS_TIME_KEY, 12,1,25,6,2013;
