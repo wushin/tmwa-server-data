@@ -32,19 +32,21 @@ L_Helping:
     mes "\"However, we need to fix it. I have only a few boxes left.";
     mes "Bring me some wood, so I can make new boxes out of it.";
     mes $@xmas_log_amount + " Raw Logs will do for one box.\"";
+    mes "";
     if (countitem("RawLog") < $@xmas_log_amount)
-        goto L_Close;
+        mes "\"But I see you do not have enough with you anyway. Come back with some material please.\"";
+    if (countitem("RawLog") < $@xmas_log_amount) goto L_Close;
     next;
     mes "\"How many boxes do you need?\"";
     input @amount;
     if (@amount <= 0)
         goto L_Close;
-    if (countitem("RawLog") < @amount*$@xmas_log_amount)
+    if (countitem("RawLog") < (@amount * $@xmas_log_amount))
         goto L_NoItems;
     getinventorylist;
     if (@inventorylist_count > 100)
         goto L_FullInv;
-    delitem "RawLog", @amount*$@xmas_log_amount;
+    delitem "RawLog", (@amount * $@xmas_log_amount);
     mes "[Urmas]";
     mes "\"Alright! Good job, kid. I'll start to make some more boxes now.";
     mes "Here, take this in the meanwhile and put some toys in it.\"";

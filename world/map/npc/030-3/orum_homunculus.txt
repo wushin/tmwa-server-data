@@ -302,9 +302,23 @@ L_HelperQuest:
     mes "\"Welcome back!\"";
     mes "\"How is the sabotage coming along?\"";
     menu
+        "What is this all about again?", L_HelpHelpers,
+        "They keep throwing me out.", L_HelpPassage,
         "I need some powders made.", L_MakePowders,
         "It's a mess.", L_Continue,
         "I'd better break some things.", L_Close;
+
+L_HelpHelpers:
+    callfunc "SabotageList";
+    goto L_HelperQuest;
+
+L_HelpPassage:
+    mes "\"As I told you, I installed a passage to the Inn's basement:";
+    mes "Head to the east in this cave to find it.\"";
+    mes "\"Once there, smash your fist into the small crack and you will be teleported into the basement of the inn.\"";
+    goto L_Close;
+
+
 
 L_MakePowders:
     callfunc "BadPowderMake";
