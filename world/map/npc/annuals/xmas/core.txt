@@ -165,14 +165,17 @@ L_FinalGift:
     mes "O look, a present from " + $@xmas_present_from$[@xmas_reward_side];
     next;
     getinventorylist;
-    if ((@inventorylist_count == 100) || (checkweight(@present_name$, $@xmas_wrap_reward) == 0))
+    if (@inventorylist_count == 100)
         goto L_FullInv;
     set @xmas_reward, (@xmas_reward + ((BaseLevel + 10)/10));
     set @xmas_uncommon_slot, rand((getarraysize($@xmas_uncommon_reward$) - 1));
     if(@xmas_reward >= 90)
-        getitem $@xmas_rare_reward$[@xmas_reward_side], 1;
+        set @xmas_reward_item$, $@xmas_rare_reward$[@xmas_reward_side];
     if(@xmas_reward < 90)
-        getitem $@xmas_uncommon_reward$[@xmas_uncommon_slot], 1;
+        set @xmas_reward_item$, $@xmas_uncommon_reward$[@xmas_uncommon_slot];
+    if(checkweight(@xmas_reward_item$, 1) == 0)
+        goto L_FullInv;
+    getitem @xmas_reward_item$, 1;
     set @xmas_state, $@xmas_reward_done;
     callfunc "XmasSetState";
     goto L_Return;
