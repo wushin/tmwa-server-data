@@ -3,7 +3,6 @@
 
 030-2.gat,87,41,0|script|Eljas|328,5,1,
 {
-    callfunc "XmasCheckList";
     callfunc "XmasStates";
     callfunc "ThrowOutTheBum";
 
@@ -17,6 +16,8 @@ L_XmasMain:
         goto L_OffSeason;
     if (@xmas_list_deliver)
         goto L_SeeChief;
+    if (@xmas_list_complete)
+        goto L_Broken;
     if (@xmas_list_both)
         goto L_HaveList1;
     if (@xmas_list_path1)
@@ -24,6 +25,12 @@ L_XmasMain:
     if (@xmas_list_path2)
         goto L_NeedList1;
     goto L_NeedList2;
+
+L_Broken:
+    mes "If you somehow reached this label this means the quest is broken, your quest state is reset to zero, however you do not have to collect lists again.";
+    set @xmas_state, 0;
+    callfunc "XmasSetState";
+    goto L_Close;
 
 L_HaveList1:
     mes "[Eljas]";
@@ -126,6 +133,8 @@ L_ListNames:
     goto L_Close;
 
 L_SantasList:
+    callfunc "XmasCheckList";
+    callfunc "XmasStates";
     if(!(@xmas_list_complete))
         goto L_NotComplete;
     mes "\"Awesome! Now please take those lists to Chief Warrick on the next floor.\"";
@@ -137,6 +146,8 @@ L_SantasList:
     goto L_Close;
 
 L_SantasFakeList:
+    callfunc "XmasCheckList";
+    callfunc "XmasStates";
     if(!(@xmas_list_complete))
         goto L_NotComplete;
     mes "\"Wait a second... whats that aura...\"";
