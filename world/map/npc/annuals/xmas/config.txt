@@ -109,7 +109,10 @@ L_Main:
     set $@xmas_boss_door_open_state, 10;
     // Reward State
     set $@xmas_reward_start, 11;
-    set $@xmas_reward_done, 12;
+    set $@xmas_reward1_done, 12;
+    set $@xmas_reward2_done, 13;
+    set $@xmas_reward_done, 14;
+
     // Boss Fight State
     set $@XmasBattleStatus, 0;
     // Boss Fight Required Level for Hard Mode

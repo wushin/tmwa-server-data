@@ -178,6 +178,8 @@ L_OffSeason:
 
 L_XmasMain:
     if((@xmas_reward_done_state) && (@xmas_side)) goto L_Thanks;
+    if((@xmas_reward1_done_state) && (@xmas_side)) goto L_Thanks;
+    if((@xmas_reward2_done_state) && (@xmas_side)) goto L_Reward;
     if((@xmas_reward_start_state) && (@xmas_side)) goto L_Reward;
     if((@xmas_boss_door_state) && (@xmas_side)) goto L_Quick;
     if((@xmas_reagent_done_state) && (@xmas_side)) goto L_PowerReagents;
@@ -410,7 +412,10 @@ L_Quick:
 L_Reward:
     mes "[Orum's Homunculus]";
     mes "\"Revenge is best served cold..\"";
-    set @xmas_state, $@xmas_reward_done;
+    if @xmas_reward2_done_state
+        set @xmas_state, $@xmas_reward_done;
+    if @xmas_reward_start_state
+        set @xmas_state, $@xmas_reward1_done;
     callfunc "XmasSetState";
     callfunc "XmasMainXpBpReward";
     goto L_Close;

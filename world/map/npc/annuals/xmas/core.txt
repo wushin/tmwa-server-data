@@ -126,9 +126,6 @@ L_SetRewardBonus:
 // Main quest completion reward
 function|script|XmasMainXpBpReward|,
 {
-    //test
-    set @xmas_reward, 100;
-    //test end
     callfunc "XmasSetReward";
 
     if(BaseLevel >= 99)
@@ -158,7 +155,7 @@ function|script|XmasMainItemReward|,
 {
     callfunc "XmasSetReward";
 
-    if(($@xmas_time == $@xmas_reward_time) && (@xmas_reward_start_state))
+    if(($@xmas_time == $@xmas_reward_time) && ((@xmas_reward_start_state) || (@xmas_reward1_done_state)))
         goto L_FinalGift;
     goto L_Return;
 
@@ -179,7 +176,11 @@ L_FinalGift:
     if(checkweight(@xmas_reward_item$, 1) == 0)
         goto L_FullInv;
     getitem @xmas_reward_item$, 1;
-    set @xmas_state, $@xmas_reward_done;
+    if (@xmas_reward_start_state)
+        set @xmas_state, $@xmas_reward2_done;
+    if (@xmas_reward1_done_state)
+        set @xmas_state, $@xmas_reward_done;
+    //technically this might require a failsafe if too
     callfunc "XmasSetState";
     goto L_Return;
 
