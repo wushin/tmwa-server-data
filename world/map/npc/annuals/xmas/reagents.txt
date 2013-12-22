@@ -124,6 +124,7 @@ L_MakePowder:
     delitem "YellowDye", $@xmas_yellow_amount;
     getitem "RedPowder", $@xmas_red_amount;
     getitem "YellowPowder", $@xmas_yellow_amount;
+    mes "\"Here is your powder, now move!\"";
     goto L_Return;
 
 L_FullInv:

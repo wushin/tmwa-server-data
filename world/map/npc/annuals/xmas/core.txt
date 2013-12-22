@@ -126,6 +126,9 @@ L_SetRewardBonus:
 // Main quest completion reward
 function|script|XmasMainXpBpReward|,
 {
+    //test
+    set @xmas_reward, 100;
+    //test end
     callfunc "XmasSetReward";
 
     if(BaseLevel >= 99)

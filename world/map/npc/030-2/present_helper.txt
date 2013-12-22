@@ -70,6 +70,7 @@ L_White:
 L_RewardIncrease:
     if ($@xmas_present_amount > countitem(@present_name$))
         goto L_NotEnough;
+    mes "\"Oh, thank you!\"";
     delitem @present_name$, $@xmas_present_amount;
     callfunc "XmasNice";
     goto L_Close;
