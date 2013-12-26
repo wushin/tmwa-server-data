@@ -5,7 +5,7 @@
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_End;
 
@@ -28,7 +28,7 @@ L_End:
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_End;
 
@@ -51,7 +51,7 @@ L_End:
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_End;
 
@@ -74,7 +74,7 @@ L_End:
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_End;
 
@@ -97,7 +97,7 @@ L_End:
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_End;
 
@@ -120,7 +120,7 @@ L_End:
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_End;
 
@@ -143,7 +143,7 @@ L_End:
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == 1)
+    if($@xmas_time == $@xmas_event_time)
         goto L_XmasMain;
     goto L_End;
 
@@ -166,8 +166,6 @@ L_End:
 {
 
     callfunc "XmasStates";
-    callfunc "XmasHelperPoints";
-    callfunc "CheckReagents";
 
     if($@xmas_time)
         goto L_XmasMain;
@@ -187,7 +185,7 @@ L_XmasMain:
     if((@xmas_boss_door_state) && (@xmas_side)) goto L_Quick;
     if((@xmas_reagent_done_state) && (@xmas_side)) goto L_PowerReagents;
     if((@xmas_reagent_start_state) && (@xmas_side)) goto L_PowerReagents;
-    if((@xmas_helper_done_state) && (@xmas_side)) goto L_HelperQuest;
+    if((@xmas_helper_done_state) && (@xmas_side)) goto L_ResetHelpers;
     if((@xmas_helper_start_state) && (@xmas_side)) goto L_HelperQuest;
     if(@xmas_list_deliver) goto L_ListReturn;
     if(@xmas_list_complete) goto L_SantasList;
@@ -287,8 +285,7 @@ L_ListReturn:
     mes "\"I have more plans for both later. Maybe you can help me smash the Christmas Inn once and for all?\"";
     next;
     menu
-        "Sure.", L_Start,
-        "No.", L_Close;
+        "Sure.", L_Start;
 
 L_Start:
     callfunc "SabotageList";
@@ -336,6 +333,8 @@ L_MakePowders:
     goto L_Close;
 
 L_Continue:
+    callfunc "XmasHelperPoints";
+    callfunc "XmasSetState";
     if(@xmas_helper_done_state)
         goto L_ManaBattery;
     goto L_NotHelpEnough;
@@ -348,14 +347,18 @@ L_ManaBattery:
     mes "\"Now that we set back the holiday, It's time for the next step in my plan.\"";
     next;
     callfunc "ListReagents";
+
     mes "\"When you have gathered the required materials please come back and see me.\"";
     set @xmas_state, $@xmas_reagents_start;
     callfunc "XmasSetState";
+
     callfunc "XmasXpReward";
+
     goto L_Close;
 
 L_IngredientList:
     callfunc "ListReagents";
+
     mes "\"When you have gathered the required materials please come back and see me.\"";
     goto L_Close;
 
@@ -368,9 +371,14 @@ L_PowerReagents:
         "No.", L_NotEnough;
 
 L_CheckReagents:
+    callfunc "CheckReagents";
+    callfunc "XmasStates";
+
     if(!(@xmas_reagent_done_state))
         goto L_NotEnough;
+
     callfunc "DeleteReagents";
+
     mes "\"YES! you have all the required components!\"";
     mes "\"Now I can create a mind link to the mana battery and control the nutcrackers\"";
     next;

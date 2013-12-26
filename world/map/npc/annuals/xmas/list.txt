@@ -42,7 +42,6 @@ L_SetListState:
     goto L_Return;
 
 L_Return:
-    set @xmas_list_count, 0;
     set @xmas_list_loop, 0;
     return;
 }
@@ -73,14 +72,11 @@ L_List:
     next;
     mes "You store " + $@xmas_child_list_name$[$@child_number] + "'s wish list carefully in a hidden pocket of your backpack.";
     set XMASTIME, XMASTIME | $@xmas_child_list[$@child_number];
-    set @karma_bonus, $@xmas_karma_bonus;
-    callfunc "XmasNice";
     callfunc "XmasXpReward";
     menu
         "I really should be going.", L_Return;
 
 L_Return:
-    set @karma_bonus, 0;
     return;
 }
 
