@@ -73,7 +73,8 @@ L_Main:
     // Time Settings
     set $@xmas_no_event_time, 0;
     set $@xmas_event_time, 1;
-    set $@xmas_reward_time, 2;
+//    set $@xmas_reward_time, 2;
+    set $@xmas_reward_time, 1; //for event_time == reward_time
 
     // Xmas debug (sets time)
     set $@xmas_debug, 0;
@@ -115,8 +116,6 @@ L_Main:
     set $@xmas_reward2_done, 13;
     set $@xmas_reward_done, 14;
 
-    // Boss Fight State
-    set $@XmasBattleStatus, 0;
     // Boss Fight Required Level for Hard Mode
     set $@BossHardLevel, 70;
     set $@xmas_boss_start_bit, (1 << 26);

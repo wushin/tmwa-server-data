@@ -53,7 +53,11 @@ L_Bedding:
         menu
             "Sure, here it is. (Give the Cotton Cloth.)",L_Cloth,
             "No, I'm still working on that.",L_Close;
+    if ((countitem("WhiteFur") < $@xmas_bedding_amount) && (countitem("CottonCloth") < $@xmas_bedding_amount))
+        menu
+            "No.", L_Close;
     goto L_Close;
+
 
 L_Fur:
     if (countitem("WhiteFur") < $@xmas_bedding_amount)

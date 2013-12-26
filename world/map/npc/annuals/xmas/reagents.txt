@@ -36,6 +36,7 @@ L_OneLoopAgain:
 L_AllReagents:
     set @xmas_state, $@xmas_reagents_done;
     callfunc "XmasSetState";
+
     goto L_Return;
 
 L_Return:

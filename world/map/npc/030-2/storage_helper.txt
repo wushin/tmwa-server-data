@@ -50,7 +50,8 @@ L_Close:
 {
     callfunc "XmasStates";
 
-    if($@xmas_time == $@xmas_reward_time)
+//    if($@xmas_time == $@xmas_reward_time)
+    if($@xmas_time == $@xmas_no_event_time)
         goto L_OffSeason;
     if(XMASTIME & $@xmas_helper_bit_storage)
         goto L_Helping;
