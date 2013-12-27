@@ -1,0 +1,68 @@
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+// Sandy Dungeon Level 2 mobs
+
+043-4.gat,139,163,7,6|monster|Terranite|1062,2,100000,100000,Mob043-4::On1062
+043-4.gat,42,39,9,10|monster|Spider|1012,5,30000,30000,Mob043-4::On1012
+043-4.gat,161,98,12,10|monster|Spider|1012,7,30000,30000,Mob043-4::On1012
+043-4.gat,157,159,12,11|monster|Spider|1012,5,30000,30000,Mob043-4::On1012
+043-4.gat,124,119,11,6|monster|Spider|1012,5,30000,30000,Mob043-4::On1012
+043-4.gat,38,137,10,11|monster|Spider|1012,3,30000,30000,Mob043-4::On1012
+043-4.gat,43,143,12,11|monster|UndeadWitch|1116,2,30000,30000,Mob043-4::On1116
+043-4.gat,102,153,9,9|monster|UndeadWitch|1116,2,30000,30000,Mob043-4::On1116
+043-4.gat,142,159,14,12|monster|UndeadWitch|1116,1,30000,30000,Mob043-4::On1116
+043-4.gat,152,30,10,8|monster|UndeadWitch|1116,2,30000,30000,Mob043-4::On1116
+043-4.gat,98,44,6,9|monster|UndeadWitch|1116,2,30000,30000,Mob043-4::On1116
+043-4.gat,105,62,14,14|monster|Spider|1012,5,30000,30000,Mob043-4::On1012
+043-4.gat,53,39,10,10|monster|BlackScorpion|1009,5,30000,30000,Mob043-4::On1009
+043-4.gat,47,39,7,10|monster|Snake|1010,5,30000,30000,Mob043-4::On1010
+043-4.gat,56,41,6,6|monster|Troll|1054,3,30000,30000,Mob043-4::On1054
+043-4.gat,88,77,8,8|monster|Snake|1010,5,30000,30000,Mob043-4::On1010
+043-4.gat,102,85,12,10|monster|Troll|1054,3,30000,30000,Mob043-4::On1054
+043-4.gat,87,60,16,11|monster|BlackScorpion|1009,5,30000,30000,Mob043-4::On1009
+043-4.gat,158,56,17,16|monster|Troll|1054,4,30000,30000,Mob043-4::On1054
+043-4.gat,154,80,14,12|monster|BlackScorpion|1009,7,30000,30000,Mob043-4::On1009
+043-4.gat,136,39,17,15|monster|Snake|1010,7,30000,30000,Mob043-4::On1010
+043-4.gat,152,150,13,11|monster|BlackScorpion|1009,5,30000,30000,Mob043-4::On1009
+043-4.gat,163,126,9,14|monster|Snake|1010,5,30000,30000,Mob043-4::On1010
+043-4.gat,145,124,7,21|monster|Troll|1054,3,30000,30000,Mob043-4::On1054
+043-4.gat,95,141,12,9|monster|Troll|1054,3,30000,30000,Mob043-4::On1054
+043-4.gat,105,139,9,8|monster|BlackScorpion|1009,5,30000,30000,Mob043-4::On1009
+043-4.gat,74,131,22,12|monster|Snake|1010,5,30000,30000,Mob043-4::On1010
+043-4.gat,41,112,11,10|monster|Troll|1054,3,30000,30000,Mob043-4::On1054
+043-4.gat,47,124,13,12|monster|BlackScorpion|1009,5,30000,30000,Mob043-4::On1009
+
+
+043-4.gat,0,0,0|script|Mob043-4|-1,
+{
+On1009:
+    set @mobID, 1009;
+    callfunc "MobPoints";
+    end;
+
+On1010:
+    set @mobID, 1010;
+    callfunc "MobPoints";
+    end;
+
+On1012:
+    set @mobID, 1012;
+    callfunc "MobPoints";
+    end;
+
+On1054:
+    set @mobID, 1054;
+    callfunc "MobPoints";
+    end;
+
+On1062:
+    set @mobID, 1062;
+    callfunc "MobPoints";
+    end;
+
+On1116:
+    set @mobID, 1116;
+    callfunc "MobPoints";
+    end;
+
+    end;
+}
