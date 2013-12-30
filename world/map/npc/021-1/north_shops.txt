@@ -17,24 +17,3 @@
     mes "I'm here for extra security for this market.";
     close;
 }
-
-// A snobby store that won't sell to the player
-// takes part in quest given by 021-2/kylian.txt
-021-1.gat,138,29,0|script|Latoy|106,
-{
-    set QUEST_NorthTulimshar, QUEST_NorthTulimshar | $@knowLatoyNT;
-    set @kylian, ((QUEST_NorthTulimshar & $@businessmanNT_MASK) >> $@businessmanNT_SHIFT);
-
-    mes "[Latoy]";
-    mes "\"There's nothing here you could want or afford.\"";
-    if (@kylian != 7)
-        goto L_Close;
-    next;
-    mes "Maybe this is the kind of shop Kylian is looking for?";
-    goto L_Close;
-
-L_Close:
-    set @kylian, 0;
-    close;
-}
-

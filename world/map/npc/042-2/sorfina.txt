@@ -307,7 +307,7 @@ OnTouch:
     if ((sorfina < 4)
         && !(FLAGS & FLAG_TUTORIAL_DONE))
             goto L_Block;
-    warp "042-1.gat", 63, 77;
+    warp "042-1.gat", 63, 49;
     end;
 
 L_Block:
