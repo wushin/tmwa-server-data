@@ -10,3 +10,4 @@
 068-2.gat,76,30|warp|To Noble Quarter|-1,-1,068-1.gat,40,80
 068-2.gat,36,30|warp|To Noble Quarter|-1,-1,068-1.gat,52,49
 068-2.gat,84,50|warp|To Silkworm Garden|-1,-1,068-1.gat,38,89
+068-2.gat,58,51|warp|To Noble Quarter|-1,-1,068-1.gat,47,30
