@@ -13,3 +13,5 @@
 023-1.gat,61,36|warp|To Lighthouse Caves|-1,-1,023-3.gat,61,39
 023-1.gat,36,34|warp|To Lighthouse |-1,-1,023-2.gat,31,38
 023-1.gat,37,23|warp|To Lighthouse |-1,-1,023-2.gat,31,33
+023-1.gat,66,101|warp|To otherside of bridge|-1,2,023-1.gat,61,100
+023-1.gat,62,101|warp|To otherside of bridge|-1,2,023-1.gat,67,100
