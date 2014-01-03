@@ -1,26 +1,22 @@
 // This file is part of the Tutorial
 // Authors: Jenalya, alastrim
 
-042-1.gat,116,84,0|script|Hasan|189,
+042-1.gat,116,84,0|script|Hasan|189,0,2,
 {
+
+L_Main:
     set @toll, 10000;
-    set @x, getx();
-    set @y, gety();
 
     if (FLAGS & FLAG_TUTORIAL_DONE)
         goto L_Tut_Done;
-    // Please consider rewriting this in terms of isin()
-    // it's not that trivial to put this in a rectangle...
-    if ( (@y < 58)&&(@x < 89) || (@x < 87) )
-        goto L_Cliff_Up;
     // implicitly, $@ScorpionFighter is nonzero
-    if (getcharid(3) == $@ScorpionFighter)
-        goto L_Fear;
     if (hasan == 4)
         goto L_Thank;
+    if ((getcharid(3) == $@ScorpionFighter) || ($@ScorpionFighter && $@ScorpionFighter != getcharid(3)))
+        goto L_Afraid;
     if (hasan == 3)
         goto L_Trick;
-    if (hasan > 0)
+    if (hasan)
         goto L_Toll;
 
     mes "[Unfriendly Guy]";
@@ -38,15 +34,22 @@ L_Toll:
     mes "\"Give me " + @toll + "GP, and I may let you pass.\"";
     if (hasan == 0)
         set hasan, 1;
-    next;
     if (Zeny >= @toll)
-        menu
-            "Ok, here you go.",L_Pay,
-            "What? I don't have that much money!",L_NoPay,
-            "We'll see if you can stop me!",L_Fight;
+        goto L_HasToll;
+    goto L_NoToll;
+
+L_HasToll:
+    menu
+        "Ok, here you go.",L_Pay,
+        "What? I don't have that much money!",L_NoPay,
+        "We'll see if you can stop me!",L_Fight;
+    close;
+
+L_NoToll:
     menu
         "What? I don't have that much money!",L_NoPay,
         "We'll see if you can stop me!",L_Fight;
+    close;
 
 L_NoPay:
     mes "[Hasan]";
@@ -84,21 +87,17 @@ L_Cheat:
 L_Trick:
     mes "[Hasan]";
     mes "\"Are you going to pay now? " + @toll + "GP, and I may let you pass.\"";
-    next;
     menu
         "I don't have that much money!",L_NoPay,
         "No. (Scratch your head.)",-;
     if ($@ScorpionFighter)
         goto L_Wait;
-    mes "While you're scratching your head, you see Kaan coming nearer to the cliff above you.";
-    // close2 blocks
-    close2;
     set $@ScorpionTimer, 0;
     set $@ScorpionFighter, getcharid(3);
     set $@ScorpDeath, PC_DIE_COUNTER;
-    monster "042-1.gat",115,85,"Scorpion",1003,1, "Hasan::onScorpionDeath";
-    initnpctimer;
-    end;
+    cmdothernpc "#ScorpionTrigger", "HasanSpawn";
+    mes "While you're scratching your head, you see Kaan coming nearer to the cliff above you.";
+    close;
 
 L_Thank:
     mes "[Hasan]";
@@ -132,12 +131,6 @@ L_Explore:
     mes "\"Alright. Take care!\"";
     goto L_Close;
 
-L_Fear:
-    mes "[Hasan]";
-    mes "\"Sc-sc-sco-scorpion!\"";
-    mes "He seems close to tears.";
-    goto L_Close;
-
 L_Tut_Done:
     mes "[Hasan]";
     if (BaseLevel >= 40)
@@ -150,44 +143,40 @@ L_Distance:
     mes "There is a person off in the distance. He doesn't seem to notice you, maybe you should go closer.";
     goto L_Close;
 
-L_Cliff_Up:
-    mes "You see a guy in shabby clothes when you look down the cliff.";
+L_Wait:
+    mes "There is a scorpion near Hasan already. I think Kaan is helping someone else... Maybe I should try the plan later.";
     goto L_Close;
+
+L_Afraid:
+    message strcharinfo(0), "Hasan: \"" + strcharinfo(0) + "! Please help me!\"";
+    end;
+
+L_Close:
+    set @toll, 0;
+    close;
+
+OnTouch:
+    if (FLAGS & FLAG_TUTORIAL_DONE)
+        goto L_Close;
+    goto L_Main;
+}
+
+042-1.gat,0,0,0|script|#ScorpionTrigger|35,
+{
+
+OnCommandHasanSpawn:
+    goto L_Summon;
+
+L_Summon:
+    monster "042-1.gat",115,85,"Scorpion",1003,1, "#ScorpionTrigger::OnScorpionDeath";
+    initnpctimer;
+    end;
 
 L_SummonAgain:
     message strcharinfo(0), "Kaan is mad at you for your interference! He walks over to the edge of the cliff and throws a rock on top of your head, then lets another scorpion run just near Hasan!";
     percentheal -100, 0;
     message strcharinfo(0), "Kaan: \"Just go while he is distracted and no one is interfering!\"";
-    monster "042-1.gat",89,63,"Scorpion",1003,1, "Hasan::OnScorpionDeath";
-    end;
-
-L_Clean:
-    killmonster "042-1.gat", "Hasan::OnScorpionDeath";
-    set $@ScorpionFighter, 0;
-    set $@ScorpionTimer, 0;
-    set $@ScorpDeath, 0;
-    stopnpctimer;
-    end;
-
-L_TimeOut:
-    message strcharinfo(0), "Hasan, with his eyes almost closed, trembling with fear, runs toward the scorpion and stabs it with all his strength! Seems like you took too long and the plan didn't work this time.";
-    warp "042-1.gat", 114, 85;
-    message strcharinfo(0), "Hasan: \"Hey you! I told you you cannot pass!\"";
-    goto L_Clean;
-
-L_MessageDeath:
-    message strcharinfo(0), "Ouch... I should be more careful when fighting these monsters.";
-    goto L_Clean;
-
-L_Wait:
-    mes "There is a scorpion near Hasan already. I think Kaan is helping someone else... Maybe I should try the plan later.";
-    goto L_Close;
-
-L_Close:
-    set @toll, 0;
-    set @x, 0;
-    set @y, 0;
-    close;
+    goto L_Summon;
 
 OnTimer5000:
     if (attachrid($@ScorpionFighter) == 0)
@@ -204,49 +193,42 @@ OnScorpionDeath:
     if (getcharid(3) != $@ScorpionFighter)
         goto L_SummonAgain;
     if (hasan != 3)
-        end;
+        goto L_Clean;
     set hasan, 4;
     message strcharinfo(0), "You saved Hasan.";
     goto L_Clean;
 
-}
-
-042-1.gat,114,85,0|script|#Toll|32767,2,2,
-{
-    end;
-
-OnTouch:
-    // implicitly, $@ScorpionFighter is nonzero
-    if ($@ScorpionFighter == getcharid(3))
-        end;
-    if ((FLAGS & FLAG_TUTORIAL_DONE) || (hasan == 4))
-        end;
+L_TimeOut:
+    message strcharinfo(0), "Hasan, with his eyes almost closed, trembling with fear, runs toward the scorpion and stabs it with all his strength! Seems like you took too long and the plan didn't work this time.";
     warp "042-1.gat", 114, 85;
-    message strcharinfo(0), "Hasan: \"Stop!\"";
-    end;
+    message strcharinfo(0), "Hasan: \"Hey you! I told you you cannot pass!\"";
+    goto L_Clean;
 
+L_MessageDeath:
+    message strcharinfo(0), "Ouch... I should be more careful when fighting these monsters.";
+    goto L_Clean;
+
+L_Clean:
+    killmonster "042-1.gat", "#ScorpionTrigger::OnScorpionDeath";
+    set $@ScorpionFighter, 0;
+    set $@ScorpionTimer, 0;
+    set $@ScorpDeath, 0;
+    stopnpctimer;
+    end;
 }
 
-042-1.gat,117,85,0|script|#barrier|45,0,0
+042-1.gat,117,85,0|script|#warp|45,0,0,
 {
-    end;
-
-OnTouch:
     if (FLAGS & FLAG_TUTORIAL_DONE)
         goto L_Tut;
+    goto L_SendBack;
+
+L_SendBack:
+    message strcharinfo(0), "Hasan: I can do this all day.";
     warp "042-1.gat", 114, 85;
-    // implicitly, $@ScorpionFighter is nonzero
-    if ($@ScorpionFighter == getcharid(3))
-        message strcharinfo(0), "Hasan: \"" + strcharinfo(0) + "! Please help me!\"";
-    if ($@ScorpionFighter && $@ScorpionFighter != getcharid(3))
-        // is this reachable?
-        message strcharinfo(0), "Hasan: \"Hey! Stop right there!\"";
-    if (hasan == 4)
-        message strcharinfo(0), "Hasan: \"Please wait a moment!\"";
     end;
 
 L_Tut:
     warp "022-1.gat", 49, 82;
     end;
-
 }
