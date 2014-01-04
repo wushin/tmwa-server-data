@@ -14,7 +14,7 @@ L_StartTimer:
 OnTimer20000:
     setnpctimer 0;
     cmdothernpc "#XmasConfig", "RestartQuest";
-    cmdothernpc "#XmasConfig", "RestartQuest";
+    cmdothernpc "#VdayConfig", "RestartQuest";
     initnpctimer;
     end;
 }

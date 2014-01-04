@@ -1,0 +1,30 @@
+// Annual Vday Environment changes
+014-1.gat,80,45,0|script|#Vday Fairy|388,
+{
+    close;
+}
+
+014-1.gat,80,45,0|script|#Vday Flower|387,
+{
+    close;
+}
+
+function|script|ReplaceFlower|,
+{
+    if($@VDAY_FAIRY_STATUS)
+        goto L_Fairy;
+    goto L_Plant;
+
+L_Fairy:
+    disablenpc "#Vday Flower";
+    enablenpc "#Vday Fairy";
+    goto L_Return;
+
+L_Plant:
+    disablenpc "#Vday Fairy";
+    enablenpc "#Vday Flower";
+    goto L_Return;
+
+L_Return:
+    return;
+}

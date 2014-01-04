@@ -1,0 +1,15 @@
+014-1.gat,80,45,0|script|#Flower Fairy|400,
+{
+    if($@VDAY_FAIRY_STATUS) goto L_Fairy;
+    goto L_NoFairy;
+    L_Fairy:
+        mes "Yay. I'm free!";
+        goto L_Close;
+
+    L_NoFairy:
+        mes "Eh would you mind and free me?";
+        goto L_Close;
+
+    L_Close:
+        close;
+}

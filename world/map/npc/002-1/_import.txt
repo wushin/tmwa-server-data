@@ -7,3 +7,4 @@ npc: npc/002-1/lieutenant_dausen.txt
 npc: npc/002-1/nickos.txt
 npc: npc/002-1/nomads.txt
 npc: npc/002-1/stewen.txt
+npc: npc/002-1/vday-noah.txt

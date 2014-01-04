@@ -1,0 +1,10 @@
+//TODO use NPCname depending on first seen noah or not
+
+002-1.gat,28,70,0|script|Noah|389,
+{
+    mes "Hi, I'm Noah!";
+    goto L_Close;
+
+    L_Close:
+        close;
+}

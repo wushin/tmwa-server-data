@@ -1,0 +1,6 @@
+
+009-2.gat,152,21,4|script|Alex|391,
+{
+    mes "My woman is sick!";
+    close;
+}

@@ -1,0 +1,6 @@
+
+009-2.gat,150,21,0|script|Lianna|390,
+{
+    mes "och.";
+    close;
+}

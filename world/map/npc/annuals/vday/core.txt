@@ -1,0 +1,240 @@
+// This file is part of Christmas Event
+// author: Jenalya, Chayenne, cinderweb, wushin
+// please see #VdayConfig
+
+function|script|VdayNaughty|,
+{
+    set @vday_karma, ((VDAYTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
+    if((@vday_karma - @karma_bonus) >= 0)
+        goto L_SetNaughty;
+    goto L_ResetNaughty;
+
+L_SetNaughty:
+    set @vday_karma, (@vday_karma - @karma_bonus);
+    goto L_Return;
+
+L_ResetNaughty:
+    set @vday_karma, 0;
+    goto L_Return;
+
+L_Return:
+    set VDAYTIME, (VDAYTIME & ~(NIBBLE_1_MASK) | (@vday_karma << NIBBLE_1_SHIFT));
+    set @karma_bonus, 0;
+    return;
+}
+
+function|script|VdayNice|,
+{
+    set @vday_karma, ((VDAYTIME & NIBBLE_1_MASK) >> NIBBLE_1_SHIFT);
+    if((@vday_karma + @karma_bonus) < 16)
+        goto L_SetNice;
+    goto L_ResetNice;
+
+L_SetNice:
+    set @vday_karma, (@karma_bonus + @vday_karma);
+    goto L_Return;
+
+L_ResetNice:
+    set @vday_karma, 15;
+    goto L_Return;
+
+L_Return:
+    set VDAYTIME, (VDAYTIME & ~(NIBBLE_1_MASK) | (@vday_karma << NIBBLE_1_SHIFT));
+    set @karma_bonus, 0;
+    return;
+}
+
+// Called for a basic reward for quests state completion
+function|script|VdayXpReward|,
+{
+    if (BaseLevel >= 10)
+        goto L_HigherLevel;
+    goto L_LowLevel;
+
+L_HigherLevel:
+    getexp ((BaseLevel / 10) * ($@VDAY_BASE_BONUS_XP * BaseLevel)), 0;
+    goto L_Return;
+
+L_LowLevel:
+    getexp ($@VDAY_BASE_BONUS_XP * BaseLevel), 0;
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
+function|script|VdaySetState|,
+{
+    set VDAYTIME, (VDAYTIME & ~($@VDAY_STATE_MASK) | (@vday_state << $@VDAY_STATE_SHIFT));
+    return;
+}
+
+function|script|VdaySetSide|,
+{
+    set VDAYTIME, VDAYTIME | $@VDAY_SIDE_BIT;
+    return;
+}
+
+function|script|VdaySetRoute|,
+{
+    set VDAYTIME, VDAYTIME | $@VDAY_ROUTE_BIT;
+    return;
+}
+
+function|script|VdayThrowOut|,
+{
+    set VDAYTIME, VDAYTIME | $@VDAY_THROWN_OUT_BIT;
+    return;
+}
+
+function|script|VdaySetBossStart|,
+{
+    set VDAYTIME, VDAYTIME | $@vday_boss_start_bit;
+    return;
+}
+
+function|script|VdaySetBossHero|,
+{
+    set VDAYTIME, VDAYTIME | $@vday_boss_hero_bit;
+    return;
+}
+
+// Tallys the players quest
+function|script|VdaySetReward|,
+{
+    set @vday_endgame, 0;
+    set @vday_reward_side, 0;
+    set @vday_reward_tally, 0;
+    if(@vday_side)
+        goto L_SetSide;
+    goto L_NotSetSide;
+
+L_SetSide:
+    set @vday_reward_side, 1;
+    set @vday_reward_tally, (@vday_reward_tally + ($@vday_reward_max_karma - @vday_karma));
+    goto L_SetRewardBonus;
+
+L_NotSetSide:
+    set @vday_reward_tally, (@vday_reward_tally + @vday_karma);
+    goto L_SetRewardBonus;
+
+L_SetRewardBonus:
+    if(@vday_boss_hero)
+        set @vday_reward_tally, (@vday_reward_tally + $@vday_reward_hero_boss);
+    if(@vday_all_helpers)
+        set @vday_reward_tally, (@vday_reward_tally + $@vday_reward_all_helpers);
+    if(@vday_all_lists)
+        set @vday_reward_tally, (@vday_reward_tally + $@vday_reward_all_lists);
+    //formula should:
+    if (@vday_reward_tally > 5)
+    set @vday_reward_lower_bound, 2 * @vday_reward_tally - rand(5);
+    if (@vday_reward_tally <= 5)
+        set @vday_reward_lower_bound, @vday_reward_tally;
+    set @vday_reward_upper_bound, @vday_reward_lower_bound + ((readparam(bLuk)) / 5);
+    set @vday_reward, (rand(@vday_reward_lower_bound, @vday_reward_upper_bound));
+    set @vday_reward_lower_bound, 0;
+    set @vday_reward_upper_bound, 0;
+    return;
+}
+
+// Main quest completion reward
+function|script|VdayMainXpBpReward|,
+{
+    callfunc "VdaySetReward";
+
+    if(BaseLevel >= 99)
+        goto L_EndGameReward;
+    goto L_LevelingReward;
+
+L_EndGameReward:
+    set @vday_bp_reward, 100 + rand(@vday_reward, 2 * @vday_reward);
+    set BOSS_POINTS, BOSS_POINTS + @vday_bp_reward;
+    message strcharinfo(0), "You gain " + @vday_bp_reward + " Bosspoints, giving you a total of " + BOSS_POINTS + ".";
+    set @vday_bp_reward, 0;
+    return;
+
+L_LevelingReward:
+    if(@vday_reward >= $@vday_reward_tally_rare)
+        goto L_VdayLevel;
+    goto L_VdayExp;
+
+L_VdayLevel:
+    gmcommand "@blvl 1";
+    gmcommand "@l I was a good kid this year.";
+    return;
+
+L_VdayExp:
+    getexp ((@vday_reward * BaseLevel * (BaseLevel + 10)) / 10), 0;
+    return;
+}
+
+// Final Item reward
+function|script|VdayMainItemReward|,
+{
+    callfunc "VdaySetReward";
+
+    if(($@vday_time == $@vday_reward_time) && ((@vday_reward_start_state) || (@vday_reward1_done_state)))
+        goto L_FinalGift;
+    goto L_Return;
+
+L_FinalGift:
+    mes "[To: " + strcharinfo(0) + "]";
+    mes "[From: " + $@vday_present_from$[@vday_reward_side] + "]";
+    mes "O look, a present from " + $@vday_present_from$[@vday_reward_side];
+    next;
+    getinventorylist;
+    if (@inventorylist_count > 97)
+        goto L_FullInv;
+    set @vday_reward, (@vday_reward + ((BaseLevel + 10)/10));
+    if (debug > 0)
+        message strcharinfo(0), "Reward variable: " + @vday_reward;
+    set @vday_uncommon_slot1, rand(getarraysize($@vday_uncommon_reward$));
+    set @vday_uncommon_slot2, rand(getarraysize($@vday_uncommon_reward$));
+    if(@vday_reward >= $@vday_reward_tally_rare)
+        set @vday_reward_item$, $@vday_rare_reward$[@vday_reward_side];
+    if(@vday_reward >= $@vday_reward_tally_common)
+        set @vday_reward_item1$, $@vday_uncommon_reward$[@vday_uncommon_slot1];
+    set @vday_reward_item2$, $@vday_uncommon_reward$[@vday_uncommon_slot2];
+    if(checkweight("Iten", 1) == 0)
+        goto L_FullInv;
+    if(@vday_reward >= 80)
+    getitem @vday_reward_item$, 1;
+    if(@vday_reward >= 40)
+    getitem @vday_reward_item1$, 1;
+    getitem @vday_reward_item2$, 1;
+    set @vday_uncommon_slot1, 0;
+    set @vday_uncommon_slot2, 0;
+    set @vday_reward_item$, "";
+    set @vday_reward_item1$, "";
+    set @vday_reward_item2$, "";
+    if (@vday_reward_start_state)
+        set @vday_state, $@vday_reward2_done;
+    if (@vday_reward1_done_state)
+        set @vday_state, $@vday_reward_done;
+    callfunc "VdaySetState";
+    goto L_Return;
+
+L_FullInv:
+    mes "\"You have no place to put the present.\"";
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
+// Checks for an expired event key
+// Each new annual event needs a new key
+// or it will allow completion from last year
+function|script|VdayCheckOld|,
+{
+    if(VDAYYEAR == $VDAY_TIME_KEY[4])
+        goto L_Return;
+
+L_OldMatch:
+    set VDAYTIME, 0;
+    set VDAYYEAR, $VDAY_TIME_KEY[4];
+    goto L_Return;
+
+L_Return:
+    return;
+}

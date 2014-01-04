@@ -7,4 +7,5 @@ npc: npc/020-1/_warps.txt
 npc: npc/020-1/mapflags.txt
 npc: npc/020-1/rockscissor.txt
 npc: npc/020-1/soul-menhir.txt
+npc: npc/020-1/vday-dakota.txt
 npc: npc/020-1/well.txt

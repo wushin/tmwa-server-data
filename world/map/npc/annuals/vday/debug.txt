@@ -1,0 +1,214 @@
+// This file is part of Valentines Day Event
+// author: Chayenne
+// please see #VdayConfig
+
+function|script|VdayDebug|,
+{
+    if(debug)
+        goto L_Debug;
+    goto L_Live;
+
+L_Live:
+    mes "What do you want to do?";
+    menu
+        "Debug Vars", L_DebugLive,
+        "Vday Time Key Change.", L_VdayTimeKey,
+        "Do nothing.", L_Close;
+
+L_DebugLive:
+    mes "--Sever--";
+    mes "Event State: " + $@VDAY_TIME;
+    mes "Event Start" + $VDAY_TIME_KEY[0] + "/" + $VDAY_TIME_KEY[1];
+    mes "Event End: " + $VDAY_TIME_KEY[2] + "/" + $VDAY_TIME_KEY[3];
+    mes "Event Time Key (year (CCYY)): " + $VDAY_TIME_KEY[4];
+    goto L_Close;
+
+L_Debug:
+    mes "What do you want to do?";
+    menu
+        "Debug Vars", L_DebugVars,
+        "Set Quest State.", L_VdayState,
+        "Set Karma. [0-2^10]", L_VdayKarma,
+        "Learn about valentines potion", L_SetPot1,
+        "Learn about cure potion", L_SetPot2,
+        "Make the Fairy appear", L_Fairy,
+        "Reset Quest State.", L_Reset,
+        "Set Old Event Flag.", L_LastReset,
+        "Vday Time Key Change.", L_VdayTimeKey,
+        "Do nothing.", L_Close;
+
+L_DebugVars:
+    callfunc "VdayStates";
+    mes "--Sever--";
+    mes "Event State: " + $@VDAY_TIME;
+    mes "Event Start" + $VDAY_TIME_KEY[0] + "/" + $VDAY_TIME_KEY[1];
+    mes "Event End: " + $VDAY_TIME_KEY[2] + "/" + $VDAY_TIME_KEY[3];
+    mes "Event Time Key (year (CCYY)): " + $VDAY_TIME_KEY[4];
+    mes "Fairy alive: (0 - no, 1, yes)" + $@VDAY_FAIRY_STATUS;
+    next;
+    mes "--Player--";
+    mes "Player Event Time Key " + VDAYYEAR;
+    mes "vday_state " + @vday_state;
+    mes "vday_karma " + @vday_karma;
+    mes " ";
+    mes "@vday_couple1_state" + @vday_couple1_state;
+    mes "@vday_couple2_state" + @vday_couple2_state;
+    mes "@vday_couple3_state" + @vday_couple3_state;
+    mes "@vday_couple1_done" + @vday_couple1_done;
+    mes "@vday_couple2_done" + @vday_couple2_done;
+    mes "@vday_couple3_done" + @vday_couple3_done;
+    mes "@vday_all_couples " + @vday_all_couples;
+    mes " ";
+    mes "@vday_knows_pot1" + @vday_knows_pot1;
+    mes "@vday_knows_pot2" + @vday_knows_pot2;
+    mes " ";
+    mes "@vday_knows_fairy " + @vday_knows_fairy;
+    goto L_Close;
+
+L_LastReset:
+    set VDAYTIME, 255;
+    set VDAYYEAR, 2012;
+    goto L_Close;
+
+L_Reset:
+    set VDAYTIME, 0;
+    set VDAYYEAR, $VDAY_TIME_KEY[4];
+    goto L_Close;
+
+L_VdayTimeKey:
+    if (getgmlevel() < 20) goto L_Close;
+    mes "Vday Time Key Change.";
+    mes "Start Month?";
+    input @vday_time_key_smonth;
+    if((@vday_time_key_smonth == 0) || (@vday_time_key_smonth > 12))
+        goto L_VdayError;
+    mes "Which day? (i.e. 20 for 20eth)";
+    input @vday_time_key_sday;
+    if((@vday_time_key_sday == 0) || (@vday_time_key_sday > 31))
+        goto L_VdayError;
+    mes "End Month?";
+    input @vday_time_key_emonth;
+    if((@vday_time_key_emonth == 0) || (@vday_time_key_emonth > 12))
+        goto L_VdayError;
+    input @vday_time_key_eday;
+    if((@vday_time_key_eday == 0) || (@vday_time_key_eday > 31))
+        goto L_VdayError;
+
+    mes "Time Key (CCYY) ";
+    input @vday_time_key_year;
+    goto L_SetNewKey;
+
+L_VdayError:
+    mes "Incorrect Entry. Try again.";
+    goto L_Close;
+
+L_SetNewKey:
+    setarray $VDAY_TIME_KEY, @vday_time_key_smonth, @vday_time_key_sday, @vday_time_key_emonth, @vday_time_key_eday, @vday_time_key_year;
+    cmdothernpc "#VdayConfig", "RestartQuest";
+    goto L_Close;
+
+L_VdayState:
+    mes "Quest state?";
+    input @vday_state;
+    callfunc "VdaySetState";
+    goto L_Close;
+
+L_VdayKarma:
+    mes "Karma 0 to 1023";
+    input @vday_karma;
+    set VDAYTIME, (VDAYTIME & ~($@VDAY_KARMA_MASK) | (@vday_karma << $@VDAY_KARMA_SHIFT));
+    goto L_Close;
+
+L_SetPot1:
+    set VDAYTIME, (VDAYTIME | $@VDAY_POT1_BIT);
+    goto L_Close;
+
+L_SetPot2:
+    set VDAYTIME, (VDAYTIME | $@VDAY_POT2_BIT);
+    goto L_Close;
+
+L_Fairy:
+    set $@VDAY_FAIRY_STATUS, (($@VDAY_FAIRY_STATUS + 1) % 2);
+    callfunc "ReplaceFlower";
+    goto L_Close;
+
+L_Close:
+    set @vday_state, 0;
+    set @vday_karma, 0;
+    set @vday_couple1_state, 0;
+    set @vday_couple1_state, 0;
+    set @vday_couple3_state, 0;
+    set @vday_all_couples, 0;
+    set @vday_knows_pot1, 0;
+    set @vday_knows_pot2, 0;
+    set @vday_knows_fairy, 0;
+    set @vday_time_key_smonth, 0;
+    set @vday_time_key_emonth, 0;
+    set @vday_time_key_sday, 0;
+    set @vday_time_key_eday, 0;
+    set @vday_time_key_year, 0;
+    close;
+}
+
+//Near the Fairy
+014-1.gat,66,45,0|script|VdayDebug#1|393,
+{
+    callfunc "VdayDebug";
+    goto L_end;
+
+OnInit:
+    if(!(debug))
+        disablenpc "VdayDebug#1";
+L_end:
+    end;
+}
+
+//Near Noah (couple 1)
+002-1.gat,40,67,0|script|VdayDebug#2|389,
+{
+    callfunc "VdayDebug";
+    goto L_end;
+
+OnInit:
+    if(!(debug))
+        disablenpc "VdayDebug#2";
+L_end:
+    end;
+}
+
+//near Couple 2
+009-2.gat,148,22,6|script|VdayDebug#3|391,
+{
+   callfunc "VdayDebug";
+   goto L_end;
+
+OnInit:
+   if(!(debug))
+       disablenpc "VdayDebug#3";
+L_end:
+   end;
+}
+
+//near Couple 3
+020-2.gat,28,62,0|script|VdayDebug#4|392,
+{
+    callfunc "VdayDebug";
+    goto L_end;
+
+OnInit:
+    if(!(debug))
+        disablenpc "VdayDebug#4";
+L_end:
+    end;
+}
+
+botcheck.gat,28,28,0|script|VdayDebug#5|108,
+{
+   if(getgmlevel() < 40)
+       goto L_End;
+
+   callfunc "VdayDebug";
+
+L_End:
+   end;
+}

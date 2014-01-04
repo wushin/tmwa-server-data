@@ -1,0 +1,28 @@
+// This file is part of Christmas Event
+// author: Jenalya, Chayenne
+// please see #VdayConfig
+
+function|script|VdayStates|,
+{
+    // Check for Old Quest Line Keys. Reset Quest if so.
+    callfunc "VdayCheckOld";
+    // Main Quest
+    set @vday_state, ((VDAYTIME & $@VDAY_STATE_MASK) >> $@VDAY_STATE_SHIFT);
+    set @vday_karma, ((VDAYTIME & $@VDAY_KARMA_MASK) >> $@VDAY_KARMA_SHIFT);
+
+    set @vday_couple1_state, ((VDAYTIME & $@VDAY_SUBSTATE1_MASK) >> $@VDAY_SUBSTATE1_SHIFT);
+    set @vday_couple2_state, ((VDAYTIME & $@VDAY_SUBSTATE2_MASK) >> $@VDAY_SUBSTATE2_SHIFT);
+    set @vday_couple3_state, ((VDAYTIME & $@VDAY_SUBSTATE3_MASK) >> $@VDAY_SUBSTATE3_SHIFT);
+
+    set @vday_couple1_done, (@vday_couple1_state >= $@VDAY_COUPLE1_DONE_STATE);
+    set @vday_couple2_done, (@vday_couple2_state >= $@VDAY_COUPLE2_DONE_STATE);
+    set @vday_couple3_done, (@vday_couple3_state >= $@VDAY_COUPLE3_DONE_STATE);
+
+    set @vday_all_couples, ((@vday_couple1_done && @vday_couple2_done) && @vday_couple2_done);
+
+    set @vday_knows_pot1, (VDAYTIME & $@VDAY_POT1_BIT);
+    set @vday_knows_pot2, (VDAYTIME & $@VDAY_POT2_BIT);
+
+    set @vday_knows_fairy, (VDAYTIME & $@VDAY_FAIRY_BIT);
+    return;
+}

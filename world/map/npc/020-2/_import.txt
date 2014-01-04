@@ -8,3 +8,4 @@ npc: npc/020-2/banker.txt
 npc: npc/020-2/furquest.txt
 npc: npc/020-2/mapflags.txt
 npc: npc/020-2/shops.txt
+npc: npc/020-2/vday-marcus.txt

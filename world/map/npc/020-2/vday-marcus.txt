@@ -1,0 +1,6 @@
+
+020-2.gat,34,59,2|script|Marcus|392,
+{
+    mes "My Bonnie is over the ocean...";
+    close;
+}

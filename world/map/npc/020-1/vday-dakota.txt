@@ -1,0 +1,6 @@
+
+020-1.gat,79,65,0|script|Dakota|393,
+{
+    mes "Out of my waaaaaay im sliding!";
+    close;
+}

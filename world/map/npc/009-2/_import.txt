@@ -19,5 +19,7 @@ npc: npc/009-2/peter.txt
 npc: npc/009-2/richard.txt
 npc: npc/009-2/selim.txt
 npc: npc/009-2/shops.txt
+npc: npc/009-2/vday-alex.txt
+npc: npc/009-2/vday-lianna.txt
 npc: npc/009-2/waitress.txt
 npc: npc/009-2/wyara.txt
