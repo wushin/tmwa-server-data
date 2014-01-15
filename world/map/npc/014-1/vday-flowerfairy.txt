@@ -1,15 +1,100 @@
 014-1.gat,80,45,0|script|#Flower Fairy|400,
 {
+    callfunc "VdayStates";
+    set @address$, "man";
+    if (Sex == 0)
+        set @address$, "girl";
+
     if($@VDAY_FAIRY_STATUS) goto L_Fairy;
     goto L_NoFairy;
+    
+    //TODO make the name vary
     L_Fairy:
-        mes "Yay. I'm free!";
+        if (@vday_started) goto L_FairyStarted;
+        mes "[Fairy]";
+        mes "Hey there, young " + @address$ + "!";
+        menu
+            "Hello!", -,
+            "Oh, err ... bye bye.", L_Close;
+        mes "[Fairy]";
+        mes "Hey good to meet you in this jolly time!";
+        mes "It is the season of love, did you notice?";
+        menu
+            "Yes I noticed and yet I dont care!", L_Ignorant,
+            "Sure I did.", -,
+            "Who are you?", -;
+        mes "[Fairy]";
+        mes "\"I am Joyful, as you might have already noticed, I am a fairy.";
+        mes "Well...";
+        mes "Unfortunately I had to spend most of my lifetime trapped inside this strange flower.";
+        mes "But it's my own fault\"";
+        menu 
+            "Oh, what happened?", -,
+            "Right on... exactly what I assumed.", L_Ignorant,
+            "Too bad ... I gotta go now.", L_Close,
+            "Yes yes... Just tell me, what I can do for you.", L_SkipStory;
+        mes "[Joyful]";
+        mes "\"When i was just a month old, I played with my siblings in the magic house. Auldsbel had forbidden this but you know how young fairies are. ";
+        mes "So during a session of hide and seek my sister, her name was harmless Harmless fell into a kettle filled to the brim with horribly smelling goo";
+        mes "She got stuck there so I tried pulling her out which destroyed part of her left wing.\"";
+        next;
+        mes "Joyful hesitates";
+        mes "[Joyful]";
+        mes "\"Strangely the color of the goo started to change.\"";
+        mes "\"I had seen this before when watching that old wizard from the east make potions.";
+        mes "\"And I was so ashamed, I did't dare asking for help, so I just blindly poured every reagent I could find into that kettle of slime\"";
+        mes "It was sooooo scary\"";
+        next;
+        mes "[Joyful]";
+        mes "\"Nothing worked, and my sister was crying for help and the goo was getting thicker and stiffer.";
+        mes "";
+        
         goto L_Close;
 
     L_NoFairy:
-        mes "Eh would you mind and free me?";
-        goto L_Close;
+        mes "As you admire the tree's beautiful flowers, you notice one that seems a little different to the rest.";
+    next;
+    menu
+        "Pick it", -,
+        "Leave it alone", L_Close;
+    
 
+  // TODO Date checks
+    if ($Valentines_2012_State & 1) goto L_IsFairy;
+
+    // TODO Player state dispatch
+    if ((Valentines_2012 & 0x7) == 1) goto L_Return;
+
+    mes "[Flower]";
+    mes "\"Hey! Leave me alone!\"";
+    next;
+    menu
+        "Um... did you just speak?", -,
+        "Aah! A talking flower!", L_Close;
+
+    mes "[Flower]";
+    mes "\"Well, yes! Are you surprised?\"";
+    next;
+    menu
+        "It's just that I've never met a talking flower before.", -,
+        "Actually, not really.", L_Close;
+
+    mes "[Flower]";
+    mes "\"Well, I'm really a magical Fairy, you know. My name is Joyful! Only I've kinda been trapped inside this flower...\"";
+    next;
+    menu
+        "Oh? How come?", -,
+        "Fairies are boring. I wanna play Stomping Flowers!", L_Close;
+
+    mes "[Flower]";
+    mes "\"It's a bit of a long story...\"";
+    next;
+    menu
+        "Well?", -,
+        "I haven't got time for that. Just tell me about the quest already.", L_SkipStory,
+        "I'm bored already.", L_Close;
+        
+        
     L_Close:
         close;
 }
