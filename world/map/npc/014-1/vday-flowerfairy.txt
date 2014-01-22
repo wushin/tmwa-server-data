@@ -1,66 +1,78 @@
 014-1.gat,80,45,0|script|#Flower Fairy|400,
 {
     callfunc "VdayStates";
+
     set @address$, "man";
     if (Sex == 0)
         set @address$, "girl";
 
     if($@VDAY_FAIRY_STATUS) goto L_Fairy;
     goto L_NoFairy;
-    
+
     //TODO make the name vary
     L_Fairy:
         if (@vday_started) goto L_FairyStarted;
         mes "[Fairy]";
-        mes "Hey there, young " + @address$ + "!";
+        mes "[[greeting]]";
         menu
-            "Hello!", -,
-            "Oh, err ... bye bye.", L_Close;
-        mes "[Fairy]";
-        mes "Hey good to meet you in this jolly time!";
-        mes "It is the season of love, did you notice?";
-        menu
-            "Yes I noticed and yet I dont care!", L_Ignorant,
-            "Sure I did.", -,
-            "Who are you?", -;
-        mes "[Fairy]";
-        mes "\"I am Joyful, as you might have already noticed, I am a fairy.";
-        mes "Well...";
-        mes "Unfortunately I had to spend most of my lifetime trapped inside this strange flower.";
-        mes "But it's my own fault\"";
-        menu 
-            "Oh, what happened?", -,
-            "Right on... exactly what I assumed.", L_Ignorant,
-            "Too bad ... I gotta go now.", L_Close,
-            "Yes yes... Just tell me, what I can do for you.", L_SkipStory;
-        mes "[Joyful]";
-        mes "\"When i was just a month old, I played with my siblings in the magic house. Auldsbel had forbidden this but you know how young fairies are. ";
-        mes "So during a session of hide and seek my sister, her name was harmless Harmless fell into a kettle filled to the brim with horribly smelling goo";
-        mes "She got stuck there so I tried pulling her out which destroyed part of her left wing.\"";
-        next;
-        mes "Joyful hesitates";
-        mes "[Joyful]";
-        mes "\"Strangely the color of the goo started to change.\"";
-        mes "\"I had seen this before when watching that old wizard from the east make potions.";
-        mes "\"And I was so ashamed, I did't dare asking for help, so I just blindly poured every reagent I could find into that kettle of slime\"";
-        mes "It was sooooo scary\"";
-        next;
-        mes "[Joyful]";
-        mes "\"Nothing worked, and my sister was crying for help and the goo was getting thicker and stiffer.";
-        mes "";
+            "interesting", -,
+            "close", L_Close,
+            "I dont care", L_Ingorant;
         
+        mes "[[Dialogue about how the fairy got turned into a flower]]";
+        set @vday_state, $@VDAY_FLOWER_STATE;
+        
+        callfunc "VdaySetState";
+        
+        menu
+            "can i help you", L_Help0,
+            "close", L_Close,
+            "I dont care", L_Ignorant;
         goto L_Close;
+        
+    L_Help0:
+        mes "Yes indeed";
+        mes "[[Story about she needs a potion to stay in her human form every once in a while]]";
+        goto L_Help1;
 
+    L_Help1: //knows story didnt get reward
+        mes "[[Greeting again]]";
+        menu
+            "where do i find such a potion", L_InfoPotion,
+            "What else can i do for you", L_InfoCouples1,
+            "I have one of those potions with me", L_NoPotionTime,
+            "I don't care", L_Ignorant,
+            "bye", L_Close;
+
+    L_InfoPotion:
+        mes "[[Info how the love potion should be retrievable]]";
+        goto L_Help1;
+
+    L_InfoCouples1:
+        callfunc "VdayCouples";
+        goto L_Close;
+        
+    L_NoPotionTime:
+        mes "[[Thanks you your offer but you will have to pour it over me while im in fairy form]]";
+        goto L_Help1;
+
+    L_Done0:
+        mes "[[Thank you for all your help next time you come to me i may have something for you]]";
+        set @vday_state, 4;
+        
+    L_Ignorant:
+        mes "how ignorant of you piff paff memory erased";
+        misceffect FX_MEDIUM_BLINDINGLIGHT;
+        set @vday_state, 0;
+        callfunc "VdaySetState";
+        goto L_Close;
+        
     L_NoFairy:
         mes "As you admire the tree's beautiful flowers, you notice one that seems a little different to the rest.";
     next;
     menu
         "Pick it", -,
         "Leave it alone", L_Close;
-    
-
-  // TODO Date checks
-    if ($Valentines_2012_State & 1) goto L_IsFairy;
 
     // TODO Player state dispatch
     if ((Valentines_2012 & 0x7) == 1) goto L_Return;
