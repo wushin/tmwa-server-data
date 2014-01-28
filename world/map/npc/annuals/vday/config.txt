@@ -125,12 +125,9 @@ L_Main:
     set $@VDAY_REWARD_MAX_KARMA, 1023;
 
     set $@VDAY_FLOWER_STATE, 1;
-    set $@VDAY_MAKEPOTION_STATE, 2;
-    set $@VDAY_HELPING_STATE, 3;
-    set $@VDAY_HELPED_STATE, 4;
-    set $@VDAY_LETTER1_STATE, 5;
-    set $@VDAY_LETTER2_STATE, 6;
-    set $@VDAY_RECEIVED_STATE, 7;
+    set $@VDAY_HELPING_STATE, 2;
+    set $@VDAY_HELPED_STATE, 3;
+    set $@VDAY_RECEIVED_STATE, 4;
 
     set $@VDAY_COUPLE1_DONE_STATE, 5;
     set $@VDAY_COUPLE2_DONE_STATE, 4;
@@ -154,10 +151,10 @@ L_Main:
     // Fairy NPCs shop... TODO
 
     // Main Quest rewards
-    setarray $@VDAY_REWARD_RARE$, "HeartNecklace";
+    set $@VDAY_REWARD_RARE$, "HeartNecklace";
     setarray $@VDAY_REWARD_COMMON$, "ChocolateMouboo", "FlowerBucket", "CupidsArrows", "PlushPollett";
+    setarray $@VDAY_REWARD_COUPLE$, "", "HeartPendant", "GoldPearls", "RosePetal"; //I wont start counting at zero just because you do
     setarray $@VDAY_SHOP_PRICE, 1, 10, 2, 30;
-    //TODO add the fourleaf amulets?
 
     //  Main
 

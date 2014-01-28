@@ -11,102 +11,130 @@
 
     //TODO make the name vary
     L_Fairy:
-        if (@vday_started) goto L_FairyStarted;
+        if (@vday_got_reward) goto L_Shop;
+        if (@vday_all_couples) goto L_Reward;
+        if (@vday_helping) goto L_Help2;
+        if (@vday_started) goto L_Help1;
+
         mes "[Fairy]";
         mes "[[greeting]]";
         menu
             "interesting", -,
             "close", L_Close,
             "I dont care", L_Ingorant;
-        
+
         mes "[[Dialogue about how the fairy got turned into a flower]]";
         set @vday_state, $@VDAY_FLOWER_STATE;
-        
+
         callfunc "VdaySetState";
-        
+
         menu
             "can i help you", L_Help0,
             "close", L_Close,
             "I dont care", L_Ignorant;
         goto L_Close;
-        
+
     L_Help0:
         mes "Yes indeed";
-        mes "[[Story about she needs a potion to stay in her human form every once in a while]]";
+        mes "[[Story about she needs a potion to stay in her human form every once in a while/or awake...]]";
         goto L_Help1;
 
-    L_Help1: //knows story didnt get reward
+    L_Help1: //knows story didnt get main reward
         mes "[[Greeting again]]";
         menu
-            "where do i find such a potion", L_InfoPotion,
+            "Where do i find such a potion", L_InfoPotion,
             "What else can i do for you", L_InfoCouples1,
-            "I have one of those potions with me", L_NoPotionTime,
+            "I have one of those potions with me", L_Potion,
             "I don't care", L_Ignorant,
             "bye", L_Close;
+
+     L_Help2: //knows story didnt get main reward
+        mes "[[Greeting again]]";
+        menu
+            "Where do i find such a potion", L_InfoPotion,
+            "Where do i find the couples you talked about?", L_InfoCouples2,
+            "I have one of those potions with me", L_Potion,
+            "I don't care", L_Ignorant,
+            "bye", L_Close;
+
 
     L_InfoPotion:
         mes "[[Info how the love potion should be retrievable]]";
         goto L_Help1;
 
     L_InfoCouples1:
-        callfunc "VdayCouples";
-        goto L_Close;
-        
-    L_NoPotionTime:
-        mes "[[Thanks you your offer but you will have to pour it over me while im in fairy form]]";
+        set @vday_state, $@VDAY_HELPING_STATE;
+        callfunc "VdaySetState";
+        goto L_InfoCouples2;
+
+    L_InfoCouples2:
+        callfunc "VdayStates";
+
+        if (@vday_all_couples) goto L_Reward;
+        if !(@vday_couple1_done) goto L_Couple1;
+        if !(@vday_couple2_done) goto L_Couple2;
+        if !(@vday_couple3_done) goto L_Couple3;
+        mes "[[encouraging words from the Fairy]]";
+        goto L_Help2;
+
+    L_Couple1:
+        mes "[[Couple1 needs help]]";
+        goto L_Help2;
+
+    L_Couple2:
+        mes "[[Couple2 needs help]]";
+        goto L_Help2;
+
+    L_Couple3:
+        mes "[[Couple3 needs help]]";
+        goto L_Help2;
+
+    L_Potion:
+        if ($@VDAY_FAIRY_STATUS) goto L_NoPotionTime;
+        mes "[[Good, just pour it over me]]";
+        if (@vday_helping) goto L_Help2;
         goto L_Help1;
 
-    L_Done0:
-        mes "[[Thank you for all your help next time you come to me i may have something for you]]";
-        set @vday_state, 4;
-        
+    L_NoPotionTime:
+        mes "[[Thanks you your offer but you will have to pour it over me while im in fairy form]]";
+        if (@vday_helping) goto L_Help2;
+        goto L_Help1;
+
+    L_NeedPotion:
+        mes "[[Fairy wants to reward player but cant because trapped]]";
+        goto L_Close;
+
     L_Ignorant:
         mes "how ignorant of you piff paff memory erased";
         misceffect FX_MEDIUM_BLINDINGLIGHT;
         set @vday_state, 0;
         callfunc "VdaySetState";
         goto L_Close;
-        
+
+    L_Reward:
+        if !($@VDAY_FAIRY_STATUS) goto L_NeedPotion;
+        if (@vday_got_reward) goto L_Shop;
+        if (!(@vday_all_couples) || !($@VDAY_TIME)) goto L_Close;
+        callfunc "VdayMainReward";
+        goto L_Close;
+
+    L_Shop:
+        callfunc "VdayKarmaShop";
+        goto L_Close;
+
     L_NoFairy:
+        if (@vday_started) goto L_Fairy;
         mes "As you admire the tree's beautiful flowers, you notice one that seems a little different to the rest.";
-    next;
+        next;
     menu
         "Pick it", -,
         "Leave it alone", L_Close;
 
-    // TODO Player state dispatch
-    if ((Valentines_2012 & 0x7) == 1) goto L_Return;
+    mes "[[Stuff the Flower Says]]";
+        set @vday_state, $@VDAY_FLOWER_STATE;
+        callfunc "VdaySetState";
+        goto L_Close;
 
-    mes "[Flower]";
-    mes "\"Hey! Leave me alone!\"";
-    next;
-    menu
-        "Um... did you just speak?", -,
-        "Aah! A talking flower!", L_Close;
-
-    mes "[Flower]";
-    mes "\"Well, yes! Are you surprised?\"";
-    next;
-    menu
-        "It's just that I've never met a talking flower before.", -,
-        "Actually, not really.", L_Close;
-
-    mes "[Flower]";
-    mes "\"Well, I'm really a magical Fairy, you know. My name is Joyful! Only I've kinda been trapped inside this flower...\"";
-    next;
-    menu
-        "Oh? How come?", -,
-        "Fairies are boring. I wanna play Stomping Flowers!", L_Close;
-
-    mes "[Flower]";
-    mes "\"It's a bit of a long story...\"";
-    next;
-    menu
-        "Well?", -,
-        "I haven't got time for that. Just tell me about the quest already.", L_SkipStory,
-        "I'm bored already.", L_Close;
-        
-        
     L_Close:
         close;
 }

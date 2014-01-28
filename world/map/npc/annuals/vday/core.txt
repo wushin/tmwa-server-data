@@ -169,53 +169,29 @@ L_VdayExp:
 }
 
 // Final Item reward
-function|script|VdayMainItemReward|,
+function|script|VdayMainReward|,
 {
-    callfunc "VdaySetReward";
-
-    if(($@vday_time == $@vday_reward_time) && ((@vday_reward_start_state) || (@vday_reward1_done_state)))
-        goto L_FinalGift;
-    goto L_Return;
-
-L_FinalGift:
-    mes "[To: " + strcharinfo(0) + "]";
-    mes "[From: " + $@vday_present_from$[@vday_reward_side] + "]";
-    mes "O look, a present from " + $@vday_present_from$[@vday_reward_side];
-    next;
+    mes "[[thank you, i planned to give you a reward,]]";
     getinventorylist;
-    if (@inventorylist_count > 97)
+    if (@inventorylist_count > 99)
         goto L_FullInv;
-    set @vday_reward, (@vday_reward + ((BaseLevel + 10)/10));
-    if (debug > 0)
-        message strcharinfo(0), "Reward variable: " + @vday_reward;
-    set @vday_uncommon_slot1, rand(getarraysize($@vday_uncommon_reward$));
-    set @vday_uncommon_slot2, rand(getarraysize($@vday_uncommon_reward$));
-    if(@vday_reward >= $@vday_reward_tally_rare)
-        set @vday_reward_item$, $@vday_rare_reward$[@vday_reward_side];
-    if(@vday_reward >= $@vday_reward_tally_common)
-        set @vday_reward_item1$, $@vday_uncommon_reward$[@vday_uncommon_slot1];
-    set @vday_reward_item2$, $@vday_uncommon_reward$[@vday_uncommon_slot2];
-    if(checkweight("Iten", 1) == 0)
+    if (countitem($@VDAY_REWARD_COUPLE$[1]) == 0 ||
+        countitem($@VDAY_REWARD_COUPLE$[2]) == 0 ||
+        countitem($@VDAY_REWARD_COUPLE$[3]) == 0)
+        goto L_NoItems;
+    if(checkweight($@VDAY_REWARD_RARE$, 1) == 0)
         goto L_FullInv;
-    if(@vday_reward >= 80)
-    getitem @vday_reward_item$, 1;
-    if(@vday_reward >= 40)
-    getitem @vday_reward_item1$, 1;
-    getitem @vday_reward_item2$, 1;
-    set @vday_uncommon_slot1, 0;
-    set @vday_uncommon_slot2, 0;
-    set @vday_reward_item$, "";
-    set @vday_reward_item1$, "";
-    set @vday_reward_item2$, "";
-    if (@vday_reward_start_state)
-        set @vday_state, $@vday_reward2_done;
-    if (@vday_reward1_done_state)
-        set @vday_state, $@vday_reward_done;
+    getitem $@VDAY_REWARD_RARE$, 1;
+    set @vday_state, $@VDAY_RECEIVED_STATE;
     callfunc "VdaySetState";
     goto L_Return;
 
 L_FullInv:
-    mes "\"You have no place to put the present.\"";
+    mes "[[Too much stuff]]";
+    goto L_Return;
+
+L_NoItems:
+    mes "[[But you don't have what's needed]]";
     goto L_Return;
 
 L_Return:
