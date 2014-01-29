@@ -25,16 +25,16 @@
     L_ReceiveL1:
         mes "[[Ty for the letter]]";
         set @vday_couple3_state, $@VDAY_L1_DONE_STATE;
-        callfunc "SetVdayCouple3";
+        callfunc "VdaySetCouple3";
         next;
         goto L_SendL2;
 
     L_SendL2:
         mes "[[Here have my reply]]";
         set @vday_couple3_state, $@VDAY_L2_DACOTA_STATE;
-        callfunc "SetVdayCouple3";
+        callfunc "VdaySetCouple3";
         next;
-        goto L_WaitL2;
+        goto L_Close;
 
     L_WaitL2:
         mes "[[Did you return it yet?]]";
@@ -52,7 +52,7 @@
             "[[no]]", L_Hurry2;
 
         set @vday_couple3_state, $@VDAY_L3_DONE_STATE;
-        callfunc "SetVdayCouple3";
+        callfunc "VdaySetCouple3";
         mes "[[Oh thank you for this letter]]";
         next;
         goto L_SendL4;
@@ -60,9 +60,9 @@
     L_SendL4:
         mes "[[Here have my reply]]";
         set @vday_couple3_state, $@VDAY_L4_DACOTA_STATE;
-        callfunc "SetVdayCouple3";
+        callfunc "VdaySetCouple3";
         next;
-        goto L_WaitL4;
+        goto L_Close;
 
     L_WaitL4:
         mes "[[Did you return it yet?]]";
