@@ -1,6 +1,102 @@
 
 020-1.gat,79,65,0|script|Dakota|393,
 {
-    mes "Out of my waaaaaay im sliding!";
-    close;
+    callfunc "VdayStates";
+
+    if (($@VDAY_TIME) && (@vday_helping)) goto L_Event;
+    goto L_NoEvent;
+
+    L_Event:
+        if @vday_couple3_done goto L_Thanks;
+        if !(@vday_dakota) goto L_Shy;
+        if (@vday_couple3_state == $@VDAY_L1_MARCUS_STATE) goto L_ReceiveL1;
+        if (@vday_couple3_state == $@VDAY_L1_DONE_STATE) goto L_SendL2;
+        if (@vday_couple3_state == $@VDAY_L2_DACOTA_STATE) goto L_WaitL2;
+        if (@vday_couple3_state == $@VDAY_L2_DONE_STATE) goto L_WaitL2;
+        if (@vday_couple3_state == $@VDAY_L3_MARCUS_STATE) goto L_ReceiveL3;
+        if (@vday_couple3_state == $@VDAY_L3_DONE_STATE) goto L_SendL4;
+        if (@vday_couple3_state == $@VDAY_L4_DACOTA_STATE) goto L_WaitL4;
+        if (@vday_couple3_state > $@VDAY_L4_DACOTA_STATE) goto L_Reward;
+
+    L_Shy:
+        mes "[[Hi, I'm not allowed to talk to strangers]]";
+        goto L_Close;
+
+    L_ReceiveL1:
+        mes "[[Ty for the letter]]";
+        set @vday_couple3_state, $@VDAY_L1_DONE_STATE;
+        callfunc "SetVdayCouple3";
+        next;
+        goto L_SendL2;
+
+    L_SendL2:
+        mes "[[Here have my reply]]";
+        set @vday_couple3_state, $@VDAY_L2_DACOTA_STATE;
+        callfunc "SetVdayCouple3";
+        next;
+        goto L_WaitL2;
+
+    L_WaitL2:
+        mes "[[Did you return it yet?]]";
+        menu
+            "[[yes]]", -,
+            "[[no]]", L_Hurry;
+
+        mes "[[Mhh strnage that he didnt reply go ask again]]";
+        goto L_Close;
+
+    L_ReceiveL3:
+        mes "[[Any news yet?]]";
+        menu
+            "[[yes]]", -,
+            "[[no]]", L_Hurry2;
+
+        set @vday_couple3_state, $@VDAY_L3_DONE_STATE;
+        callfunc "SetVdayCouple3";
+        mes "[[Oh thank you for this letter]]";
+        next;
+        goto L_SendL4;
+
+    L_SendL4:
+        mes "[[Here have my reply]]";
+        set @vday_couple3_state, $@VDAY_L4_DACOTA_STATE;
+        callfunc "SetVdayCouple3";
+        next;
+        goto L_WaitL4;
+
+    L_WaitL4:
+        mes "[[Did you return it yet?]]";
+        menu
+            "[[yes]]", -,
+            "[[no]]", L_Hurry;
+
+        mes "[[Mhh strnage that he didnt reply go ask again]]";
+        goto L_Close;
+
+    L_Reward:
+        mes "[[did you like your reward?]]";
+        menu
+            "What?", -;
+        mes "[[Oh i see, marcus didnt read his letter yet go talk to him]]";
+        goto L_Close;
+
+    L_Thanks:
+        mes "[[aaah im in love]]";
+        goto L_Close;
+
+    L_Hurry:
+        mes "[[Hey did you deliver the letter yet?]]";
+        mes "[[I dont think so...]]";
+        goto L_Close;
+
+    L_Hurry2:
+        mes "[[Hey I am sure Markus has something to reply, go and get!]]";
+        goto L_Close;
+
+    L_NoEvent:
+        mes "Out of my waaaaaay im sliding!";
+        goto L_Close;
+
+    L_Close:
+        close;
 }

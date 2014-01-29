@@ -154,8 +154,8 @@ L_Main:
 
 
     // Vday Fairy Potion
-    set $@VDAY_POT1$, "LovePotion";
-    set $@VDAY_POT1_FRIENDLY$, "Love Potion";
+    set $@VDAY_POT1$, "IronPotion";//"LovePotion";
+    set $@VDAY_POT1_FRIENDLY$, "Iron Potion"; //"Love Potion";
 
     setarray $@VDAY_POT1_REQ$, "RosePetal", "Pearl", "PinkRose";
     setarray $@VDAY_POT1_REQ_FRIENDLY$, "rose petals", "pearl", "pink rose";
@@ -164,8 +164,8 @@ L_Main:
         goto L_VdayError;
 
     // Vday Cure Potion
-    set $@VDAY_POT2$, "CurePotion";
-    set $@VDAY_POT2_FRIENDLY$, "Cure Potion";
+    set $@VDAY_POT2$, "ConcentrationPotion"; //"CurePotion";
+    set $@VDAY_POT2_FRIENDLY$, "Concentration Potion"; //"Cure Potion";
     if(getarraysize($@VDAY_POT1_REQ) != getarraysize($@VDAY_BOSS_REQ$))
     setarray $@VDAY_POT2_REQ$, "AlizarinHerb", "GambogeHerb", "CobaltHerb", "MauveHerb", "BottleOfWater";
     setarray $@VDAY_POT2_REQ_FRIENDLY$, "herbs of an alizarin plant", "gamboge herbs", "cobalt herbs", "mauve herbs", "flask of water";
@@ -177,9 +177,10 @@ L_Main:
 
     // Main Quest rewards
     set $@VDAY_RING$, "SimpleRing";
-    set $@VDAY_REWARD_RARE$, "HeartNecklace";
+    set $@VDAY_REWARD_RARE$, "MoubooHead"; //"HeartNecklace";
     setarray $@VDAY_REWARD_COMMON$, "ChocolateMouboo", "FlowerBucket", "CupidsArrows", "PlushPollett";
-    setarray $@VDAY_REWARD_COUPLE$, "", "GoldPearls", "RosePetal", "HeartPendant"; //I wont start counting at zero just because you do
+//    setarray $@VDAY_REWARD_COUPLE$, "", "GoldPearls", "RosePetal", "HeartPendant"; //I wont start counting at zero just because you do
+    setarray $@VDAY_REWARD_COUPLE$, "", "FourLeafClover", "BlackRose", "AquaHint"; //I wont start counting at zero just because you do
     setarray $@VDAY_SHOP_PRICE, 1, 10, 2, 30;
 
     //  Main
