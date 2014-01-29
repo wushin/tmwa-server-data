@@ -2,8 +2,110 @@
 
 002-1.gat,28,70,0|script|Noah|389,
 {
-    mes "Hi, I'm Noah!";
-    goto L_Close;
+    callfunc "VdayStates";
+
+    if ($@VDAY_TIME) goto L_Event;
+    goto L_NoEvent;
+
+    L_NoEvent:
+        mes "[[Text while no event]]";
+        goto L_Close;
+
+    L_Event:
+        mes "[[Greetings and weeping]]";
+            if (@vday_helping) goto L_Helping;
+        mes "[[Refuses to open his heart]]";
+        goto L_Close;
+
+    L_Helping:
+        if (@vday_noah_cheat) goto L_Cheater;
+        if (@vday_couple1_state == $@VDAY_NOAH_STATE) goto L_Familiar;
+        if (@vday_couple1_state == $@VDAY_C1HELPING_STATE) goto L_Searching;
+        if (@vday_couple1_state == $@VDAY_C1FOUND_STATE) goto L_Found;
+        if (@vday_couple1_state == $@VDAY_C1HELPED_STATE) goto L_Reward;
+        if (@vday_couple1_state == $@VDAY_RECEIVED_STATE) goto L_Chatter;
+
+        mes "[[Some text]]";
+        set @vday_couple1_state, $@VDAY_NOAH_STATE;
+
+        callfunc "VdaySetCouple1";
+        callfunc "VdayStates";
+
+        next;
+        mes "[[Asks to get him back his ring]]";
+        menu
+            "ok", -,
+            "no", L_Close;
+
+        mes "[[I lost my ring somewhere, find it]]";
+        set @vday_couple1_state, $@VDAY_C1HELPING_STATE;
+        callfunc "VdaySetCouple1";
+        goto L_Close;
+
+    L_Familiar:
+        mes "[[Hey again *cries more*]]";
+        menu
+            "I would like to help you now", -,
+            "[[go away]]", L_Close;
+
+        mes "[[OK, I lost my ring somewhere, find it]]";
+        set @vday_couple1_state, $@VDAY_C1HELPING_STATE;
+        callfunc "VdaySetCouple1";
+        goto L_Close;
+
+    L_Searching:
+        mes "[[Have you found it yet]]";
+        menu
+            "Yes", -,
+            "No", L_Sad;
+        if (countitem($@VdayRing$) == 0) goto L_NoItem;
+        mes "[[Not my ring]]";
+        goto L_Close;
+
+    L_Found:
+        mes "[[Have you found it yet]]";
+        menu
+            "Yes", -,
+            "No", L_Sad;
+
+        mes "[[Give it to me]]";
+        menu
+            "Yes", -,
+            "No", L_Steal;
+
+        if countitem($@VdayRing$ == 0) goto L_NoItem;
+        delitem $@VdayRing$, 1;
+        set @vday_couple1_state, $@VDAY_C1HELPED_STATE;
+        callfunc "VdaySetCouple1";
+        next;
+        goto L_Reward;
+
+    L_Reward:
+        mes "[[I would like to reward you for this]]";
+        set @vday_couple1_state, $@VDAY_C1RECEIVED_STATE;
+        callfunc "VdaySetCouple1";
+        getitem $@VDAY_REWARD_COUPLE$[1], 1;
+        menu
+            "thanks",-;
+        goto L_Close;
+
+    L_Chatter:
+        mes "[[hi nice to see you all well good bye]]";
+        goto L_Close;
+
+    L_Steal:
+        set @vday_couple1_state, $@VDAY_C1CHEATER_STATE;
+        callfunc "VdaySetCouple1";
+        mes "[[comment on beautiful ring]]";
+        goto L_Close;
+
+    L_Cheater:
+        mes "[[more whining]]";
+        goto L_Close;
+
+    L_NoItem:
+        mes "[[You miss the ring]]";
+        goto L_Close;
 
     L_Close:
         close;

@@ -69,6 +69,24 @@ function|script|VdaySetState|,
     return;
 }
 
+function|script|VdaySetCouple1|,
+{
+    set VDAYTIME, (VDAYTIME & ~($@VDAY_SUBSTATE1_MASK) | (@vday_couple1_state << $@VDAY_SUBSTATE1_SHIFT));
+    return;
+}
+
+function|script|VdaySetCouple2|,
+{
+    set VDAYTIME, (VDAYTIME & ~($@VDAY_SUBSTATE2_MASK) | (@vday_couple2_state << $@VDAY_SUBSTATE2_SHIFT));
+    return;
+}
+
+function|script|VdaySetCouple3|,
+{
+    set VDAYTIME, (VDAYTIME & ~($@VDAY_SUBSTATE3_MASK) | (@vday_couple3_state << $@VDAY_SUBSTATE3_SHIFT));
+    return;
+}
+
 function|script|VdaySetSide|,
 {
     set VDAYTIME, VDAYTIME | $@VDAY_SIDE_BIT;

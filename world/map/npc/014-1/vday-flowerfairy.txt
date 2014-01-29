@@ -48,7 +48,7 @@
             "I don't care", L_Ignorant,
             "bye", L_Close;
 
-     L_Help2: //knows story didnt get main reward
+     L_Help2: //knows story and couples didnt get main reward
         mes "[[Greeting again]]";
         menu
             "Where do i find such a potion", L_InfoPotion,
@@ -62,7 +62,7 @@
         mes "[[Info how the love potion should be retrievable]]";
         goto L_Help1;
 
-    L_InfoCouples1:
+    L_InfoCouples1: //learns about couples
         set @vday_state, $@VDAY_HELPING_STATE;
         callfunc "VdaySetState";
         goto L_InfoCouples2;
@@ -71,27 +71,21 @@
         callfunc "VdayStates";
 
         if (@vday_all_couples) goto L_Reward;
-        if !(@vday_couple1_done) goto L_Couple1;
-        if !(@vday_couple2_done) goto L_Couple2;
-        if !(@vday_couple3_done) goto L_Couple3;
+        if !(@vday_couple1_done) mes "[[Couple1 needs help]]";
+        if !(@vday_couple1_done) mes "";
+
+        if !(@vday_couple2_done) mes "[[Couple2 needs help]]";
+        if !(@vday_couple2_done) mes "";
+
+        if !(@vday_couple3_done) mes "[[Couple3 needs help]]";
+        if !(@vday_couple3_done) mes "";
+
         mes "[[encouraging words from the Fairy]]";
-        goto L_Help2;
-
-    L_Couple1:
-        mes "[[Couple1 needs help]]";
-        goto L_Help2;
-
-    L_Couple2:
-        mes "[[Couple2 needs help]]";
-        goto L_Help2;
-
-    L_Couple3:
-        mes "[[Couple3 needs help]]";
         goto L_Help2;
 
     L_Potion:
         if ($@VDAY_FAIRY_STATUS) goto L_NoPotionTime;
-        mes "[[Good, just pour it over me]]";
+        mes "[[Good to hear, just pour it over me]]";
         if (@vday_helping) goto L_Help2;
         goto L_Help1;
 

@@ -23,10 +23,16 @@ function|script|VdayStates|,
     set @vday_knows_pot1, (VDAYTIME & $@VDAY_POT1_BIT);
     set @vday_knows_pot2, (VDAYTIME & $@VDAY_POT2_BIT);
 
+    set @vday_started, (@vday_state >= $@VDAY_FLOWER_STATE);
     set @vday_knows_fairy, (VDAYTIME & $@VDAY_FAIRY_BIT);
     set @vday_knows_couples, (@vday_state >= $@VDAY_HELPING_STATE);
     set @vday_got_reward, (@vday_state >= $@VDAY_RECEIVED_STATE);
-    set @vday_started, (@vday_state >= $@VDAY_FLOWER_STATE);
+
+    set @vday_noah, (@vday_couple1_state >= $@VDAY_NOAH_STATE);
+    set @vday_noah_cheat, (@vday_couple1_state == $@VDAY_C1CHEATER_STATE);
+    set @vday_alex, (@vday_couple2_state >= $@VDAY_ALEX_STATE);
+
+    set @vday_dakota, (@vday_couple3_state >= $@VDAY_C3KNOWS_STATE);
 
     // conditional (tool) flags
     set @vday_started, (@vday_state > 0);

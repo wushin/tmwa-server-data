@@ -18,7 +18,6 @@
 // 3 helping the couples
 // 3.1 1 knows Noah
 // 3.1 2 looking for ring
-// 3.1 3 found ring
 // 3.1 4 gave ring
 // 3.1 5 got Gold Pieces from Noah
 
@@ -34,10 +33,7 @@
 // 3.3 5 gave letter to marcus
 // 3.3 6 got letter from dakota
 
-// 4 helped all couples
-// 5 got letter from dakota
-// 6 gave letter to marcus
-// 7 got pendant from marcus
+// 4 quest finished
 
 // TODO have a separate routine for the time check, calculations dont need to be spammed all the time (regarding starttime_c , endtime_c)
 
@@ -92,11 +88,11 @@ L_Main:
     // quest state: 3 bits (0,1,2)
     // couple 1: 3 bits (3,4,5)
     // couple 2: 3 bits (6,7,8)
-    // couple 3: 3 bits (9,10,11)
-    // knows pot 1: 1 bit (12)
-    // knows pot 2: 1 bit (13)
-    // helped fairy once: 1 bit (14)
-    // karma: 10 bit (15, 16, 17, 18, 19, 20, 21, 22, 23, 24)
+    // couple 3: 4 bits (9,10,11,12)
+    // knows pot 1: 1 bit (13)
+    // knows pot 2: 1 bit (14)
+    // helped fairy once: 1 bit (15)
+    // karma: 9 bit (16, 17, 18, 19, 20, 21, 22, 23, 24)
     // ------------------------
     // 15 bits ... promising :D
     // falling back to nibbles... for other readers'
@@ -106,19 +102,19 @@ L_Main:
     set $@VDAY_SUBSTATE1_SHIFT, 3;
     set $@VDAY_SUBSTATE2_SHIFT, 6;
     set $@VDAY_SUBSTATE3_SHIFT, 9;
-    set $@VDAY_POT1_SHIFT, 12;
-    set $@VDAY_POT2_SHIFT, 13;
-    set $@VDAY_FAIRY_SHIFT, 14;
-    set $@VDAY_KARMA_SHIFT, 15;
+    set $@VDAY_POT1_SHIFT, 13;
+    set $@VDAY_POT2_SHIFT, 14;
+    set $@VDAY_FAIRY_SHIFT, 15;
+    set $@VDAY_KARMA_SHIFT, 16;
 
     set $@VDAY_STATE_MASK, 7;
     set $@VDAY_SUBSTATE1_MASK, 56;
     set $@VDAY_SUBSTATE2_MASK, 448;
-    set $@VDAY_SUBSTATE3_MASK, 3584;
-    set $@VDAY_POT1_BIT, 4096;
-    set $@VDAY_POT2_BIT, 8192;
-    set $@VDAY_FAIRY_BIT, 16384;
-    set $@VDAY_KARMA_MASK, 33521664;
+    set $@VDAY_SUBSTATE3_MASK, 7680;
+    set $@VDAY_POT1_BIT, 8192;
+    set $@VDAY_POT2_BIT, 16384;
+    set $@VDAY_FAIRY_BIT, 32768;
+    set $@VDAY_KARMA_MASK, 33488896;
 
     set $@VDAY_BASE_BONUS_XP, 4;
     set $@VDAY_KARMA_BONUS, 1;
@@ -129,9 +125,33 @@ L_Main:
     set $@VDAY_HELPED_STATE, 3;
     set $@VDAY_RECEIVED_STATE, 4;
 
-    set $@VDAY_COUPLE1_DONE_STATE, 5;
-    set $@VDAY_COUPLE2_DONE_STATE, 4;
-    set $@VDAY_COUPLE3_DONE_STATE, 6;
+    set $@VDAY_NOAH_STATE, 1;
+    set $@VDAY_C1HELPING_STATE, 2;
+    set $@VDAY_C1FOUND_STATE, 3;
+    set $@VDAY_C1HELPED_STATE, 4;
+    set $@VDAY_C1RECEIVED_STATE, 5;
+    set $@VDAY_C1CHEATER_STATE, 6;
+
+    set $@VDAY_ALEX_STATE, 1;
+    set $@VDAY_C2HELPING_STATE, 2;
+    set $@VDAY_C2HELPED_STATE, 3;
+    set $@VDAY_C2RECEIVED_STATE, 4;
+
+    set $@VDAY_C3KNOWS_STATE, 1;
+    set $@VDAY_L1_MARCUS_STATE, 2;
+    set $@VDAY_L1_DONE_STATE, 3;
+    set $@VDAY_L2_DACOTA_STATE, 4;
+    set $@VDAY_L2_DONE_STATE, 5;
+    set $@VDAY_L3_MARCUS_STATE, 6;
+    set $@VDAY_L3_DONE_STATE, 7;
+    set $@VDAY_L4_DACOTA_STATE, 8;
+    set $@VDAY_L4_DONE_STATE, 9;
+    set $@VDAY_C3RECEIVED_STATE, 10;
+
+    set $@VDAY_COUPLE1_DONE_STATE, $@VDAY_C1RECEIVED_STATE;
+    set $@VDAY_COUPLE2_DONE_STATE, $@VDAY_C2RECEIVED_STATE;
+    set $@VDAY_COUPLE3_DONE_STATE, $@VDAY_C3RECEIVED_STATE;
+
 
     // Vday Fairy Potion
     setarray $@VDAY_POT1_REQ$, "RosePetal", "Pearl", "PinkRose";
@@ -151,9 +171,10 @@ L_Main:
     // Fairy NPCs shop... TODO
 
     // Main Quest rewards
+    set $@VDAY_RING$, "SimpleRing";
     set $@VDAY_REWARD_RARE$, "HeartNecklace";
     setarray $@VDAY_REWARD_COMMON$, "ChocolateMouboo", "FlowerBucket", "CupidsArrows", "PlushPollett";
-    setarray $@VDAY_REWARD_COUPLE$, "", "HeartPendant", "GoldPearls", "RosePetal"; //I wont start counting at zero just because you do
+    setarray $@VDAY_REWARD_COUPLE$, "", "GoldPearls", "RosePetal", "HeartPendant"; //I wont start counting at zero just because you do
     setarray $@VDAY_SHOP_PRICE, 1, 10, 2, 30;
 
     //  Main
