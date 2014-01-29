@@ -1,6 +1,89 @@
 
 009-2.gat,152,21,4|script|Alex|391,
 {
-    mes "My woman is sick!";
-    close;
+    callfunc "VdayStates";
+
+    if (($@VDAY_TIME) && (@vday_helping)) goto L_Event;
+    goto L_NoEvent;
+
+    L_Event:
+        if @vday_couple2_done goto L_Thanks;
+        if (@vday_couple2_state == $@VDAY_ALEX_STATE) goto L_WelcomeBack;
+        if (@vday_couple2_state == $@VDAY_C2HELPING_STATE) goto L_Helping;
+        if (@vday_couple2_state == $@VDAY_C2HELPED_STATE) goto L_Reward;
+        goto L_Hello;
+
+    L_Hello:
+        mes "[[Nice to see you]]";
+        set @vday_couple2_state, $@VDAY_ALEX_STATE;
+        callfunc "VdaySetCouple2";
+        callfunc "VdayStates";
+        menu
+            "[[can i help you]]", -,
+            "[[bybye]]", L_Close;
+
+        mes "[[Yes my wife is sick, she needs this potion...]]";
+        set @vday_couple2_state, $@VDAY_C2HELPING_STATE;
+        callfunc "VdaySetCouple2";
+        callfunc "VdayStates";
+        next;
+        goto L_Helping;
+
+    L_WelcomeBack:
+        mes "[[Good to see you again]]";
+        menu
+            "[[can i help you]]", -,
+            "[[bybye]]", L_Close;
+
+        mes "[[Yes my wife is sick, she needs this potion...]]";
+        set @vday_couple2_state, $@VDAY_C2HELPING_STATE;
+        callfunc "VdaySetCouple2";
+        callfunc "VdayStates";
+        next;
+        goto L_Helping;
+
+    L_Helping:
+        mes "[[Any success yet?]]";
+        menu
+            "[[yes, i have it with me]]", -,
+            "[[Where can i find it]]", L_ExplainPot,
+            "[[Bye]]", L_Close;
+
+            getinventorylist;
+            if (countitem($@VDAY_POT2$) == 0) goto L_NoItems;
+        mes "[[Oh nice, now give it to me, so we can perform the ceremony]]"; //could be replaced with minigame;
+            delitem $@VDAY_POT2$, 1;
+            set @vday_couple2_state, $@VDAY_C2HELPED_STATE;
+            callfunc "VdaySetCouple2";
+        mes "[[Thanks]]";
+        mes "[[]]";
+        next;
+        goto L_Reward;
+
+    L_ExplainPot:
+        mes "[[I think Wizard abc knows how to do it]]";
+        goto L_Helping;
+
+    L_Reward:
+        mes "[[My wife said she has sth for you]]";
+        goto L_Close;
+
+    L_FullInv:
+        mes "[[But you dont have room for it]]";
+        goto L_Close;
+
+    L_NoItems:
+        mes "[[I don't think you have that potion we talked about with you]]";
+        goto L_Close;
+
+    L_Thanks:
+        mes "[[Thanks for helping]]";
+        goto L_Close;
+
+    L_NoEvent:
+        mes "[[Text while no event]]";
+        goto L_Close;
+
+    L_Close:
+        close;
 }

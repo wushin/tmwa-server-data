@@ -199,6 +199,10 @@ function|script|VdayMainReward|,
         goto L_NoItems;
     if(checkweight($@VDAY_REWARD_RARE$, 1) == 0)
         goto L_FullInv;
+    delitem $@VDAY_REWARD_COUPLE$[1], 1;
+    delitem $@VDAY_REWARD_COUPLE$[2], 1;
+    delitem $@VDAY_REWARD_COUPLE$[3], 1;
+    
     getitem $@VDAY_REWARD_RARE$, 1;
     set @vday_state, $@VDAY_RECEIVED_STATE;
     callfunc "VdaySetState";

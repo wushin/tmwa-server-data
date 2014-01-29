@@ -58,7 +58,7 @@
         menu
             "Yes", -,
             "No", L_Sad;
-        if (countitem($@VdayRing$) == 0) goto L_NoItem;
+        if (countitem($@VDAY_RING$) == 0) goto L_NoItem;
         mes "[[Not my ring]]";
         goto L_Close;
 
@@ -73,8 +73,8 @@
             "Yes", -,
             "No", L_Steal;
 
-        if countitem($@VdayRing$ == 0) goto L_NoItem;
-        delitem $@VdayRing$, 1;
+        if countitem($@VDAY_RING$ == 0) goto L_NoItem;
+        delitem $@VDAY_RING$, 1;
         set @vday_couple1_state, $@VDAY_C1HELPED_STATE;
         callfunc "VdaySetCouple1";
         next;
@@ -91,6 +91,10 @@
 
     L_Chatter:
         mes "[[hi nice to see you all well good bye]]";
+        goto L_Close;
+
+    L_Sad:
+        mes "[[:(]]";
         goto L_Close;
 
     L_Steal:

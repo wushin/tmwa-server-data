@@ -154,13 +154,18 @@ L_Main:
 
 
     // Vday Fairy Potion
+    set $@VDAY_POT1$, "LovePotion";
+    set $@VDAY_POT1_FRIENDLY$, "Love Potion";
+
     setarray $@VDAY_POT1_REQ$, "RosePetal", "Pearl", "PinkRose";
-    setarray $@VDAY_POT1_REQ$, "rose petals", "pearl", "pink rose";
+    setarray $@VDAY_POT1_REQ_FRIENDLY$, "rose petals", "pearl", "pink rose";
     setarray $@VDAY_POT1_REQ, 25, 1, 5;
     if(getarraysize($@VDAY_POT1_REQ) != getarraysize($@VDAY_POT1_REQ$))
         goto L_VdayError;
 
     // Vday Cure Potion
+    set $@VDAY_POT2$, "CurePotion";
+    set $@VDAY_POT2_FRIENDLY$, "Cure Potion";
     if(getarraysize($@VDAY_POT1_REQ) != getarraysize($@VDAY_BOSS_REQ$))
     setarray $@VDAY_POT2_REQ$, "AlizarinHerb", "GambogeHerb", "CobaltHerb", "MauveHerb", "BottleOfWater";
     setarray $@VDAY_POT2_REQ_FRIENDLY$, "herbs of an alizarin plant", "gamboge herbs", "cobalt herbs", "mauve herbs", "flask of water";

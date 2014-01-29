@@ -25,7 +25,7 @@ function|script|VdayStates|,
 
     set @vday_started, (@vday_state >= $@VDAY_FLOWER_STATE);
     set @vday_knows_fairy, (VDAYTIME & $@VDAY_FAIRY_BIT);
-    set @vday_knows_couples, (@vday_state >= $@VDAY_HELPING_STATE);
+    set @vday_helping, (@vday_state >= $@VDAY_HELPING_STATE);
     set @vday_got_reward, (@vday_state >= $@VDAY_RECEIVED_STATE);
 
     set @vday_noah, (@vday_couple1_state >= $@VDAY_NOAH_STATE);

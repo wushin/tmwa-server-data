@@ -1,6 +1,41 @@
 
 009-2.gat,150,21,0|script|Lianna|390,
 {
-    mes "och.";
-    close;
-}
+    callfunc "VdayStates";
+
+    if ($@VDAY_TIME) goto L_Event;
+    goto L_NoEvent;
+
+    L_Event:
+        if @vday_couple2_done goto L_Thanks;
+        if (@vday_couple2_state == $@VDAY_C2HELPED_STATE && ($@VDAY_TIME)) goto L_Reward;
+        goto L_NoEvent;
+
+    L_Reward:
+        mes "[[Thanks for all your help, i want to reward you]]";
+        getinventorylist;
+        if ((@inventorylist_count > 99) || (checkweight($@VDAY_REWARD_COUPLE$[2], 1) == 0)) goto L_FullInv;
+        mes "[[here take this as token... ]]";
+        set @vday_couple2_state, $@VDAY_C2RECEIVED_STATE;
+        callfunc "VdaySetCouple2";
+        getitem $@VDAY_REWARD_COUPLE$[2], 1;
+        menu
+            "Thx",-;
+        mes "[[np, bye]]";
+        goto L_Close;
+
+    L_FullInv:
+        mes "[[But you dont have room for it]]";
+        goto L_Close;
+
+    L_Thanks:
+        mes "[[Im better now]]";
+        goto L_Close;
+
+    L_NoEvent:
+        mes "[[Text while no event]]";
+        goto L_Close;
+
+    L_Close:
+        close;
+    }
