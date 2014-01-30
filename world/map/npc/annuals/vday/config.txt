@@ -127,10 +127,11 @@ L_Main:
 
     set $@VDAY_NOAH_STATE, 1;
     set $@VDAY_C1HELPING_STATE, 2;
-    set $@VDAY_C1FOUND_STATE, 3;
-    set $@VDAY_C1HELPED_STATE, 4;
-    set $@VDAY_C1RECEIVED_STATE, 5;
-    set $@VDAY_C1CHEATER_STATE, 6;
+    set $@VDAY_C1FOUND0_STATE, 3;
+    set $@VDAY_C1FOUND_STATE, 4;
+    set $@VDAY_C1HELPED_STATE, 5;
+    set $@VDAY_C1RECEIVED_STATE, 6;
+    set $@VDAY_C1CHEATER_STATE, 7;
 
     set $@VDAY_ALEX_STATE, 1;
     set $@VDAY_C2HELPING_STATE, 2;
@@ -152,6 +153,9 @@ L_Main:
     set $@VDAY_COUPLE2_DONE_STATE, $@VDAY_C2RECEIVED_STATE;
     set $@VDAY_COUPLE3_DONE_STATE, $@VDAY_C3RECEIVED_STATE;
 
+
+    // Vday Ring
+    set $@VDAY_RING_MIN, 5;
 
     // Vday Fairy Potion
     set $@VDAY_POT1$, "IronPotion";//"LovePotion";
@@ -183,27 +187,8 @@ L_Main:
     setarray $@VDAY_REWARD_COUPLE$, "", "FourLeafClover", "BlackRose", "AquaHint"; //I wont start counting at zero just because you do
     setarray $@VDAY_SHOP_PRICE, 1, 10, 2, 30;
 
-    //  Main
-
     // Olanna (Daily Vday)
 
-    // MobManager
-    setarray $@VDAY_MOB_NAMES$, "Chocolate Slime";
-    setarray $@VDAY_MOB_SPAWNS, 1111;
-    setarray $@VDAY_MOB_COUNTS, 10;
-    setarray $@VDAY_MAP_SPAWNS$, "009-1.gat";
-    if(getarraysize($@VDAY_MOB_SPAWNS) != getarraysize($@VDAY_MAP_SPAWNS$))
-        goto L_VdayError;
-    if(getarraysize($@VDAY_MOB_NAMES$) != getarraysize($@VDAY_MAP_SPAWNS$))
-        goto L_VdayError;
-    if(getarraysize($@VDAY_MOB_COUNTS) != getarraysize($@VDAY_MAP_SPAWNS$))
-        goto L_VdayError;
-
-    set $@VDAY_SPAWN_X1, 54;
-    set $@VDAY_SPAWN_Y1, 48;
-    set $@VDAY_SPAWN_X2, 79;
-    set $@VDAY_SPAWN_Y2, 89;
-    set $@VDAY_RESPAWN_COUNT, 9;
 
     if(($@VDAY_EVENT_START <= $@VDAY_TODAY) && ($@VDAY_TODAY <= $@VDAY_EVENT_END))
         goto L_EventTime;

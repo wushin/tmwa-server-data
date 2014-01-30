@@ -21,11 +21,16 @@
         if (@vday_noah_cheat) goto L_Cheater;
         if (@vday_couple1_state == $@VDAY_NOAH_STATE) goto L_Familiar;
         if (@vday_couple1_state == $@VDAY_C1HELPING_STATE) goto L_Searching;
+        if (@vday_couple1_state == $@VDAY_C1FOUND0_STATE) goto L_Searching;
         if (@vday_couple1_state == $@VDAY_C1FOUND_STATE) goto L_Found;
         if (@vday_couple1_state == $@VDAY_C1HELPED_STATE) goto L_Reward;
-        if (@vday_couple1_state == $@VDAY_RECEIVED_STATE) goto L_Chatter;
+        if (@vday_couple1_state == $@VDAY_C1RECEIVED_STATE) goto L_Chatter;
+        if (@vday_couple1_state <= 0 ) goto L_Hello;
+        goto L_Close;
 
+    L_Hello:
         mes "[[Some text]]";
+        next;
         set @vday_couple1_state, $@VDAY_NOAH_STATE;
 
         callfunc "VdaySetCouple1";

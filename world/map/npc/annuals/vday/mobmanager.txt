@@ -1,70 +1,51 @@
-// 027-1 Graveyard zombies and fallens
-// they need to be in an extra file because of the crying child quest
+//vday_mob_manager
 
-027-1.gat,71,41,31,22|monster|Zombie|1036,2,300000,120000,specialMob027-1::On1036
-027-1.gat,37,41,33,22|monster|Zombie|1036,2,200000,10000,specialMob027-1::On1036
-027-1.gat,37,65,33,22|monster|Zombie|1036,3,140000,30000,specialMob027-1::On1036
-027-1.gat,37,65,33,22|monster|Fallen|1045,3,120000,30000,specialMob027-1::On1045
+021-3.gat,120,130,20,21|monster|AngrySeaSlime|1109,6,150000,100000,VdayMob021-3::On1109
+021-3.gat,53,130,20,21|monster|AngrySeaSlime|1109,6,150000,100000,VdayMob021-3::On1109
+021-3.gat,128,69,27,7|monster|AngrySeaSlime|1109,6,150000,100000,VdayMob021-3::On1109
+021-3.gat,149,129,2,15|monster|Troll|1054,2,600000,100000,VdayMob021-3::On1054
+021-3.gat,28,52,3,20|monster|Troll|1054,2,600000,100000,VdayMob021-3::On1054
 
-027-1.gat,0,0,0|script|specialMob027-1|-1,
+021-3.gat,0,0,0|script|VdayMob021-3|-1,
 {
-On1036:
-    set @mobID, 1036;
-    callsub _MOBCOUNT_ZOMBIES;
+On1109:
+    set @mobID, 1109;
+    callsub S_Mobcount;
     callfunc "MobPoints";
     end;
 
-On1045:
-    set @mobID, 1045;
-    callsub _MOBCOUNT_FALLENS;
+On1054:
+    set @mobID, 1054;
+    callsub S_Trolls;
     callfunc "MobPoints";
     end;
 
-_MOBCOUNT_ZOMBIES:
-
-    set @Graveyard_Inn_MASK, NIBBLE_2_MASK;
-    set @Graveyard_Inn_SHIFT, NIBBLE_2_SHIFT;
-
-    set @state, ((QUEST_Graveyard_Inn & @Graveyard_Inn_MASK) >> @Graveyard_Inn_SHIFT);
-
-    if (@state != 1)
-        goto L_Return;
+S_Mobcount:
+    set @vday_couple1_state, ((VDAYTIME & $@VDAY_SUBSTATE1_MASK) >> $@VDAY_SUBSTATE1_SHIFT);
+    if (@vday_couple1_state != $@VDAY_C1HELPING_STATE) goto L_Return;
     set @ring, @ring + 1;
-    if (@ring < 10)
-        goto L_Return;
-    if (rand(8) != 0)
-        goto L_Return;
-    message strcharinfo(0), "You found a ring hidden in the zombie's rotten rags. Maybe this is what Aldred was looking for...";
-    set @state, 2;
-    callsub S_Update_Mask;
+    if (@ring == 1) message strcharinfo(0), "Maybe one of those electric seaslimes picked the Ring up.";
+    if (@ring < ($@VDAY_RING_MIN + (BaseLevel / 13))) goto L_Return;
+    if (rand(8) != 0) goto L_Return;
+    message strcharinfo(0), "Oh this is pointless, I should look somewhere else;";
+    set @vday_couple1_state, $@VDAY_C1FOUND0_STATE;
+    callfunc "VdaySetCouple1";
+    set @ring, 0;
     return;
 
-_MOBCOUNT_FALLENS:
-
-    set @Graveyard_Inn_MASK, NIBBLE_2_MASK;
-    set @Graveyard_Inn_SHIFT, NIBBLE_2_SHIFT;
-
-    set @state, ((QUEST_Graveyard_Inn & @Graveyard_Inn_MASK) >> @Graveyard_Inn_SHIFT);
-
-    if (@state != 1)
-        goto L_Return;
+S_Trolls:
+    set @vday_couple1_state, ((VDAYTIME & $@VDAY_SUBSTATE1_MASK) >> $@VDAY_SUBSTATE1_SHIFT);
+    if (@vday_couple1_state != $@VDAY_C1FOUND0_STATE) goto L_Return;
     set @ring, @ring + 1;
-    if (@ring < 10)
-        goto L_Return;
-    if (rand(8) != 0)
-        goto L_Return;
-    message strcharinfo(0), "You found a ring inside the fallen's broken helmet. Maybe this is what Aldred was looking for...";
-    set @state, 2;
-    callsub S_Update_Mask;
+    if (@ring == 1) message strcharinfo(0), "Mmh these trolls look like they just love to hoard sparkling things";
+    if (rand(3) != 0) goto L_Return;
+    set @vday_couple1_state, $@VDAY_C1FOUND_STATE;
+    callfunc "VdaySetCouple1";
+    message strcharinfo(0), "Indeed, seems like this is the ring Noah has asked for.";
+    getitem $@VDAY_RING$, 1;
+    set @ring, 0;
     return;
 
 L_Return:
     return;
-
-S_Update_Mask:
-    set QUEST_Graveyard_Inn,
-        (QUEST_Graveyard_Inn & ~(@Graveyard_Inn_MASK))
-            | (@state << @Graveyard_Inn_SHIFT);
-    return;
-    end;
 }
