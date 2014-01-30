@@ -14,6 +14,10 @@
     set @Q_status, (QUEST_Forestbow_state & @Q_MASK) >> @Q_SHIFT;
     // End of Setzer quest/monster oil quest participation
 
+    // Valentines Day Cure Potion
+    callfunc "VdayStates";
+    // end Valentines Day Cure Potion
+
     set @QUEST_CAN_GET_DYE_HERE, 2;
     set @QUEST_HAS_SOLVED_DYE_PUZZLE, 3;
     set @QUEST_GUESS_BASE, 4;
@@ -26,9 +30,11 @@
     set @CHOICE_MANA_POTION, 5;
     set @CHOICE_SULPHUR_POWDER, 6;
     set @CHOICE_IRON_POWDER, 7;
-    set @CHOICE_ABORT, 8;
+    set @CHOICE_VDAY_PRE_POT2, 8;
+    set @CHOICE_VDAY_POT2, 9;
+    set @CHOICE_ABORT, 10;
 
-    setarray @menuitems$, "", "", "", "", "", "", "", "";
+    setarray @menuitems$, "", "", "", "", "", "", "", "", "", "";
     set @c, 0;
 
     set @menuitems$[@c], "Iron potion.";
@@ -39,6 +45,24 @@
     set @menuID[@c], @CHOICE_CONCENTRATION;
     set @c, @c + 1;
 
+    if !($@VDAY_TIME) goto L_mana_potion_c;
+
+L_vday_pot2_c:
+    if ($@VDAY_TIME && !(@vday_knows_pot2))
+        goto L_post_vday_pot2_c;
+    set @menuitems$[@c], $@VDAY_POT2_FRIENDLY$;
+    set @menuID[@c], @CHOICE_VDAY_POT2;
+    set @c, @c + 1;
+    goto L_mana_potion_c;
+
+L_post_vday_pot2_c:
+    if ($@VDAY_TIME && (@vday_started))
+        goto L_mana_potion_c;
+    set @menuitems$[@c], "[[I know a really sick woman]]";
+    set @menuID[@c], @CHOICE_VDAY_PRE_POT2;
+    set @c, @c + 1;
+
+L_mana_potion_c:
     if (!(MAGIC_FLAGS & MFLAG_KNOWS_MANAPOTION))
         goto L_post_mana_potion_c;
     set @menuitems$[@c], "Mana potion.";
@@ -108,7 +132,9 @@ L_main_menu:
         @menuitems$[4], -,
         @menuitems$[5], -,
         @menuitems$[6], -,
-        @menuitems$[7], -;
+        @menuitems$[7], -,
+        @menuitems$[8], -,
+        @menuitems$[9], -;
 
     set @menu, @menu - 1;
 
@@ -130,6 +156,10 @@ L_main_menu:
         goto L_sulphur;
     if (@menuID[@menu] == @CHOICE_IRON_POWDER)
         goto L_iron_powder;
+    if (@menuID[@menu] == @CHOICE_VDAY_POT2)
+        goto L_vday_pot2;
+    if (@menuID[@menu] == @CHOICE_VDAY_PRE_POT2)
+        goto L_vday_pot2_intro;
     if (@menuID[@menu] == @CHOICE_ABORT)
         goto L_abort;
     goto L_abort;
@@ -1005,9 +1035,63 @@ L_monster_oil:
     callsub L_Update_Var;
     close;
 
+// Valentines day additions
+L_vday_pot2_intro:
+    mes "[[Dialogue about how to make the potion]]";
+    callfunc "VdaySetPot2";
+    menu
+        "[[Can you make one now]]", L_vday_pot2,
+        "[[Interesting]]", L_abort;
+    goto L_abort;
+
+L_vday_pot2:
+    mes "[[Sure I can]]";
+    set @vday_pot, 2;
+    menu
+        "[[What do you need again]]", L_V_List,
+        "[[I have all ingredients]]", L_V_Have,
+        "[[get me out of here]]", L_abort;
+    goto L_abort;
+
+L_V_List:
+    callfunc "VdayListReagents";
+    goto L_vday_pot2;
+
+L_V_Have:
+    callfunc "VdayCheckReagents";
+    if (@vday_pot2_items == 1) goto L_V_Make;
+    goto L_V_NoItems;
+
+L_V_Make:
+    mes "[[You have all items, i can make the potion now if oyu want]]";
+    menu
+        "[[Ok]]", -,
+        "[[Nah]]", L_abort;
+
+    mes "[[Beware]]";
+    getinventorylist;
+    if (@inventorylist_count > 99) goto L_V_FullInv;
+    callfunc "VdayCheckReagents";
+    if (@vday_pot2_items != 1) goto L_V_NoItems;
+    callfunc "VdayDeleteReagents";
+    getitem $@VDAY_POT2$, 1;
+    mes "[[Be careful with it]]";
+    next;
+    goto L_abort;
+
+L_V_FullInv:
+    mes "[[No room]]";
+    next;
+    goto L_abort;
+
+L_V_NoItems:
+    mes "[[No items]]";
+    next;
+    goto L_abort;
+
+//end of valentines day additions
 L_abort:
     close;
-
 
 L_Update_Var:
     set QUEST_Forestbow_state,

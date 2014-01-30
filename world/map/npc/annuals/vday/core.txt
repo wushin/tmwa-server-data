@@ -115,16 +115,6 @@ L_EndGameReward:
     set @vday_bp_reward, 0;
     return;
 
-L_LevelingReward:
-    if(@vday_reward >= $@vday_reward_tally_rare)
-        goto L_VdayLevel;
-    goto L_VdayExp;
-
-L_VdayLevel:
-    gmcommand "@blvl 1";
-    gmcommand "@l I was a good kid this year.";
-    return;
-
 L_VdayExp:
     getexp ((@vday_reward * BaseLevel * (BaseLevel + 10)) / 10), 0;
     return;

@@ -10,6 +10,7 @@ function|script|VdayCheckReagents|, //returns vday_pot = 0 if not all items, vda
     if(@vday_pot == 2)
         goto L_Pot2Loop;
     goto L_Return;
+
     set @vday_pot1_items, 0;
     set @vday_pot2_items, 0;
 
@@ -83,7 +84,7 @@ L_AllReagents1:
     goto L_Return;
 
 L_AllReagents2:
-    set @vday_pot1_items, 2;
+    set @vday_pot2_items, 2;
     goto L_Return;
 
 L_Return:

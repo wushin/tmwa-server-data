@@ -170,7 +170,7 @@ L_Main:
     // Vday Cure Potion
     set $@VDAY_POT2$, "ConcentrationPotion"; //"CurePotion";
     set $@VDAY_POT2_FRIENDLY$, "Concentration Potion"; //"Cure Potion";
-    if(getarraysize($@VDAY_POT1_REQ) != getarraysize($@VDAY_BOSS_REQ$))
+
     setarray $@VDAY_POT2_REQ$, "AlizarinHerb", "GambogeHerb", "CobaltHerb", "MauveHerb", "BottleOfWater";
     setarray $@VDAY_POT2_REQ_FRIENDLY$, "herbs of an alizarin plant", "gamboge herbs", "cobalt herbs", "mauve herbs", "flask of water";
     setarray $@VDAY_POT2_REQ_AMO, 30, 30, 30, 30, 1;
