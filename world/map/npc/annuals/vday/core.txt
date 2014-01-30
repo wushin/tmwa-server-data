@@ -87,71 +87,9 @@ function|script|VdaySetCouple3|,
     return;
 }
 
-function|script|VdaySetSide|,
-{
-    set VDAYTIME, VDAYTIME | $@VDAY_SIDE_BIT;
-    return;
-}
-
-function|script|VdaySetRoute|,
-{
-    set VDAYTIME, VDAYTIME | $@VDAY_ROUTE_BIT;
-    return;
-}
-
-function|script|VdayThrowOut|,
-{
-    set VDAYTIME, VDAYTIME | $@VDAY_THROWN_OUT_BIT;
-    return;
-}
-
-function|script|VdaySetBossStart|,
-{
-    set VDAYTIME, VDAYTIME | $@vday_boss_start_bit;
-    return;
-}
-
 function|script|VdaySetBossHero|,
 {
     set VDAYTIME, VDAYTIME | $@vday_boss_hero_bit;
-    return;
-}
-
-// Tallys the players quest
-function|script|VdaySetReward|,
-{
-    set @vday_endgame, 0;
-    set @vday_reward_side, 0;
-    set @vday_reward_tally, 0;
-    if(@vday_side)
-        goto L_SetSide;
-    goto L_NotSetSide;
-
-L_SetSide:
-    set @vday_reward_side, 1;
-    set @vday_reward_tally, (@vday_reward_tally + ($@vday_reward_max_karma - @vday_karma));
-    goto L_SetRewardBonus;
-
-L_NotSetSide:
-    set @vday_reward_tally, (@vday_reward_tally + @vday_karma);
-    goto L_SetRewardBonus;
-
-L_SetRewardBonus:
-    if(@vday_boss_hero)
-        set @vday_reward_tally, (@vday_reward_tally + $@vday_reward_hero_boss);
-    if(@vday_all_helpers)
-        set @vday_reward_tally, (@vday_reward_tally + $@vday_reward_all_helpers);
-    if(@vday_all_lists)
-        set @vday_reward_tally, (@vday_reward_tally + $@vday_reward_all_lists);
-    //formula should:
-    if (@vday_reward_tally > 5)
-    set @vday_reward_lower_bound, 2 * @vday_reward_tally - rand(5);
-    if (@vday_reward_tally <= 5)
-        set @vday_reward_lower_bound, @vday_reward_tally;
-    set @vday_reward_upper_bound, @vday_reward_lower_bound + ((readparam(bLuk)) / 5);
-    set @vday_reward, (rand(@vday_reward_lower_bound, @vday_reward_upper_bound));
-    set @vday_reward_lower_bound, 0;
-    set @vday_reward_upper_bound, 0;
     return;
 }
 
@@ -160,7 +98,7 @@ function|script|VdayMainXpBpReward|,
 {
     callfunc "VdaySetReward";
 
-    if(BaseLevel >= 99)
+    if(BaseLevel >= 70)
         goto L_EndGameReward;
     goto L_LevelingReward;
 
@@ -202,7 +140,7 @@ function|script|VdayMainReward|,
     delitem $@VDAY_REWARD_COUPLE$[1], 1;
     delitem $@VDAY_REWARD_COUPLE$[2], 1;
     delitem $@VDAY_REWARD_COUPLE$[3], 1;
-    
+
     getitem $@VDAY_REWARD_RARE$, 1;
     set @vday_state, $@VDAY_RECEIVED_STATE;
     callfunc "VdaySetState";
