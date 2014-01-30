@@ -1,0 +1,127 @@
+// This file is part of Christmas Event
+// author: Jenalya, Chayenne, cinderweb, wushin
+// please see #XmasConfig
+
+function|script|VdayCheckReagents|, //returns vday_pot = 0 if not all items, vday_pot = 1 if all items needed in inv.
+{
+    set @vday_reagent_loop, 0;
+    if(@vday_pot == 1)
+        goto L_Pot1Loop;
+    if(@vday_pot == 2)
+        goto L_Pot2Loop;
+    goto L_Return;
+    set @vday_pot1_items, 0;
+    set @vday_pot2_items, 0;
+
+L_Pot1Loop:
+    if(countitem($@VDAY_POT1_REQ$[@vday_reagent_loop]) >= $@VDAY_POT1_REQ_AMO[@vday_reagent_loop])
+        goto L_Pot1LoopAgain;
+    goto L_Return;
+
+L_Pot1LoopAgain:
+    if((@vday_reagent_loop + 1) == getarraysize($@VDAY_POT1_REQ$))
+        goto L_AllReagents1;
+    set @vday_reagent_loop, (@vday_reagent_loop + 1);
+    goto L_Pot1Loop;
+
+L_Pot2Loop:
+    if(countitem($@VDAY_POT2_REQ$[@vday_reagent_loop]) >= $@VDAY_POT2_REQ_AMO[@vday_reagent_loop])
+        goto L_Pot2LoopAgain;
+    goto L_Return;
+
+L_Pot2LoopAgain:
+    if((@vday_reagent_loop + 1) == getarraysize($@VDAY_POT2_REQ$))
+        goto L_AllReagents2;
+    set @vday_reagent_loop, (@vday_reagent_loop + 1);
+    goto L_Pot2Loop;
+
+L_AllReagents1:
+    set @vday_pot1_items, 1;
+    goto L_Return;
+
+L_AllReagents2:
+    set @vday_pot2_items, 1;
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
+function|script|VdayDeleteReagents|,
+{
+    set @vday_reagent_loop, 0;
+
+    if(@vday_pot == 1 && @vday_pot1_items)
+        goto L_Pot1Loop;
+    if(@vday_pot == 2 && @vday_pot2_items)
+        goto L_Pot2Loop;
+
+    goto L_Return;
+    set @vday_pot1_items, 0;
+    set @vday_pot2_items, 0;
+
+L_Pot1Loop:
+    delitem $@VDAY_POT1_REQ$[@vday_reagent_loop], $@VDAY_POT1_REQ_AMO[@vday_reagent_loop];
+
+L_Pot1LoopAgain:
+    if((@vday_reagent_loop + 1) == getarraysize($@VDAY_POT1_REQ$))
+        goto L_AllReagents1;
+    set @vday_reagent_loop, (@vday_reagent_loop + 1);
+    goto L_Pot1Loop;
+
+L_Pot2Loop:
+    delitem $@VDAY_POT2_REQ$[@vday_reagent_loop], $@VDAY_POT2_REQ_AMO[@vday_reagent_loop];
+
+L_Pot2LoopAgain:
+    if((@vday_reagent_loop + 1) == getarraysize($@VDAY_POT2_REQ$))
+        goto L_AllReagents2;
+    set @vday_reagent_loop, (@vday_reagent_loop + 1);
+    goto L_Pot2Loop;
+
+L_AllReagents1:
+    set @vday_pot1_items, 2;
+    goto L_Return;
+
+L_AllReagents2:
+    set @vday_pot1_items, 2;
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
+function|script|VdayListReagents|,
+{
+    set @vday_reagent_loop, 0;
+    mes "\"For that I need \"";
+    next;
+
+    if(@vday_pot == 1)
+        goto L_Pot1Loop;
+    if(@vday_pot == 2)
+        goto L_Pot2Loop;
+    goto L_Return;
+
+L_Pot1Loop:
+    mes "\"" + $@VDAY_POT1_REQ_AMO[@vday_reagent_loop] + " " + $@VDAY_POT1_REQ_FRIENDLY$[@vday_reagent_loop] + "\"";
+    next;
+
+L_Pot1LoopAgain:
+    if((@vday_reagent_loop + 1) == getarraysize($@VDAY_POT1_REQ$))
+        goto L_AllReagents;
+    set @vday_reagent_loop, (@vday_reagent_loop + 1);
+    goto L_Pot1Loop;
+
+L_Pot2Loop:
+    mes "\"" + $@VDAY_POT2_REQ_AMO[@vday_reagent_loop] + " " + $@VDAY_POT2_REQ_FRIENDLY$[@vday_reagent_loop] + "\"";
+    next;
+
+L_Pot2LoopAgain:
+    if((@vday_reagent_loop + 1) == getarraysize($@VDAY_POT2_REQ$))
+        goto L_AllReagents;
+    set @vday_reagent_loop, (@vday_reagent_loop + 1);
+    goto L_Pot2Loop;
+
+L_AllReagents:
+    return;
+}

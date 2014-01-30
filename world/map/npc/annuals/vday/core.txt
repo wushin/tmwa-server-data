@@ -87,9 +87,15 @@ function|script|VdaySetCouple3|,
     return;
 }
 
-function|script|VdaySetBossHero|,
+function|script|VdaySetPot1|,
 {
-    set VDAYTIME, VDAYTIME | $@vday_boss_hero_bit;
+    set VDAYTIME, (VDAYTIME | $@VDAY_POT1_BIT);
+    return;
+}
+
+function|script|VdaySetPot2|,
+{
+    set VDAYTIME, (VDAYTIME | $@VDAY_POT2_BIT);
     return;
 }
 

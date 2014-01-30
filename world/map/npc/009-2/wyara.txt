@@ -3,6 +3,8 @@
 // ----------------------------------------
 009-2.gat,121,26,0|script|Wyara#_M|103,
 {
+    callfunc "VdayStates";
+
     set @Q_MASK, NIBBLE_2_MASK;
     set @Q_SHIFT, NIBBLE_2_SHIFT;
     set @Q_status, (QUEST_MAGIC2 & @Q_MASK) >> @Q_SHIFT;
@@ -37,6 +39,9 @@
         mes "\"Hello! What brings you here?\"";
     next;
     set MAGIC_FLAGS, MAGIC_FLAGS | MFLAG_KNOWS_WYARA;
+
+    if ($@VDAY_TIME) goto L_V_SetUp;
+    goto L_Main;
 
 L_Main:
     if (!@has_magic && (MAGIC_FLAGS & MFLAG_TOUCHED_MANASEED))
@@ -528,6 +533,90 @@ L_Magic_train_sagatha_lvl1:
     mes "\"Well, you're still a bit of a beginner, so I don't think she will accept you yet.  Maybe you can absorb some more power from the mana seed?  If you can grow your magical powers a little, I might be able to help you.\"";
     next;
     goto L_Magic_main;
+
+L_V_SetUp:
+    set @vday_question$, "Hey Did you know its valentines season?";
+    if !(@vday_started) goto L_V_Intro;
+    set @vday_question$, "[[Hey can you make me another potion?]]";
+    if (@vday_knows_pot1) goto L_V_Intro;
+    set @vday_question$, "[[The tree asked if you could make a pot]]";
+    goto L_V_Intro;
+
+L_V_Intro:
+    menu
+        @vday_question$, -,
+        "[[Actually i wanted to talk about sth different]]", L_Main;
+
+    if (@vday_started && ~@vday_knows_pot1) goto L_V_Potion0;
+    if (@vday_started && @vday_knows_pot1) goto L_V_Potion;
+    if !(@vday_started) goto L_V_NoPotion;
+    goto L_Main;
+
+L_V_Potion0:
+    menu
+        "[[I heard you can make a fairy wake up]]", -,
+        "[[Nothing, bye]]", L_Main;
+
+    set @vday_pot, 1; //input variable for reagents scripts
+    mes "[[blabla about vpotion]]";
+    callfunc "VdayListReagents";
+    goto L_V_Potion;
+
+L_V_Potion:
+    mes "[[I can make a potion for you if you wish]]";
+
+    set @vday_pot, 1;
+    menu
+        "[[What do you need again]]", L_V_List,
+        "[[I have all ingredients]]", L_V_Have,
+        "[[get me out of here]]", -;
+
+    goto L_Main;
+
+L_V_List:
+    callfunc "VdayListReagents";
+    goto L_V_Potion;
+
+L_V_Have:
+    callfunc "VdayCheckReagents";
+    if @vday_pot1_items == 1 goto L_V_Make;
+    goto L_V_NoItems;
+
+L_V_Make:
+    mes "[[You have all items, i can make the potion now if oyu want]]";
+    menu
+        "[[Ok]]", -,
+        "[[Nah]]", L_Main;
+
+    mes "[[Beware]]";
+    getinventorylist;
+    if (@inventorylist_count > 99) goto L_V_FullInv;
+    callfunc "VdayCheckReagents";
+    if (@vday_pot1_items != 1) goto L_V_NoItems;
+    callfunc "VdayDeleteReagents";
+    getitem $@VDAY_POT1$, 1;
+    callfunc "VdaySetPot1";
+    mes "[[Be careful with it]]";
+    next;
+    goto L_Main;
+
+L_V_FullInv:
+    mes "[[No room]]";
+    next;
+    goto L_Main;
+
+L_V_NoItems:
+    mes "[[No items]]";
+    next;
+    goto L_Main;
+
+L_V_NoPotion:
+    mes "[[yeah seems so, sorry no idea]]";
+    next;
+    goto L_Main;
+
+L_Return:
+    return;
 
 S_update_var:
     set QUEST_MAGIC2, (QUEST_MAGIC2 & ~(@Q_MASK) | (@Q_status << @Q_SHIFT));
