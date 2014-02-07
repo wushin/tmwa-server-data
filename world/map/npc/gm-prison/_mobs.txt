@@ -1,0 +1,9 @@
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+// Base mobs
+
+
+
+gm-prison.gat,0,0,0|script|Mobgm-prison|-1,
+{
+    end;
+}

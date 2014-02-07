@@ -1,0 +1,5 @@
+// Map gm-prison: Base
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+map: gm-prison.gat
+npc: npc/gm-prison/_mobs.txt
+npc: npc/gm-prison/_warps.txt

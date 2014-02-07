@@ -1,0 +1,5 @@
+// Map 024-008-1: Base
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+map: 024-008-1.gat
+npc: npc/024-008-1/_mobs.txt
+npc: npc/024-008-1/_warps.txt

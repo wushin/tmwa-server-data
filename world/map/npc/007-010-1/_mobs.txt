@@ -1,0 +1,9 @@
+// This file is generated automatically. All manually changes will be removed when running the Converter.
+// Base mobs
+
+
+
+007-010-1.gat,0,0,0|script|Mob007-010-1|-1,
+{
+    end;
+}
