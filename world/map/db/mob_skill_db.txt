@@ -35,6 +35,9 @@
 1015,SantaSlime@NPC_EMOTION,walk,199,1,100,0,10000,yes,self,always,0,5,0,0,0,0,
 1015,SantaSlime@NPC_SUMMONSLAVE,attack,198,5,10000,2000,60000,no,self,slavele,3,1016,0,0,0,0,
 1015,SantaSlime@NPC_SUMMONSLAVE,idle,198,5,10000,2000,60000,no,self,slavele,3,1016,0,0,0,0,
+// Slime Mothers
+1111,SeaSlimeMother@NPC_SUMMONSLAVE,any,198,2,8000,1000,5000,no,self,slavelt,2,1109,0,0,0,0,
+1112,GreenSlimeMother@NPC_SUMMONSLAVE,any,198,2,8000,1000,5000,no,self,slavelt,2,1110,0,0,0,0,
 
 // Poison
 // mobid, descriptive-label     STATE, SKILL-ID,SKILLLV,rate,   casttime,delay, cancel?,target, condition
@@ -64,3 +67,6 @@
 1102,Luvia@NPC_SUMMONSLAVE_witchguardX1,any,198,1,10000,1000,60000,no,self,always,0,1103,0,0,0,0,
 1102,Luvia@NPC_SUMMONSLAVE_demonicspiritX2,any,198,2,10000,10,5000,no,self,slavelt,7,1101,0,0,0,0,
 1102,Luvia@NPC_SUMMONSLAVE_demonicspiritX1,any,198,1,10000,10,20000,no,self,always,0,1101,0,0,0,0,
+
+//The Dread Pirate Marley Skills
+1116,TheDreadPirateMarley@NPC_SUMMONSLAVE,any,198,2,8000,1000,5000,no,self,slavelt,1,1117,0,0,0,0,
