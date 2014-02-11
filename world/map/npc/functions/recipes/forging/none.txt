@@ -1,0 +1,8 @@
+// Recipes for creating objects from forging
+
+function|script|None|{
+
+    set @CommonName$, "None";
+    return;
+
+}

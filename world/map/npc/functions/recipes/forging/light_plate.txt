@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORLightPlatemail|{
+
+    set @CommonName$, "Light Platemail";
+    set @ItemName$, "LightPlatemail";
+    set @ZenyAmt, 25000;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "IronIngot","Coal";
+    setarray @ReqIngCn$, "Iron Ingot","Coal";
+    setarray @ReqIngNum, "10","20";
+    return;
+
+}

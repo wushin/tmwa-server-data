@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORShortSword|{
+
+    set @CommonName$, "Short Sword";
+    set @ItemName$, "ShortSword";
+    set @ZenyAmt, 7000;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "IronIngot","Coal";
+    setarray @ReqIngCn$, "Iron Ingot","Coal";
+    setarray @ReqIngNum, "3","10";
+    return;
+
+}

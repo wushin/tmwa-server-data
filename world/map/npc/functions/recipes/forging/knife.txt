@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORKnife|{
+
+    set @CommonName$, "Knife";
+    set @ItemName$, "Knife";
+    set @ZenyAmt, 10;
+    set @ItemNum, 2;
+    setarray @ReqIng$, "IronIngot";
+    setarray @ReqIngCn$, "Iron Ingot";
+    setarray @ReqIngNum, "1";
+    return;
+
+}

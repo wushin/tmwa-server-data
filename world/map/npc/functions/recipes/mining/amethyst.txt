@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRAmethyst|{
+
+    set @CommonName$, "Amethyst";
+    set @ItemName$, "Amethyst";
+    set @ZenyAmt, 500;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "Coal","PurpleDye";
+    setarray @ReqIngCn$, "Coal","Purple Dye";
+    setarray @ReqIngNum, "1000","5";
+    return;
+
+}

@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRDiamond|{
+
+    set @CommonName$, "Diamond";
+    set @ItemName$, "Diamond";
+    set @ZenyAmt, 500;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "Coal","PileOfAsh";
+    setarray @ReqIngRn$, "Coal","Pile of Ash";
+    setarray @ReqIngNum, "1000","5";
+    return;
+
+}

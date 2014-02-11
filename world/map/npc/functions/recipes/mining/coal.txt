@@ -1,0 +1,14 @@
+// Recipes for creating objects from mining
+
+function|script|MRCoal|{
+
+    set @CommonName$, "Coal";
+    set @ItemName$, "Coal";
+    set @ZenyAmt, 500;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "RawLog";
+    setarray @ReqIngCn$, "Raw Log";
+    setarray @ReqIngNum, "20";
+    return;
+
+}

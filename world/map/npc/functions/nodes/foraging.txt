@@ -1,0 +1,107 @@
+// Template to call mining veins
+// written by wushin
+
+function|script|CloverPatch|{
+    set @NodeDrop$, "Grass Seeds";
+    set @NodeLevel, 1;
+    set @NodeHitCount, 3;
+    set @NodeXp, 1;
+    set @RequiredSkill, SKILL_FORGING;
+    set @RequiredSkillName$, "Forging";
+    set @RequiredItem$, "PruningKnife";
+    set @NodeReduceAttr, bInt;
+    set @DROP_CHNACE_EPIC, 10000;
+    set @FOUND_WAIT_TIME_BASE, 15;
+    setarray @BonGatherRewards$, "Four-Leaf Clover";
+    callfunc("GatherEvent");
+}
+
+function|script|AppleTree|{
+    set @NodeDrop$, "Apple";
+    set @NodeLevel, 1;
+    set @NodeHitCount, 3;
+    set @NodeXp, 5;
+    set @RequiredSkill, SKILL_FORGING;
+    set @RequiredSkillName$, "Forging";
+    set @RequiredItem$, "PruningKnife";
+    set @NodeReduceAttr, bInt;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 15;
+    setarray @BonGatherRewards$, "Acorn","Grass Seeds";
+    callfunc("GatherEvent");
+}
+
+function|script|MauvePlant|{
+    set @NodeDrop$, "MauveHerb";
+    set @NodeLevel, 2;
+    set @NodeHitCount, 3;
+    set @NodeXp, 1;
+    set @RequiredSkill, SKILL_FORGING;
+    set @RequiredSkillName$, "Forging";
+    set @RequiredItem$, "PruningKnife";
+    set @NodeReduceAttr, bInt;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 15;
+    setarray @BonGatherRewards$, "Pink Petal";
+    callfunc("GatherEvent");
+}
+
+function|script|CobaltPlant|{
+    set @NodeDrop$, "Cobalt Herb";
+    set @NodeLevel, 2;
+    set @NodeHitCount, 3;
+    set @NodeXp, 1;
+    set @RequiredSkill, SKILL_FORGING;
+    set @RequiredSkillName$, "Forging";
+    set @RequiredItem$, "PruningKnife";
+    set @NodeReduceAttr, bInt;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 15;
+    setarray @BonGatherRewards$, "Pink Petal";
+    callfunc("GatherEvent");
+}
+
+function|script|GambogePlant|{
+    set @NodeDrop$, "Gamboge Herb";
+    set @NodeLevel, 2;
+    set @NodeHitCount, 3;
+    set @NodeXp, 1;
+    set @RequiredSkill, SKILL_FORAGING;
+    set @RequiredSkillName$, "Foraging";
+    set @RequiredItem$, "PruningKnife";
+    set @NodeReduceAttr, bInt;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 15;
+    setarray @BonGatherRewards$, "Pink Petal";
+    callfunc("GatherEvent");
+}
+
+function|script|AlizarinPlant|{
+    set @NodeDrop$, "Alizarin Herb";
+    set @NodeLevel, 2;
+    set @NodeHitCount, 3;
+    set @NodeXp, 1;
+    set @RequiredSkill, SKILL_FORAGING;
+    set @RequiredSkillName$, "Foraging";
+    set @RequiredItem$, "PruningKnife";
+    set @NodeReduceAttr, bInt;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 15;
+    setarray @BonGatherRewards$, "Pink Petal";
+    callfunc("GatherEvent");
+}
+
+function|script|Mushroom|{
+    set @NodeDrop$, "Small Mushroom";
+    set @NodeLevel, 3;
+    set @NodeHitCount, 5;
+    set @NodeXp, 10;
+    set @RequiredSkill, SKILL_FORAGING;
+    set @RequiredSkillName$, "Foraging";
+    set @RequiredItem$, "PruningKnife";
+    set @NodeReduceAttr, bInt;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 25;
+    setarray @BonGatherRewards$, "Hard Spike","Root";
+    callfunc("GatherEvent");
+}
