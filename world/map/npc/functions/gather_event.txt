@@ -1,0 +1,118 @@
+// Further Edit into Ore Nodes & cleanup. gather treasure quest
+// Author of Easter Quest this is based off of: PjotrOrial
+// Author: wushin
+
+function|script|GatherEvent|,
+{
+
+    set @FOUND_WAIT_TIME, ((@FOUND_WAIT_TIME_BASE - readparam(@NodeReduceAttr) / 5));
+    if (5 > (@FOUND_WAIT_TIME)) 
+        set @FOUND_WAIT_TIME, 5;
+
+    if (getarraysize($@gathernode_posy) != getarraysize($@gathernode_posx))
+        goto L_FAULTY_SETUP;
+
+    set @HasSkill, 0;
+    if(CRAFT_ONE == $@RequiredSkill)
+        set @HasSkill, CRAFT_ONE_LVL;
+    if(CRAFT_TWO == $@RequiredSkill)
+        set @HasSkill, CRAFT_TWO_LVL;
+    if(@HasSkill == 0)
+        goto L_EndNeedSkill;
+
+    if (countitem($@RequiredItem$) == 0)
+        goto L_EndNeedItem;
+
+    // prevent clicking multiple times:
+    if (gettimetick(2) < @gathertimepenalty + @FOUND_WAIT_TIME)
+        goto L_End2;
+    set @gathertimepenalty, gettimetick(2);
+
+    set @nodehits, @nodehits + 1;
+    if (@nodehits < @NodeHitCount)
+        goto L_Work;
+    goto L_Gather;
+
+L_Work:
+    misceffect FX_GETITEM, strcharinfo(0);
+    message strcharinfo(0), "Phew this is hard work.";
+    end;
+
+L_Gather:
+    getitem $@NodeDrop$, 1;
+    misceffect FX_GETITEM, strcharinfo(0);
+    if (CRAFT_ONE == $@RequiredSkill)
+        goto L_EndCraftOne;
+    if (CRAFT_TWO == $@RequiredSkill)
+        goto L_EndCraftTwo;
+    goto L_EndNeedSkill;
+
+L_EndNeedSkill:
+    message strcharinfo(0), "You do not have enough experience "+@RequiredSkillName$+" to gather this.";
+    goto L_EndNoMove;
+
+L_EndNeedItem:
+    message strcharinfo(0), "The node is hard for work with using your bare hands. You need a "+@RequiredItem$;
+    goto L_EndNoMove;
+
+L_FAULTY_SETUP:
+    disablenpc "#Node" + $@NodeID;
+    end;
+
+L_End2:
+    message strcharinfo(0), "You look exhausted, maybe you should rest a bit.";
+    set PLAYER_TIME_PENALTY, $@gathertimepenalty + 5;
+    if (PLAYER_TIME_PENALTY > gettimetick(2))
+        set PLAYER_TIME_PENALTY, gettimetick(2);
+    set @random, 0;
+    return;
+
+OnTimer2000:
+    enablenpc "#Node" + $@NodeID;
+    stopnpctimer;
+    return;
+
+L_EndNoMove:
+    set @random, 0;
+    set @nodehits, 0;
+    return;
+
+L_EndCraftOne:
+    set CRAFT_ONE_XP, CRAFT_ONE_XP + $@NodeXp;
+    if($@DROP_CHNACE_EPIC)
+        goto L_BonusDrop;
+    goto L_EndMove;
+
+L_EndCraftTwo:
+    set CRAFT_TWO_XP, CRAFT_TWO_XP + $@NodeXp;
+    if($@DROP_CHNACE_EPIC)
+        goto L_BonusDrop;
+    goto L_EndMove;
+
+L_BonusDrop:
+    set @random, rand(getarraysize($@BonGatherRewards$));
+    getitem $@BonGatherRewards$[@radnom], 1;
+    goto L_EndMove;
+
+L_EndMove:
+    disablenpc "#Node" + $@NodeID;
+    initnpctimer;
+    set $@gathernodePos, rand(getarraysize($@gathernode_posx));
+    npcwarp $@gathernode_posx[$@gathernodePos], $@gathernode_posy[$@gathernodePos], "#Node" + $@NodeID;
+
+    set @HasSkill, 0;
+    set $@NodeDrop$, "";
+    set $@NodeLevel, 0;
+    set $@NodeHitCount, 0;
+    set $@NodeXp, 0;
+    set $@RequiredSkill, 0;
+    set $@RequiredSkillName$, "";
+    set $@RequiredItem$, "";
+    set $@NodeReduceAttr, 0;
+    set $@DROP_CHNACE_EPIC, 0;
+    set $@FOUND_WAIT_TIME_BASE, 0;
+    cleararray $@BonGatherRewards$, "", getarraysize($@BonGatherRewards$);
+    set @random, 0;
+    set $@nodehits, 0;
+    return;
+}

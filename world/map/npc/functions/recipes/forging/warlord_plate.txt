@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORWarlordPlate|{
+
+    set @CommonName$, "Warlord Plate";
+    set @ItemName$, "WarlordPlate";
+    set @ZenyAmt, 90000;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "IronIngot","Coal";
+    setarray @ReqIngCn$, "Iron Ingot","Coal";
+    setarray @ReqIngNum, "15","30";
+    return;
+
+}

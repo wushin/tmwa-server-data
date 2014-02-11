@@ -1,0 +1,47 @@
+// Template to call mining veins
+// written by wushin
+
+function|script|CoalVein|{
+    set @NodeDrop$, "Coal";
+    set @NodeLevel, 1;
+    set @NodeHitCount, 3;
+    set @NodeXp, 1;
+    set @RequiredSkill, SKILL_MINING;
+    set @RequiredSkillName$, "Mining";
+    set @RequiredItem$, "MiningPick";
+    set @NodeReduceAttr, bStr;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 15;
+    setarray @BonGatherRewards$, "Pile Of Ash","Sulphur Powder";
+    callfunc("GatherEvent");
+}
+
+function|script|IronVein|{
+    set @NodeDrop$, "Iron Ore";
+    set @NodeLevel, 2;
+    set @NodeHitCount, 4;
+    set @NodeXp, 5;
+    set @RequiredSkill, SKILL_MINING;
+    set @RequiredSkillName$, "Mining";
+    set @RequiredItem$, "MiningPick";
+    set @NodeReduceAttr, bStr;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 20;
+    setarray @BonGatherRewards$, "Iron Ore","Iron Powder","Coal";
+    callfunc("GatherEvent");
+}
+
+function|script|TerraniteVein|{
+    set @NodeDrop$, "Terranite Ore";
+    set @NodeLevel, 3;
+    set @NodeHitCount, 5;
+    set @NodeXp, 10;
+    set @RequiredSkill, SKILL_MINING;
+    set @RequiredSkillName$, "Mining";
+    set @RequiredItem$, "MiningPick";
+    set @NodeReduceAttr, bStr;
+    set @DROP_CHNACE_EPIC, 1000;
+    set @FOUND_WAIT_TIME_BASE, 20;
+    setarray @BonGatherRewards$, "Diamond","Ruby","Coal","Sapphire","Iron Ore","Topaz","Amethyst","Emerald","Coal";
+    callfunc("GatherEvent");
+}

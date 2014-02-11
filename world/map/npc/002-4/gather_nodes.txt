@@ -1,0 +1,54 @@
+// Further Edit into Ore Veins & cleanup. mining treasure quest
+// Author of Easter Quest this is based off of: PjotrOrial
+// Author: wushin
+
+// Gather Node NPC
+002-4.gat,95,80,0|script|#Node3|501,
+{
+    set $@NodeID, 3;
+    set $@NodeDrop$, "Coal";
+    set $@NodeLevel, 60;
+    set $@NodeHitCount, 3;
+    set $@RequiredItem$, "Mining Pick";
+    set $@NodeReduceAttr, bStr;
+    set $@DROP_CHNACE_EPIC, 1000;
+    set $@FOUND_WAIT_TIME_BASE, 15;
+    setarray $@BonGatherRewards$, "IronOre","IronPowder","SulphurPowder";
+    setarray $@gathernode_posx, 43, 34, 97, 93, 91, 57; 
+    setarray $@gathernode_posy, 64, 34, 29, 53, 76, 36; 
+    #callfunc("GatherEvent");
+}
+
+// Gather Node NPC
+002-4.gat,95,85,0|script|#Node4|501,
+{
+    set $@NodeID, 4;
+    set $@NodeDrop$, "Coal";
+    set $@NodeLevel, 60;
+    set $@NodeHitCount, 3;
+    set $@RequiredItem$, "Mining Pick";
+    set $@NodeReduceAttr$, bStr;
+    set $@DROP_CHNACE_EPIC, 1000;
+    set $@FOUND_WAIT_TIME_BASE, 15;
+    setarray $@BonGatherRewards$, "IronOre","IronPowder","SulphurPowder";
+    setarray $@gathernode_posx, 43, 34, 97, 93, 91, 57; 
+    setarray $@gathernode_posy, 64, 34, 29, 53, 76, 36; 
+    #callfunc("GatherEvent");
+}
+
+// Gather Node NPC
+002-4.gat,95,85,0|script|#Node5|501,
+{
+    set $@NodeID, 5;
+    set $@NodeDrop$, "Coal";
+    set $@NodeLevel, 60;
+    set $@NodeHitCount, 3;
+    set $@RequiredItem$, "Mining Pick";
+    set $@NodeReduceAttr$, bStr;
+    set $@DROP_CHNACE_EPIC, 1000;
+    set $@FOUND_WAIT_TIME_BASE, 15;
+    setarray $@BonGatherRewards$, "IronOre","IronPowder","SulphurPowder";
+    setarray $@gathernode_posx, 43, 34, 97, 93, 91, 57; 
+    setarray $@gathernode_posy, 64, 34, 29, 53, 76, 36; 
+    #callfunc("GatherEvent");
+}

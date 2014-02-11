@@ -1,0 +1,14 @@
+// Recipes for creating objects from forging
+
+function|script|FORSteelShield|{
+
+    set @CommonName$, "Steel Shield";
+    set @ItemName$, "SteelShield";
+    set @ZenyAmt, 15000;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "InfantryHelmet","LeatherPatch","IronIngot","Coal";
+    setarray @ReqIngCn$, "Infantry Helmet","Leather Patch","Iron Ingot","Coal";
+    setarray @ReqIngNum, "2","1","6","12";
+    return;
+
+}

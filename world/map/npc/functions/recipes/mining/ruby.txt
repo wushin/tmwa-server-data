@@ -1,0 +1,13 @@
+// Recipes for creating objects from mining
+
+function|script|MRRuby|{
+
+    set @CommonName$, "Ruby";
+    set @ItemName$, "Ruby";
+    set @ZenyAmt, 500;
+    set @ItemNum, 1;
+    setarray @ReqIng$, "Coal","RedDye";
+    setarray @ReqIngCn$, "Coal","Red Dye";
+    setarray @ReqIngNum, "1000","5";
+    return;
+}
