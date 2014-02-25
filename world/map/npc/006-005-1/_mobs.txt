@@ -1,3 +1,9 @@
 // This file is generated automatically. All manually changes will be removed when running the Converter.
+// Base mobs
 
-import: npc/006-005-1/_import.txt
+
+
+006-005-1.gat,0,0,0|script|Mob006-005-1|-1,
+{
+    end;
+}

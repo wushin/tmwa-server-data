@@ -1,1 +1,0 @@
-051-1.gat|mapflag|nosave|007-1,86,76
