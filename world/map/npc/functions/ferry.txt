@@ -1,5 +1,41 @@
 // The ferry system
 
+botcheck.gat,27,28,0|script|#FerryConfig|-1,
+{
+OnInit:
+    disablenpc "#HurnscaldKoga";
+    disablenpc "#CandorKoga";
+    disablenpc "#NivalisKoga";
+    disablenpc "#TulimsharKoga";
+    set $@CurrentDock, 0;
+    set $@DockTickCount, 0;
+    setarray $@Docks$, "Hurnscald", "Candor", "Nivalis", "Tulimshar";
+    cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Arrive";
+    initnpctimer;
+    end;
+
+L_NextDock:
+    set $@LastDock, $@CurrentDock;
+    set $@CurrentDock, $@CurrentDock + 1;
+    if($@CurrentDock == getarraysize($@Docks$))
+        set $@CurrentDock, 0;
+    set $@DockTickCount, 0;
+    cmdothernpc "#"+$@Docks$[$@LastDock]+"Dock", "Warp";
+    cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Arrive";
+    initnpctimer;
+    end;
+
+OnTimer3000:
+    if ($@DockTickCount > 5)
+        goto L_NextDock;
+    if ($@DockTickCount)
+        cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Annouce";
+    set $@DockTickCount, $@DockTickCount + 1;
+    initnpctimer;
+    end;
+
+}
+
 function|script|Ferry|,
 {
     if (BaseLevel < 20)
@@ -7,9 +43,9 @@ function|script|Ferry|,
     set @cost_tulimshar, 500;
     set @cost_hurnscald, 500;
     set @cost_nivalis, 500;
+    set @cost_candor, 1500;
 
 L_Start:
-    set @cost_candor, 1500;
     mes "Where would you like to go?";
     next;
     if (BaseLevel < 40)

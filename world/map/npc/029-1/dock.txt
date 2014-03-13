@@ -1,7 +1,25 @@
 // The ferry dock
 
-029-1.gat,22,37,0|script|#candordock|45,2,1,
+029-1.gat,16,36,0|script|#CandorKoga|395,
 {
-    set @loc, DOCK_candor;
-    callfunc "Ferry";
+    end;
+}
+029-1.gat,22,37,0|script|#CandorDock|45,
+{
+    end;
+OnCommandArrive:
+    enablenpc "#CandorKoga";
+    mapannounce "029-1.gat", "Koga: Now arriving in Candor.", 0;
+    mapannounce "029-3.gat", "Koga: Now arriving in Candor.", 0;
+    end;
+
+OnCommandAnnouce:
+    mapannounce "029-1.gat", "Koga: Now docked in Candor, Departing soon", 0;
+    mapannounce "029-3.gat", "Koga: Now docked in Candor, Departing soon", 0;
+    end;
+
+OnCommandWarp:
+    disablenpc "#CandorKoga";
+    areawarp "029-1.gat",22,37,25,38,"031-1.gat", 95, 109;
+    end;
 }

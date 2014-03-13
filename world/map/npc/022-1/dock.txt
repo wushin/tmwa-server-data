@@ -1,7 +1,26 @@
 // The ferry dock
 
-022-1.gat,84,72,0|script|#tulimshardock|45,6,1,
+022-1.gat,85,71,0|script|#TulimsharKoga|395,
 {
-    set @loc, DOCK_tulimshar;
-    callfunc "Ferry";
+    end;
+}
+
+022-1.gat,84,72,0|script|#TulimsharDock|45,
+{
+    end;
+OnCommandArrive:
+    enablenpc "#TulimsharKoga";
+    mapannounce "022-1.gat", "Koga: Now arriving in Tulimshar.", 0;
+    mapannounce "001-1.gat", "Koga: Now arriving in Tulimshar.", 0;
+    end;
+
+OnCommandAnnouce:
+    mapannounce "022-1.gat", "Koga: Now docked in Tulimshar, Departing soon", 0;
+    mapannounce "001-1.gat", "Koga: Now docked in Tulimshar, Departing soon", 0;
+    end;
+
+OnCommandWarp:
+    disablenpc "#TulimsharKoga";
+    areawarp "022-1.gat",75,71,87,73,"008-1.gat", 136, 64;
+    end;
 }

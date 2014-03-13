@@ -1,7 +1,26 @@
 // The ferry dock
 
-031-1.gat,105,109,0|script|#nivalisdock|45,6,1,
+031-1.gat,110,108,0|script|#NivalisKoga|395,
 {
-    set @loc, DOCK_nivalis;
-    callfunc "Ferry";
+    end;
+}
+
+031-1.gat,105,109,0|script|#NivalisDock|45,
+{
+    end;
+OnCommandArrive:
+    enablenpc "#NivalisKoga";
+    mapannounce "031-1.gat", "Koga: Now arriving in Nivalis.", 0;
+    mapannounce "020-1.gat", "Koga: Now arriving in Nivalis.", 0;
+    end;
+
+OnCommandAnnouce:
+    mapannounce "031-1.gat", "Koga: Now docked in Nivalis, Departing soon", 0;
+    mapannounce "020-1.gat", "Koga: Now docked in Nivalis, Departing soon", 0;
+    end;
+
+OnCommandWarp:
+    disablenpc "#NivalisKoga";
+    areawarp "031-1.gat",96,108,108,110,"022-1.gat", 73, 74;
+    end;
 }

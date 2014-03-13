@@ -1,7 +1,31 @@
 // The ferry dock
 
-008-1.gat,140,64,0|script|#hurnscalddock|45,2,1,
+008-1.gat,147,64,0|script|#HurnscaldKoga|395,
 {
-    set @loc, DOCK_hurnscald;
-    callfunc "Ferry";
+    end;
+}
+
+008-1.gat,140,64,0|script|#HurnscaldDock|45,
+{
+    end;
+OnCommandArrive:
+    enablenpc "#HurnscaldKoga";
+    mapannounce "008-1.gat", "Koga: Now arriving in Hurnscald.", 0;
+    mapannounce "009-1.gat", "Koga: Now arriving in Hurnscald.", 0;
+    end;
+
+OnCommandAnnouce:
+    mapannounce "008-1.gat", "Koga: Now docked in Hurnscald, Departing soon", 0;
+    mapannounce "009-1.gat", "Koga: Now docked in Hurnscald, Departing soon", 0;
+    end;
+
+OnCommandWarp:
+    disablenpc "#HurnscaldKoga";
+    areawarp "008-1.gat",137,64,141,65,"029-1.gat", 26, 37;
+    end;
+}
+
+008-1.gat,140,60,0|script|DockDebug|154,
+{
+    cmdothernpc "#HurnscaldDock", "Arrive";
 }
