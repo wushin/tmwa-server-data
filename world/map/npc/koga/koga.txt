@@ -1,0 +1,45 @@
+// Dock
+
+koga.gat,39,29,0|script|#KogaExit|45,0,1,
+{
+    mes "Disembark the ferry for "+$@Docks$[$@CurrentDock]+"?";
+    menu
+        "Yes.", L_Leave,
+        "Nevermind", L_Close;
+
+L_Leave:
+    if ($@CurrentDock == 0)
+        goto L_Hurnscald;
+    if ($@CurrentDock == 1)
+        goto L_Candor;
+    if ($@CurrentDock == 2)
+        goto L_Nivalis;
+    if ($@CurrentDock == 3)
+        goto L_Tulimshar;
+    goto L_Close;
+
+L_Tulimshar:
+    warp "022-1.gat", 76, 72;
+    goto L_Close;
+
+L_Hurnscald:
+    warp "008-1.gat", 137, 64;
+    goto L_Close;
+
+L_Nivalis:
+    warp "031-1.gat", 95, 109;
+    goto L_Close;
+
+L_Candor:
+    if (BaseLevel < 40)
+        goto L_TooYoung;
+    warp "029-1.gat", 25, 37;
+    goto L_Close;
+
+L_TooYoung:
+    mes "This area is too dangerous for your low level.";
+    goto L_Close;
+
+L_Close:
+    close;
+}

@@ -1,26 +1,48 @@
 // The ferry dock
 
+// Tell Ship Schedule 
+// 022-1.gat,83,72,0|script|#FerrySign|396,
+//{
+//  end;
+//}
+
 022-1.gat,85,71,0|script|#TulimsharKoga|395,
 {
     end;
 }
 
-022-1.gat,84,72,0|script|#TulimsharDock|45,
+022-1.gat,84,72,0|script|#TulimsharFerry|45,6,1,
+{
+L_Main:
+    callfunc "BoardFerry";
+    end;
+
+OnDockCheck:
+    goto L_Main;
+
+OnCommandCheckDock:
+    areatimer "022-1.gat",75,71,87,73,10,"#TulimsharFerry::OnDockCheck";
+    end;
+}
+
+022-1.gat,80,62,0|script|#TulimsharDock|45,
 {
     end;
 OnCommandArrive:
     enablenpc "#TulimsharKoga";
+    enablenpc "#TulimsharFerry";
+    cmdothernpc "#TulimsharFerry", "CheckDock";
     mapannounce "022-1.gat", "Koga: Now arriving in Tulimshar.", 0;
-    mapannounce "001-1.gat", "Koga: Now arriving in Tulimshar.", 0;
+    mapannounce "koga.gat", "Koga: Now arriving in Tulimshar.", 0;
     end;
 
 OnCommandAnnouce:
     mapannounce "022-1.gat", "Koga: Now docked in Tulimshar, Departing soon", 0;
-    mapannounce "001-1.gat", "Koga: Now docked in Tulimshar, Departing soon", 0;
+    mapannounce "koga.gat", "Koga: Now docked in Tulimshar, Departing soon", 0;
     end;
 
 OnCommandWarp:
     disablenpc "#TulimsharKoga";
-    areawarp "022-1.gat",75,71,87,73,"008-1.gat", 136, 64;
+    disablenpc "#TulimsharFerry";
     end;
 }

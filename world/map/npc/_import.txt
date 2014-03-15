@@ -113,3 +113,4 @@ import: npc/056-1/_import.txt
 import: npc/056-2/_import.txt
 import: npc/057-1/_import.txt
 import: npc/botcheck/_import.txt
+import: npc/koga/_import.txt

@@ -4,11 +4,16 @@ botcheck.gat,27,28,0|script|#FerryConfig|-1,
 {
 OnInit:
     disablenpc "#HurnscaldKoga";
+    disablenpc "#HurnscaldFerry";
     disablenpc "#CandorKoga";
+    disablenpc "#CandorFerry";
     disablenpc "#NivalisKoga";
+    disablenpc "#NivalisFerry";
     disablenpc "#TulimsharKoga";
+    disablenpc "#TulimsharFerry";
     set $@CurrentDock, 0;
     set $@DockTickCount, 0;
+    set $@DockLeaveCount, 1;
     setarray $@Docks$, "Hurnscald", "Candor", "Nivalis", "Tulimshar";
     cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Arrive";
     initnpctimer;
@@ -25,8 +30,8 @@ L_NextDock:
     initnpctimer;
     end;
 
-OnTimer3000:
-    if ($@DockTickCount > 5)
+OnTimer20000:
+    if ($@DockTickCount > $@DockLeaveCount)
         goto L_NextDock;
     if ($@DockTickCount)
         cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Annouce";
@@ -36,99 +41,17 @@ OnTimer3000:
 
 }
 
-function|script|Ferry|,
+function|script|BoardFerry|,
 {
-    if (BaseLevel < 20)
-        goto L_LowerCost;
-    set @cost_tulimshar, 500;
-    set @cost_hurnscald, 500;
-    set @cost_nivalis, 500;
-    set @cost_candor, 1500;
-
-L_Start:
-    mes "Where would you like to go?";
-    next;
-    if (BaseLevel < 40)
-        goto L_PlainMenu;
-    goto L_MenuWithCandor;
-
-
-L_PlainMenu:
+    mes "Board the ferry?";
     menu
-        "Tulimshar (" + @cost_tulimshar + "GP)", L_Tulimshar,
-        "Hurnscald (" + @cost_hurnscald + "GP)", L_Hurnscald,
-        "Nivalis (" + @cost_nivalis + "GP)", L_Nivalis,
-        "Nevermind", -;
-    goto L_Close;
+        "yes.", L_Board,
+        "no.", L_Return;
 
-L_MenuWithCandor:
-    menu
-        "Tulimshar (" + @cost_tulimshar + "GP)", L_Tulimshar,
-        "Hurnscald (" + @cost_hurnscald + "GP)", L_Hurnscald,
-        "Nivalis (" + @cost_nivalis + "GP)", L_Nivalis,
-        "Candor (" + @cost_candor + "GP)", L_Candor,
-        "Nevermind", -;
-    goto L_Close;
+L_Board:
+    warp "koga.gat",39,29;
+    goto L_Return;
 
-L_Tulimshar:
-    if (@loc == DOCK_tulimshar)
-        goto L_AlreadyThere;
-    if (Zeny < @cost_tulimshar)
-        goto L_NotEnoughGP;
-
-    set Zeny, Zeny - @cost_tulimshar;
-    warp "022-1.gat", 76, 72;
-    goto L_Close;
-
-L_Hurnscald:
-    if (@loc == DOCK_hurnscald)
-        goto L_AlreadyThere;
-    if (Zeny < @cost_hurnscald)
-        goto L_NotEnoughGP;
-
-    set Zeny, Zeny - @cost_hurnscald;
-    warp "008-1.gat", 137, 64;
-    goto L_Close;
-
-L_Nivalis:
-    if (@loc == DOCK_nivalis)
-        goto L_AlreadyThere;
-    if (Zeny < @cost_nivalis)
-        goto L_NotEnoughGP;
-
-    set Zeny, Zeny - @cost_nivalis;
-    warp "031-1.gat", 95, 109;
-    goto L_Close;
-
-L_Candor:
-    if (@loc == DOCK_candor)
-        goto L_AlreadyThere;
-    if (Zeny < @cost_candor)
-        goto L_NotEnoughGP;
-
-    set Zeny, Zeny - @cost_candor;
-    warp "029-1.gat", 25, 37;
-    goto L_Close;
-
-L_AlreadyThere:
-    mes "You're already here!";
-    goto L_Close;
-
-L_NotEnoughGP:
-    mes "You don't have enough money to go there!";
-    goto L_Close;
-
-L_LowerCost:
-    set @cost_tulimshar, 250;
-    set @cost_hurnscald, 250;
-    set @cost_nivalis, 250;
-    goto L_Start;
-
-L_Close:
-    set @cost_tulimshar, 0;
-    set @cost_hurnscald, 0;
-    set @cost_candor, 0;
-    set @cost_nivalis, 0;
-    set @loc, 0;
-    close;
+L_Return:
+    return;
 }

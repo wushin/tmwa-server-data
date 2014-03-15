@@ -4,22 +4,39 @@
 {
     end;
 }
+
+029-1.gat,22,37,0|script|#CandorFerry|45,2,1,
+{
+L_Main:
+    callfunc "BoardFerry";
+    end;
+
+OnDockCheck:
+    goto L_Main;
+
+OnCommandCheckDock:
+    areatimer "029-1.gat",22,37,25,38,10,"#CandorFerry::OnDockCheck";
+    end;
+}
+
 029-1.gat,22,37,0|script|#CandorDock|45,
 {
     end;
 OnCommandArrive:
     enablenpc "#CandorKoga";
+    enablenpc "#CandorFerry";
+    cmdothernpc "#CandorFerry", "CheckDock";
     mapannounce "029-1.gat", "Koga: Now arriving in Candor.", 0;
-    mapannounce "029-3.gat", "Koga: Now arriving in Candor.", 0;
+    mapannounce "koga.gat", "Koga: Now arriving in Candor.", 0;
     end;
 
 OnCommandAnnouce:
     mapannounce "029-1.gat", "Koga: Now docked in Candor, Departing soon", 0;
-    mapannounce "029-3.gat", "Koga: Now docked in Candor, Departing soon", 0;
+    mapannounce "koga.gat", "Koga: Now docked in Candor, Departing soon", 0;
     end;
 
 OnCommandWarp:
     disablenpc "#CandorKoga";
-    areawarp "029-1.gat",22,37,25,38,"031-1.gat", 95, 109;
+    disablenpc "#CandorFerry";
     end;
 }

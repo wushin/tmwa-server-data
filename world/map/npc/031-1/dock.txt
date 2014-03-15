@@ -5,22 +5,38 @@
     end;
 }
 
-031-1.gat,105,109,0|script|#NivalisDock|45,
+031-1.gat,105,109,0|script|#NivalisFerry|45,6,1,
+{
+L_Main:
+    callfunc "BoardFerry";
+    end;
+
+OnDockCheck:
+    goto L_Main;
+
+OnCommandCheckDock:
+    areatimer "031-1.gat",96,108,108,110,10,"#NivalisFerry::OnDockCheck";
+    end;
+}
+
+031-1.gat,100,100,0|script|#NivalisDock|45,
 {
     end;
 OnCommandArrive:
     enablenpc "#NivalisKoga";
+    enablenpc "#NivalisFerry";
+    cmdothernpc "#NivalisFerry", "CheckDock";
     mapannounce "031-1.gat", "Koga: Now arriving in Nivalis.", 0;
-    mapannounce "020-1.gat", "Koga: Now arriving in Nivalis.", 0;
+    mapannounce "koga.gat", "Koga: Now arriving in Nivalis.", 0;
     end;
 
 OnCommandAnnouce:
     mapannounce "031-1.gat", "Koga: Now docked in Nivalis, Departing soon", 0;
-    mapannounce "020-1.gat", "Koga: Now docked in Nivalis, Departing soon", 0;
+    mapannounce "koga.gat", "Koga: Now docked in Nivalis, Departing soon", 0;
     end;
 
 OnCommandWarp:
     disablenpc "#NivalisKoga";
-    areawarp "031-1.gat",96,108,108,110,"022-1.gat", 73, 74;
+    disablenpc "#NivalisFerry";
     end;
 }
