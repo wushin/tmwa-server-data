@@ -5,4 +5,5 @@ npc: npc/005-1/_mobs.txt
 npc: npc/005-1/_warps.txt
 npc: npc/005-1/npcs.txt
 npc: npc/005-1/spirit.txt
+npc: npc/005-1/traveler.txt
 npc: npc/005-1/tree.txt

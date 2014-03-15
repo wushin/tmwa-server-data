@@ -6,3 +6,4 @@ npc: npc/027-1/_warps.txt
 npc: npc/027-1/golbenez.txt
 npc: npc/027-1/graves.txt
 npc: npc/027-1/monsters.txt
+npc: npc/027-1/traveler.txt
