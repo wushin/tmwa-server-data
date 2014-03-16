@@ -3,8 +3,6 @@
 
 // Multiple Travelers
 // Cannot access until found (Player Bitmask)
-// Hub-Spoke
-// --Sub-Spoke
 // Costs Zeny
 
 // Contains all warp points to find
@@ -20,6 +18,16 @@ OnInit:
     set $@tulimshar_bit, (1 << 7);
     set $@blue_sage_bit, (1 << 8);
     set $@hurnscald_bit, (1 << 9);
+    set $@nivalis_bit, (1 << 10);
+    // Travel Base Cost
+    set $@druid_tree_cost, 150;
+    set $@graveyard_cost, 150;
+    set $@magic_house_cost, 150;
+    set $@terranite_cave_cost, 150;
+    set $@tulimshar_cost, 100;
+    set $@blue_sage_cost, 150;
+    set $@hurnscald_cost, 100;
+    set $@nivalis_cost, 100;
     end;
 }
 
@@ -53,15 +61,9 @@ L_Main:
     goto L_SetTravelBit;
 
 L_BitTravelSet:
+    set @Cost, 10;
     if (BaseLevel < 45)
-        goto L_LowerCost;
-
-    set @CostDruidTree, 1500;
-    set @CostGraveyard, 1500;
-    set @CostMagicHouse, 1000;
-    set @CostTerraniteCave, 1500;
-    set @CostTulimshar, 1000;
-    set @CostBlueSage, 1500;
+        set @Cost, 5;
     goto L_Start;
 
 L_TravelTut:
@@ -75,36 +77,21 @@ L_SetTravelBit:
     set TravelFound, TravelFound | @NpcTravelBit;
     goto L_BitTravelSet;
 
-L_LowerCost:
-    set @CostDruidTree, 750;
-    set @CostGraveyard, 750;
-    set @CostMagicHouse, 500;
-    set @CostTerraniteCave, 750;
-    set @CostTulimshar, 500;
-    set @CostBlueSage, 500;
-    goto L_Start;
-
 L_Start:
     mes "["+@NpcName$+"]";
-    // Bleh, Edit text
-    mes "\"Greetings.  I am Diryn the Traveler, Assistant Councilor of Tulimshar and teleporter extraordinaire.  Tulimshar is expanding our influence throughout the world, so I was sent here to aid all who are willing and able to take on the threats to our interests.\"";
+    mes "\"Greetings.  I am "+@NpcName$+" the Traveler.\"";
     next;
-    mes "\"The monsters of the world have grown out of control, harming people, trade and travel.  Needless to say, Tulimshar is not happy with this problem.  Our solution: Rally those powerful enough to combat the monster threat and send them to hot spots to challenge the monster threat head on.  However, teleportation to these areas is not only extremely dangerous, but also highly expensive.   Do you think you got what it takes?\"";
+    mes "\"Where would you like to go?\"";
     menu
-        "I sure do!", L_TravelYes,
-        "No, thank you.", L_TravelNo;
-
-L_TravelYes:
-    mes "["+@NpcName$+"]";
-    mes "\"Excellent.  I can send you to many places, but again, the fees are large. Where shall I send you?\"";
-    menu
-        "Druid Tree (" + @CostDruidTree + " GP)", L_TravelDruidTree,
-        "Graveyard (" + @CostGraveyard + " GP)", L_TravelGraveyard,
-        "Magic House (" + @CostMagicHouse + " GP)", L_TravelMagicHouse,
-        "Terranite Cave (" + @CostTerraniteCave + " GP)", L_TravelTerranite,
-        "Tulimshar Town Square (" + @CostTulimshar + " GP)", L_TravelTulimshar,
-        "Sage Nikolai's Mansion (" + @CostBlueSage + " GP)", L_TravelBlueSage,
-        "Hurnscald (" + @CostHurnscald + " GP)", L_TravelHurnscald,
+        "Druid Tree (" + (@Cost * $@druid_tree_cost) + " GP)", L_TravelDruidTree,
+        "Graveyard (" + (@Cost * $@graveyard_cost) + " GP)", L_TravelGraveyard,
+        "Magic House (" + (@Cost * $@magic_house_cost) + " GP)", L_TravelMagicHouse,
+        "Terranite Cave (" + (@Cost * $@terranite_cave_cost) + " GP)", L_TravelTerranite,
+        "Tulimshar Town Square (" + (@Cost * $@tulimshar_cost) + " GP)", L_TravelTulimshar,
+        "Sage Nikolai's Mansion (" + (@Cost * $@blue_sage_cost) + " GP)", L_TravelBlueSage,
+        "Hurnscald (" + (@Cost * $@hurnscald_cost) + " GP)", L_TravelHurnscald,
+        "Nivalis (" + (@Cost * $@nivalis_cost) + " GP)", L_TravelNivalis,
+        "Who are the Travelers?", L_TravelTut,
         "I'm not interested.", L_TravelNo;
 
 L_TravelDruidTree:
@@ -112,85 +99,111 @@ L_TravelDruidTree:
         goto L_AlreadyThere;
     if (!(TravelFound & $@druid_tree_bit))
         goto L_NoFound;
-    if (Zeny < @CostDruidTree)
+    if (Zeny < (@Cost * $@druid_tree_cost))
         goto L_NoMoney;
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - @CostDruidTree;
+    set Zeny, Zeny - (@Cost * $@druid_tree_cost);
     warp "005-1.gat",76,36;
     goto L_Clearvars;
 
 L_TravelGraveyard:
+    if (@NpcTravelBit == $@graveyard_bit)
+        goto L_AlreadyThere;
     if (!(TravelFound & $@graveyard_bit))
         goto L_NoFound;
-    if (Zeny < @CostGraveyard)
+    if (Zeny < (@Cost * $@graveyard_cost))
         goto L_NoMoney;
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - @CostGraveyard;
+    set Zeny, Zeny - (@Cost * $@graveyard_cost);
     warp "027-1.gat",84,86;
     goto L_Clearvars;
 
 L_TravelMagicHouse:
+    if (@NpcTravelBit == $@magic_house_bit)
+        goto L_AlreadyThere;
     if (!(TravelFound & $@magic_house_bit))
         goto L_NoFound;
-    if (Zeny < @CostMagicHouse)
+    if (Zeny < (@Cost * $@magic_house_cost))
         goto L_NoMoney;
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - @CostMagicHouse;
-    warp "013-1.gat",45,92;
+    set Zeny, Zeny - (@Cost * $@magic_house_cost);
+    warp "013-1.gat",120,93;
     goto L_Clearvars;
 
 L_TravelTerranite:
+    if (@NpcTravelBit == $@terranite_cave_bit)
+        goto L_AlreadyThere;
     if (!(TravelFound & $@terranite_cave_bit))
         goto L_NoFound;
-    if (Zeny < @CostTerraniteCave)
+    if (Zeny < (@Cost * $@terranite_cave_cost))
         goto L_NoMoney;
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - @CostTerraniteCave;
+    set Zeny, Zeny - (@Cost * $@terranite_cave_cost);
     warp "012-3.gat",445,65;
     goto L_Clearvars;
 
 L_TravelTulimshar:
+    if (@NpcTravelBit == $@tulimshar_bit)
+        goto L_AlreadyThere;
     if (!(TravelFound & $@tulimshar_bit))
         goto L_NoFound;
-    if (Zeny < @CostTulimshar)
+    if (Zeny < (@Cost * $@tulimshar_cost))
         goto L_NoMoney;
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - @CostTulimshar;
+    set Zeny, Zeny - (@Cost * $@tulimshar_cost);
     warp "001-1.gat",44,70;
     goto L_Clearvars;
 
 L_TravelBlueSage:
+    if (@NpcTravelBit == $@blue_sage_bit)
+        goto L_AlreadyThere;
     if (!(TravelFound & $@blue_sage_bit))
         goto L_NoFound;
-    if (Zeny < @CostBlueSage)
+    if (Zeny < (@Cost  * $@blue_sage_cost))
         goto L_NoMoney;
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - @CostBlueSage;
+    set Zeny, Zeny - (@Cost * $@blue_sage_cost);
     warp "048-1.gat",65,45;
     goto L_Clearvars;
 
 L_TravelHurnscald:
+    if (@NpcTravelBit == $@hurnscald_bit)
+        goto L_AlreadyThere;
     if (!(TravelFound & $@hurnscald_bit))
         goto L_NoFound;
-    if (Zeny < @CostHurnscald)
+    if (Zeny < (@Cost * $@hurnscald_cost))
         goto L_NoMoney;
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - @CostHurnscald;
+    set Zeny, Zeny - (@Cost * $@hurnscald_cost);
     warp "008-1.gat",79,84;
+    goto L_Clearvars;
+
+L_TravelNivalis:
+    if (@NpcTravelBit == $@nivalis_bit)
+        goto L_AlreadyThere;
+    if (!(TravelFound & $@nivalis_bit))
+        goto L_NoFound;
+    if (Zeny < (@Cost * $@nivalis_cost))
+        goto L_NoMoney;
+    mes "["+@NpcName$+"]";
+    mes "\"Be fearless!\"";
+    close2;
+    set Zeny, Zeny - (@Cost * $@nivalis_cost);
+    warp "020-1.gat",53,122;
     goto L_Clearvars;
 
 L_TravelNo:
@@ -218,11 +231,6 @@ L_AlreadyThere:
     goto L_Clearvars;
 
 L_Clearvars:
-    set @CostDruidTree, 0;
-    set @CostGraveyard, 0;
-    set @CostMagicHouse, 0;
-    set @CostTerraniteCave, 0;
-    set @CostTulimshar, 0;
-    set @CostBlueSage, 0;
+    set @Cost, 0;
     return;
 }

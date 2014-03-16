@@ -26,4 +26,5 @@ npc: npc/001-1/sandra.txt
 npc: npc/001-1/sarah.txt
 npc: npc/001-1/soul-menhir.txt
 npc: npc/001-1/trader.txt
+npc: npc/001-1/traveler.txt
 npc: npc/001-1/vincent.txt
