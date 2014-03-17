@@ -9,32 +9,44 @@ OnInit:
     disablenpc "#CandorFerry";
     disablenpc "#NivalisKoga";
     disablenpc "#NivalisFerry";
+    disablenpc "#TulCandorKoga";
+    disablenpc "#TulCandorFerry";
     disablenpc "#TulimsharKoga";
     disablenpc "#TulimsharFerry";
-    set $@CurrentDock, 0;
+    set $@MainCurrentDock, 0;
+    set $@CandorCurrentDock, 0;
     set $@DockTickCount, 0;
     set $@DockLeaveCount, 1;
-    setarray $@Docks$, "Hurnscald", "Candor", "Nivalis", "Tulimshar";
-    cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Arrive";
+    setarray $@MainDocks$, "Hurnscald", "Nivalis", "Tulimshar";
+    setarray $@CandorDocks$, "Candor", "TulCandor";
+    cmdothernpc "#"+$@MainDocks$[$@MainCurrentDock]+"Dock", "Arrive";
+    cmdothernpc "#"+$@CandorDocks$[$@CandorCurrentDock]+"Dock", "Arrive";
     initnpctimer;
     end;
 
 L_NextDock:
-    set $@LastDock, $@CurrentDock;
-    set $@CurrentDock, $@CurrentDock + 1;
-    if($@CurrentDock == getarraysize($@Docks$))
-        set $@CurrentDock, 0;
+    set $@MainLastDock, $@MainCurrentDock;
+    set $@CandorLastDock, $@CandorCurrentDock;
+    set $@MainCurrentDock, $@MainCurrentDock + 1;
+    set $@CandorCurrentDock, $@CandorCurrentDock + 1;
+    if($@MainCurrentDock == getarraysize($@MainDocks$))
+        set $@MainCurrentDock, 0;
+    if($@CandorCurrentDock == getarraysize($@CandorDocks$))
+        set $@CandorCurrentDock, 0;
     set $@DockTickCount, 0;
-    cmdothernpc "#"+$@Docks$[$@LastDock]+"Dock", "Warp";
-    cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Arrive";
+    cmdothernpc "#"+$@MainDocks$[$@MainLastDock]+"Dock", "Warp";
+    cmdothernpc "#"+$@MainDocks$[$@MainCurrentDock]+"Dock", "Arrive";
+    cmdothernpc "#"+$@CandorDocks$[$@CandorLastDock]+"Dock", "Warp";
+    cmdothernpc "#"+$@CandorDocks$[$@CandorCurrentDock]+"Dock", "Arrive";
     initnpctimer;
     end;
 
-OnTimer20000:
+OnTimer10000:
     if ($@DockTickCount > $@DockLeaveCount)
         goto L_NextDock;
     if ($@DockTickCount)
-        cmdothernpc "#"+$@Docks$[$@CurrentDock]+"Dock", "Annouce";
+        cmdothernpc "#"+$@MainDocks$[$@MainCurrentDock]+"Dock", "Annouce";
+        cmdothernpc "#"+$@CandorDocks$[$@CandorCurrentDock]+"Dock", "Annouce";
     set $@DockTickCount, $@DockTickCount + 1;
     initnpctimer;
     end;
@@ -50,6 +62,26 @@ function|script|BoardFerry|,
 
 L_Board:
     warp "koga.gat",39,29;
+    goto L_Return;
+
+L_Return:
+    return;
+}
+
+function|script|BoardCandorFerry|,
+{
+    mes "Board the ferry?";
+    menu
+        "yes.", L_Board,
+        "no.", L_Return;
+
+L_Board:
+    if (BaseLevel < 40) goto L_TooYoung;
+    warp "koga-candor.gat",39,29;
+    goto L_Return;
+
+L_TooYoung:
+    mes "This area is too dangerous for your low level.";
     goto L_Return;
 
 L_Return:

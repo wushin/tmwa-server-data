@@ -8,7 +8,7 @@
 029-1.gat,22,37,0|script|#CandorFerry|45,2,1,
 {
 L_Main:
-    callfunc "BoardFerry";
+    callfunc "BoardCandorFerry";
     end;
 
 OnDockCheck:
@@ -26,13 +26,13 @@ OnCommandArrive:
     enablenpc "#CandorKoga";
     enablenpc "#CandorFerry";
     cmdothernpc "#CandorFerry", "CheckDock";
-    mapannounce "029-1.gat", "Koga: Now arriving in Candor.", 0;
-    mapannounce "koga.gat", "Koga: Now arriving in Candor.", 0;
+    mapannounce "029-1.gat", "Koga - Candor: Now arriving in Candor.", 0;
+    mapannounce "koga-candor.gat", "Koga - Candor: Now arriving in Candor.", 0;
     end;
 
 OnCommandAnnouce:
-    mapannounce "029-1.gat", "Koga: Now docked in Candor, Departing soon", 0;
-    mapannounce "koga.gat", "Koga: Now docked in Candor, Departing soon", 0;
+    mapannounce "029-1.gat", "Koga - Candor: Now docked in Candor, Departing soon", 0;
+    mapannounce "koga-candor.gat", "Koga - Candor: Now docked in Candor, Departing soon", 0;
     end;
 
 OnCommandWarp:

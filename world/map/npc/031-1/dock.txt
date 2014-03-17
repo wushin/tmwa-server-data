@@ -26,13 +26,13 @@ OnCommandArrive:
     enablenpc "#NivalisKoga";
     enablenpc "#NivalisFerry";
     cmdothernpc "#NivalisFerry", "CheckDock";
-    mapannounce "031-1.gat", "Koga: Now arriving in Nivalis.", 0;
-    mapannounce "koga.gat", "Koga: Now arriving in Nivalis.", 0;
+    mapannounce "031-1.gat", "Koga - Main: Now arriving in Nivalis.", 0;
+    mapannounce "koga.gat", "Koga - Main: Now arriving in Nivalis.", 0;
     end;
 
 OnCommandAnnouce:
-    mapannounce "031-1.gat", "Koga: Now docked in Nivalis, Departing soon", 0;
-    mapannounce "koga.gat", "Koga: Now docked in Nivalis, Departing soon", 0;
+    mapannounce "031-1.gat", "Koga - Main: Now docked in Nivalis, Departing soon", 0;
+    mapannounce "koga.gat", "Koga - Main: Now docked in Nivalis, Departing soon", 0;
     end;
 
 OnCommandWarp:

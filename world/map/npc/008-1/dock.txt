@@ -26,13 +26,13 @@ OnCommandArrive:
     enablenpc "#HurnscaldKoga";
     enablenpc "#HurnscaldFerry";
     cmdothernpc "#HurnscaldFerry", "CheckDock";
-    mapannounce "008-1.gat", "Koga: Now arriving in Hurnscald.", 0;
-    mapannounce "koga.gat", "Koga: Now arriving in Hurnscald.", 0;
+    mapannounce "008-1.gat", "Koga - Main: Now arriving in Hurnscald.", 0;
+    mapannounce "koga.gat", "Koga - Main: Now arriving in Hurnscald.", 0;
     end;
 
 OnCommandAnnouce:
-    mapannounce "008-1.gat", "Koga: Now docked in Hurnscald, Departing soon", 0;
-    mapannounce "koga.gat", "Koga: Now docked in Hurnscald, Departing soon", 0;
+    mapannounce "008-1.gat", "Koga - Main: Now docked in Hurnscald, Departing soon", 0;
+    mapannounce "koga.gat", "Koga - Main: Now docked in Hurnscald, Departing soon", 0;
     end;
 
 OnCommandWarp:

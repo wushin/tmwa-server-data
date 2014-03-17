@@ -32,17 +32,58 @@ OnCommandArrive:
     enablenpc "#TulimsharKoga";
     enablenpc "#TulimsharFerry";
     cmdothernpc "#TulimsharFerry", "CheckDock";
-    mapannounce "022-1.gat", "Koga: Now arriving in Tulimshar.", 0;
-    mapannounce "koga.gat", "Koga: Now arriving in Tulimshar.", 0;
+    mapannounce "022-1.gat", "Koga - Main: Now arriving in Tulimshar.", 0;
+    mapannounce "koga.gat", "Koga - Main: Now arriving in Tulimshar.", 0;
     end;
 
 OnCommandAnnouce:
-    mapannounce "022-1.gat", "Koga: Now docked in Tulimshar, Departing soon", 0;
-    mapannounce "koga.gat", "Koga: Now docked in Tulimshar, Departing soon", 0;
+    mapannounce "022-1.gat", "Koga - Main: Now docked in Tulimshar, Departing soon", 0;
+    mapannounce "koga.gat", "Koga - Main: Now docked in Tulimshar, Departing soon", 0;
     end;
 
 OnCommandWarp:
     disablenpc "#TulimsharKoga";
     disablenpc "#TulimsharFerry";
+    end;
+}
+
+022-1.gat,60,24,0|script|#TulCandorKoga|395,
+{
+    end;
+}
+
+022-1.gat,60,28,0|script|#TulCandorFerry|45,1,4,
+{
+L_Main:
+    callfunc "BoardCandorFerry";
+    end;
+
+OnDockCheck:
+    goto L_Main;
+
+OnCommandCheckDock:
+    areatimer "022-1.gat",59,24,61,32,10,"#TulCandorFerry::OnDockCheck";
+    end;
+}
+
+022-1.gat,65,25,0|script|#TulCandorDock|45,
+{
+    end;
+OnCommandArrive:
+    enablenpc "#TulCandorKoga";
+    enablenpc "#TulCandorFerry";
+    cmdothernpc "#TulCandorFerry", "CheckDock";
+    mapannounce "022-1.gat", "Koga - Candor: Now arriving in Tulimshar.", 0;
+    mapannounce "koga-candor.gat", "Koga - Candor: Now arriving in Tulimshar.", 0;
+    end;
+
+OnCommandAnnouce:
+    mapannounce "022-1.gat", "Koga - Candor: Now docked in Tulimshar, Departing soon", 0;
+    mapannounce "koga-candor.gat", "Koga - Candor: Now docked in Tulimshar, Departing soon", 0;
+    end;
+
+OnCommandWarp:
+    disablenpc "#TulCandorKoga";
+    disablenpc "#TulCandorFerry";
     end;
 }

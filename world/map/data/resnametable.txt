@@ -112,4 +112,5 @@
 057-1.gat#057-1.wlk#
 botcheck.gat#botcheck.wlk#
 koga.gat#koga.wlk#
+koga-candor.gat#koga-candor.wlk#
 prison.gat#prison.wlk#
