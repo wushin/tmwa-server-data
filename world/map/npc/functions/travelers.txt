@@ -19,6 +19,7 @@ OnInit:
     set $@blue_sage_bit, (1 << 8);
     set $@hurnscald_bit, (1 << 9);
     set $@nivalis_bit, (1 << 10);
+    set $@tul_mine_bit, (1 << 11);
     // Travel Base Cost
     set $@druid_tree_cost, 150;
     set $@graveyard_cost, 150;
@@ -28,6 +29,7 @@ OnInit:
     set $@blue_sage_cost, 150;
     set $@hurnscald_cost, 100;
     set $@nivalis_cost, 100;
+    set $@tul_min_cost, 100;
     end;
 }
 
@@ -204,6 +206,20 @@ L_TravelNivalis:
     close2;
     set Zeny, Zeny - (@Cost * $@nivalis_cost);
     warp "020-1.gat",53,122;
+    goto L_Clearvars;
+
+L_TravelTuMine:
+    if (@NpcTravelBit == $@tul_mine_bit)
+        goto L_AlreadyThere;
+    if (!(TravelFound & $@tul_mine_bit))
+        goto L_NoFound;
+    if (Zeny < (@Cost * $@tul_mine_cost))
+        goto L_NoMoney;
+    mes "["+@NpcName$+"]";
+    mes "\"Be fearless!\"";
+    close2;
+    set Zeny, Zeny - (@Cost * $@tul_mine_cost);
+    warp "002-3.gat",75,67;
     goto L_Clearvars;
 
 L_TravelNo:

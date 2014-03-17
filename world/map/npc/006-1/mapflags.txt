@@ -1,1 +1,1 @@
-006-1.gat|mapflag|resave|005-1,24,41
+006-1.gat|mapflag|resave|005-1,75,40
