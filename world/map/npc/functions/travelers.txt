@@ -23,6 +23,7 @@ OnInit:
     set $@pachua_bit, (1 << 12);
     set $@santas_work_bit, (1 << 13);
     set $@barbarians_bit, (1 << 14);
+    set $@hurns_farms_bit, (1 << 15);
     // Travel Base Cost
     set $@tulimshar_cost, 100;
     set $@hurnscald_cost, 100;
@@ -36,6 +37,7 @@ OnInit:
     set $@blue_sage_cost, 200;
     set $@santas_work_cost, 150;
     set $@barbarians_cost, 150;
+    set $@hurns_farms_cost, 150;
     end;
 }
 
@@ -99,6 +101,7 @@ L_Start:
         "Tonori - Tulimshar Mines (" + (@Cost * $@tul_mine_cost) + " GP)", L_TravelTulMine,
         "Tonori - Pachua's Village (" + (@Cost * $@pachua_cost) + " GP)", L_TravelPachua,
         "Argeas - Magic House (" + (@Cost * $@magic_house_cost) + " GP)", L_TravelMagicHouse,
+        "Argeas - Farmsteads (" + (@Cost * $@hurns_farms_cost) + " GP)", L_TravelHurnsFarms,
         "Argeas - Graveyard (" + (@Cost * $@graveyard_cost) + " GP)", L_TravelGraveyard,
         "Argeas - Terranite Cave (" + (@Cost * $@terranite_cave_cost) + " GP)", L_TravelTerranite,
         "Nivalis - Santa's Workshop (" + (@Cost * $@santas_work_cost) + " GP)", L_TravelWorkshop,
@@ -167,9 +170,9 @@ L_TravelTulimshar:
 L_TravelBlueSage:
     set @NextLocationBit, $@blue_sage_bit;
     set @NextLocationCost, (@Cost  * $@blue_sage_cost);
-    set @NextLocationMap$, "048-1.gat";
-    set @NextLocationX, 65;
-    set @NextLocationY, 45;
+    set @NextLocationMap$, "048-2.gat";
+    set @NextLocationX, 26;
+    set @NextLocationY, 47;
     goto L_TravelChecks;
 
 L_TravelHurnscald:
@@ -220,6 +223,14 @@ L_TravelBarbarians:
     set @NextLocationY, 33;
     goto L_TravelChecks;
 
+L_TravelHurnsFarms:
+    set @NextLocationBit, $@hurns_farms_bit;
+    set @NextLocationCost, (@Cost * $@hurns_farms_cost);
+    set @NextLocationMap$, "055-1.gat";
+    set @NextLocationX, 135;
+    set @NextLocationY, 60;
+    goto L_TravelChecks;
+
 L_TravelNo:
     mes "["+@NpcName$+"]";
     mes "\"Perhaps some day you will have the courage to help us.  Enjoy your stay here in Hurnscald.\"";
@@ -246,5 +257,10 @@ L_AlreadyThere:
 
 L_Clearvars:
     set @Cost, 0;
+    set @NextLocationBit, 0;
+    set @NextLocationCost, 0;
+    set @NextLocationMap$, "";
+    set @NextLocationX, 0;
+    set @NextLocationY, 0;
     return;
 }

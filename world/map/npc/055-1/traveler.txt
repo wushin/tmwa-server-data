@@ -2,10 +2,10 @@
 // Author: Wombat, wushin
 // cost depending on level and adapted to new scripting guidelines: Jenalya
 
-048-1.gat,69,42,0|script|Drake the Traveler|103,
+055-1.gat,135,60,0|script|Sherman the Traveler|103,
 {
-    set @NpcName$, "Drake";
-    set @NpcTravelBit, $@blue_sage_bit;
+    set @NpcName$, "Sherman";
+    set @NpcTravelBit, $@hurns_farms_bit;
     callfunc "Traveler";
     end;
 }

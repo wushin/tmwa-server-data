@@ -18,5 +18,6 @@ npc: npc/027-2/headless_man.txt
 npc: npc/027-2/husband.txt
 npc: npc/027-2/innkeeper.txt
 npc: npc/027-2/lover.txt
+npc: npc/027-2/mapflags.txt
 npc: npc/027-2/testnpcs.txt
 npc: npc/027-2/werewolf.txt
