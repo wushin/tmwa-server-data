@@ -59,6 +59,10 @@ L_Return:
 
 function|script|Traveler|,
 {
+    mes "["+@NpcName$+"]";
+    mes "\"Greetings.  I am "+@NpcName$+" the Traveler.\"";
+    next;
+
     if (TravelFound & $@tut_bit)
         goto L_Main;
     goto L_TravelTut;
@@ -86,9 +90,6 @@ L_SetTravelBit:
     goto L_BitTravelSet;
 
 L_Start:
-    mes "["+@NpcName$+"]";
-    mes "\"Greetings.  I am "+@NpcName$+" the Traveler.\"";
-    next;
     mes "\"Where would you like to go?\"";
     menu
         "Tulimshar (" + (@Cost * $@tulimshar_cost) + " GP)", L_TravelTulimshar,
@@ -106,173 +107,118 @@ L_Start:
         "Who are the Travelers?", L_TravelTut,
         "I'm not interested.", L_TravelNo;
 
-L_TravelDruidTree:
-    if (@NpcTravelBit == $@druid_tree_bit)
+L_TravelChecks:
+    if (@NpcTravelBit == @NextLocationBit)
         goto L_AlreadyThere;
-    if (!(TravelFound & $@druid_tree_bit))
+    if (!(TravelFound & @NextLocationBit))
         goto L_NoFound;
-    if (Zeny < (@Cost * $@druid_tree_cost))
+    if (Zeny < @NextLocationCost)
         goto L_NoMoney;
+    goto L_TravelPlayer;
+
+L_TravelPlayer:
     mes "["+@NpcName$+"]";
     mes "\"Be fearless!\"";
     close2;
-    set Zeny, Zeny - (@Cost * $@druid_tree_cost);
-    warp "005-1.gat",76,36;
+    set Zeny, Zeny - @NextLocationCost;
+    warp @NextLocationMap$,@NextLocationX,@NextLocationY;
     goto L_Clearvars;
+
+L_TravelDruidTree:
+    set @NextLocationBit, $@druid_tree_bit;
+    set @NextLocationCost, (@Cost * $@druid_tree_cost);
+    set @NextLocationMap$, "005-1.gat";
+    set @NextLocationX, 76;
+    set @NextLocationY, 36;
+    goto L_TravelChecks;
 
 L_TravelGraveyard:
-    if (@NpcTravelBit == $@graveyard_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@graveyard_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@graveyard_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@graveyard_cost);
-    warp "027-1.gat",84,86;
-    goto L_Clearvars;
+    set @NextLocationBit, $@graveyard_bit;
+    set @NextLocationCost, (@Cost * $@graveyard_cost);
+    set @NextLocationMap$, "027-1.gat";
+    set @NextLocationX, 84;
+    set @NextLocationY, 86;
+    goto L_TravelChecks;
 
 L_TravelMagicHouse:
-    if (@NpcTravelBit == $@magic_house_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@magic_house_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@magic_house_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@magic_house_cost);
-    warp "013-1.gat",120,93;
-    goto L_Clearvars;
+    set @NextLocationBit, $@magic_house_bit;
+    set @NextLocationCost, (@Cost * $@magic_house_cost);
+    set @NextLocationMap$, "013-1.gat";
+    set @NextLocationX, 120;
+    set @NextLocationY, 93;
+    goto L_TravelChecks;
 
 L_TravelTerranite:
-    if (@NpcTravelBit == $@terranite_cave_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@terranite_cave_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@terranite_cave_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@terranite_cave_cost);
-    warp "012-3.gat",445,65;
-    goto L_Clearvars;
+    set @NextLocationBit, $@terranite_cave_bit;
+    set @NextLocationCost, (@Cost * $@terranite_cave_cost);
+    set @NextLocationMap$, "012-3.gat";
+    set @NextLocationX, 445;
+    set @NextLocationY, 65;
+    goto L_TravelChecks;
 
 L_TravelTulimshar:
-    if (@NpcTravelBit == $@tulimshar_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@tulimshar_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@tulimshar_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@tulimshar_cost);
-    warp "001-1.gat",44,70;
-    goto L_Clearvars;
+    set @NextLocationBit, $@tulimshar_bit;
+    set @NextLocationCost, (@Cost * $@tulimshar_cost);
+    set @NextLocationMap$, "001-1.gat";
+    set @NextLocationX, 44;
+    set @NextLocationY, 70;
+    goto L_TravelChecks;
 
 L_TravelBlueSage:
-    if (@NpcTravelBit == $@blue_sage_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@blue_sage_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost  * $@blue_sage_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@blue_sage_cost);
-    warp "048-1.gat",65,45;
-    goto L_Clearvars;
+    set @NextLocationBit, $@blue_sage_bit;
+    set @NextLocationCost, (@Cost  * $@blue_sage_cost);
+    set @NextLocationMap$, "048-1.gat";
+    set @NextLocationX, 65;
+    set @NextLocationY, 45;
+    goto L_TravelChecks;
 
 L_TravelHurnscald:
-    if (@NpcTravelBit == $@hurnscald_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@hurnscald_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@hurnscald_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@hurnscald_cost);
-    warp "008-1.gat",79,84;
-    goto L_Clearvars;
+    set @NextLocationBit, $@hurnscald_bit;
+    set @NextLocationCost, (@Cost * $@hurnscald_cost);
+    set @NextLocationMap$, "008-1.gat";
+    set @NextLocationX, 79;
+    set @NextLocationY, 84;
+    goto L_TravelChecks;
 
 L_TravelNivalis:
-    if (@NpcTravelBit == $@nivalis_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@nivalis_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@nivalis_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@nivalis_cost);
-    warp "020-1.gat",53,122;
-    goto L_Clearvars;
+    set @NextLocationBit, $@nivalis_bit;
+    set @NextLocationCost, (@Cost * $@nivalis_cost);
+    set @NextLocationMap$, "020-1.gat";
+    set @NextLocationX, 53;
+    set @NextLocationY, 122;
+    goto L_TravelChecks;
 
 L_TravelTulMine:
-    if (@NpcTravelBit == $@tul_mine_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@tul_mine_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@tul_mine_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@tul_mine_cost);
-    warp "002-3.gat",75,67;
-    goto L_Clearvars;
+    set @NextLocationBit, $@tul_mine_bit;
+    set @NextLocationCost, (@Cost * $@tul_mine_cost);
+    set @NextLocationMap$, "002-3.gat";
+    set @NextLocationX, 75;
+    set @NextLocationY, 67;
+    goto L_TravelChecks;
 
 L_TravelPachua:
-    if (@NpcTravelBit == $@pachua_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@pachua_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@pachua_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@pachua_cost);
-    warp "002-3.gat",75,67;
-    goto L_Clearvars;
+    set @NextLocationBit, $@pachua_bit;
+    set @NextLocationCost, (@Cost * $@pachua_cost);
+    set @NextLocationMap$, "006-1.gat";
+    set @NextLocationX, 28;
+    set @NextLocationY, 97;
+    goto L_TravelChecks;
 
 L_TravelWorkshop:
-    if (@NpcTravelBit == $@santas_work_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@santas_work_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@santas_work_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@santas_work_cost);
-    warp "030-1.gat",103,55;
-    goto L_Clearvars;
+    set @NextLocationBit, $@santas_work_bit;
+    set @NextLocationCost, (@Cost * $@santas_work_cost);
+    set @NextLocationMap$, "030-1.gat";
+    set @NextLocationX, 103;
+    set @NextLocationY, 55;
+    goto L_TravelChecks;
 
 L_TravelBarbarians:
-    if (@NpcTravelBit == $@barbarians_bit)
-        goto L_AlreadyThere;
-    if (!(TravelFound & $@barbarians_bit))
-        goto L_NoFound;
-    if (Zeny < (@Cost * $@barbarians_cost))
-        goto L_NoMoney;
-    mes "["+@NpcName$+"]";
-    mes "\"Be fearless!\"";
-    close2;
-    set Zeny, Zeny - (@Cost * $@barbarians_cost);
-    warp "033-1.gat",66,33;
-    goto L_Clearvars;
+    set @NextLocationBit, $@barbarians_bit;
+    set @NextLocationCost, (@Cost * $@barbarians_cost);
+    set @NextLocationMap$, "033-1.gat";
+    set @NextLocationX, 66;
+    set @NextLocationY, 33;
+    goto L_TravelChecks;
 
 L_TravelNo:
     mes "["+@NpcName$+"]";
