@@ -6,3 +6,4 @@ npc: npc/006-1/_warps.txt
 npc: npc/006-1/mapflags.txt
 npc: npc/006-1/mika.txt
 npc: npc/006-1/pachua.txt
+npc: npc/006-1/traveler.txt

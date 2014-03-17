@@ -1,0 +1,11 @@
+// This is a teleportation (warp) NPC.  Its purpose is to offer expensive, fast trips throughout the world.
+// Author: Wombat, wushin
+// cost depending on level and adapted to new scripting guidelines: Jenalya
+
+030-1.gat,105,53,0|script|Klaus the Traveler|103,
+{
+    set @NpcName$, "Klaus";
+    set @NpcTravelBit, $@santas_work_bit;
+    callfunc "Traveler";
+    end;
+}

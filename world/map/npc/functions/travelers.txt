@@ -20,16 +20,22 @@ OnInit:
     set $@hurnscald_bit, (1 << 9);
     set $@nivalis_bit, (1 << 10);
     set $@tul_mine_bit, (1 << 11);
+    set $@pachua_bit, (1 << 12);
+    set $@santas_work_bit, (1 << 13);
+    set $@barbarians_bit, (1 << 14);
     // Travel Base Cost
-    set $@druid_tree_cost, 150;
-    set $@graveyard_cost, 150;
-    set $@magic_house_cost, 150;
-    set $@terranite_cave_cost, 150;
     set $@tulimshar_cost, 100;
-    set $@blue_sage_cost, 150;
     set $@hurnscald_cost, 100;
     set $@nivalis_cost, 100;
-    set $@tul_min_cost, 100;
+    set $@druid_tree_cost, 150;
+    set $@tul_mine_cost, 150;
+    set $@pachua_cost, 200;
+    set $@graveyard_cost, 200;
+    set $@magic_house_cost, 150;
+    set $@terranite_cave_cost, 200;
+    set $@blue_sage_cost, 200;
+    set $@santas_work_cost, 150;
+    set $@barbarians_cost, 150;
     end;
 }
 
@@ -85,14 +91,18 @@ L_Start:
     next;
     mes "\"Where would you like to go?\"";
     menu
-        "Druid Tree (" + (@Cost * $@druid_tree_cost) + " GP)", L_TravelDruidTree,
-        "Graveyard (" + (@Cost * $@graveyard_cost) + " GP)", L_TravelGraveyard,
-        "Magic House (" + (@Cost * $@magic_house_cost) + " GP)", L_TravelMagicHouse,
-        "Terranite Cave (" + (@Cost * $@terranite_cave_cost) + " GP)", L_TravelTerranite,
-        "Tulimshar Town Square (" + (@Cost * $@tulimshar_cost) + " GP)", L_TravelTulimshar,
-        "Sage Nikolai's Mansion (" + (@Cost * $@blue_sage_cost) + " GP)", L_TravelBlueSage,
+        "Tulimshar (" + (@Cost * $@tulimshar_cost) + " GP)", L_TravelTulimshar,
         "Hurnscald (" + (@Cost * $@hurnscald_cost) + " GP)", L_TravelHurnscald,
         "Nivalis (" + (@Cost * $@nivalis_cost) + " GP)", L_TravelNivalis,
+        "Tonori - Druid Tree (" + (@Cost * $@druid_tree_cost) + " GP)", L_TravelDruidTree,
+        "Tonori - Tulimshar Mines (" + (@Cost * $@tul_mine_cost) + " GP)", L_TravelTulMine,
+        "Tonori - Pachua's Village (" + (@Cost * $@pachua_cost) + " GP)", L_TravelPachua,
+        "Argeas - Magic House (" + (@Cost * $@magic_house_cost) + " GP)", L_TravelMagicHouse,
+        "Argeas - Graveyard (" + (@Cost * $@graveyard_cost) + " GP)", L_TravelGraveyard,
+        "Argeas - Terranite Cave (" + (@Cost * $@terranite_cave_cost) + " GP)", L_TravelTerranite,
+        "Nivalis - Santa's Workshop (" + (@Cost * $@santas_work_cost) + " GP)", L_TravelWorkshop,
+        "Nivalis - Barbarian Village (" + (@Cost * $@barbarians_cost) + " GP)", L_TravelBarbarians,
+        "Nivalis - Sage Nikolai's Mansion (" + (@Cost * $@blue_sage_cost) + " GP)", L_TravelBlueSage,
         "Who are the Travelers?", L_TravelTut,
         "I'm not interested.", L_TravelNo;
 
@@ -208,7 +218,7 @@ L_TravelNivalis:
     warp "020-1.gat",53,122;
     goto L_Clearvars;
 
-L_TravelTuMine:
+L_TravelTulMine:
     if (@NpcTravelBit == $@tul_mine_bit)
         goto L_AlreadyThere;
     if (!(TravelFound & $@tul_mine_bit))
@@ -220,6 +230,48 @@ L_TravelTuMine:
     close2;
     set Zeny, Zeny - (@Cost * $@tul_mine_cost);
     warp "002-3.gat",75,67;
+    goto L_Clearvars;
+
+L_TravelPachua:
+    if (@NpcTravelBit == $@pachua_bit)
+        goto L_AlreadyThere;
+    if (!(TravelFound & $@pachua_bit))
+        goto L_NoFound;
+    if (Zeny < (@Cost * $@pachua_cost))
+        goto L_NoMoney;
+    mes "["+@NpcName$+"]";
+    mes "\"Be fearless!\"";
+    close2;
+    set Zeny, Zeny - (@Cost * $@pachua_cost);
+    warp "002-3.gat",75,67;
+    goto L_Clearvars;
+
+L_TravelWorkshop:
+    if (@NpcTravelBit == $@santas_work_bit)
+        goto L_AlreadyThere;
+    if (!(TravelFound & $@santas_work_bit))
+        goto L_NoFound;
+    if (Zeny < (@Cost * $@santas_work_cost))
+        goto L_NoMoney;
+    mes "["+@NpcName$+"]";
+    mes "\"Be fearless!\"";
+    close2;
+    set Zeny, Zeny - (@Cost * $@santas_work_cost);
+    warp "030-1.gat",103,55;
+    goto L_Clearvars;
+
+L_TravelBarbarians:
+    if (@NpcTravelBit == $@barbarians_bit)
+        goto L_AlreadyThere;
+    if (!(TravelFound & $@barbarians_bit))
+        goto L_NoFound;
+    if (Zeny < (@Cost * $@barbarians_cost))
+        goto L_NoMoney;
+    mes "["+@NpcName$+"]";
+    mes "\"Be fearless!\"";
+    close2;
+    set Zeny, Zeny - (@Cost * $@barbarians_cost);
+    warp "033-1.gat",66,33;
     goto L_Clearvars;
 
 L_TravelNo:
