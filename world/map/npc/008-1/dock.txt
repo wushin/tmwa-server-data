@@ -10,6 +10,7 @@
 L_Main:
     callfunc "BoardFerry";
     close;
+    end;
 
 OnDockCheck:
     goto L_Main;

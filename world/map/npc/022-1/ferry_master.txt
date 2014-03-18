@@ -12,6 +12,6 @@
 
 L_Explain:
     mes "[Ferry Master]";
-    mes "\"You'll step up on the dock and select your destination. Each destination has an associated price that you need to pay. You don't have to go anywhere. Choosing the current port will result in nothing.\"";
+    mes "\"You'll step up on the dock when the ship is in. Board the boat and get off at your desired destination. The ferrys are free to ride.\"";
     close;
 }

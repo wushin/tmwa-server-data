@@ -3,5 +3,7 @@
 map: koga-candor.gat
 npc: npc/koga-candor/_mobs.txt
 npc: npc/koga-candor/_warps.txt
+npc: npc/koga-candor/casino.txt
 npc: npc/koga-candor/koga-candor.txt
 npc: npc/koga-candor/mapflags.txt
+npc: npc/koga-candor/shops.txt
