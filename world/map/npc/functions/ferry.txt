@@ -9,16 +9,16 @@ OnInit:
     disablenpc "#CandorFerry";
     disablenpc "#NivalisKoga";
     disablenpc "#NivalisFerry";
-    disablenpc "#TulimsharNorthKoga";
-    disablenpc "#TulimsharNorthFerry";
-    disablenpc "#TulimsharSouthKoga";
-    disablenpc "#TulimsharSouthFerry";
+    disablenpc "#Tulimshar NorthKoga";
+    disablenpc "#Tulimshar NorthFerry";
+    disablenpc "#Tulimshar SouthKoga";
+    disablenpc "#Tulimshar SouthFerry";
     set $@MainCurrentDock, 0;
     set $@CandorCurrentDock, 0;
     set $@DockTickCount, 0;
     set $@DockLeaveCount, 1;
-    setarray $@MainDocks$, "Hurnscald", "Nivalis", "TulimsharSouth";
-    setarray $@CandorDocks$, "Candor", "TulimsharNorth";
+    setarray $@MainDocks$, "Hurnscald", "Nivalis", "Tulimshar South";
+    setarray $@CandorDocks$, "Candor", "Tulimshar North";
     cmdothernpc "#"+$@MainDocks$[$@MainCurrentDock]+"Dock", "Arrive";
     cmdothernpc "#"+$@CandorDocks$[$@CandorCurrentDock]+"Dock", "Arrive";
     initnpctimer;
@@ -44,13 +44,33 @@ L_NextDock:
 OnTimer10000:
     if ($@DockTickCount > $@DockLeaveCount)
         goto L_NextDock;
-    if ($@DockTickCount)
-        cmdothernpc "#"+$@MainDocks$[$@MainCurrentDock]+"Dock", "Annouce";
-        cmdothernpc "#"+$@CandorDocks$[$@CandorCurrentDock]+"Dock", "Annouce";
     set $@DockTickCount, $@DockTickCount + 1;
     initnpctimer;
     end;
 
+}
+
+function|script|CandorManifest|,
+{
+    mes "The ferry is currently at "+$@CandorDocks$[$@CandorCurrentDock];
+    next;
+    set @NextDock, ($@CandorCurrentDock + 1);
+    if(@NextDock == getarraysize($@CandorDocks$))
+        set @NextDock, 0;
+    mes "The ferry will be arriving at "+$@CandorDocks$[@NextDock]+" next";
+    close;
+    end;
+}
+function|script|MainManifest|,
+{
+    mes "The ferry is currently at "+$@MainDocks$[$@MainCurrentDock];
+    next;
+    set @NextDock, ($@MainCurrentDock + 1);
+    if(@NextDock == getarraysize($@MainDocks$))
+        set @NextDock, 0;
+    mes "The ferry will be arriving at "+$@MainDocks$[@NextDock]+" next";
+    close;
+    end;
 }
 
 function|script|BoardFerry|,

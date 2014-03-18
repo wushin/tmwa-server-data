@@ -27,13 +27,6 @@ OnCommandArrive:
     enablenpc "#CandorKoga";
     enablenpc "#CandorFerry";
     cmdothernpc "#CandorFerry", "CheckDock";
-    mapannounce "029-1.gat", "Koga - Candor: Now arriving in Candor.", 0;
-    mapannounce "koga-candor.gat", "Koga - Candor: Now arriving in Candor.", 0;
-    end;
-
-OnCommandAnnouce:
-    mapannounce "029-1.gat", "Koga - Candor: Now docked in Candor, Departing soon", 0;
-    mapannounce "koga-candor.gat", "Koga - Candor: Now docked in Candor, Departing soon", 0;
     end;
 
 OnCommandWarp:
