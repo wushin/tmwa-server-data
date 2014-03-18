@@ -3,7 +3,7 @@ function|script|WarpTowel|,
 {
     if (TowelLastUsed > (gettimetick(2) - 3600))
         goto L_DontPanic;
-    if (isin("prison.gat",25,27,51,47))
+    if (isin("botcheck.gat",25,27,51,47))
         goto L_Prison;
     if (isin("052-1.gat",1,1,100,80) || isin("052-2.gat",1,1,150,100))
         goto L_Illia;
@@ -30,7 +30,7 @@ L_Illia:
     goto L_Keep;
 
 L_Prison:
-    message strcharinfo(0), "You must be warped by a GM to leave the prison.";
+    message strcharinfo(0), "You must be warped by a GM to leave the botcheck area.";
     goto L_Keep;
 
 L_DontPanic:

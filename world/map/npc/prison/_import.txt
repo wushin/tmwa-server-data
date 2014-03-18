@@ -1,6 +1,0 @@
-// Map prison: Prison
-// This file is generated automatically. All manually changes will be removed when running the Converter.
-map: prison.gat
-npc: npc/prison/_mobs.txt
-npc: npc/prison/_warps.txt
-npc: npc/prison/mapflags.txt

@@ -1,3 +1,0 @@
-prison.gat|mapflag|no_player_drops
-prison.gat|mapflag|town
-prison.gat|mapflag|resave|prison,57,71
