@@ -115,4 +115,3 @@ import: npc/057-1/_import.txt
 import: npc/botcheck/_import.txt
 import: npc/koga-candor/_import.txt
 import: npc/koga/_import.txt
-import: npc/prison/_import.txt

@@ -38,12 +38,16 @@ L_NextDock:
     cmdothernpc "#"+$@MainDocks$[$@MainCurrentDock]+"Dock", "Arrive";
     cmdothernpc "#"+$@CandorDocks$[$@CandorLastDock]+"Dock", "Warp";
     cmdothernpc "#"+$@CandorDocks$[$@CandorCurrentDock]+"Dock", "Arrive";
+    mapannounce "koga.gat", "Koga - Main: Now arriving in "+$@MainDocks$[$@MainCurrentDock]+".", 0;
+    mapannounce "koga-candor.gat", "Koga - Candor: Now arriving in "+$@CandorDocks$[$@CandorCurrentDock]+".", 0;
     initnpctimer;
     end;
 
 OnTimer10000:
     if ($@DockTickCount > $@DockLeaveCount)
         goto L_NextDock;
+    mapannounce "koga.gat", "Koga - Main: Now docked in "+$@MainDocks$[$@MainCurrentDock]+", Departing soon", 0;
+    mapannounce "koga-candor.gat", "Koga - Candor: Now docked in "+$@CandorDocks$[$@CandorCurrentDock]+", Departing soon", 0;
     set $@DockTickCount, $@DockTickCount + 1;
     initnpctimer;
     end;
