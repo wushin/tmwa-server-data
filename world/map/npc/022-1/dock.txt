@@ -1,15 +1,16 @@
 // The ferry dock
+// Author: Wushin
 
-// Tell Ship Schedule 
-022-1.gat,62,36,0|script|Candor Ferry#CandorFerrySign|186,
+// Ferry Sign
+022-1.gat,62,36,0|script|Ferry Schedule#2|396,
 {
-  callfunc "CandorManifest";
-  end;
+    callfunc "FerryManifest";
+    end;
 }
 
-022-1.gat,65,71,0|script|World Ferry#MainFerrySign|186,
+022-1.gat,65,71,0|script|Ferry Schedule#3|396,
 {
-    callfunc "MainManifest";
+    callfunc "FerryManifest";
     end;
 }
 

@@ -1,5 +1,12 @@
 // The ferry dock
 
+// Ferry Sign
+029-1.gat,27,36,0|script|Ferry Schedule#8|397,
+{
+    callfunc "FerryManifest";
+    end;
+}
+
 029-1.gat,16,36,0|script|#CandorKoga|395,
 {
     end;

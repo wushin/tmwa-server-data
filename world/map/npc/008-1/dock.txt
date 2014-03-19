@@ -1,5 +1,11 @@
 // The ferry dock
 
+008-1.gat,134,63,0|script|Ferry Schedule#5|397,
+{
+    callfunc "FerryManifest";
+    end;
+}
+
 008-1.gat,147,64,0|script|#HurnscaldKoga|395,
 {
     end;

@@ -54,25 +54,33 @@ OnTimer10000:
 
 }
 
-function|script|CandorManifest|,
+function|script|FerryManifest|,
 {
+    mes "Which Ferry do you want to check the schedule for?";
+    menu
+        "World Ferry.", L_WorldFerry,
+        "Candor Ferry.", L_CandorFerry;
+    goto L_Close;
+
+L_CandorFerry:
     mes "The ferry is currently at "+$@CandorDocks$[$@CandorCurrentDock];
     next;
     set @NextDock, ($@CandorCurrentDock + 1);
     if(@NextDock == getarraysize($@CandorDocks$))
         set @NextDock, 0;
     mes "The ferry will be arriving at "+$@CandorDocks$[@NextDock]+" next";
-    close;
-    end;
-}
-function|script|MainManifest|,
-{
+    goto L_Close;
+
+L_WorldFerry:
     mes "The ferry is currently at "+$@MainDocks$[$@MainCurrentDock];
     next;
     set @NextDock, ($@MainCurrentDock + 1);
     if(@NextDock == getarraysize($@MainDocks$))
         set @NextDock, 0;
     mes "The ferry will be arriving at "+$@MainDocks$[@NextDock]+" next";
+    goto L_Close;
+
+L_Close:
     close;
     end;
 }
