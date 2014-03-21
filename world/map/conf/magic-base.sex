@@ -585,7 +585,10 @@
                                         (npc "Mouboo")))
                                 (+ 2
                                     (/ spellpower 100))))
-                        (SCRIPT "{ mes \"Your spell seems to have no effect on the mouboo.\"; close; }")
+                        (SCRIPT "{
+                            mes \"Your spell seems to have no effect on the mouboo.\";
+                            close;
+                        }")
                         (SET target caster)))
                 (BLOCK
                     (SET target
@@ -1164,9 +1167,9 @@
                         (BLOCK
                             (SET needed 1000)
                             (SCRIPT "{
-                                   set @spell, 1;
-                                   callfunc \"QuestMoubooHeal\";
-                                  }"))
+                                set @spell, 1;
+                                callfunc \"QuestMoubooHeal\";
+                            }"))
                         (ABORT)))
                 (BLOCK
                     (SET target
@@ -1911,7 +1914,10 @@
                                         (== name "Mouboo"))
                                     (== name "Pinkie"))
                                 (random 2))
-                            (SCRIPT "{ set @value, 1; callfunc \"QuestSagathaHappy\"; }"))))))))
+                            (SCRIPT "{
+                                set @value, 1;
+                                callfunc \"QuestSagathaHappy\"; 
+                            }"))))))))
 
 (SPELL () barrier "#asorm" (PC target)
     (LET level 1)
@@ -3067,7 +3073,7 @@
 
                 L_yes:
                 if marriage(@caster_name$)
-                     announce @caster_name$ + \" and \"+ strcharinfo(0) + \" are now married!\", 0;
+                    announce @caster_name$ + \" and \"+ strcharinfo(0) + \" are now married!\", 0;
                 close;
               }")
             (IF (not
@@ -3165,7 +3171,9 @@
                                 SFX_TELEPORT
                                 200)
                             (WAIT 8000)
-                            (SCRIPT "{ savepoint \"009-1\", 52, 39; }")
+                            (SCRIPT "{
+                                savepoint \"009-1\", 52, 39;
+                            }")
                             (warp caster
                                 (@ "009-1.gat" 55 37))
                             (sfx
@@ -3211,7 +3219,9 @@
                                     (hp caster)
                                     inithp)
                                 (ABORT)) "Cancel teleport if the player took damage during channel time (hacky, but for most purposes should work.)"
-                            (SCRIPT "{ savepoint \"028-1\", 69, 71; }")
+                            (SCRIPT "{
+                                savepoint \"028-1\", 69, 71;
+                            }")
                             (warp caster
                                 (@ "028-1.gat" 69 70))
                             (sfx
@@ -3236,7 +3246,9 @@
                             SFX_TELEPORT
                             200)
                         (WAIT 8000)
-                        (SCRIPT "{ savepoint \"009-1\", 52, 39; }")
+                        (SCRIPT "{
+                            savepoint \"009-1\", 52, 39;
+                        }")
                         (warp caster
                             (@ "009-1.gat" 55 37))
                         (sfx
@@ -3294,7 +3306,9 @@
                             (|
                                 (script_int caster "Easter_2010_QuestState")
                                 (<< 1 17)))
-                        (SCRIPT "{ savepoint \"028-1\", 69, 70; }")
+                        (SCRIPT "{
+                            savepoint \"028-1\", 69, 70;
+                        }")
                         (warp caster
                             (@ "028-1.gat" 69 70))
                         (sfx
@@ -3314,14 +3328,15 @@
                         (name_of caster)
                         "Xakelbael the Dark"))))
         (EFFECT
-            (SCRIPT "{ message strcharinfo(0), \"Global state egg1: \"+ $Easter_2010_Egg_Loc_State1;
-                       message strcharinfo(0), \"Global state egg2: \"+ $Easter_2010_Egg_Loc_State2;
-                       message strcharinfo(0), \"Global state egg3: \"+ $Easter_2010_Egg_Loc_State3;
-                       message strcharinfo(0), \"Global state egg4: \"+ $Easter_2010_Egg_Loc_State4;
-                       message strcharinfo(0), \"Global state egg5: \"+ $Easter_2010_Egg_Loc_State5;
-                       message strcharinfo(0), \"Global npc state1: \"+ $Easter_2010_Npc_State1;
-                       message strcharinfo(0), \"Global npc state2: \"+ $Easter_2010_Npc_State2;
-                     }")
+            (SCRIPT "{ 
+                message strcharinfo(0), \"Global state egg1: \"+ $Easter_2010_Egg_Loc_State1;
+                message strcharinfo(0), \"Global state egg2: \"+ $Easter_2010_Egg_Loc_State2;
+                message strcharinfo(0), \"Global state egg3: \"+ $Easter_2010_Egg_Loc_State3;
+                message strcharinfo(0), \"Global state egg4: \"+ $Easter_2010_Egg_Loc_State4;
+                message strcharinfo(0), \"Global state egg5: \"+ $Easter_2010_Egg_Loc_State5;
+                message strcharinfo(0), \"Global npc state1: \"+ $Easter_2010_Npc_State1;
+                message strcharinfo(0), \"Global npc state2: \"+ $Easter_2010_Npc_State2;
+            }")
             (message caster
                 (+ "Local state egg1: "
                     (script_int p "Easter_2010_EggState1")))
@@ -3360,9 +3375,9 @@
                 (== target "Druid"))
             (== target "Druid*"))
         (SCRIPT "{
-                    set @flag, 2;
-                    callfunc \"QuestTreeTrigger\";
-                }")))
+            set @flag, 2;
+            callfunc \"QuestTreeTrigger\";
+        }")))
 
 (SPELL (NONMAGIC) hug0 "hug" (STRING target)
     (=>
@@ -3548,7 +3563,9 @@
                         (npc "#Power Circle")))
                 0))
         (EFFECT
-            (SCRIPT "{callfunc \"StartChannelling\";}"))))
+            (SCRIPT "{
+                callfunc \"StartChannelling\";}
+            "))))
 
 "--------------------------------------------------------------------------------"
 "Kill the GM event spell"
@@ -3559,5 +3576,5 @@
             (is_equipped caster "MagicGMTopHat"))
         (EFFECT
             (SCRIPT "{
-                                                    callfunc \"ActivateMagicGMTophat\";
-                                                }"))))
+                callfunc \"ActivateMagicGMTophat\";
+            }"))))
