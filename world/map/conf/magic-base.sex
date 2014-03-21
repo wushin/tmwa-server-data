@@ -154,10 +154,10 @@
                     (CALL set_var SCRIPT_XP SCRIPT_LASTSPELL_MASK SCRIPT_LASTSPELL_SHIFT index)
                     (IF DEBUG
                         (message caster
-                            (+ "Spell xp = "xp))))
+                            (+ "Spell xp = " xp))))
                 (IF DEBUG
                     (message caster
-                        (+ "Re-cast same spell, xp remain at "last_xp)))))))
+                        (+ "Re-cast same spell, xp remain at " last_xp)))))))
 
 (PROCEDURE create_item (good_item count bad_item difficulty)
     (SET success 1)
@@ -290,9 +290,8 @@
                     (location caster)
                     (location target))
                 attack_range))
-        (ABORT)))
+        (ABORT))) "Cause elemental damage.  bonus_elt grants an attack bonus, malus_elt reduces the attack. `effect' is the sfx ID."
 
-"Cause elemental damage.  bonus_elt grants an attack bonus, malus_elt reduces the attack. `effect' is the sfx ID."
 (PROCEDURE elt_damage (target damage dmgplus bonus_elt malus_elt effect)
     (SET d
         (+ damage
@@ -311,7 +310,6 @@
                     (+ 4
                         (element_level target)))
                 4)))
-    "(message caster "bonus="+ (element(target) = bonus_elt) + "malus="+ (element(target) = malus_elt) + "damage="+ damage + "+ r("+ dmgplus + ") -> "+ d)"
     (sfx target effect 0)
     (injure caster target d 0))
 
@@ -363,9 +361,9 @@
                 (skill caster ASTRAL)
                 control_level)
             2
-            1) "pets when level is high enough"
+            1) 
         count
-        lifetime))
+        lifetime)) "pets when level is high enough"
 
 (PROCEDURE summon_dark_spell (mob_id count delay lifetime control_level)
     (CALL default_effect)
@@ -381,13 +379,10 @@
                 (skill caster DARK)
                 control_level)
             2
-            1) "pets when level is high enough"
+            1)
         count
-        lifetime))
+        lifetime)) "pets when level is high enough"
 
-"--------------------------------------------------------------------------------"
-"Level 0 spells"
-"--------------------------------------------------------------------------------"
 (PROCEDURE abort_on_area_shield (pos)
     (IF (&&
             (==
@@ -397,17 +392,20 @@
                 (||
                     (==
                         (map_nr pos)
-                        1) "Tulimshar"
+                        1) 
                     (==
                         (map_nr pos)
-                        9)) "Hurnscald"
+                        9)) 
                 (==
                     (map_nr pos)
-                    20))) "Nivalis"
+                    20))) "1 is Tulimshar, 9 is Hurnscald and 20 is Nivalis"
         (BLOCK
             (message caster "A powerful magic drains your spell just as it is beginning to take shape!")
             (ABORT))))
 
+"--------------------------------------------------------------------------------"
+"Level 0 spells"
+"--------------------------------------------------------------------------------"
 (SPELL () ask-magic-exp "#abizit" ()
     (LET level 0)
     (LET school MAGIC)
@@ -457,7 +455,7 @@
                                 (if_then_else
                                     (>= level MAX_MAGIC_LEVEL)
                                     ""
-                                    "Surely the Mana Seed will more than readily offer more magic for such a proficient user.")))
+                                    " Surely the Mana Seed will more than readily offer more magic for such a proficient user.")))
                         (IF (>= ratio 20)
                             (message caster "You have perfect control of what you understand now, but there is now a distinct sensation of something more, something indescribable. If only the Mana Seed would give more magic to you...")
                             (IF (>= ratio 10)
@@ -858,9 +856,6 @@
                     (* spellpower 50))
                 1))))
 
-"--------------------------------------------------------------------------------"
-"Level 1 spells"
-"--------------------------------------------------------------------------------"
 (SPELL () detect-magic "#miteyo" ()
     (LET level 0)
     (LET school MAGIC)
@@ -895,6 +890,9 @@
                     range) (IF (!= s self_invocation)
                     (sfx s SFX_DEFAULT 0))))))
 
+"--------------------------------------------------------------------------------"
+"Level 1 spells"
+"--------------------------------------------------------------------------------"
 (SPELL () make-arrows "#kularzufrill" ()
     (LET level 1)
     (LET school TRANSMUTE)
@@ -1088,7 +1086,7 @@
             (CALL default_effect)
             (CALL create_item "ConcentrationPotion" 1 "DilutedConcentrationPot" 1000)
             (message caster
-                (+ "success = "success))
+                (+ "success = " success))
             (IF success
                 (CALL set_var MAGIC_FLAGS 1 MFLAG_MADE_CONC_POTION_SHIFT 1))
             (CALL gain_xp 4 17))))
@@ -1795,12 +1793,12 @@
             (IF (is_in
                     (location caster)
                     (@+
-                        (@ "011-1.gat" 94 38) "Halloween quest"
+                        (@ "011-1.gat" 94 38) 
                         9
                         7))
                 (SCRIPT "{
                     callfunc \"HalloweenQuestWaterPumpkins\";
-                }"))
+                }")) "Halloween quest"
             (FOR i 0
                 (/ spellpower 3)
                 (BLOCK
@@ -2126,13 +2124,13 @@
                             (SET message
                                 (+
                                     (+
-                                        (+ message " (")
+                                        (+ message "(")
                                         (level target))
                                     ")"))))))
             (IF (== message "")
                 (message caster "You sense no-one else nearby.")
                 (message caster
-                    (+ "You sense the following: "message))))))
+                    (+ "You sense the following: " message))))))
 
 (SPELL () enchant-lifestone "#manpahil" ()
     (LET level 1)
@@ -2207,7 +2205,7 @@
                 (BLOCK
                     (message caster
                         (+
-                            (+ "You cannot sense "name)
+                            (+ "You cannot sense " name)
                             "nearby."))
                     (ABORT)))
             (IF (&&
@@ -2223,7 +2221,7 @@
                 (BLOCK
                     (message caster
                         (+
-                            (+ "You sense "name)
+                            (+ "You sense " name)
                             "somewhere below."))
                     (ABORT)))
             (IF (&&
@@ -2239,7 +2237,7 @@
                 (BLOCK
                     (message caster
                         (+
-                            (+ "You sense "name)
+                            (+ "You sense " name)
                             "somewhere above."))
                     (ABORT)))
             (IF (!=
@@ -2249,7 +2247,7 @@
                         (location partner)))
                 (message caster
                     (+
-                        (+ "You sense "name)
+                        (+ "You sense " name)
                         "somewhere in the vincinity."))
                 (BLOCK
                     (SET distance
@@ -2264,14 +2262,14 @@
                     (IF (< distance 3)
                         (message caster
                             (+
-                                (+ "You sense "name)
+                                (+ "You sense " name)
                                 "right next to you."))
                         (IF (< distance 30)
                             (message caster
                                 (+
                                     (+
                                         (+
-                                            (+ "You sense "name)
+                                            (+ "You sense " name)
                                             "close by, towards the ")
                                         dir)
                                     "."))
@@ -2280,7 +2278,7 @@
                                     (+
                                         (+
                                             (+
-                                                (+ "You sense "name)
+                                                (+ "You sense " name)
                                                 "nearby, towards the ")
                                             dir)
                                         "."))
@@ -2288,14 +2286,11 @@
                                     (+
                                         (+
                                             (+
-                                                (+ "You sense "name)
+                                                (+ "You sense " name)
                                                 "in the ")
                                             dir)
                                         "."))))))))))
 
-"--------------------------------------------------------------------------------"
-"Level 2 spells"
-"--------------------------------------------------------------------------------"
 (SPELL () hide "#anwiltyp" (PC target)
     (LET level 1)
     (LET school ASTRAL)
@@ -2340,6 +2335,9 @@
             (ATEND
                 (message target "You are no longer hidden.")))))
 
+"--------------------------------------------------------------------------------"
+"Level 2 spells"
+"--------------------------------------------------------------------------------"
 (SPELL () cure-poison "#anju" (PC target)
     (LET level 2)
     (LET school LIFE)
@@ -2420,7 +2418,7 @@
                 (CALL attack_check target)
                 (SET loc
                     (location target))
-                "WAIT 500;"
+                (DISABLED (WAIT 500))
                 (sfx loc 16 0)
                 (FOREACH TARGET target
                     (rbox loc radius)
@@ -2442,9 +2440,6 @@
                                 ELT_FIRE
                                 15))))))))
 
-"--------------------------------------------------------------------------------"
-"Level 4 spells"
-"--------------------------------------------------------------------------------"
 (SPELL () summon-partner "#kalzumin" ()
     (LET level 2)
     (LET school ASTRAL)
@@ -2481,7 +2476,7 @@
                         (partner caster)
                         (+
                             (name_of caster)
-                            "is calling for your aid!"))
+                            " is calling for your aid!"))
                     (sfx
                         (partner caster)
                         2
@@ -2517,6 +2512,9 @@
                                     dest)
                                 (sfx dest SFX_TELEPORT 0)))))))))
 
+"--------------------------------------------------------------------------------"
+"Level 4 spells"
+"--------------------------------------------------------------------------------"
 (SPELL () shroud "#anwilvimar" ()
     (LET level 4)
     (LET school NATURE)
@@ -2543,8 +2541,8 @@
         (GUARD
             (MANA 80)
             (CASTTIME 400)
-            "(COMPONENT "EtherEssence")"
-            "(CATALYST "TeleportCrystal")"
+            "(COMPONENT \"EtherEssence\")"
+            "(CATALYST \"TeleportCrystal\")"
             (REQUIRE
                 (>
                     (skill caster MAGIC)
@@ -3006,7 +3004,7 @@
                 (BLOCK
                     (message caster
                         (+
-                            (+ "You must be level "MIN_MARRY_LEVEL)
+                            (+ "You must be level " MIN_MARRY_LEVEL)
                             "or higher to marry!"))
                     (ABORT)))
             (IF (<
@@ -3015,7 +3013,7 @@
                 (BLOCK
                     (message caster
                         (+
-                            (+ "Your partner must be level "MIN_MARRY_LEVEL)
+                            (+ "Your partner must be level " MIN_MARRY_LEVEL)
                             "or higher to marry!"))
                     (ABORT)))
             (IF (==
@@ -3026,7 +3024,7 @@
                         (+
                             (+ "You and "
                                 (name_of target))
-                            "are already married."))
+                            " are already married."))
                     (ABORT)))
             (IF (is_married caster)
                 (BLOCK
@@ -3037,7 +3035,7 @@
                     (message caster
                         (+
                             (name_of target)
-                            "is already married."))
+                            " is already married."))
                     (ABORT)))
             (IF (!=
                     (distance
@@ -3059,8 +3057,8 @@
                     (ABORT)))
             (SET script_target target)
             (SCRIPT "{
-                announce @caster_name$ + \"is asking \"+ strcharinfo(0) + \"for marriage.\", 2;
-                mes @caster_name$ + \"wishes to marry you.\";
+                announce @caster_name$ + \" is asking \"+ strcharinfo(0) + \" for marriage.\", 2;
+                mes @caster_name$ + \" wishes to marry you.\";
                 mes \"Do you accept?\";
                 next;
                 menu \"Yes, I do!\", L_yes,
@@ -3069,7 +3067,7 @@
 
                 L_yes:
                 if marriage(@caster_name$)
-                     announce @caster_name$ + \"and \"+ strcharinfo(0) + \"are now married!\", 0;
+                     announce @caster_name$ + \" and \"+ strcharinfo(0) + \" are now married!\", 0;
                 close;
               }")
             (IF (not
@@ -3077,7 +3075,7 @@
                 (message caster
                     (+
                         (name_of target)
-                        "turned down your marriage offer."))))))
+                        " turned down your marriage offer."))))))
 
 (SPELL (LOCAL) mouboo-groan "#g" ()
     (=>
@@ -3136,22 +3134,22 @@
                                 (script_int caster "Easter_2010_QuestState")
                                 7)
                             3)
-                        2)))) "Travel only works when you have both helped the doctor at least thrice and have defeated the invader - top level requirement."
+                        2))) "Travel only works when you have both helped the doctor at least thrice and have defeated the invader - top level requirement." ) 
         (|
             (=>
                 (GUARD
                     (REQUIRE
                         (&&
                             (&&
-                                (count_item caster "DarkPetal") "Allow unlimited travel with the petal"
+                                (count_item caster "DarkPetal") 
                                 (!=
                                     (map_nr
                                         (location caster))
-                                    52)) "Do not allow if player is in Illia island"
+                                    52)) 
                             (!=
                                 (map_nr
                                     (location caster))
-                                5698)))) "Do not allow if player is in botcheck area"
+                                5698))) "Allow unlimited travel with the petal, 52 Do not allow if player is in Illia island, 5698 Do not allow if player is in botcheck area" )
                 (|
                     (=>
                         (GUARD
@@ -3259,7 +3257,7 @@
                                             (script_int caster "Easter_2010_QuestState")
                                             17)
                                         1)
-                                    0)))) "Allow for one free warp home without the petal"
+                                    0))) "Allow for one free warp home without the petal" )
                     (EFFECT
                         (SET inithp
                             (hp caster)) "Store this value."
@@ -3317,13 +3315,13 @@
                         "Xakelbael the Dark"))))
         (EFFECT
             (SCRIPT "{ message strcharinfo(0), \"Global state egg1: \"+ $Easter_2010_Egg_Loc_State1;
-             message strcharinfo(0), \"Global state egg2: \"+ $Easter_2010_Egg_Loc_State2;
-             message strcharinfo(0), \"Global state egg3: \"+ $Easter_2010_Egg_Loc_State3;
-             message strcharinfo(0), \"Global state egg4: \"+ $Easter_2010_Egg_Loc_State4;
-             message strcharinfo(0), \"Global state egg5: \"+ $Easter_2010_Egg_Loc_State5;
-             message strcharinfo(0), \"Global npc state1: \"+ $Easter_2010_Npc_State1;
-             message strcharinfo(0), \"Global npc state2: \"+ $Easter_2010_Npc_State2;
-           }")
+                       message strcharinfo(0), \"Global state egg2: \"+ $Easter_2010_Egg_Loc_State2;
+                       message strcharinfo(0), \"Global state egg3: \"+ $Easter_2010_Egg_Loc_State3;
+                       message strcharinfo(0), \"Global state egg4: \"+ $Easter_2010_Egg_Loc_State4;
+                       message strcharinfo(0), \"Global state egg5: \"+ $Easter_2010_Egg_Loc_State5;
+                       message strcharinfo(0), \"Global npc state1: \"+ $Easter_2010_Npc_State1;
+                       message strcharinfo(0), \"Global npc state2: \"+ $Easter_2010_Npc_State2;
+                     }")
             (message caster
                 (+ "Local state egg1: "
                     (script_int p "Easter_2010_EggState1")))
@@ -3461,9 +3459,6 @@
         (EFFECT
             (CALL hug_tree target))))
 
-"--------------------------------------------------------------------------------"
-"Teleport anchors"
-"--------------------------------------------------------------------------------"
 (SPELL (NONMAGIC) hug5 "*hugs" (STRING target)
     (=>
         (REQUIRE
@@ -3483,6 +3478,9 @@
         (EFFECT
             (CALL hug_tree target))))
 
+"--------------------------------------------------------------------------------"
+"Teleport anchors"
+"--------------------------------------------------------------------------------"
 (TELEPORT-ANCHOR tulimshar "tulimshar"
     (@+
         (@ "001-1.gat" 43 66)
@@ -3550,9 +3548,7 @@
                         (npc "#Power Circle")))
                 0))
         (EFFECT
-            (SCRIPT "{
-                                                    callfunc \"StartChannelling\";
-                                                }"))))
+            (SCRIPT "{callfunc \"StartChannelling\";}"))))
 
 "--------------------------------------------------------------------------------"
 "Kill the GM event spell"
