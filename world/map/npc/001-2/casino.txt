@@ -22,19 +22,19 @@ L_End:
     close;
 }
 
-001-2.gat,37,65,0|script|Slot1|400,
+001-2.gat,37,65,0|script|Slots#1|400,
 {
     callfunc "SlotMachine";
     close;
 }
 
-001-2.gat,39,65,0|script|Slot2|400,
+001-2.gat,39,65,0|script|Slots#2|400,
 {
     callfunc "SlotMachine";
     close;
 }
 
-001-2.gat,41,65,0|script|Slot3|400,
+001-2.gat,41,65,0|script|Slots#3|400,
 {
     callfunc "SlotMachine";
     close;
