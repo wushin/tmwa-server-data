@@ -5,9 +5,18 @@ function|script|SoulMenhir|,
     next;
 
     menu
-        "Touch it.", -,
+        "Touch it.", L_Touch,
+        "I need a Towel", L_Towel,
         "Leave it alone.", L_Return;
 
+L_Towel:
+    mes "[Soul Menhir]";
+    mes "Don't Panic! Just for testing now";
+    next;
+    getitem "HitchhikersTowel", 1;
+    goto L_Return;
+
+L_Touch:
     if (Menhir_Activated == 1)
         goto L_Shortversion;
 
