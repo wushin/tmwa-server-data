@@ -1,7 +1,6 @@
 // See #TravelConfig
 function|script|WarpTowel|,
 {
-    set TowelLastUsed, gettimetick(2);
     if (@warpTowelType == WARP_TOWEL_SAVE) 
         goto L_Save;
     if(@warpTowelType == WARP_TOWEL_WHITE)
@@ -128,6 +127,7 @@ L_WarpChecks:
     goto L_WarpPlayer;
 
 L_WarpPlayer:
+    set TowelLastUsed, gettimetick(2);
     warp @NextLocationMap$,@NextLocationX,@NextLocationY;
     goto L_BreakChance;
 
