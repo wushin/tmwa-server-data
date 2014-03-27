@@ -15,7 +15,7 @@ L_End:
     end;
 }
 
-001-2.gat,134,23,0|script|Valdo|117,
+001-2.gat,39,32,0|script|Valdo|117,
 {
     mes "[Valdo the Worker]";
     mes "\"Please let me work. I'm really in a hurry!\"";
@@ -40,7 +40,7 @@ L_End:
     close;
 }
 
-001-2.gat,32,67,0|shop|MoneyChanger|124,CasinoCoins :-1
+001-2.gat,102,27,0|shop|MoneyChanger|124,CasinoCoins :-1
 
 001-2.gat,28,63,0|script|BlackJack|107,
 {
