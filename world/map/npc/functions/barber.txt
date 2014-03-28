@@ -114,8 +114,11 @@ L_Done:
 
 // Since this is a function, not an NPC, OnInit doesn't work
 // So call this from a real NPC's OnInit (001-1/barber.txt)
-function|script|OnInitBarber|,
+-|script|#BarberConfig|-1,
 {
+    end;
+
+OnInit:
     setarray $@HairStyles$,
         "Bald", "Flat ponytail", "Bowl cut", "Combed back", "Emo", "Mohawk",
         "Pompadour", "Center parting/Short and slick", "Long and slick",
@@ -126,5 +129,5 @@ function|script|OnInitBarber|,
         "Brunette", "Green", "Dark red", "Light purple", "Gray", "Blonde",
         "Teal", "Light red", "Blue", "Dark purple", "Black", "Pink",
         "Brown";
-    return;
+    end;
 }

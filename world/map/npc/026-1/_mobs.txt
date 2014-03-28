@@ -13,45 +13,38 @@
 
 026-1.gat,0,0,0|script|Mob026-1|-1,
 {
+    end;
+
 On1003:
     set @mobID, 1003;
     callfunc "MobPoints";
     end;
-
 On1025:
     set @mobID, 1025;
     callfunc "MobPoints";
     end;
-
 On1035:
     set @mobID, 1035;
     callfunc "MobPoints";
     end;
-
 On1040:
     set @mobID, 1040;
     callfunc "MobPoints";
     end;
-
 On1042:
     set @mobID, 1042;
     callfunc "MobPoints";
     end;
-
 On1043:
     set @mobID, 1043;
     callfunc "MobPoints";
     end;
-
 On1044:
     set @mobID, 1044;
     callfunc "MobPoints";
     end;
-
 On1047:
     set @mobID, 1047;
     callfunc "MobPoints";
-    end;
-
     end;
 }
