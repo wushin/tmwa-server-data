@@ -2,6 +2,8 @@
 
 botcheck.gat,27,28,0|script|#FerryConfig|-1,
 {
+    end;
+
 OnInit:
     disablenpc "#HurnscaldKoga";
     disablenpc "#HurnscaldFerry";
@@ -60,7 +62,6 @@ function|script|FerryManifest|,
     menu
         "World Ferry.", L_WorldFerry,
         "Candor Ferry.", L_CandorFerry;
-    goto L_Close;
 
 L_CandorFerry:
     mes "The ferry is currently at "+$@CandorDocks$[$@CandorCurrentDock];
@@ -82,7 +83,6 @@ L_WorldFerry:
 
 L_Close:
     close;
-    end;
 }
 
 function|script|BoardFerry|,

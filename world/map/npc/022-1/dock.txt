@@ -21,10 +21,11 @@
 
 022-1.gat,84,72,0|script|#Tulimshar SouthFerry|45,6,1,
 {
+    goto L_Main;
+
 L_Main:
     callfunc "BoardFerry";
     close;
-    end;
 
 OnDockCheck:
     goto L_Main;
@@ -56,10 +57,11 @@ OnCommandWarp:
 
 022-1.gat,60,28,0|script|#Tulimshar NorthFerry|45,1,4,
 {
+    goto L_Main;
+
 L_Main:
     callfunc "BoardCandorFerry";
     close;
-    end;
 
 OnDockCheck:
     goto L_Main;

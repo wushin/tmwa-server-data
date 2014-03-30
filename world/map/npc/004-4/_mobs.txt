@@ -14,20 +14,18 @@
 
 004-4.gat,0,0,0|script|Mob004-4|-1,
 {
+    end;
+
 On1119:
     set @mobID, 1119;
     callfunc "MobPoints";
     end;
-
 On1120:
     set @mobID, 1120;
     callfunc "MobPoints";
     end;
-
 On1121:
     set @mobID, 1121;
     callfunc "MobPoints";
-    end;
-
     end;
 }

@@ -7,13 +7,12 @@
     next;
     menu
         "Yes.", L_PirateCave,
-        "Nevermind", -;
+        "Nevermind", L_Close;
+
+L_PirateCave:
+    warp "004-3",80,23;
     goto L_Close;
 
-    L_PirateCave:
-        warp "004-3",80,23;
-        goto L_Close;
-
-    L_Close:
-        close; 
+L_Close:
+    close; 
 }

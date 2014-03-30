@@ -13,10 +13,11 @@
 
 008-1.gat,140,64,0|script|#HurnscaldFerry|45,2,1,
 {
+    goto L_Main;
+
 L_Main:
     callfunc "BoardFerry";
     close;
-    end;
 
 OnDockCheck:
     goto L_Main;

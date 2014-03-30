@@ -14,6 +14,8 @@
 
 -|script|#TutorialConfig|-1,
 {
+    end;
+
 OnInit:
     set $@ScorpionFighter, 0;
     set $@ScorpionTimer, 0;

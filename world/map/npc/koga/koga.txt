@@ -30,5 +30,4 @@ L_Nivalis:
 
 L_Close:
     close;
-    end;
 }

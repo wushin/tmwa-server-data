@@ -3,6 +3,7 @@
 
 042-1.gat,116,84,0|script|Hasan|189,0,2,
 {
+    goto L_Main;
 
 L_Main:
     if (FLAGS & FLAG_TUTORIAL_DONE)
@@ -23,13 +24,16 @@ L_Main:
     mes "[Unfriendly Guy]";
     mes "\"Hey! You can't pass here.\"";
     menu
-        "Why not?",-,
-        "Who says that?",-;
+        "Why not?",L_Next,
+        "Who says that?",L_Next;
+
+L_Next:
     mes "[Unfriendly Guy]";
     mes "\"I, Hasan the Mighty, have decided to put a toll on this path.\"";
     set @tutorial_tmp, 10;
     callfunc "SetTutorialMask";
     next;
+    goto L_Toll;
 
 L_Toll:
     mes "[Hasan]";
@@ -43,13 +47,11 @@ L_HasToll:
         "Ok, here you go.",L_Pay,
         "What? I don't have that much money!",L_NoPay,
         "We'll see if you can stop me!",L_Fight;
-    close;
 
 L_NoToll:
     menu
         "What? I don't have that much money!",L_NoPay,
         "We'll see if you can stop me!",L_Fight;
-    close;
 
 L_NoPay:
     mes "[Hasan]";
@@ -89,7 +91,9 @@ L_Trick:
     mes "\"Are you going to pay now? " + @toll + "GP, and I may let you pass.\"";
     menu
         "I don't have that much money!",L_NoPay,
-        "No. (Scratch your head.)",-;
+        "No. (Scratch your head.)",L_ScratchHead;
+
+L_ScratchHead:
     if ($@ScorpionFighter)
         goto L_Wait;
     set $@ScorpionTimer, 0;
@@ -115,8 +119,10 @@ L_Thank:
     next;
     mes "\"You want to go to the bazaar, right? Shall I tell you how to get there?\"";
     menu
-        "Sure, thanks.",-,
+        "Sure, thanks.",L_HasanThanks,
         "I'll try to find the way myself.",L_Explore;
+
+L_HasanThanks:
     mes "[Hasan]";
     mes "\"Ok, when you leave here follow the road past the docks until you reach the old city gates.\"";
     next;
@@ -162,6 +168,7 @@ OnTouch:
 
 042-1.gat,0,0,0|script|#ScorpionTrigger|35,
 {
+    end;
 
 OnCommandHasanSpawn:
     goto L_Summon;

@@ -8,6 +8,8 @@
 // Contains all warp points to find
 botcheck.gat,27,28,0|script|#TravelConfig|-1,
 {
+    end;
+
 OnInit:
     // TravelFound
     set $@tut_bit, (1 << 2);

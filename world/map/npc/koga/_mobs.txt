@@ -6,4 +6,5 @@
 koga.gat,0,0,0|script|Mobkoga|-1,
 {
     end;
+
 }

@@ -11,9 +11,6 @@
     next;
     mes "\"I was so excited to get an opportunity to study some of the rare and valuable books and now this.";
     mes "I'd never have expected something like this happening in a Sages household. I thought they're so powerful and wise...\"";
-    goto L_Close;
-
-L_Close:
     close;
 }
 
@@ -23,7 +20,9 @@ L_Close:
     mes "\"Hello young one. Did you also come here to see the library?\"";
     menu
         "Nah, I'm just having a look around.",L_Close,
-        "Yes!",-;
+        "Yes!", L_More;
+
+L_More:
     mes "[Parcival]";
     mes "\"That's very commendable. But you'll be disappointed, there is a huge problem and the library is all upside down.";
     mes "This is very annoying! I was planning this trip for months and now this!\"";
@@ -35,8 +34,5 @@ L_Close:
     mes "\"I wonder what they did... I can still feel some distortion in the magic pattern within this mansion. I mean, it's twisted anyway, because the Sages have their houses in a shifted dimension - that's why it is so much larger in the inside than from the outside.\"";
     next;
     mes "\"But there's something else... Well, I've heard about the research being done here. Seems there's some very advanced magic involved.\"";
-    goto L_Close;
-
-L_Close:
     close;
 }

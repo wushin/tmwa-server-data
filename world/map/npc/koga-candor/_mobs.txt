@@ -6,4 +6,5 @@
 koga-candor.gat,0,0,0|script|Mobkoga-candor|-1,
 {
     end;
+
 }

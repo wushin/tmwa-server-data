@@ -31,8 +31,10 @@ L_Tanisha:
     mes "[Kaan]";
     mes "\"Did you already talk to Tanisha?\"";
     menu
-        "Yes, I helped her with the maggots.",-,
-        "Yeah, and she's done with the maggots.",-;
+        "Yes, I helped her with the maggots.",L_Next,
+        "Yeah, and she's done with the maggots.",L_Next;
+
+L_Next:
     mes "[Kaan]";
     mes "\"Ah, that is good news.";
     mes "You know, we have a lot of problems with bugs here.\"";
@@ -47,8 +49,10 @@ L_Tanisha:
     mes "\"I've trapped or slain many scorpians south of here to keep them out of our fields.\"";
     next;
     menu
-        "Impressive! Just a bit... skewed.",-,
-        "Wow, it looks very - ahm, unconventional.",-;
+        "Impressive! Just a bit... skewed.",L_Next1,
+        "Wow, it looks very - ahm, unconventional.",L_Next1;
+
+L_Next1:
     mes "[Kaan]";
     mes "\"Well, I keep the scorpions out. That's all that matters.\"";
     next;
@@ -66,6 +70,7 @@ L_Tanisha:
         menu
             "A guy named Hasan won't let me enter Tulimshar.",L_Hasan,
             "Thanks for the advice.",L_Close;
+    goto L_Out;
 
 L_Out:
     mes "[Kaan]";
@@ -77,8 +82,10 @@ L_Hasan:
     mes "[Kaan]";
     mes "\"Hello! How are you? Did you already visit Tulimshar?\"";
     menu
-        "A guy named Hasan won't let me enter Tulimshar.",-,
+        "A guy named Hasan won't let me enter Tulimshar.",L_Next2,
         "Not yet.",L_Close;
+
+L_Next2:
     mes "\"Hasan! That's crazy. He becomes more cheeky with every day.";
     mes "I'd like to help you, but - I won't risk an open confrontation with him.\"";
     next;
@@ -89,6 +96,7 @@ L_Hasan:
     set @tutorial_tmp, 11;
     callfunc "SetTutorialMask";
     next;
+    goto L_Trick;
 
 L_Trick:
     mes "[Kaan]";
@@ -101,14 +109,17 @@ L_TrickKnown:
     mes "[Kaan]";
     mes "\"Do you have any idea what Hasan's weakness could be?";
     menu
-        "He's afraid of scorpions.",-,
+        "He's afraid of scorpions.",L_Next3,
         "No idea.",L_Close;
+
+L_Next3:
     mes "[Kaan]";
     mes "\"Scorpions?! Right! How could I forget?";
     mes "When he was a child, he nearly died because he fell into a scorpion nest.\"";
     set @tutorial_tmp, 12;
     callfunc "SetTutorialMask";
     next;
+    goto L_Explain;
 
 L_Explain:
     mes "\"Ok, then here's the plan:";
