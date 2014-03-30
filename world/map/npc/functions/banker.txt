@@ -5,6 +5,7 @@ function|script|Banker|,
     if (BankAccount == 0)
         goto L_Start;
     callsub S_MoveAccount;
+    goto L_Start;
 
 L_Start:
     mes "[" + @npcname$ + "]";
@@ -108,6 +109,7 @@ L_Dep_All:
     if (Zeny<1)
         goto L_NoMoney;
     set @Amount, Zeny;
+    goto L_Dep_Continue;
 
 L_Dep_Continue:
     if (Zeny < @Amount)
@@ -197,6 +199,7 @@ L_With_All:
     if (#BankAccount < 0)
         goto L_NoMoney;
     set @Amount, #BankAccount;
+    goto L_With_Continue;
 
 L_With_Continue:
     if (#BankAccount < @Amount)
