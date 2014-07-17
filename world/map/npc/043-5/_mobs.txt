@@ -1,0 +1,38 @@
+// This file is generated automatically. All manually added changes will be removed when running the Converter.
+// Witch Cave mobs
+
+043-5,27,57,8,18|monster|UndeadWitch|1116,1,120000ms,60000ms,Mob043-5::On1116
+043-5,66,31,23,16|monster|UndeadWitch|1116,1,120000ms,60000ms,Mob043-5::On1116
+043-5,54,103,13,12|monster|UndeadWitch|1116,1,120000ms,60000ms,Mob043-5::On1116
+043-5,63,61,24,5|monster|UndeadTroll|1117,2,120000ms,60000ms,Mob043-5::On1117
+043-5,115,101,16,8|monster|UndeadTroll|1117,2,120000ms,60000ms,Mob043-5::On1117
+043-5,127,75,10,10|monster|Snake|1010,4,120000ms,60000ms,Mob043-5::On1010
+043-5,62,73,16,5|monster|Snake|1010,4,120000ms,60000ms,Mob043-5::On1010
+043-5,104,54,9,20|monster|BlackScorpion|1009,4,120000ms,60000ms,Mob043-5::On1009
+043-5,83,95,24,10|monster|BlackScorpion|1009,4,120000ms,60000ms,Mob043-5::On1009
+
+
+043-5,0,0,0|script|Mob043-5|32767
+{
+    end;
+
+On1009:
+    set @mobID, 1009;
+    callfunc "MobPoints";
+    end;
+
+On1010:
+    set @mobID, 1010;
+    callfunc "MobPoints";
+    end;
+
+On1116:
+    set @mobID, 1116;
+    callfunc "MobPoints";
+    end;
+
+On1117:
+    set @mobID, 1117;
+    callfunc "MobPoints";
+    end;
+}

@@ -1,9 +1,5 @@
 // This file is generated automatically. All manually added changes will be removed when running the Converter.
-// Backstage mobs
+// Witch Cave warps
 
-
-
-017-9,0,0,0|script|Mob017-9|32767
-{
-    end;
-}
+043-5,30,108|warp|-1,-1,043-4,194,25
+043-5,126,26|warp|-1,-1,005-3,27,40

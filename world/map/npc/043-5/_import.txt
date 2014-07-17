@@ -1,0 +1,6 @@
+// Map 043-5: Witch Cave
+// This file is generated automatically. All manually added changes will be removed when running the Converter.
+map: 043-5
+npc: npc/043-5/_mobs.txt
+npc: npc/043-5/_warps.txt
+npc: npc/043-5/mapflags.txt

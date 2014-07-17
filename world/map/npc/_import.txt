@@ -90,8 +90,6 @@ import: npc/043-3/_import.txt
 import: npc/043-4/_import.txt
 import: npc/043-5/_import.txt
 import: npc/043-6/_import.txt
-import: npc/044-1/_import.txt
-import: npc/044-3/_import.txt
 import: npc/045-1/_import.txt
 import: npc/046-1/_import.txt
 import: npc/046-3/_import.txt
