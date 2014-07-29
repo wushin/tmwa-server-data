@@ -1,0 +1,127 @@
+// Battle Groups
+// Author: Wushin
+// Based off Illia Quest
+// Vars
+// Leader has array, Players have Leader only.
+// - BATTLE_GROUP (Array)
+// - Leader is Instance Key (Int)
+// Needs a series of functions to attachrid leader and check members
+// Should be able to create, disband & leave.
+
+function|script|BattleGroup|,
+{
+    if (BATTLE_GROUP[0])
+        goto L_LeaveGroup;
+    goto L_Leader;
+
+L_LeaveGroup:
+    if (BATTLE_GROUP[0] == getcharid(3, strcharinfo(0)))
+        goto L_MenuDisband;
+    goto L_MenuLeaveGroup;
+
+L_MenuDisband:
+    mes "[Battle Group Selector]";
+    mes "Disband Battle Group?";
+    menu
+        "No.", L_Return,
+        "Yes.", L_Disband;
+
+L_Disband:
+    // Loop through, attachrids of the group and remove leader.
+    cleararray BATTLE_GROUP, "", getarraysize(BATTLE_GROUP);
+    goto L_Return;
+
+L_MenuLeaveGroup:
+    mes "[Battle Group Selector]";
+    mes "Leave Battle Group?";
+    menu
+        "No.", L_Return,
+        "Yes.", L_LeaveGroup;
+
+L_LeaveGroup:
+    cleararray BATTLE_GROUP, 0, getarraysize(BATTLE_GROUP);
+    goto L_Return;
+
+L_Leader:
+    set $@BG_LEAD$, strcharinfo(0);
+    set $@BG_LEAD_ID, getcharid(3, $@BG_LEAD$);
+    goto L_ChooseMember;
+
+L_ChooseMemberConfirm:
+    mes "[Battle Group Selector]";
+    mes "Select players to join your battlegroup.";
+    menu
+        "Select Player.", L_ChooseMember,
+        "I done.", L_PlayerGaveUp;
+
+L_ChooseMember:
+    set $@BG_MEMBER$, "";
+    mes "[Battle Group Selector]";
+    mes "Name the a player to help you:";
+    input $@BG_MEMBER$;
+
+    if (getcharid(3, $@BG_MEMBER$) == $@BG_LEAD_ID)
+        goto L_WrongMember;
+    if ($@BG_MEMBER$ == "")
+        goto L_MemberDoesNotExist;
+    if (isloggedin(getcharid(3, $@BG_MEMBER$)) == 0)
+        goto L_MemberDoesNotExist;
+    if (!(attachrid(getcharid(3, $@BG_MEMBER$))))
+        goto L_MemberDoesNotExist;
+    goto L_Accept;
+
+L_Accept:
+    mes "[Battle Group Selector]";
+    mes "\"Join Battle Group\"";
+    menu
+        "Yes.", L_Join,
+        "No.", L_NoJoin;
+
+L_Join:
+    setarray BATTLE_GROUP[0], strcharinfo(0);
+    detachrid;
+    if (!(attachrid($@BG_LEAD_ID)))
+        goto L_Return;
+    goto L_Joined;
+
+L_Joined:
+    mes "[Battle Group Selector]";
+    mes $@BG_MEMBER$ + " joined you.";
+    next;
+    goto L_ChooseMemberConfirm;
+
+L_NoJoin:
+    detachrid;
+    if (!(attachrid($@BG_LEAD_ID)))
+        goto L_Return;
+    mes "[Battle Group Selector]";
+    mes "The player " + $@BG_MEMBER$ + " doesn't want to help you.";
+    next;
+    goto L_ChooseMemberConfirm;
+
+L_MemberDoesNotExist:
+    mes "[Battle Group Selector]";
+    mes "This player " + $@BG_MEMBER$ + " seems offline or does not exist.";
+    next;
+    goto L_ChooseMemberConfirm;
+
+L_WrongMember:
+    mes "[Battle Group Selector]";
+    mes "You can't name yourself.";
+    next;
+    goto L_ChooseMemberConfirm;
+
+L_Return:
+    return;
+}
+function|script|setBGInt|,
+{
+    set INSTANCE_KEY, 0;
+    if(getarraysize(BATTLE_GROUP) > 0)
+        set INSTANCE_KEY, BATTLE_GROUP[0];
+    return;
+}
+function|script|checkBGInt|,
+{
+    end;
+}
