@@ -1,8 +1,0 @@
-//#################################################################################
-//#                                                                               #
-//# This script file contains all shops and other NPCs with important functions.  #
-//#                                                                               #
-//#################################################################################
-
-// Shop
-011-1.gat,80,33,0|shop|Fruit Store|400,GreenApple :-1,RedApple :-1,Orange :-1

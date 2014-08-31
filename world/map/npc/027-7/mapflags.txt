@@ -1,2 +1,0 @@
-027-7.gat|mapflag|nosave|027-4,73,78
-027-7.gat|mapflag|resave|027-4,73,78

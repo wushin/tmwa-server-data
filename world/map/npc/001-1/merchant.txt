@@ -1,3 +1,0 @@
-//
-
-001-1.gat,38,50,0|shop|Neko|101,CactusDrink :-1,CactusPotion :-1,Beer :-1,ChickenLeg :-2

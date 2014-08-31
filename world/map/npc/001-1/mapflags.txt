@@ -1,2 +1,0 @@
-001-1.gat|mapflag|town
-001-1.gat|mapflag|resave|001-1,57,71

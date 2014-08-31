@@ -1,1 +1,0 @@
-005-3.gat|mapflag|resave|005-1,80,30

@@ -1,2 +1,0 @@
-035-2.gat|mapflag|town
-035-2.gat|mapflag|resave|035-2,20,21
