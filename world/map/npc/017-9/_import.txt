@@ -4,5 +4,6 @@ map: 017-9.gat
 npc: npc/017-9/_mobs.txt
 npc: npc/017-9/_warps.txt
 npc: npc/017-9/announcements.txt
+npc: npc/017-9/bitmask_tut.txt
 npc: npc/017-9/mapflags.txt
 npc: npc/017-9/secret.txt
