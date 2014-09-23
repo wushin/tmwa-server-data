@@ -74,3 +74,9 @@
 
 //The Dread Pirate Marley Skills
 1122,TheDreadPirateMarley@NPC_SUMMONSLAVE,any,198,2,8000,1000,5000,no,self,slavelt,1,1123,0,0,0,0,
+
+// Kalinoir skills
+// Summons Undead Witches every 5s to a maximum of 5, Undead Trolls (10s, max 3) and one Terranite (30s)
+1132,Kalinoir@NPC_SUMMONSLAVE_undeadwitchX1,any,198,1,10000,10,5000,no,self,slavelt,5,1116,0,0,0,0,
+1132,Kalinoir@NPC_SUMMONSLAVE_undeadtrollX1,any,198,1,10000,10,10000,no,self,slavelt,3,1117,0,0,0,0,
+1132,Kalinoir@NPC_SUMMONSLAVE_terraniteX1,any,198,1,10000,10,30000,no,self,slavelt,1,1062,0,0,0,0,
