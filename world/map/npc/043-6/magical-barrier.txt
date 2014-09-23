@@ -1,0 +1,14 @@
+// Magical barrier preventing you to exit the cave while the final fight
+// in the Witch Cult Quest against Kalinoir is still ongoing.
+// Author: Cassy
+
+043-6.gat,34,59,0|script|#Magical Barrier|45,0,0,
+{
+    if ($@KALINOIR_FIGHT_STATUS == 1) goto L_Block;
+    warp "043-5.gat", 33, 20;
+    end;
+
+L_Block:
+    message strcharinfo(0), "Another magical barrier! Seems like the witches don't want to let you escape.";
+    end;
+}

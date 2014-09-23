@@ -1,0 +1,15 @@
+// Magical barrier preventing you to enter the
+// boss fight cave 043-6 in the Witch Cult Quest.
+// Author: Cassy
+
+043-5.gat,33,20,0|script|Magical Barrier|204,0,0,
+{
+    if ($@TORCHES_ACTIVATED == 1) goto L_Block;
+    warp "043-6.gat", 34, 59;
+    end;
+
+L_Block:
+    message strcharinfo(0), "A magical barrier is blocking the entrance. If you want to enter this cave you must find a way to weaken the barrier first.";
+    end;
+}
+

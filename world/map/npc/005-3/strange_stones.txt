@@ -1,0 +1,49 @@
+// There are two stones in map 005-3 that should lead to hidden paths (only viewable by enabling collision tiles) by clicking at them.
+// In those hidden paths there are regular warp points to return.
+// This is intended to make the Witch Cult Quest (see Troll Mask Guy in 043-4) more interesting.
+// Author: Cassy
+
+//Strange Stone next to the pond
+005-3.gat,110,77,0|script|#Strange Stone by the pond|400,
+{
+    if (isin("005-3.gat", 109, 75, 111, 78))
+        goto L_Inspect;
+    mes "You sense a mystical aura coming from this direction. Maybe you should get closer?";
+    goto L_Close;
+
+L_Inspect:
+    mes "There seems to be some kind of mechanism within this stone. A part of it seems loose. Move it?";
+    menu
+        "Better not.", L_Close,
+        "Yes.", L_Warp;
+
+L_Warp:
+    warp "005-3.gat", 110, 79;
+    goto L_Close;
+
+L_Close:
+    close;
+
+}
+
+//Strange Stone on the side path
+005-3.gat,101,34,0|script|#Strange Stone on the wall|400,
+{
+    if (isin("005-3.gat", 100, 33, 102, 35))
+        goto L_Inspect;
+    mes "You sense a mystical aura coming from this direction. Maybe you should get closer?";
+    goto L_Close;
+
+L_Inspect:
+    mes "Looking closely at the stone you find a crack in the wall behind it. Do you want to try to enter it?";
+    menu
+        "Better not.", L_Close,
+        "Yes.", L_Warp;
+
+L_Warp:
+    warp "005-3.gat", 101, 30;
+    goto L_Close;
+
+L_Close:
+    close;
+}
