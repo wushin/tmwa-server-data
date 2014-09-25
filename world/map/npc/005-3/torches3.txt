@@ -1,0 +1,26 @@
+// Torches used within the Witch Cult Quest (see Troll Mask Guy in 043-4).
+// Author: Cassy
+
+//Torch next to the bridge
+005-3.gat,118,97,0|script|#Torch123|400,
+{
+    if (isin("005-3.gat", 106, 94, 110, 101))
+        goto L_SeeTorch;
+    if (isin("005-3.gat", 117, 97, 118, 98))
+        goto L_Torch;
+    mes "You sense a mystical aura coming from this direction.";
+    goto L_Close;
+
+L_SeeTorch:
+    mes "You can see this torch with its mystical blue flame but you can't reach it from this place. You must find a way there.";
+    goto L_Close;
+
+L_Torch:
+    mes "Content not finished yet. Trolololololol.";
+    goto L_Close;
+
+L_Close:
+    close;
+}
+
+//Second Torch here!!
