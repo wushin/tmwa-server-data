@@ -1,0 +1,281 @@
+// Witch Cult Quest
+// Author: Cassy
+
+// Witch Cult Quest states:
+// 0: nothing started
+// 1: player knows the story and accepted the task
+// 2: player disabled the torches in 043-4, 043-5 and 005-3, therefore broke the barrier in 043-5 and defeated Kalinoir in 043-6
+// 3: player received the rewards and therefore finished the quest
+
+043-4.gat,197,28,0|script|Troll Mask Guy|418,
+{
+    set @AMOUNT_LARGEHEALINGPOTION, 1;
+    set @AMOUNT_SULPHURPOWDER, 1;
+    set @AMOUNT_SNAKEEGG, 5;
+    set @AMOUNT_BLACKSCORPIONSTINGER, 3;
+    set @REWARD_GP, 100000;
+    set @REWARD_EXP, 100000;
+    set $@witchcultquest_min_level, 70;
+
+    if (Witch_Cult_Quest == 1) goto L_Continue7;
+    if (Witch_Cult_Quest == 2) goto L_Defeated1;
+    if (Witch_Cult_Quest == 3) goto L_Finished;
+
+    if (BaseLevel < $witchcultquest_min_level) goto L_NotReady;
+
+    mes "[Troll Mask Guy]";
+    mes "\"What are you doing here? This is a dangerous place!\"";
+    menu
+        "How is it dangerous?", L_Continue1,
+        "Dangerous?! Get me out of here!!!", L_Leave;
+
+L_Continue1:
+    mes "[Troll Mask Guy]";
+    mes "\"Are you joking? Didn't you just pass many monsters like Trolls and Witches on your way?\"";
+    menu
+        "Yes, but what's so dangerous about them?", L_Continue2,
+        "They are dangerous? Get me out of here!!!", L_Leave;
+
+L_Continue2:
+    mes "[Troll Mask Guy]";
+    mes "\"I don't know if you're serious or just acting cool, but let me tell you something: Those witches you saw are indeed not too dangerous. There is a much more powerful witch in these caves...\"";
+    menu
+        "Tell me more about it!", L_Continue3,
+        "That sounds too dangerous to me! Get me out of here!!!", L_Leave;
+
+L_Continue3:
+    mes "[Troll Mask Guy]";
+    mes "\"Well, this place used to be a hideout for a group of witches. One of them was their leader, Kalinoir, and she was a very mighty witch.";
+    next;
+    mes "Actually she still is, just... let's say just different than other living creatures.\"";
+    next;
+    menu
+        "Different? Is she all bones like the other witches out there?", L_Continue4,
+        "That sounds too dangerous to me! Get me out of here!!!", L_Leave;
+
+L_Continue4:
+    mes "[Troll Mask Guy]";
+    mes "\"Yes... but it's not just that...";
+    next;
+    mes "You see, those witches suffered the same as Kalinoir: After improving their dark magical abilities they started using them for turning humans into Trolls and making them their slaves.";
+    next;
+    mes "Kalinoir was even able to turn humans into Terranites and brainwash them, using them as guards back then!";
+    next;
+    mes "So they reached a point where they became a serious danger but luckily an even more powerful light mage appeared and challenged the cult.";
+    next;
+    mes "However, even though he was stronger than them something went terribly wrong.";
+    next;
+    mes "Kalinoir attacked her opponent with a dark magic spell while the light mage was using a life magic spell at the same time.";
+    next;
+    mes "It seemed that they used full strength on those spells and the combination of both killed them, all of Kalinoir's followers and many Trolls.";
+    next;
+    mes "But they weren't killed completely. The life spell used by the mage kept them half-alive, as skeletons as you already noticed.";
+    next;
+    mes "This is more than hundred years ago, but they are still not dead because they can't die from aging.";
+    next;
+    mes "Kalinoir is still out there... weaker than before that accident, but she's still a very dangerous witch.\"";
+    next;
+    menu
+        "How do you know? And where is that mage from back then?", L_Continue5,
+        "That sounds too dangerous to me! Get me out of here!!!", L_Leave;
+
+L_Continue5:
+    mes "[Troll Mask Guy]";
+    mes "\"Old fairytales, legends and such are my hobby, but I have also seen her myself.";
+    next;
+    mes "I don't know about the other guy but I know that she is still dangerous and must be eliminated!";
+    next;
+    mes "So you were asking what's so dangerous about the other witches earlier.";
+    next;
+    mes "You think you have the guts to beat her and the cult?\"";
+    next;
+    menu
+        "Yes, I will go after her.", L_Continue6,
+        "Actually this sounds a bit too dangerous to me... get me out of here!!!", L_Leave;
+
+L_Continue6:
+    mes "[Troll Mask Guy]";
+    mes "\"So go ahead, but listen carefully!";
+    next;
+    mes "There is no doubt that she is somewhere in the caves north from this place as there is a cave entrance which is protected by a magical barrier.";
+    next;
+    mes "But I know how to get through that barrier. It's old magic.";
+    next;
+    mes "Maybe you noticed that some of the torches in these caves look different than the others and give off a strong and warm aura.";
+    next;
+    mes "Those torches are under the influence of a spell you have to break in order to get through that barrier!";
+    next;
+    mes "Each of these torches are a source of the power of the barrier. Break all of them and you are free to enter Kalinoir's cave.";
+    next;
+    mes "You will need ingredients from this area as well as something that gives life and a magical powder. I think " + @AMOUNT_LARGEHEALINGPOTION + " Large Healing Potion, " + @AMOUNT_SULPHURPOWDER + " Sulphur Powder, " + @AMOUNT_SNAKEEGG + " Snake Eggs and " + @AMOUNT_BLACKSCORPIONSTINGER + " Black Scorpion Stingers will do it.";
+    next;
+    mes "Mix them together for each torch and pure the just created potion into their flames. This will kill the spell within in the torches and therefore weaken the barrier until it breaks.";
+    next;
+    mes "However, be prepared! Kalinoir is mighty and clever, she will have prepared traps. You might want to find someone to support you.";
+    next;
+    mes "Also facing her alone is suicide. I'm too old to help you but I bet there are some warriors, archers and mages who will support you.\"";
+    set Witch_Cult_Quest, 1;
+    goto L_Continue7;
+
+L_Continue7:
+    mes "[Troll Mask Guy]";
+    mes "\"I wish you the best of luck... you will need it.\"";
+    goto L_Close;
+
+L_NotReady:
+    mes "[Troll Mask Guy]";
+    mes "\"I don't see people at this place often.";
+    mes "";
+    mes "You don't appear to be strong. Better be careful out there. This place is dangerous.\"";
+    goto L_Close;
+
+L_Leave:
+    mes "[Troll Mask Guy]";
+    mes "\"Get out of here then!\"";
+    warp "043-4.gat", 47, 66;
+    goto L_Close;
+
+L_Defeated1:
+    mes "[Troll Mask Guy]";
+    mes "\"So you really defeated her? She must have become far weaker than when I fought her... on the other hand that accident also took nearly all of my power, so it's not really a big surprise.\"";
+    menu
+        "Wait... this sounds like...", L_Defeated2;
+
+L_Defeated2:
+    mes "[Troll Mask Guy]";
+    mes "\"Damn, I've been thinking loudly... but you already heard it so I will tell you: Yes, I am that mage from over 100 years ago.\"";
+    menu
+        "But you're not all bones like the witches?", L_Defeated3;
+
+L_Defeated3:
+    mes "[Troll Mask Guy]";
+    mes "\"...... I am hiding my face behind this mask. I don't want to talk about it, it was my mistake to think loudly.";
+    mes "But I am very happy you defeated her. Please take this as your reward... and for not asking me questions about how it feels like to be a stupid skeleton.\"";
+    set Zeny, Zeny + @REWARD_GP;
+    getexp @REWARD_EXP, 0;
+    getinventorylist;
+    if (@inventorylist_count > 98)
+        goto L_InventoryFull;
+    set @reward, rand(5);
+    if (@reward == 4) // 20% chance to get an Undead Troll Mask, 80% Troll Mask
+        goto L_UndeadTrollMask;
+    getitem "TrollMask", 1;
+    goto L_WeaponReward;
+
+L_UndeadTrollMask:
+    getitem "UndeadTrollMask", 1;
+    goto L_WeaponReward;
+
+L_WeaponReward:
+    set @reward, rand(3);
+    if (@reward == 0) // same chances for getting a Rune Rapier, Staff of Life or Fairy Bow
+        goto L_RuneRapier;
+    if (@reward == 1)
+        goto L_StaffOfLife;
+    getitem "FairyBow", 1;
+    set Witch_Cult_Quest, 3;
+    goto L_Close;
+
+L_RuneRapier:
+    getitem "RuneRapier", 1;
+    set Witch_Cult_Quest, 3;
+    goto L_Close;
+
+L_StaffOfLife:
+    getitem "StaffOfLife", 1;
+    set Witch_Cult_Quest, 3;
+    goto L_Close;
+
+L_InventoryFull:
+    mes "[Troll Mask Guy]";
+    mes "\"Your inventory is full. Talk to me again after you cleaned it up.\"";
+    goto L_Close;
+
+L_Finished:
+    mes "[Troll Mask Guy]";
+    mes "\"I am very happy you defeated her. I lost my own life to do so, but now there is one less danger in the desert.\"";
+    goto L_Close;
+
+L_Close:
+    close;
+}
+
+043-4.gat,191,29,0|script|Troll Mask Guy Debug|418,
+{
+    mes "[Troll Mask Guy Debug]";
+    mes "\"Feel free to set your quest state to another one. Here are your options:\"";
+    menu
+        "0 = Complete reset, quest not started yet.", L_QuestState0,
+        "1 = Talked to the Troll Mask Guy, heard his story and accepted the task.", L_QuestState1,
+        "2 = Defeated the boss Kalinoir.", L_QuestState2,
+        "3 = Rewards received, quest completed.", L_QuestState3,
+        "Nevermind.", L_Close;
+
+L_QuestState0:
+    set Witch_Cult_Quest, 0;
+    set Witch_Cult_Torch1, 0;
+    set Witch_Cult_Torch2, 0;
+    set Witch_Cult_Torch3, 0;
+    set Witch_Cult_Torch4, 0;
+    set Witch_Cult_Torch5, 0;
+    set Witch_Cult_Torch6, 0;
+    set Witch_Cult_Torch7, 0;
+    set Witch_Cult_Torch8, 0;
+    set Witch_Cult_Torch9, 0;
+    mes "[Troll Mask Guy Debug]";
+    mes "\"Done.\"";
+    goto L_Close;
+
+L_QuestState1:
+    set Witch_Cult_Quest, 1;
+    set Witch_Cult_Torch1, 0;
+    set Witch_Cult_Torch2, 0;
+    set Witch_Cult_Torch3, 0;
+    set Witch_Cult_Torch4, 0;
+    set Witch_Cult_Torch5, 0;
+    set Witch_Cult_Torch6, 0;
+    set Witch_Cult_Torch7, 0;
+    set Witch_Cult_Torch8, 0;
+    set Witch_Cult_Torch9, 0;
+    mes "[Troll Mask Guy Debug]";
+    mes "\"Done.\"";
+    goto L_Close;
+
+L_QuestState2:
+    set Witch_Cult_Quest, 2;
+    set Witch_Cult_Torch1, 1;
+    set Witch_Cult_Torch2, 1;
+    set Witch_Cult_Torch3, 1;
+    set Witch_Cult_Torch4, 1;
+    set Witch_Cult_Torch5, 1;
+    set Witch_Cult_Torch6, 1;
+    set Witch_Cult_Torch7, 1;
+    set Witch_Cult_Torch8, 1;
+    set Witch_Cult_Torch9, 1;
+    mes "[Troll Mask Guy Debug]";
+    mes "\"Done.\"";
+    goto L_Close;
+
+L_QuestState3:
+    set Witch_Cult_Quest, 3;
+    set Witch_Cult_Torch1, 1;
+    set Witch_Cult_Torch2, 1;
+    set Witch_Cult_Torch3, 1;
+    set Witch_Cult_Torch4, 1;
+    set Witch_Cult_Torch5, 1;
+    set Witch_Cult_Torch6, 1;
+    set Witch_Cult_Torch7, 1;
+    set Witch_Cult_Torch8, 1;
+    set Witch_Cult_Torch9, 1;
+    mes "[Troll Mask Guy Debug]";
+    mes "\"Done.\"";
+    goto L_Close;
+
+L_Close:
+    close;
+
+OnInit:
+    if (!debug)
+        disablenpc "Troll Mask Guy Debug";
+    end;
+}

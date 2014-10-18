@@ -1,26 +1,181 @@
 // Torches used within the Witch Cult Quest (see Troll Mask Guy in 043-4).
 // Author: Cassy
 
-//Torch next to the bridge
-005-3.gat,118,97,0|script|#Torch123|400,
+//Torch on the side path
+005-3.gat,85,45,0|script|#WitchCultTorch8|400,
 {
-    if (isin("005-3.gat", 106, 94, 110, 101))
-        goto L_SeeTorch;
-    if (isin("005-3.gat", 117, 97, 118, 98))
-        goto L_Torch;
-    mes "You sense a mystical aura coming from this direction.";
-    goto L_Close;
+    set @AMOUNT_LARGEHEALINGPOTION, 1;
+    set @AMOUNT_SULPHURPOWDER, 1;
+    set @AMOUNT_SNAKEEGG, 5;
+    set @AMOUNT_BLACKSCORPIONSTINGER, 3;
 
-L_SeeTorch:
-    mes "You can see this torch with its mystical blue flame but you can't reach it from this place. You must find a way there.";
+    if (isin("005-3.gat", 84, 44, 86, 46))
+        goto L_Torch;
+    mes "You sense a mystical aura coming from this direction. You will need to get closer to find out more.";
     goto L_Close;
 
 L_Torch:
-    mes "Content not finished yet. Trolololololol.";
+    if (Witch_Cult_Quest == 0) goto L_Unknown;
+    if (Witch_Cult_Torch8 == 1) goto L_SummonFinished;
+    mes "[Mystical Torch]";
+    mes "This is one of the Witch Cult's torches the Troll Mask Guy talked about.";
+    mes "";
+    mes "When you pour the ingredients into its flame it will weaken the barrier to Kalinoir's Cave.";
+    next;
+    mes "Do you want to do so?";
+    menu
+        "Pour them in.", L_DisableTorch,
+        "No, not yet.", L_Close;
+
+L_DisableTorch:
+    set @LocalMonsterCount,
+        mobcount("005-3.gat", "#WitchCultTorch8::OnTrollDeath") +
+        mobcount("005-3.gat", "#WitchCultTorch8::OnUndeadTrollDeath") +
+        mobcount("005-3.gat", "#WitchCultTorch8::OnUndeadWitchDeath") +
+        3; // the mobcount function has an offset of -1, so we add 3 to have the actual amount of monsters
+    if (@LocalMonsterCount > 0)
+        goto L_MonstersAlive;
+    if ((countitem("LargeHealingPotion") < @AMOUNT_LARGEHEALINGPOTION)
+        || (countitem("SulphurPowder") < @AMOUNT_SULPHURPOWDER)
+        || (countitem("SnakeEgg") < @AMOUNT_SNAKEEGG)
+        || (countitem("BlackScorpionStinger") < @AMOUNT_BLACKSCORPIONSTINGER))
+        goto L_NoItem;
+
+    delitem "LargeHealingPotion", @AMOUNT_LARGEHEALINGPOTION;
+    delitem "SulphurPowder", @AMOUNT_SULPHURPOWDER;
+    delitem "SnakeEgg", @AMOUNT_SNAKEEGG;
+    delitem "BlackScorpionStinger", @AMOUNT_BLACKSCORPIONSTINGER;
+    set Witch_Cult_Torch8, 1;
+
+    mes "[Mystical Torch]";
+    mes "You pour the ingredients into the flame and while you do so the flame gets bigger and warmer.";
+    mes "";
+    mes "You sense a strong aura, probably magical, but then it vanishes as the flame turns back to its usual size.";
+    next;
+    mes "The pressure in this cave increased. It seems that the torch performed a summon with its final breath. You better be careful!";
+    mes "";
+
+    areamonster "005-3.gat", 92, 41, 98, 47, "", 1054, 1, "#WitchCultTorch8::OnTrollDeath";
+    areamonster "005-3.gat", 92, 41, 98, 47, "", 1117, 2, "#WitchCultTorch8::OnUndeadTrollDeath";
+    areamonster "005-3.gat", 22, 30, 31, 39, "", 1116, 2, "#WitchCultTorch8::OnUndeadWitchDeath";
+
+    goto L_SummonFinished;
+
+L_MonstersAlive:
+    mes "[Mystical Torch]";
+    mes "The pressure in this cave is depressingly high and this torch's aura seems to be weakened.";
+    mes "";
+    mes "It seems like a summon has happened here not too long ago.";
+    next;
+    mes "You better look for the remains of this summon and get rid of them as they seem to disturb the torch's magical abilities.";
+    goto L_Close;
+
+L_NoItem:
+    mes "You don't have the required items to perform the task.";
+    goto L_Close;
+
+L_SummonFinished:
+    mes "Aside from its blue color this is now just a normal torch. Its mystical warmth and aura completely disappeared.";
+    goto L_Close;
+
+L_Unknown:
+    mes "This torch is different than others and not only because of its blue flame. It is also warmer and gives off a strong aura. What is this torch?";
     goto L_Close;
 
 L_Close:
     close;
 }
 
-//Second Torch here!!
+//Torch next to the bridge
+005-3.gat,118,97,0|script|#WitchCultTorch9|400,
+{
+    set @AMOUNT_LARGEHEALINGPOTION, 1;
+    set @AMOUNT_SULPHURPOWDER, 1;
+    set @AMOUNT_SNAKEEGG, 5;
+    set @AMOUNT_BLACKSCORPIONSTINGER, 3;
+
+    if (isin("005-3.gat", 106, 94, 110, 101))
+        goto L_SeeTorch;
+    if (isin("005-3.gat", 117, 97, 118, 98))
+        goto L_Torch;
+    mes "You sense a mystical aura coming from this direction. You will need to get closer to find out more.";
+    goto L_Close;
+
+L_SeeTorch:
+    mes "[Mystical Torch]";
+    mes "You can see this torch with its mystical blue flame but you can't reach it from this place. You must find a way there.";
+    goto L_Close;
+
+L_Torch:
+    if (Witch_Cult_Quest == 0) goto L_Unknown;
+    if (Witch_Cult_Torch9 == 1) goto L_SummonFinished;
+    mes "[Mystical Torch]";
+    mes "This is one of the Witch Cult's torches the Troll Mask Guy talked about.";
+    mes "";
+    mes "When you pour the ingredients into its flame it will weaken the barrier to Kalinoir's Cave.";
+    next;
+    mes "Do you want to do so?";
+    menu
+        "Pour them in.", L_DisableTorch,
+        "No, not yet.", L_Close;
+
+L_DisableTorch:
+    set @LocalMonsterCount,
+        mobcount("005-3.gat", "#WitchCultTorch9::OnTrollDeath") +
+        mobcount("005-3.gat", "#WitchCultTorch9::OnUndeadTrollDeath") +
+        mobcount("005-3.gat", "#WitchCultTorch9::OnUndeadWitchDeath") +
+        mobcount("005-3.gat", "#WitchCultTorch9::OnTerraniteDeath") +
+        4; // the mobcount function has an offset of -1, so we add 4 to have the actual amount of monsters
+    if (@LocalMonsterCount > 0)
+        goto L_MonstersAlive;
+    if ((countitem("LargeHealingPotion") < @AMOUNT_LARGEHEALINGPOTION)
+        || (countitem("SulphurPowder") < @AMOUNT_SULPHURPOWDER)
+        || (countitem("SnakeEgg") < @AMOUNT_SNAKEEGG)
+        || (countitem("BlackScorpionStinger") < @AMOUNT_BLACKSCORPIONSTINGER))
+        goto L_NoItem;
+
+    delitem "LargeHealingPotion", @AMOUNT_LARGEHEALINGPOTION;
+    delitem "SulphurPowder", @AMOUNT_SULPHURPOWDER;
+    delitem "SnakeEgg", @AMOUNT_SNAKEEGG;
+    delitem "BlackScorpionStinger", @AMOUNT_BLACKSCORPIONSTINGER;
+    set Witch_Cult_Torch9, 1;
+
+    mes "[Mystical Torch]";
+    mes "You pour the ingredients into the flame and while you do so the flame gets bigger and warmer.";
+    mes "";
+    mes "You sense a strong aura, probably magical, but then it vanishes as the flame turns back to its usual size.";
+    next;
+    mes "The pressure in this cave increased. It seems that the torch performed a summon with its final breath. You better be careful!";
+    mes "";
+
+    areamonster "005-3.gat", 101, 64, 107, 75, "", 1054, 2, "#WitchCultTorch9::OnTrollDeath";
+    areamonster "005-3.gat", 101, 64, 107, 75, "", 1117, 1, "#WitchCultTorch9::OnUndeadTrollDeath";
+    areamonster "005-3.gat", 106, 94, 108, 99, "", 1116, 1, "#WitchCultTorch9::OnUndeadWitchDeath";
+    areamonster "005-3.gat", 106, 94, 108, 99, "", 1062, 1, "#WitchCultTorch9::OnTerraniteDeath";
+
+    goto L_SummonFinished;
+
+L_MonstersAlive:
+    mes "[Mystical Torch]";
+    mes "The pressure in this cave is depressingly high and this torch's aura seems to be weakened.";
+    mes "";
+    mes "It seems like a summon has happened here not too long ago.";
+    next;
+    mes "You better look for the remains of this summon and get rid of them as they seem to disturb the torch's magical abilities.";
+    goto L_Close;
+
+L_NoItem:
+    mes "You don't have the required items to perform the task.";
+    goto L_Close;
+
+L_SummonFinished:
+    mes "Aside from its blue color this is now just a normal torch. Its mystical warmth and aura completely disappeared.";
+    goto L_Close;
+
+L_Unknown:
+    mes "This torch is different than others and not only because of its blue flame. It is also warmer and gives off a strong aura. What is this torch?";
+    goto L_Close;
+
+L_Close:
+    close;
+}

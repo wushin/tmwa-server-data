@@ -3,4 +3,6 @@
 map: 043-5
 npc: npc/043-5/_mobs.txt
 npc: npc/043-5/_warps.txt
+npc: npc/043-5/magical-barrier.txt
 npc: npc/043-5/mapflags.txt
+npc: npc/043-5/torches2.txt

@@ -4,3 +4,5 @@ map: 005-3
 npc: npc/005-3/_mobs.txt
 npc: npc/005-3/_warps.txt
 npc: npc/005-3/mapflags.txt
+npc: npc/005-3/strange_stones.txt
+npc: npc/005-3/torches3.txt
