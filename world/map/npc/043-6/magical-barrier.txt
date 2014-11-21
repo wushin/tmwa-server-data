@@ -2,7 +2,7 @@
 // in the Witch Cult Quest against Kalinoir is still ongoing.
 // Author: Cassy
 
-043-6.gat,34,59,0|script|#Magical Barrier|45,0,0,
+043-6.gat,34,59,0|script|#Magical Barrier|45,0,0
 {
     if ($@KALINOIR_FIGHT_STATUS == 1) goto L_Block;
     warp "043-5.gat", 33, 20;

@@ -4,7 +4,7 @@
 // Author: Cassy
 
 //Strange Stone next to the pond
-005-3.gat,110,77,0|script|#Strange Stone by the pond|400,
+005-3.gat,110,77,0|script|#StrangeStoneByThePond|400
 {
     if (isin("005-3.gat", 109, 75, 111, 78))
         goto L_Inspect;
@@ -27,7 +27,7 @@ L_Close:
 }
 
 //Strange Stone on the side path
-005-3.gat,101,34,0|script|#Strange Stone on the wall|400,
+005-3.gat,101,34,0|script|#StrangeStoneOnTheWall|400
 {
     if (isin("005-3.gat", 100, 33, 102, 35))
         goto L_Inspect;

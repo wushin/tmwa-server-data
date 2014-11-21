@@ -2,7 +2,7 @@
 // Author: Cassy
 
 //Torch north-west, the top right one of the four torches
-043-4.gat,51,37,0|script|#WitchCultTorch1|400,
+043-4.gat,51,37,0|script|#WitchCultTorch1|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;

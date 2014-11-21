@@ -2,7 +2,7 @@
 // Author: Cassy
 
 //Torch south-west, at the end of the path
-043-5.gat,42,106,0|script|#WitchCultTorch2|400,
+043-5.gat,42,106,0|script|#WitchCultTorch2|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
@@ -85,7 +85,7 @@ L_Close:
 }
 
 //Torch south-west, first fork
-043-5.gat,60,84,0|script|#WitchCultWarpTorch1|400,
+043-5.gat,60,84,0|script|#WitchCultWarpTorch1|400
 {
     if (isin("043-5.gat", 59, 83, 61, 85))
         goto L_Torch;
@@ -133,7 +133,7 @@ L_Close:
 }
 
 //Torch west of the lava platform in the center
-043-5.gat,87,77,0|script|#WitchCultWarpTorch2|400,
+043-5.gat,87,77,0|script|#WitchCultWarpTorch2|400
 {
     if (isin("043-5.gat", 86, 76, 88, 78))
         goto L_Torch;
@@ -171,7 +171,7 @@ L_Close:
 }
 
 //Torch east of the lava platform in the center
-043-5.gat,116,63,0|script|#WitchCultTorch3|400,
+043-5.gat,116,63,0|script|#WitchCultTorch3|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
@@ -255,7 +255,7 @@ L_Close:
 }
 
 //Torch south-east, eastern fork
-043-5.gat,127,87,0|script|#WitchCultWarpTorch3|400,
+043-5.gat,127,87,0|script|#WitchCultWarpTorch3|400
 {
     if (isin("043-5.gat", 126, 87, 128, 88))
         goto L_Torch;
@@ -303,7 +303,7 @@ L_Close:
 }
 
 //Torch at small eastern battle cave, the one south
-043-5.gat,167,51,0|script|#WitchCultWarpTorch4|400,
+043-5.gat,167,51,0|script|#WitchCultWarpTorch4|400
 {
     if (isin("043-5.gat", 166, 50, 168, 52))
         goto L_Torch;
@@ -342,7 +342,7 @@ L_Close:
 }
 
 //Torch at small eastern battle cave, the one north
-043-5.gat,167,28,0|script|#WitchCultTorch4|400,
+043-5.gat,167,28,0|script|#WitchCultTorch4|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
@@ -494,7 +494,7 @@ L_StopWaves:
 }
 
 //Torch south-east, western fork
-043-5.gat,90,106,0|script|#WitchCultWarpTorch5|400,
+043-5.gat,90,106,0|script|#WitchCultWarpTorch5|400
 {
     if (isin("043-5.gat", 89, 105, 91, 107))
         goto L_Torch;
@@ -542,7 +542,7 @@ L_Close:
 }
 
 //Torch east at the dark path, the one south
-043-5.gat,165,107,0|script|#WitchCultWarpTorch6|400,
+043-5.gat,165,107,0|script|#WitchCultWarpTorch6|400
 {
     if (isin("043-5.gat", 164, 106, 166, 108))
         goto L_Torch;
@@ -578,7 +578,7 @@ L_Close:
 }
 
 //Torch east at the dark path, the one north
-043-5.gat,165,82,0|script|#WitchCultTorch5|400,
+043-5.gat,165,82,0|script|#WitchCultTorch5|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
@@ -658,7 +658,7 @@ L_Close:
 }
 
 //Torch norch-east, at the end of the path
-043-5.gat,108,30,0|script|#WitchCultTorch6|400,
+043-5.gat,108,30,0|script|#WitchCultTorch6|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
@@ -740,7 +740,7 @@ L_Close:
 }
 
 //Torch in the center of the Witch Cave
-043-5.gat,43,59,0|script|#WitchCultTorch7|400,
+043-5.gat,43,59,0|script|#WitchCultTorch7|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;

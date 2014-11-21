@@ -2,14 +2,22 @@
 // boss fight cave 043-6 in the Witch Cult Quest.
 // Author: Cassy
 
-043-5.gat,33,20,0|script|Magical Barrier|204,0,0,
+043-5.gat,33,20,0|script|Magical Barrier|204,0,0
 {
-    if ($@TORCHES_ACTIVATED == 1) goto L_Block;
+    if (Witch_Cult_Torch1 == 0) goto L_Block;
+    if (Witch_Cult_Torch2 == 0) goto L_Block;
+    if (Witch_Cult_Torch3 == 0) goto L_Block;
+    if (Witch_Cult_Torch4 == 0) goto L_Block;
+    if (Witch_Cult_Torch5 == 0) goto L_Block;
+    if (Witch_Cult_Torch6 == 0) goto L_Block;
+    if (Witch_Cult_Torch7 == 0) goto L_Block;
+    if (Witch_Cult_Torch8 == 0) goto L_Block;
+    if (Witch_Cult_Torch9 == 0) goto L_Block;
     warp "043-6.gat", 34, 59;
+    message strcharinfo(0), "The barrier seems to be too weak now. You don't have any problems entering Kalinoir's cave.";
     end;
 
 L_Block:
     message strcharinfo(0), "A magical barrier is blocking the entrance. If you want to enter this cave you must find a way to weaken the barrier first.";
     end;
 }
-

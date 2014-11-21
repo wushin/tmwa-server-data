@@ -2,7 +2,7 @@
 // Author: Cassy
 
 //Torch on the side path
-005-3.gat,85,45,0|script|#WitchCultTorch8|400,
+005-3.gat,85,45,0|script|#WitchCultTorch8|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
@@ -87,7 +87,7 @@ L_Close:
 }
 
 //Torch next to the bridge
-005-3.gat,118,97,0|script|#WitchCultTorch9|400,
+005-3.gat,118,97,0|script|#WitchCultTorch9|400
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
