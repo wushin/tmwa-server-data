@@ -2,7 +2,7 @@
 // boss fight cave 043-6 in the Witch Cult Quest.
 // Author: Cassy
 
-043-5.gat,33,20,0|script|Magical Barrier|204,0,0
+043-5.gat,33,20,0|script|#MagicalBarrier1|204,0,0
 {
     if (Witch_Cult_Torch1 == 0) goto L_Block;
     if (Witch_Cult_Torch2 == 0) goto L_Block;

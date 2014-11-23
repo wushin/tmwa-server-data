@@ -480,7 +480,11 @@ L_StopWaves_NoPlayers:
     goto L_StopWaves;
 
 L_SpawnWavesComplete:
-    attachrid($@Witch_Cult_PlayerID);
+    if (attachrid($@Witch_Cult_PlayerID))
+      goto L_SpawnWavesCompleteMessage;
+    end;
+
+L_SpawnWavesCompleteMessage:
     message strcharinfo(0), "Finally. It seems the powerful spell within this torch has vanished.";
     detachrid;
     goto L_StopWaves;
