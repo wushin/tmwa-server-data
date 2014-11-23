@@ -7,7 +7,7 @@
 // 2: player disabled the torches in 043-4, 043-5 and 005-3, therefore broke the barrier in 043-5 and defeated Kalinoir in 043-6
 // 3: player received the rewards and therefore finished the quest
 
-043-4.gat,197,28,0|script|Troll Mask Guy|418
+043-4.gat,197,28,0|script|Troll Mask Guy|419
 {
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
@@ -200,7 +200,7 @@ L_Close:
     close;
 }
 
-043-4.gat,191,29,0|script|Troll Mask Guy Debug|418
+043-4.gat,191,29,0|script|Troll Mask Guy Debug|419
 {
     mes "[Troll Mask Guy Debug]";
     mes "\"Feel free to set your quest state to another one. Here are your options:\"";
