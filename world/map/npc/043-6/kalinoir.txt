@@ -1,0 +1,283 @@
+// Boss fight torch of the Witch Cult Quest (see Troll Mask Guy in 043-4).
+// Author: Cassy
+
+043-5.gat,34,34,0|script|#KalinoirTorch|400
+{
+    set @AMOUNT_LARGEHEALINGPOTION, 1;
+    set @AMOUNT_SULPHURPOWDER, 1;
+    set @AMOUNT_SNAKEEGG, 5;
+    set @AMOUNT_BLACKSCORPIONSTINGER, 3;
+
+    mes "[Mystical Torch]";
+    mes "From all torches you have seen in these caves this is without a doubt the one with the largest energy output.";
+    mes "";
+
+    if (isin("043-6.gat", 33, 33, 35, 35))
+        goto L_Torch;
+    mes "However, you will need to get closer to it to ";
+    goto L_Close;
+
+L_Torch:
+    if (Witch_Cult_Quest == 0) goto L_Unknown;
+    if (Witch_Cult_Torch4 == 1) goto L_SummonFinished;
+    if ($@Witch_Cult_PlayerID != 0)
+        goto L_PlayerStillFighting;
+    mes "For one more time do you want to pour the ingredients into its flame?";
+    menu
+        "Yes, pour them in.", L_DisableTorch,
+        "No, let's prepare better first.", L_Close;
+
+L_DisableTorch:
+    if ((countitem("LargeHealingPotion") < @AMOUNT_LARGEHEALINGPOTION)
+        || (countitem("SulphurPowder") < @AMOUNT_SULPHURPOWDER)
+        || (countitem("SnakeEgg") < @AMOUNT_SNAKEEGG)
+        || (countitem("BlackScorpionStinger") < @AMOUNT_BLACKSCORPIONSTINGER))
+        goto L_NoItem;
+
+    delitem "LargeHealingPotion", @AMOUNT_LARGEHEALINGPOTION;
+    delitem "SulphurPowder", @AMOUNT_SULPHURPOWDER;
+    delitem "SnakeEgg", @AMOUNT_SNAKEEGG;
+    delitem "BlackScorpionStinger", @AMOUNT_BLACKSCORPIONSTINGER;
+    set Kalinoir_Torch, 1;
+    set $@Witch_Cult_PlayerID, getcharid(3, strcharinfo(0));
+    set $@Kalinoir_Torch_Spawns, 1;
+
+    mes "[Mystical Torch]";
+    mes "You pour the ingredients into the flame and suddenly feel a great sensation.";
+    next;
+    mes "This more than you ever expected and not comparable to the other torches. It feels like an explosion of energy through your whole body.";
+    mes "";
+    mes "But you know what that means. Only one creature is able to release that much energy.";
+    mes "";
+    mes "Now at the very latest this is not a funny game or a nice exploration anymore.";
+    next;
+    mes "They are coming...";
+
+    // Set npctimer close to 1000, to trigger spawns now.
+    setnpctimer 900;
+    startnpctimer;
+
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 5, "#KalinoirTorchWave1::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 3, "#KalinoirTorchWave1::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 2, "#KalinoirTorchWave1::OnUndeadWitchDeath";
+
+    close;
+
+L_PlayerStillFighting:
+    mes "However, the flame is burning to wildly. You will only burn your hand at its current state. Better wait until it calms down.";
+    goto L_Close;
+
+L_NoItem:
+    mes "You don't have the required items to perform the task.";
+    goto L_Close;
+
+L_SummonFinished:
+    mes "Aside from its blue color this is now just a normal torch. Its mystical warmth and aura completely disappeared.";
+    goto L_Close;
+
+L_Unknown:
+    mes "However, it immediately warps you outside of this cave when you came close to it. It's as if you shouldn't be at this place.";
+    warp "043-5.gat", 33, 21;
+    goto L_Close;
+
+L_Close:
+    close;
+
+OnTimer1000:
+    setnpctimer 0;
+    // Check if there are players; stop the waves if not.
+    if (getmapusers("043-6.gat") == 0)
+        goto L_StopWaves_NoPlayers;
+
+    if ($@Kalinoir_Torch_Spawns == 1)
+        goto L_CheckWave1;
+    if ($@Kalinoir_Torch_Spawns == 2)
+        goto L_CheckWave2;
+    if ($@Kalinoir_Torch_Spawns == 3)
+        goto L_CheckWave3;
+    if ($@Kalinoir_Torch_Spawns == 4)
+        goto L_CheckWave4;
+    if ($@Kalinoir_Torch_Spawns == 5)
+        goto L_CheckWave5;
+    if ($@Kalinoir_Torch_Spawns == 6)
+        goto L_CheckWave6;
+    if ($@Kalinoir_Torch_Spawns == 7)
+        goto L_CheckWave7;
+    if ($@Kalinoir_Torch_Spawns == 8)
+        goto L_CheckWave8;
+    if ($@Kalinoir_Torch_Spawns == 9)
+        goto L_CheckWave9;
+    if ($@Kalinoir_Torch_Spawns == 10)
+        goto L_CheckWave10;
+    
+    end;
+
+L_SpawnWave2:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 2
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 6, "#KalinoirTorchWave2::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 4, "#KalinoirTorchWave2::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 3, "#KalinoirTorchWave2::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 1, "#KalinoirTorchWave2::OnTerraniteDeath";
+    end;
+L_SpawnWave3:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 3
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 7, "#KalinoirTorchWave3::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 5, "#KalinoirTorchWave3::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 4, "#KalinoirTorchWave3::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 1, "#KalinoirTorchWave3::OnTerraniteDeath";
+    end;
+L_SpawnWave4:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 4
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 8, "#KalinoirTorchWave4::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 6, "#KalinoirTorchWave4::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 5, "#KalinoirTorchWave4::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 1, "#KalinoirTorchWave4::OnTerraniteDeath";
+    end;
+L_SpawnWave5:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 5
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 8, "#KalinoirTorchWave5::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 7, "#KalinoirTorchWave5::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 6, "#KalinoirTorchWave5::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 2, "#KalinoirTorchWave5::OnTerraniteDeath";
+    end;
+L_SpawnWave6:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 6
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 9, "#KalinoirTorchWave6::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 8, "#KalinoirTorchWave6::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 7, "#KalinoirTorchWave6::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 2, "#KalinoirTorchWave6::OnTerraniteDeath";
+    end;
+L_SpawnWave7:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 7
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 9, "#KalinoirTorchWave7::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 9, "#KalinoirTorchWave7::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 8, "#KalinoirTorchWave7::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 2, "#KalinoirTorchWave7::OnTerraniteDeath";
+    end;
+L_SpawnWave8:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 8
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 10, "#KalinoirTorchWave8::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 10, "#KalinoirTorchWave8::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 9, "#KalinoirTorchWave8::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 3, "#KalinoirTorchWave8::OnTerraniteDeath";
+    end;
+L_SpawnWave9:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 9
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 10, "#KalinoirTorchWave9::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 10, "#KalinoirTorchWave9::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 10, "#KalinoirTorchWave9::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 3, "#KalinoirTorchWave9::OnTerraniteDeath";
+    end;
+L_SpawnWave10:
+    set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 10
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 5, "#KalinoirTorchWave10::OnTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 3, "#KalinoirTorchWave10::OnUndeadTrollDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 3, "#KalinoirTorchWave10::OnUndeadWitchDeath";
+    areamonster "043-6.gat", 20, 19, 48, 47, "", 1062, 1, "#KalinoirTorchWave10::OnTerraniteDeath";
+    areamonster "043-6.gat", 34, 29, 34, 29, "", 1133, 1, "#KalinoirTorchWave10::OnKalinoirDeath";
+    end;
+
+L_CheckWave1:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnTrollDeath") > -1)
+        end;
+    goto L_SpawnWave2;
+L_CheckWave2:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadTrollDeath") > -1)
+        end;
+    goto L_SpawnWave3;
+L_CheckWave3:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadWitchDeath") > -1)
+        end;
+    goto L_SpawnWave4;
+L_CheckWave4:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnTerraniteDeath") > -1)
+        end;
+    goto L_SpawnWave5;
+L_CheckWave5:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadWitchDeath") > -1)
+        end;
+    goto L_SpawnWave6;
+L_CheckWave6:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadWitchDeath") > -1) 
+      end;
+    goto L_SpawnWave7;
+L_CheckWave7:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadWitchDeath") > -1)
+        end;
+    goto L_SpawnWave8;
+L_CheckWave8:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadWitchDeath") > -1)
+        end;
+    goto L_SpawnWave9;
+L_CheckWave9:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadWitchDeath") > -1)
+        end;
+    goto L_SpawnWave10;
+L_CheckWave10:
+    if (mobcount("043-5.gat", "#WitchCultTorch4::OnUndeadWitchDeath") > -1)
+        end;
+    goto L_SpawnWavesComplete;
+
+L_StopWaves_NoPlayers:
+    set $@Witch_Cult_PlayerID, 0;
+    // Kill waves
+    killmonster "043-6.gat", "#KalinoirTorchWave1::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave1::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave1::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave2::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave2::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave2::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave2::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave3::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave3::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave3::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave3::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave4::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave4::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave4::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave4::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave5::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave5::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave5::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave5::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave6::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave6::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave6::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave6::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave7::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave7::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave7::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave7::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave8::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave8::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave8::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave8::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave9::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave9::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave9::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave9::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave10::OnTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave10::OnUndeadTrollDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave10::OnUndeadWitchDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave10::OnTerraniteDeath";
+    killmonster "043-6.gat", "#KalinoirTorchWave10::OnKalinoirDeath";
+
+    goto L_StopWaves;
+
+L_SpawnWavesComplete:
+    if (attachrid($@Witch_Cult_PlayerID))
+      goto L_SpawnWavesCompleteMessage;
+    goto L_StopWaves;
+
+L_SpawnWavesCompleteMessage:
+    message strcharinfo(0), "Finally. It seems the powerful spell within this torch has vanished.";
+    detachrid;
+    goto L_StopWaves;
+
+L_StopWaves:
+    // stop timer
+    set $@Witch_Cult_PlayerID, 0;
+    stopnpctimer;
+    setnpctimer 0;
+    end;
+}
