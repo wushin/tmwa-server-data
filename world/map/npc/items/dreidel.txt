@@ -1,0 +1,103 @@
+// Author: Wushin
+
+function|script|Dreidel
+{
+    set $@AnteAmount, 5;
+    set $@MaxRounds, 20;
+    set @pot, 0; 
+    set @round, 0;
+    set @player, 0;
+    setarray @players, 15, 15;
+    set @player_cnt, getarraysize(@players);
+    goto L_Start;
+
+L_Start:
+    set @round, (@round + 1);
+    if(@round > $@MaxRounds)
+        goto L_EndIt;
+    if(!(@pot))
+        goto L_StartAnte;
+    set @spin, rand(1,4);
+    if (@spin == 1)
+        goto L_NextPlayer;
+    if (@spin == 2)
+        goto L_GetsPot;
+    if (@spin == 3)
+        goto L_GetsHalf;
+    if (@spin == 4)
+        goto L_AddsThree;
+    goto L_Debug;
+
+L_StartAnte:
+    set @ante_loop, 0;
+    goto L_Ante;
+
+L_Ante:
+    if (@players[@ante_loop] < $@AnteAmount)
+        goto L_EndIt;
+    set @players[@ante_loop], (@players[@ante_loop] - $@AnteAmount);
+    set @pot, (@pot + $@AnteAmount);
+    set @ante_loop, (@ante_loop + 1);
+    if (@ante_loop >= @player_cnt)
+        goto L_Start;
+    goto L_Ante;
+
+L_NextPlayer:
+    set @player, (@player + 1);
+    if (@player >= @player_cnt)
+        set @player, 0;
+    goto L_Start;
+
+L_GetsPot:
+    set @players[@player], (@players[@player] + @pot);
+    set @pot, 0;
+    goto L_NextPlayer;
+
+L_GetsHalf:
+    set @carry, 0;
+    if (((@pot / 2) * 2) < @pot)
+        set @carry, 1;
+    set @players[@player], (@players[@player] + (@pot / 2) + @carry);
+    set @pot, (@pot / 2);
+    goto L_NextPlayer;
+
+L_AddsThree:
+    if (@players[@player] < $@AnteAmount)
+        goto L_EndIt;
+    set @players[@player], (@players[@player] - $@AnteAmount);
+    set @pot, (@pot + $@AnteAmount);
+    goto L_NextPlayer;
+
+L_Debug:
+    debugmes "Should be unreachable.";
+    goto L_EndIt;
+
+L_EndIt:
+    set @end_loop, 0;
+    set @player, 0;
+    set @winner, 0;
+    set @winning_amt, 0;
+    goto L_Tally;
+
+L_Tally:
+    if (@players[@player] > @winning_amt)
+        goto L_SetNewWinner;
+    goto L_NextTally;
+
+L_SetNewWinner: 
+    set @winning_amt, @players[@player];
+    set @winner, @player;
+    goto L_NextTally;
+
+L_NextTally:
+    set @player, (@player + 1);
+    if (@player >= @player_cnt)
+        goto L_Final;
+    goto L_Tally;
+
+L_Final:
+    //debugmes @winner + " Won!";
+    cleararray @players, 0, @player_cnt;
+    set @player_cnt, 0;
+    return;
+}
