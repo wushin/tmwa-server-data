@@ -3,18 +3,25 @@
 
 043-6.gat,34,34,0|script|#KalinoirTorch|400
 {
+    if ($@Kalinoir_Fight_Status != 0) goto L_FightActive;
+
     set @AMOUNT_LARGEHEALINGPOTION, 1;
     set @AMOUNT_SULPHURPOWDER, 1;
     set @AMOUNT_SNAKEEGG, 5;
     set @AMOUNT_BLACKSCORPIONSTINGER, 3;
 
     mes "[Mystical Torch]";
-    mes "From all torches you have seen in these caves this is without a doubt the one with the largest energy output.";
+    mes "From all the torches you have seen in these caves this is without a doubt the one with the largest energy output.";
     mes "";
 
     if (isin("043-6.gat", 33, 33, 35, 35))
         goto L_Torch;
-    mes "However, you will need to get closer to it to investigate it.";
+    mes "However, you will need to get closer if you want to investigate it.";
+    goto L_Close;
+
+L_FightActive:
+    mes "[Mystical Torch]";
+    mes "Looking at the danger all around this cave don't you think you have better things to do than staring at a torch that seems to explode every moment?";
     goto L_Close;
 
 L_Torch:
@@ -123,7 +130,7 @@ OnTimer1000:
 
 L_SpawnWave2:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 2
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "A new wave of reinforcement. They are already more than before.", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 6, "#KalinoirTorchWave2::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 4, "#KalinoirTorchWave2::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 3, "#KalinoirTorchWave2::OnUndeadWitchDeath";
@@ -131,7 +138,7 @@ L_SpawnWave2:
     end;
 L_SpawnWave3:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 3
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "The pressure becomes stronger. You can feel how the air becomes thicker.", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 7, "#KalinoirTorchWave3::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 5, "#KalinoirTorchWave3::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 4, "#KalinoirTorchWave3::OnUndeadWitchDeath";
@@ -139,7 +146,7 @@ L_SpawnWave3:
     end;
 L_SpawnWave4:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 4
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "Another group of cult members appear. The cult seems bigger than you thought.", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 8, "#KalinoirTorchWave4::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 6, "#KalinoirTorchWave4::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 5, "#KalinoirTorchWave4::OnUndeadWitchDeath";
@@ -147,7 +154,7 @@ L_SpawnWave4:
     end;
 L_SpawnWave5:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 5
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "They are getting more and more. This will soon turn into a real war.", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 8, "#KalinoirTorchWave5::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 7, "#KalinoirTorchWave5::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 6, "#KalinoirTorchWave5::OnUndeadWitchDeath";
@@ -155,7 +162,7 @@ L_SpawnWave5:
     end;
 L_SpawnWave6:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 6
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "The pressure is really high now. This is quite a torture for everyone's health.", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 9, "#KalinoirTorchWave6::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 8, "#KalinoirTorchWave6::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 7, "#KalinoirTorchWave6::OnUndeadWitchDeath";
@@ -163,7 +170,7 @@ L_SpawnWave6:
     end;
 L_SpawnWave7:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 7
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "Even more reinforcement. It's starting to become too much under this pressure.", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 9, "#KalinoirTorchWave7::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 9, "#KalinoirTorchWave7::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 8, "#KalinoirTorchWave7::OnUndeadWitchDeath";
@@ -171,7 +178,7 @@ L_SpawnWave7:
     end;
 L_SpawnWave8:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 8
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "Another wave of enemies but the end of this must be near so hang on!", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 10, "#KalinoirTorchWave8::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 10, "#KalinoirTorchWave8::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 9, "#KalinoirTorchWave8::OnUndeadWitchDeath";
@@ -179,7 +186,7 @@ L_SpawnWave8:
     end;
 L_SpawnWave9:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 9
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "The pressure becomes unendurable. You must put an end on this before it becomes your end!", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 10, "#KalinoirTorchWave9::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 10, "#KalinoirTorchWave9::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 10, "#KalinoirTorchWave9::OnUndeadWitchDeath";
@@ -187,7 +194,7 @@ L_SpawnWave9:
     end;
 L_SpawnWave10:
     set $@Kalinoir_Torch_Spawns, $@Kalinoir_Torch_Spawns + 1; // 10
-    mapannounce "043-6.gat", "Text.", 0;
+    mapannounce "043-6.gat", "The leader appears in person! If Kalinoir goes down the rest of the Witch Cult will fall along with her!", 0;
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1054, 5, "#KalinoirTorchWave10::OnTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1117, 3, "#KalinoirTorchWave10::OnUndeadTrollDeath";
     areamonster "043-6.gat", 20, 19, 48, 47, "", 1116, 3, "#KalinoirTorchWave10::OnUndeadWitchDeath";
