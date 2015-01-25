@@ -25,16 +25,16 @@ L_FightActive:
     goto L_Close;
 
 L_Torch:
-//    if (Witch_Cult_Torch1 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch2 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch3 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch4 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch5 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch6 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch7 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch8 == 0) goto L_Unknown;
-//    if (Witch_Cult_Torch9 == 0) goto L_Unknown;
-//    if (Kalinoir_Torch == 1) goto L_SummonFinished;
+    if (Witch_Cult_Torch1 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch2 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch3 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch4 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch5 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch6 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch7 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch8 == 0) goto L_Unknown;
+    if (Witch_Cult_Torch9 == 0) goto L_Unknown;
+    if (Kalinoir_Torch == 1) goto L_SummonFinished;
     if ($@Witch_Cult_PlayerID != 0)
         goto L_PlayerStillFighting;
     mes "For one more time do you want to pour the ingredients into its flame?";
