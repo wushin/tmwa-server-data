@@ -29,10 +29,8 @@ L_Torch:
 
 L_DisableTorch:
     set @LocalMonsterCount,
-        mobcount("005-3.gat", "#WitchCultTorch8::OnTrollDeath") +
-        mobcount("005-3.gat", "#WitchCultTorch8::OnUndeadTrollDeath") +
-        mobcount("005-3.gat", "#WitchCultTorch8::OnUndeadWitchDeath") +
-        3; // the mobcount function has an offset of -1, so we add 3 to have the actual amount of monsters
+        mobcount("005-3.gat", "#WitchCultTorch8::OnMobsDeath") +
+        1; // the mobcount function has an offset of -1, so we add 1 to have the actual amount of monsters
     if (@LocalMonsterCount > 0)
         goto L_MonstersAlive;
     if ((countitem("LargeHealingPotion") < @AMOUNT_LARGEHEALINGPOTION)
@@ -55,11 +53,22 @@ L_DisableTorch:
     mes "The pressure in this cave increased. It seems that the torch performed a summon with its final breath. You better be careful!";
     mes "";
 
-    areamonster "005-3.gat", 92, 41, 98, 47, "", 1054, 1, "#WitchCultTorch8::OnTrollDeath";
-    areamonster "005-3.gat", 92, 41, 98, 47, "", 1117, 2, "#WitchCultTorch8::OnUndeadTrollDeath";
-    areamonster "005-3.gat", 22, 30, 31, 39, "", 1116, 2, "#WitchCultTorch8::OnUndeadWitchDeath";
+    setarray $@witchculttorch8_x0, 92, 92, 22;
+    setarray $@witchculttorch8_y0, 41, 41, 30;
+    setarray $@witchculttorch8_x1, 98, 98, 31;
+    setarray $@witchculttorch8_y1, 47, 47, 39;
+    setarray $@witchculttorch8_IDs, 1054, 1117, 1116;
+    setarray $@witchculttorch8_QTYs, 1, 2, 2;
+
+    set @witchculttorch8_loop, 2;
+    areamonster "005-3.gat", $@witchculttorch8_x0[@witchculttorch8_loop], $@witchculttorch8_y0[@witchculttorch8_loop], $@witchculttorch8_x1[@witchculttorch8_loop], $@witchculttorch8_y1[@witchculttorch8_loop], "", $@witchculttorch8_IDs[@witchculttorch8_loop], $@witchculttorch8_QTYs[@witchculttorch8_loop], "#WitchCultTorch8::OnMobsDeath";
 
     goto L_SummonFinished;
+
+OnMobsDeath:
+    getexp 17000, 0;
+    message strcharinfo(0), "You feel some dark magic vanishing and gain 17,000 experience points.";
+    end;
 
 L_MonstersAlive:
     mes "[Mystical Torch]";
@@ -121,11 +130,8 @@ L_Torch:
 
 L_DisableTorch:
     set @LocalMonsterCount,
-        mobcount("005-3.gat", "#WitchCultTorch9::OnTrollDeath") +
-        mobcount("005-3.gat", "#WitchCultTorch9::OnUndeadTrollDeath") +
-        mobcount("005-3.gat", "#WitchCultTorch9::OnUndeadWitchDeath") +
-        mobcount("005-3.gat", "#WitchCultTorch9::OnTerraniteDeath") +
-        4; // the mobcount function has an offset of -1, so we add 4 to have the actual amount of monsters
+        mobcount("005-3.gat", "#WitchCultTorch9::OnMobsDeath") +
+        1; // the mobcount function has an offset of -1, so we add 1 to have the actual amount of monsters
     if (@LocalMonsterCount > 0)
         goto L_MonstersAlive;
     if ((countitem("LargeHealingPotion") < @AMOUNT_LARGEHEALINGPOTION)
@@ -148,12 +154,22 @@ L_DisableTorch:
     mes "The pressure in this cave increased. It seems that the torch performed a summon with its final breath. You better be careful!";
     mes "";
 
-    areamonster "005-3.gat", 101, 64, 107, 75, "", 1054, 2, "#WitchCultTorch9::OnTrollDeath";
-    areamonster "005-3.gat", 101, 64, 107, 75, "", 1117, 1, "#WitchCultTorch9::OnUndeadTrollDeath";
-    areamonster "005-3.gat", 106, 94, 108, 99, "", 1116, 1, "#WitchCultTorch9::OnUndeadWitchDeath";
-    areamonster "005-3.gat", 106, 94, 108, 99, "", 1062, 1, "#WitchCultTorch9::OnTerraniteDeath";
+    setarray $@witchculttorch9_x0, 101, 101, 106, 106;
+    setarray $@witchculttorch9_y0, 64, 64, 94, 94;
+    setarray $@witchculttorch9_x1, 107, 107, 108, 108;
+    setarray $@witchculttorch9_y1, 75, 75, 99, 99;
+    setarray $@witchculttorch9_IDs, 1054, 1117, 1116, 1062;
+    setarray $@witchculttorch9_QTYs, 2, 1, 1, 1;
+
+    set @witchculttorch9_loop, 3;
+    areamonster "005-3.gat", $@witchculttorch9_x0[@witchculttorch9_loop], $@witchculttorch9_y0[@witchculttorch9_loop], $@witchculttorch9_x1[@witchculttorch9_loop], $@witchculttorch9_y1[@witchculttorch9_loop], "", $@witchculttorch9_IDs[@witchculttorch9_loop], $@witchculttorch9_QTYs[@witchculttorch9_loop], "#WitchCultTorch9::OnMobsDeath";
 
     goto L_SummonFinished;
+
+OnMobsDeath:
+    getexp 17000, 0;
+    message strcharinfo(0), "You feel some dark magic vanishing and gain 17,000 experience points.";
+    end;
 
 L_MonstersAlive:
     mes "[Mystical Torch]";
