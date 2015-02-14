@@ -364,7 +364,7 @@ L_mo_leaf_color:
     if (countitem (@use_leaf$) < 1)
         goto L_mo_out_of_leaves;
 
-    callsub S_monster_oil_random_move;
+    callsub S_mo_random_move;
     if (@color & @use_color)
         goto L_mo_pc_bad;
     set @color, @color | @use_color;
@@ -379,7 +379,7 @@ L_mo_mauve:
         goto L_mo_out_of_leaves;
     delitem "MauveHerb", 1;
 
-    callsub S_monster_oil_random_move;
+    callsub S_mo_random_move;
     if (@intensity == 2 && @color == 7)
         goto L_mo_done;
     if (@intensity == 2)
@@ -390,7 +390,7 @@ L_mo_mauve:
     next;
     goto L_mo_loop;
 
-S_monster_oil_random_move:
+S_mo_random_move:
     mes "[Brewing monster oil]";
     mes "You throw in a leaf and stir.";
 
