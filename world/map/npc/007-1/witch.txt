@@ -128,7 +128,7 @@ L_Next3:
     next;
 
     if (getusers(1) < 4)
-        goto L_NotEnoughPeopleAvailable;
+        goto L_NotPeepAv;
 
     mes "[Valia]";
     mes "\"Do you know such people?\"";
@@ -144,7 +144,7 @@ L_Next4:
         "I have them here.", L_CheckItems,
         "I don't have them, but I'll try to find.", L_NoItems;
 
-L_NotEnoughPeopleAvailable:
+L_NotPeepAv:
     mes "[Valia]";
     mes "\"But it seems there are not enough people around.";
     mes "Come back later.\"";
