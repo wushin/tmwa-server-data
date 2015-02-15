@@ -738,11 +738,11 @@ L_stinger_check:
     mes "\"Welcome, welcome!  Did you bring me my snake skins?\"";
     next;
     menu
-        "Yes, here they are!", L_snakeskins_completecheck,
+        "Yes, here they are!", L_ss_cc,
         "No, sorry, I didn't have the time.", L_main_menu,
         "I forgot!  Let me get them right now.", L_end;
 
-L_snakeskins_completecheck:
+L_ss_cc:
     if (countitem("SnakeSkin") < @SNAKE_SKINS_NR)
         goto L_snakeskins_missing;
     getinventorylist;
@@ -831,11 +831,11 @@ L_player_out_of_beer:
 
 L_golden_scorpion:
     if (@Q_status > @QS_STINGER_QUEST)
-        goto L_golden_scorpion_over_ask;
+        goto L_gs_over_ask;
     if (@Q_status == @QS_STINGER_QUEST)
-        goto L_golden_scorpion_ask_again;
+        goto L_gs_ask_again;
     if (@Q_status == @QS_LOST_WRESTLING)
-        goto L_golden_scorpion_wrestle_again;
+        goto L_gs_wrestle_again;
 
     mes "[Kfahr the Warrior]";
     mes "He grins.";
@@ -861,13 +861,13 @@ L_Next2:
     mes "A mischievous sparkle lightens up in his eyes.";
     mes "\"...if you arm-wrestle me for it!\"";
     next;
-    goto L_golden_scorpion_wrestle_intro;
+    goto L_gs_wrestle_intro;
 
-L_golden_scorpion_wrestle_intro:
+L_gs_wrestle_intro:
     menu
         "Never!", L_main_menu,
         "Wait... what?", L_wrestle_explain,
-        "Bring it on!", L_golden_scorpion_wrestle;
+        "Bring it on!", L_gs_wrestle;
 
 L_golden_requires_done:
     mes "He hesitates.";
@@ -885,33 +885,33 @@ L_wrestle_explain:
     mes "[Kfahr the Warrior]";
     mes "\"Arm wrestling!  Arm against arm!  And whoever is stronger wins!  If you manage to defeat me, I'll give you a little quest for the stinger. How about it?\"";
     next;
-    goto L_golden_scorpion_wrestle_intro;
+    goto L_gs_wrestle_intro;
 
 L_too_lowlevel_for_stinger:
     mes "\"Well, I have one, but I can't just give it to anyone. Maybe if you train a little and become a worthy warrior I will consider giving it away...\"";
     next;
     goto L_main_menu;
 
-L_golden_scorpion_over_ask:
+L_gs_over_ask:
     mes "[Kfahr the Warrior]";
     mes "\"Is this about the stingers again? I already gave you a golden stinger, I'm not going to part with any more.\"";
     next;
     goto L_main_menu;
 
-L_golden_scorpion_ask_again:
+L_gs_ask_again:
     mes "[Kfahr the Warrior]";
     mes "\"This is about the stinger again, right?  Well, just bring me " + @SNAKE_SKINS_NR + " snake skins, and you can have one.\"";
     next;
     goto L_main_menu;
 
-L_golden_scorpion_wrestle_again:
+L_gs_wrestle_again:
     mes "[Kfahr the Warrior]";
     mes "\"This is about the stinger again, eh?  So you want to give it another try?\"";
     mes "He grins broadly.";
     next;
-    goto L_golden_scorpion_wrestle;
+    goto L_gs_wrestle;
 
-L_golden_scorpion_wrestle:
+L_gs_wrestle:
     mes "[Kfahr the Warrior]";
     mes "You sit down. Both of you place your arms on the table, on opposing sides, and grab each other's hands.";
     next;
