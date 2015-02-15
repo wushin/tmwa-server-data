@@ -395,7 +395,7 @@ L_a_sp_minimenu:
         "What is this 'astral power'?", L_about_astral_power,
         "What is a catalyst?", L_about_catalysts,
         "What is a component?", L_about_components,
-        "What other prerequisites are there?", L_about_other_prerequisites,
+        "What other prerequisites are there?", L_a_oth_prereq,
         "Where can I learn spells?", L_a_m_learn,
         "How often can I cast spells?", L_about_speed,
         "Never mind.", L_a_m_minimenu;
@@ -424,7 +424,7 @@ L_about_components:
     next;
     goto L_a_sp_minimenu;
 
-L_about_other_prerequisites:
+L_a_oth_prereq:
     mes "[Auldsbel the Wizard]";
     mes "\"Some spells have additional requirements – they can only be cast underground, or when you are standing very close to the person you are casting them on, or only when you are wearing a particular enchanted item. Spells are quirky, so read their descriptions carefully – if you do find a description.\"";
     next;
