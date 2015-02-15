@@ -226,7 +226,7 @@ OnPetDeath:
     end;
 
 L_Failure:
-    if $@CRYPT_FAIL_ANNOUNCED goto L_NextWave;
+    if ($@CRYPT_FAIL_ANNOUNCED) goto L_NextWave;
     set $@CRYPT_FAIL_ANNOUNCED, 1;
     mapannounce "027-8", "Looks like your neighbour team to is finished off, this is your death sentence!", 0;
     set $@CRYPT_FIGHT3_WAVE, 23;
