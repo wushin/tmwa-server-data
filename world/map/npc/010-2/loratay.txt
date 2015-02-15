@@ -814,7 +814,7 @@ L_Next12:
     if (countitem("SilkSheet") < @ROBE_SHEETS_NR)
         goto L_robe_missing_sheets;
     if (Zeny < @ROBE_SHEETS_ZENY)
-        goto L_robe_sheet_missing_Zeny;
+        goto L_r_sh_miss_zeny;
     getinventorylist;
     if (@inventorylist_count == 100 && countitem("SilkSheet") > @ROBE_SHEETS_NR)
         goto L_TooMany;
@@ -867,7 +867,7 @@ L_robe_missing_sheets:
     next;
     goto L_main_menu;
 
-L_robe_sheet_missing_Zeny:
+L_r_sh_miss_zeny:
     mes "[Lora Tay the Seamstress]";
     mes "\"No, no no.  The way this works is that you give me the GP first and I give you the robe afterwards.  You're " + (@ROBE_SHEETS_ZENY - Zeny) + " GP short, so come back when you can afford the robe!\"";
     next;
