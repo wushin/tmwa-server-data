@@ -6,7 +6,10 @@ maps:
 	tools/tmx_converter.py client-data/ world/map/
 
 herc-maps:
-	tools/tmx_converter.py client-data/ .
+	tools/herc_converter.py client-data/ .
+
+herc-cache:
+	cd ../evol-tools/hercules/ ;python ./convert_tmx_to_mapcache.py;
 
 % : | %.example
 	cp "$|" "$@"
