@@ -1,24 +1,24 @@
 // This file is generated automatically. All manually added changes will be removed when running the Converter.
 // Hurnscald Indoor warps
 
-009-2,75,23,0	warp	To First Floor#240	0,-1,009-2,74,47
-009-2,95,30,0	warp	To Outside#241	-1,-1,009-1,59,34
-009-2,130,26,0	warp	To Outside#242	-1,-1,009-1,71,31
-009-2,144,26,0	warp	To Second Floor#243	0,-1,009-2,144,43
-009-2,144,42,0	warp	To Third Floor#244	0,-1,009-2,144,25
-009-2,155,48,0	warp	To First Floor#245	0,-1,009-2,155,63
-009-2,114,46,0	warp	To First Floor#246	0,-1,009-2,114,70
-009-2,50,55,0	warp	To Outside#247	-1,-1,009-1,35,31
-009-2,74,53,0	warp	To Cellar#248	-1,-1,009-2,143,78
-009-2,74,46,0	warp	To Second Floor#249	0,-1,009-2,75,22
-009-2,114,78,0	warp	To Outside#250	-1,-1,009-1,72,45
-009-2,114,69,0	warp	To Second Floor#251	0,-1,009-2,114,45
-009-2,149,67,0	warp	To Outside#252	-1,-1,009-1,80,32
-009-2,143,77,0	warp	To First Floor#253	-1,-1,009-2,74,52
-009-2,155,62,0	warp	To Second Floor#254	0,-1,009-2,155,46
-009-2,182,67,0	warp	To Outside#255	0,-1,009-1,91,47
-009-2,147,90,0	warp	To Hurnscald Cave#256	-1,-1,009-3,173,21
-009-2,27,107,0	warp	To Outside#257	-1,-1,009-1,58,47
-009-2,46,50,0	warp	To Inn Private Room#258	-1,-1,009-2,76,78
-009-2,77,78,0	warp	To Hurnscald Inn#259	-1,-1,009-2,47,50
-009-2,31,91,0	warp	To Outside#260	-1,-1,009-1,59,41
+009-2,75,23,0	warp	To First Floor#240	1,0,009-2,74,47
+009-2,95,30,0	warp	To Outside#241	0,0,009-1,59,34
+009-2,130,26,0	warp	To Outside#242	0,0,009-1,71,31
+009-2,144,26,0	warp	To Second Floor#243	1,0,009-2,144,43
+009-2,144,42,0	warp	To Third Floor#244	1,0,009-2,144,25
+009-2,155,48,0	warp	To First Floor#245	1,0,009-2,155,63
+009-2,114,46,0	warp	To First Floor#246	1,0,009-2,114,70
+009-2,50,55,0	warp	To Outside#247	0,0,009-1,35,31
+009-2,74,53,0	warp	To Cellar#248	0,0,009-2,143,78
+009-2,74,46,0	warp	To Second Floor#249	1,0,009-2,75,22
+009-2,114,78,0	warp	To Outside#250	0,0,009-1,72,45
+009-2,114,69,0	warp	To Second Floor#251	1,0,009-2,114,45
+009-2,149,67,0	warp	To Outside#252	0,0,009-1,80,32
+009-2,143,77,0	warp	To First Floor#253	0,0,009-2,74,52
+009-2,155,62,0	warp	To Second Floor#254	1,0,009-2,155,46
+009-2,182,67,0	warp	To Outside#255	1,0,009-1,91,47
+009-2,147,90,0	warp	To Hurnscald Cave#256	0,0,009-3,173,21
+009-2,27,107,0	warp	To Outside#257	0,0,009-1,58,47
+009-2,46,50,0	warp	To Inn Private Room#258	0,0,009-2,76,78
+009-2,77,78,0	warp	To Hurnscald Inn#259	0,0,009-2,47,50
+009-2,31,91,0	warp	To Outside#260	0,0,009-1,59,41

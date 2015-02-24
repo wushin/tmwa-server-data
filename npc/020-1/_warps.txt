@@ -1,13 +1,13 @@
 // This file is generated automatically. All manually added changes will be removed when running the Converter.
 // Nivalis warps
 
-020-1,76,38,0	warp	To Ice Cave#604	1,-1,020-3,31,26
-020-1,47,48,0	warp	To Nivalis Indoor#605	-1,-1,020-2,25,35
-020-1,66,52,0	warp	To Nivalis House#606	-1,-1,020-2,72,70
-020-1,64,82,0	warp	To Nivalis Inn#607	-1,-1,020-2,111,32
-020-1,86,46,0	warp	To Armory#608	-1,-1,020-2,32,73
-020-1,57,91,0	warp	To Nivalis Shop#609	-1,-1,020-2,65,23
-020-1,70,128,0	warp	To Snow Field#610	2,-1,019-1,70,22
-020-1,107,55,0	warp	To Nivalis Port#611	-1,-1,031-1,38,55
-020-1,59,45,0	warp	To Nivalis Storage#612	-1,-1,020-2,127,68
-020-1,33,93,0	warp	To Christmas Inn#613	-1,-1,030-2,88,50
+020-1,76,38,0	warp	To Ice Cave#604	2,0,020-3,31,26
+020-1,47,48,0	warp	To Nivalis Indoor#605	0,0,020-2,25,35
+020-1,66,52,0	warp	To Nivalis House#606	0,0,020-2,72,70
+020-1,64,82,0	warp	To Nivalis Inn#607	0,0,020-2,111,32
+020-1,86,46,0	warp	To Armory#608	0,0,020-2,32,73
+020-1,57,91,0	warp	To Nivalis Shop#609	0,0,020-2,65,23
+020-1,70,128,0	warp	To Snow Field#610	3,0,019-1,70,22
+020-1,107,55,0	warp	To Nivalis Port#611	0,0,031-1,38,55
+020-1,59,45,0	warp	To Nivalis Storage#612	0,0,020-2,127,68
+020-1,33,93,0	warp	To Christmas Inn#613	0,0,030-2,88,50

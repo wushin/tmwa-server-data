@@ -1,6 +1,6 @@
 // This file is generated automatically. All manually added changes will be removed when running the Converter.
 // Nivalis Port warps
 
-031-1,37,55,0	warp	To Nivalis#143	-1,-1,020-1,106,55
-031-1,76,24,0	warp	To Ice Labyrinth#144	-1,-1,031-3,212,299
-031-1,90,115,0	warp	To Nivalis Storage#145	-1,-1,031-2,73,29
+031-1,37,55,0	warp	To Nivalis#143	0,0,020-1,106,55
+031-1,76,24,0	warp	To Ice Labyrinth#144	0,0,031-3,212,299
+031-1,90,115,0	warp	To Nivalis Storage#145	0,0,031-2,73,29

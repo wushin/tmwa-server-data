@@ -1,7 +1,7 @@
 // This file is generated automatically. All manually added changes will be removed when running the Converter.
 // snow Field warps
 
-019-1,70,21,0	warp	To Nivalis#139	2,-1,020-1,70,127
-019-1,96,40,0	warp	To Snow Cave#140	-1,-1,019-3,98,30
-019-1,38,75,0	warp	To Snow Cave#141	-1,-1,019-3,39,101
-019-1,21,70,0	warp	To Snow Path#142	-1,0,033-1,118,69
+019-1,70,21,0	warp	To Nivalis#139	3,0,020-1,70,127
+019-1,96,40,0	warp	To Snow Cave#140	0,0,019-3,98,30
+019-1,38,75,0	warp	To Snow Cave#141	0,0,019-3,39,101
+019-1,21,70,0	warp	To Snow Path#142	0,1,033-1,118,69

@@ -1,11 +1,11 @@
 // This file is generated automatically. All manually added changes will be removed when running the Converter.
 // Hurnscald Outskirts warps
 
-008-1,54,61,0	warp	To Hurnscald West E#485	-1,1,009-1,25,36
-008-1,79,80,0	warp	To Hurnscald South #486	2,-1,009-1,48,54
-008-1,127,61,0	warp	To Hurnscald East E#487	-1,0,009-1,96,36
-008-1,79,49,0	warp	To Hurnscald North #488	2,-1,009-1,48,25
-008-1,24,62,0	warp	To Woodland#489	-1,2,011-1,123,61
-008-1,79,17,0	warp	To Woodland Mining #490	2,-1,018-1,78,97
-008-1,79,102,0	warp	To Woodland#491	2,-1,007-1,68,22
-008-1,132,101,0	warp	To Woodland#492	1,-1,007-1,122,23
+008-1,54,61,0	warp	To Hurnscald West E#485	0,2,009-1,25,36
+008-1,79,80,0	warp	To Hurnscald South #486	3,0,009-1,48,54
+008-1,127,61,0	warp	To Hurnscald East E#487	0,1,009-1,96,36
+008-1,79,49,0	warp	To Hurnscald North #488	3,0,009-1,48,25
+008-1,24,62,0	warp	To Woodland#489	0,3,011-1,123,61
+008-1,79,17,0	warp	To Woodland Mining #490	3,0,018-1,78,97
+008-1,79,102,0	warp	To Woodland#491	3,0,007-1,68,22
+008-1,132,101,0	warp	To Woodland#492	2,0,007-1,122,23

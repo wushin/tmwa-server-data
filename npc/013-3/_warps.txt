@@ -1,30 +1,30 @@
 // This file is generated automatically. All manually added changes will be removed when running the Converter.
 // Woodland Hills Cave warps
 
-013-3,28,20,0	warp	To Woodland Hills#24	-1,-1,013-1,0,0
-013-3,34,63,0	warp	To Woodland Hills#25	-1,-1,013-1,125,103
-013-3,36,96,0	warp	To Woodland Hills C#26	-1,-1,013-3,79,126
-013-3,79,125,0	warp	To Woodland Hills C#27	-1,-1,013-3,35,96
-013-3,22,115,0	warp	To Woodland Mining #28	-1,-1,018-1,115,41
-013-3,139,45,0	warp	To Woodland Mining #29	-1,-1,018-1,127,37
-013-3,61,179,0	warp	To Woodland Mining #30	-1,-1,018-1,134,46
-013-3,69,143,0	warp	To Northern Mine#31	-1,-1,018-3,50,89
-013-3,81,103,0	warp	To Woodland Mining #32	-1,-1,018-1,147,41
-013-3,177,91,0	warp	To Jack O Land#33	-1,-1,018-1,177,21
-013-3,178,44,0	warp	To Northern Mine#34	-1,-1,018-3,97,70
-013-3,169,45,0	warp	To Northern Mine#35	-1,-1,018-3,27,55
-013-3,152,28,0	warp	To Northern Mine#36	-1,-1,018-3,134,62
-013-3,123,104,0	warp	To Northern Mine#37	-1,-1,018-3,172,22
-013-3,147,104,0	warp	To Northern Mine#38	-1,-1,018-3,177,22
-013-3,158,66,0	warp	To Northern Mine#39	-1,-1,018-3,27,90
-013-3,75,51,0	warp	To Woodland Hills C#40	-1,-1,013-3,109,65
-013-3,109,64,0	warp	To Woodland Hills C#41	-1,-1,013-3,75,50
-013-3,67,51,0	warp	To Northern Mine#42	-1,-1,018-3,90,51
-013-3,71,20,0	warp	To Demon Mask Chest#43	-1,-1,013-3,28,39
-013-3,28,41,0	warp	To Fight Cave#44	-1,-1,013-3,71,21
-013-3,71,42,0	warp	To Black Scorpion C#45	-1,-1,013-3,109,21
-013-3,109,20,0	warp	To Woodland Hills C#46	-1,-1,013-3,71,41
-013-3,111,42,0	warp	To Magic Bookshelf #47	-1,-1,018-3,71,123
-013-3,62,100,0	warp	To Northern Mine#48	-1,-1,018-3,174,86
-013-3,68,97,0	warp	To Northern Mine#49	-1,-1,018-3,102,70
-013-3,160,103,0	warp	To Hurnscald Cave#50	-1,-1,009-3,117,20
+013-3,28,20,0	warp	To Woodland Hills#24	0,0,013-1,0,0
+013-3,34,63,0	warp	To Woodland Hills#25	0,0,013-1,125,103
+013-3,36,96,0	warp	To Woodland Hills C#26	0,0,013-3,79,126
+013-3,79,125,0	warp	To Woodland Hills C#27	0,0,013-3,35,96
+013-3,22,115,0	warp	To Woodland Mining #28	0,0,018-1,115,41
+013-3,139,45,0	warp	To Woodland Mining #29	0,0,018-1,127,37
+013-3,61,179,0	warp	To Woodland Mining #30	0,0,018-1,134,46
+013-3,69,143,0	warp	To Northern Mine#31	0,0,018-3,50,89
+013-3,81,103,0	warp	To Woodland Mining #32	0,0,018-1,147,41
+013-3,177,91,0	warp	To Jack O Land#33	0,0,018-1,177,21
+013-3,178,44,0	warp	To Northern Mine#34	0,0,018-3,97,70
+013-3,169,45,0	warp	To Northern Mine#35	0,0,018-3,27,55
+013-3,152,28,0	warp	To Northern Mine#36	0,0,018-3,134,62
+013-3,123,104,0	warp	To Northern Mine#37	0,0,018-3,172,22
+013-3,147,104,0	warp	To Northern Mine#38	0,0,018-3,177,22
+013-3,158,66,0	warp	To Northern Mine#39	0,0,018-3,27,90
+013-3,75,51,0	warp	To Woodland Hills C#40	0,0,013-3,109,65
+013-3,109,64,0	warp	To Woodland Hills C#41	0,0,013-3,75,50
+013-3,67,51,0	warp	To Northern Mine#42	0,0,018-3,90,51
+013-3,71,20,0	warp	To Demon Mask Chest#43	0,0,013-3,28,39
+013-3,28,41,0	warp	To Fight Cave#44	0,0,013-3,71,21
+013-3,71,42,0	warp	To Black Scorpion C#45	0,0,013-3,109,21
+013-3,109,20,0	warp	To Woodland Hills C#46	0,0,013-3,71,41
+013-3,111,42,0	warp	To Magic Bookshelf #47	0,0,018-3,71,123
+013-3,62,100,0	warp	To Northern Mine#48	0,0,018-3,174,86
+013-3,68,97,0	warp	To Northern Mine#49	0,0,018-3,102,70
+013-3,160,103,0	warp	To Hurnscald Cave#50	0,0,009-3,117,20
