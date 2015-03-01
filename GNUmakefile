@@ -7,8 +7,6 @@ maps:
 
 herc-maps:
 	tools/herc_converter.py client-data/ .
-
-herc-cache:
 	cd ../evol-tools/hercules/ ;python ./convert_tmx_to_mapcache.py;
 
 % : | %.example
