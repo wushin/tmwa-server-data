@@ -16,7 +16,7 @@ On1063:
     set @discover_poisonous_pumpkin, 1;
     misceffect FX_PUMPKIN_EXPLOSION, strcharinfo(0);
     heal -15, 0;
-    sc_start sc_poison, 1, 4;
+    sc_start SC_POISON, 1, 4;
     if (rand(0,100) < 10)
         getitem "PumpkinSeeds", 1;
 
@@ -48,7 +48,7 @@ L_HeavyPoison0:
     message strcharinfo(0), "Ouch, this pumpkin is totally poisonous! Let's get away from them!";
     misceffect FX_PUMPKIN_EXPLOSION, strcharinfo(0);
     heal -150,0;
-    sc_start sc_poison, 1, 60;
+    sc_start SC_POISON, 1, 60;
     end;
 
 L_HeavyPoison1:
@@ -56,7 +56,7 @@ L_HeavyPoison1:
     message strcharinfo(0), "This is really awful! I should not touch them!";
     misceffect FX_PUMPKIN_EXPLOSION, strcharinfo(0);
     heal -350,0;
-    sc_start sc_poison, 1, 120;
+    sc_start SC_POISON, 1, 120;
     end;
 
 L_HeavyPoison2:
