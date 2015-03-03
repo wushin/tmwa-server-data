@@ -158,7 +158,8 @@
 139,0,0,25:30:35:40:45:50:55:60:45:45,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//AS_POISONREACT#ポイズンリアクト#
 140,0,0,20,0,0,0,99,0,0,none,0,716,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//AS_VENOMDUST#ベナムダスト#
 141,0,0,12:14:16:18:20:22:24:26:28:30,0,0,0,99,0,0,none,0,716,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//AS_SPLASHER#ベナムスプラッシャ?#
-142,0,0,3,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NV_FIRSTAID#?急手?#
+// SkillID,HPCost,MaxHPTrigger,SPCost,HPRateCost,SPRateCost,ZenyCost,RequiredWeapons,RequiredAmmoTypes,RequiredAmmoAmount,RequiredState,SpiritSphereCost,RequiredItemID1,RequiredItemAmount1,RequiredItemID2,RequiredItemAmount2,RequiredItemID3,RequiredItemAmount3,RequiredItemID4,RequiredItemAmount4,RequiredItemID5,RequiredItemAmount5,RequiredItemID6,RequiredItemAmount6,RequiredItemID7,RequiredItemAmount7,RequiredItemID8,RequiredItemAmount8,RequiredItemID9,RequiredItemAmount9,RequiredItemID10,RequiredItemAmount10
+142,0,0,3,0,0,0,99,0,0,none,0,660,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NV_FIRSTAID#?急手?#
 143,0,0,5,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//NV_TRICKDEAD#死んだふり#
 
 146,0,0,1,0,0,0,99,0,0,none,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	//SM_AUTOBERSERK#オ?トバ?サ?ク#
