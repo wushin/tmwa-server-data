@@ -1,0 +1,73 @@
+029-2,0,0,0|script|Tanisha#Event|32767
+{
+    end;
+OnTimer1000:
+    setnpctimer 0, "Tanisha#Event";
+    if (getareausers("029-2", 98, 84, 106, 89) == 0)
+        goto L_CleanUp;
+    // This is needed because multiple players can be in the area at once
+    areatimer "029-2", 98, 84, 106, 89, 0, "Tanisha#Event::OnTick";
+    end;
+
+L_CleanUp:
+    killmonster "029-2", "Tanisha#Event::OnMaggotDeath";
+    set $@Maggot_Hunters, 0;
+    stopnpctimer "Tanisha#Event";
+    goto L_Summon;
+
+L_Sleep:
+    warp "029-2", 101, 87;
+    mes "[Tanisha]";
+    mes "\"What are you doing in there?";
+    mes "Sleeping?";
+    mes "Come back when you're serious.\"";
+    set @Maggot_Kills, 0;
+    set @time, 0;
+    close2;
+    if (getareausers("029-2", 98, 84, 106, 89) == 0)
+        goto L_CleanUp;
+    end;
+
+OnTick:
+    set @time, @time + 1;
+    if (@time > 300)
+        goto L_Sleep;
+    if (isdead())
+        end;
+    if (Hp > 20)
+        end;
+    heal MaxHp, 0;
+    message strcharinfo(0), "##3Tanisha : You're doing good!";
+    end;
+
+OnSummon:
+    goto L_Summon;
+
+L_Summon:
+    areamonster "029-2", 98, 84, 106, 89, "", 1002, 1, "Tanisha#Event::OnMaggotDeath";
+    end;
+
+OnMaggotDeath:
+    if (@Maggot_Kills == 1)
+        message strcharinfo(0), "##3Tanisha : Aaahhhh... another one! It will crawl up your legs!";
+    if (@Maggot_Kills == 2)
+        message strcharinfo(0), "##3Tanisha : Ohh... Irrhk... Eeeeww... They just appear from nowhere!";
+    if (@Maggot_Kills == 3)
+        message strcharinfo(0), "##3Tanisha : Yuck... I think I am getting sick.";
+    if (isin("029-2", 98, 84, 106, 89))
+        set @Maggot_Kills, @Maggot_Kills + 1;
+    if (@Maggot_Kills < 5)
+        goto L_Summon;
+    // else, complete
+    warp "029-2", 110, 88;
+    set QL_BEGIN, 7;
+    set @Maggot_Kills, 0;
+    set @time, 0;
+    if (getareausers("029-2", 98, 84, 106, 89) == 0)
+        goto L_CleanUp;
+    end;
+
+OnInit:
+    set $@Maggot_MaxHunters, 4;
+    goto L_Summon;
+}

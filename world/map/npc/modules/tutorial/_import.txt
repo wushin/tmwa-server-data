@@ -1,0 +1,2 @@
+npc: npc/modules/tutorial/tanisha.txt
+npc: npc/modules/tutorial/events/tanisha.txt
