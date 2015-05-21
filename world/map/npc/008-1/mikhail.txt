@@ -58,6 +58,5 @@ L_Done:
     goto L_Close;
 
 L_Close:
-    set QL_SOUP, 0;
     close;
 }
