@@ -94,7 +94,6 @@ L_Done:
 
 L_Close:
     set @TEMP, 0;
-    set QL_SANDRA, 0;
     close;
 
 L_TooMany:
