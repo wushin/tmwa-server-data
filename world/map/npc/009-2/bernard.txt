@@ -1,4 +1,3 @@
-009-2,67,79,0|script|Bernard|117
 {
     if (QL_SOUP >= 6) goto L_Done3;
     if (QL_SOUP >= 4) goto L_Done2;
@@ -115,7 +114,6 @@ L_Done3:
 
 L_Close:
     set @TEMP, 0;
-    set QL_SOUP, 0;
     close;
 
 L_TooMany:
