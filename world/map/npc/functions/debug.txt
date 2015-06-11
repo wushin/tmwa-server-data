@@ -5,7 +5,7 @@ function|script|Debug
     if(!@debug_npc) goto L_Begin;
     mes "The debug NPCs have been deprecated. Please use this magic spell instead:";
     mes "";
-    mes "%%E        ##a"+ getspellinvocation("debug0") +"##0";
+    mes "%%E        ##a#debug##0";
     set @debug_npc, 0;
     goto L_Close;
 
@@ -920,6 +920,16 @@ L_Close:
     close2;
     return;
 
+}
+
+-|script|Debug Spell|32767
+{
+    if(!debug && getgmlevel() < 99) end;
+    callfunc "Debug";
+    end;
+OnInit:
+    registercmd "@debug", "Debug Spell";
+    end;
 }
 
 029-2,30,26,0|script|Debug#0|154

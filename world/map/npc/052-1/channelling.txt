@@ -259,7 +259,7 @@ S_CheckChannelling:
         set $@illia_channelling_status_msg$, $@illia_char_channelling$ + ": Damn! It faded a little.";
 
     if ($@illia_channelling_status_msg$ != "")
-        areatimer "052-1", 1, 1, 100, 80, 0, "#Power Circle::OnMPSC";
+        areatimer 0, "052-1", 1, 1, 100, 80, 0, "#Power Circle::OnMPSC";
 
     return;
 
