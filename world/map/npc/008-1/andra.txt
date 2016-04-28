@@ -69,9 +69,9 @@ L_PreSummon:
 OnTimer1000:
     set $@plant_id, rand(1029,1032);
     areamonster "008-1",44,18,135,46,"plant",$@plant_id,$@PLANTS_PER_SEED, "Andra::OnPlantDeath";
-    if (attachrid(getcharid(3,$@farmer$)) == 0)
+    if (!(isloggedin(getcharid(3,$@farmer$))))
         goto L_Spawn1000;
-    message strcharinfo(0), "Andra: I think some plants will grow almost instantly! Just Watch...";
+    message strcharinfo(0, getcharid(3,$@farmer$)), "Andra: I think some plants will grow almost instantly! Just Watch...";
     goto L_Spawn1000;
 
 L_Spawn1000:
@@ -93,9 +93,9 @@ OnTimer5000:
 OnTimer7000:
     set $@plant_id, rand(1029,1032);
     areamonster "008-1",44,18,135,46,"plant",$@plant_id,$@PLANTS_PER_SEED, "Andra::OnPlantDeath";
-    if (attachrid(getcharid(3,$@farmer$)) == 0)
+    if (!(isloggedin(getcharid(3,$@farmer$))))
         goto L_Spawn7000;
-    message strcharinfo(0), "Andra: Good... Just take a walk and you will be able to see how your seeds turned into some nice looking plants.";
+    message strcharinfo(0, getcharid(3,$@farmer$)), "Andra: Good... Just take a walk and you will be able to see how your seeds turned into some nice looking plants.";
     goto L_Spawn7000;
 
 L_Spawn7000:
