@@ -174,13 +174,13 @@ L_Warpfail:
     mapannounce "009-6", "Brodomir : There are not enough players around to start!", 0;
     if ($@BRODOMIR_ITEM_AMOUNT == 0 || $@BRODOMIR_ITEM$ == "")
         goto L_Cleanup;
-    if (attachrid($@BRODOMIR_SPONSOR) == 0)
+    if (!isloggedin($@BRODOMIR_SPONSOR))
         goto L_SkipItemback;
     // we need this loop because for items that can't be stacked, getitem will stack them nevertheless
     goto L_GetitemLoop;
 
 L_GetitemLoop:
-    getitem $@BRODOMIR_ITEM$, 1;
+    getitem $@BRODOMIR_ITEM$, 1, $@BRODOMIR_SPONSOR;
     set $@BRODOMIR_ITEM_AMOUNT, $@BRODOMIR_ITEM_AMOUNT - 1;
     if ($@BRODOMIR_ITEM_AMOUNT > 0)
         goto L_GetitemLoop;
