@@ -168,12 +168,14 @@ L_SummonAgain:
     goto L_Summon;
 
 OnTimer5000:
-    if (attachrid($@ScorpionFighter) == 0)
+    if (!(isloggedin($@ScorpionFighter)))
+        goto L_Clean;
+    if ((getmap($@ScorpionFighter) != "029-1"))
         goto L_Clean;
     set $@ScorpionTimer, $@ScorpionTimer + 5;
     if ($@ScorpionTimer >= 300)
         goto L_TimeOut;
-    if (PC_DIE_COUNTER > $@ScorpDeath)
+    if (get(PC_DIE_COUNTER, $@ScorpionFighter) > $@ScorpDeath)
         goto L_MessageDeath;
     setnpctimer 0;
     end;
@@ -190,11 +192,11 @@ OnScorpionDeath:
     goto L_Clean;
 
 L_TimeOut:
-    message strcharinfo(0), "Hasan, with his eyes almost closed, trembling with fear, runs toward the scorpion and stabs it with all his strength!";
+    message strcharinfo(0, $@ScorpionFighter), "Hasan, with his eyes almost closed, trembling with fear, runs toward the scorpion and stabs it with all his strength!";
     goto L_Clean;
 
 L_MessageDeath:
-    message strcharinfo(0), "Ouch... I should be more careful when fighting these monsters.";
+    message strcharinfo(0, $@ScorpionFighter), "Ouch... I should be more careful when fighting these monsters.";
     goto L_Clean;
 
 L_Clean:
