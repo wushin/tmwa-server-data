@@ -185,33 +185,34 @@ OnTimer1000:
         goto L_Action;
     set $@Fluffy_Hunting, $@Fluffy_Hunting + 1;
     goto L_ContinueTimer;
+
 L_Action:
 // Checking if player is logged
-    if (attachrid($@Fluffy_FighterID) == 0)
+    if (!(isloggedin($@Fluffy_FighterID)))
         goto L_GotOut;
 // Checking if player is still in the map or used a towel or spell to get out
     if (getareausers("033-1", 79, 28, 88, 42) == 0)
         goto L_GotOut;
-    if (PC_DIE_COUNTER > $@Fluffy_PC_Deaths)
+    if (get(PC_DIE_COUNTER, $@Fluffy_FighterID) > $@Fluffy_PC_Deaths)
         goto L_Died;
 // Checking if there is more than 1 player in the fight area
     if (getareausers("033-1", 79, 28, 88, 42) > 1)
         areatimer 0, "033-1", 79, 28, 88, 42, 10, "Kimarr::OnTooMany";
 
     if ($@Fluffy_Time == 180)
-        npctalk strnpcinfo(0), strcharinfo(0) + ", you have 3 minutes.";
+        npctalk strnpcinfo(0, $@Fluffy_FighterID), strcharinfo(0) + ", you have 3 minutes.";
     if ($@Fluffy_Time == 120)
-        npctalk strnpcinfo(0), "You have 2 minutes left.";
+        npctalk strnpcinfo(0, $@Fluffy_FighterID), "You have 2 minutes left.";
     if ($@Fluffy_Time == 60)
-        npctalk strnpcinfo(0), "You have 1 minute left.";
+        npctalk strnpcinfo(0, $@Fluffy_FighterID), "You have 1 minute left.";
     if ($@Fluffy_Time == 30)
-        npctalk strnpcinfo(0), "You have 30 seconds left.";
+        npctalk strnpcinfo(0, $@Fluffy_FighterID), "You have 30 seconds left.";
     if ($@Fluffy_Time == 15)
-        npctalk strnpcinfo(0), "You have 15 seconds left.";
+        npctalk strnpcinfo(0, $@Fluffy_FighterID), "You have 15 seconds left.";
     if ($@Fluffy_Time == 10)
-        npctalk strnpcinfo(0), "You have 10 seconds left.";
+        npctalk strnpcinfo(0, $@Fluffy_FighterID), "You have 10 seconds left.";
     if ($@Fluffy_Time == 5)
-        npctalk strnpcinfo(0), "You have 5 seconds left.";
+        npctalk strnpcinfo(0, $@Fluffy_FighterID), "You have 5 seconds left.";
     set $@Fluffy_Time, $@Fluffy_Time - 1;
     if ($@Fluffy_Time < 0)
         goto L_TimeOver;
@@ -222,7 +223,7 @@ L_ContinueTimer:
     end;
 
 L_GotOut:
-    npctalk strnpcinfo(0), "What a strange thing... " + $@Fluffy_Fighter$ + " just disappeared!";
+    npctalk strnpcinfo(0, $@Fluffy_FighterID), "What a strange thing... " + $@Fluffy_Fighter$ + " just disappeared!";
     callsub S_Clean;
     end;
 
@@ -235,7 +236,7 @@ OnTooMany:
 
 L_Died:
     warp "033-1", 77, 34;
-    message strcharinfo(0), "You are dead.";
+    message strcharinfo(0, $@Fluffy_FighterID), "You are dead.";
     npctalk strnpcinfo(0), "Oh no! " + $@Fluffy_Fighter$ + " got overwhelmed!";
     callsub S_Clean;
     end;
@@ -315,7 +316,7 @@ OnFluffyDeath:
     set $@Fluffy_Alive, $@Fluffy_Alive - 1;
     if ($@Fluffy_Alive != 0)
         end;
-    if (attachrid($@Fluffy_FighterID) == 1)
+    if (isloggedin($@Fluffy_FighterID))
         goto L_Killedall;
     goto L_GotOut;
 
@@ -335,7 +336,7 @@ L_Punish:
     end;
 
 L_Killedall:
-    message strcharinfo(0), "Good job, but you still have time to throw more food on the ground.";
+    message strcharinfo(0, $@Fluffy_FighterID), "Good job, but you still have time to throw more food on the ground.";
     end;
 
 S_Clean:
