@@ -20,10 +20,12 @@
 end;
 
 OnYeti:
-    if (attachrid($@Yerrnk_Yetifighter_ID) == 0)
+    if (!(isloggedin($@Yerrnk_Yetifighter_ID)))
+        goto L_Abort;
+    if (getmap($@Yerrnk_Yetifighter_ID) != "034-1")
         goto L_Abort;
 
-    message strcharinfo(0), "There is the Yeti!";
+    message strcharinfo(0, $@Yerrnk_Yetifighter_ID), "There is the Yeti!";
     areamonster "034-1", 67, 93, 74, 102, "", 1072, 1, "#Yerrnk_Yeti::OnYetiDeath";
     end;
 
