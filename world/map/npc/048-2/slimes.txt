@@ -51,11 +51,13 @@ L_End:
     end;
 
 OnSpawn:
-    if (attachrid($@Slime0VictimID) == 0)
+    if (!(isloggedin($@Slime0VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime0VictimID) != "048-2")
         goto L_Clean;
     set $@BlueSageSlime0_Spawn, $@BlueSageSlime0_Amount;
     areamonster "048-2", 178, 92, 184, 98, "", 1093, $@BlueSageSlime0_Spawn, "#Slime0::OnSlimeDeath";
-    message strcharinfo(0), "You notice a group of slimes emerging from the debris among the shelves.";
+    message strcharinfo(0, $@Slime0VictimID), "You notice a group of slimes emerging from the debris among the shelves.";
     end;
 
 OnSlimeDeath:
@@ -85,7 +87,9 @@ L_SlimesEscaped:
     goto L_Clean;
 
 L_ClearedPoint:
-    if (attachrid($@Slime0VictimID) == 0)
+    if (!(isloggedin($@Slime0VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime0VictimID) != "048-2")
         goto L_Clean;
     if (rand($@BlueSageSlime0_Amount - @spawnSlime0) != 0)
         goto L_SlimesEscaped;
@@ -140,11 +144,13 @@ L_End:
     end;
 
 OnSpawn:
-    if (attachrid($@Slime1VictimID) == 0)
+    if (!(isloggedin($@Slime1VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime1VictimID) != "048-2")
         goto L_Clean;
     set $@BlueSageSlime1_Spawn, $@BlueSageSlime1_Amount;
     areamonster "048-2", 161, 120, 167, 126, "", 1093, $@BlueSageSlime1_Spawn, "#Slime1::OnSlimeDeath";
-    message strcharinfo(0), "You notice a group of slimes emerging from the debris among the shelves.";
+    message strcharinfo(0, $@Slime1VictimID), "You notice a group of slimes emerging from the debris among the shelves.";
     end;
 
 OnSlimeDeath:
@@ -174,7 +180,9 @@ L_SlimesEscaped:
     goto L_Clean;
 
 L_ClearedPoint:
-    if (attachrid($@Slime1VictimID) == 0)
+    if (!(isloggedin($@Slime1VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime1VictimID) != "048-2")
         goto L_Clean;
     if (rand($@BlueSageSlime1_Amount - @spawnSlime1) != 0)
         goto L_SlimesEscaped;
@@ -229,11 +237,13 @@ L_End:
     end;
 
 OnSpawn:
-    if (attachrid($@Slime2VictimID) == 0)
+    if (!(isloggedin($@Slime2VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime2VictimID) != "048-2")
         goto L_Clean;
     set $@BlueSageSlime2_Spawn, $@BlueSageSlime2_Amount;
     areamonster "048-2", 195, 112, 201, 118, "", 1093, $@BlueSageSlime2_Spawn, "#Slime2::OnSlimeDeath";
-    message strcharinfo(0), "You notice a group of slimes emerging from the debris among the shelves.";
+    message strcharinfo(0, $@Slime2VictimID), "You notice a group of slimes emerging from the debris among the shelves.";
     end;
 
 OnSlimeDeath:
@@ -263,7 +273,9 @@ L_SlimesEscaped:
     goto L_Clean;
 
 L_ClearedPoint:
-    if (attachrid($@Slime2VictimID) == 0)
+    if (!(isloggedin($@Slime2VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime2VictimID) != "048-2")
         goto L_Clean;
     if (rand($@BlueSageSlime2_Amount - @spawnSlime2) != 0)
         goto L_SlimesEscaped;
@@ -318,11 +330,13 @@ L_End:
     end;
 
 OnSpawn:
-    if (attachrid($@Slime3VictimID) == 0)
+    if (!(isloggedin($@Slime3VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime3VictimID) != "048-2")
         goto L_Clean;
     set $@BlueSageSlime3_Spawn, $@BlueSageSlime3_Amount;
     areamonster "048-2", 164, 76, 170, 82, "", 1093, $@BlueSageSlime3_Spawn, "#Slime3::OnSlimeDeath";
-    message strcharinfo(0), "You notice a group of slimes emerging from the debris among the shelves.";
+    message strcharinfo(0, $@Slime3VictimID), "You notice a group of slimes emerging from the debris among the shelves.";
     end;
 
 OnSlimeDeath:
@@ -352,7 +366,9 @@ L_SlimesEscaped:
     goto L_Clean;
 
 L_ClearedPoint:
-    if (attachrid($@Slime3VictimID) == 0)
+    if (!(isloggedin($@Slime3VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime3VictimID) != "048-2")
         goto L_Clean;
     if (rand($@BlueSageSlime3_Amount - @spawnSlime3) != 0)
         goto L_SlimesEscaped;
@@ -407,11 +423,13 @@ L_End:
     end;
 
 OnSpawn:
-    if (attachrid($@Slime4VictimID) == 0)
+    if (!(isloggedin($@Slime4VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime4VictimID) != "048-2")
         goto L_Clean;
     set $@BlueSageSlime4_Spawn, $@BlueSageSlime4_Amount;
     areamonster "048-2", 189, 83, 195, 89, "", 1091, $@BlueSageSlime4_Spawn, "#Slime4::OnSlimeDeath";
-    message strcharinfo(0), "You notice a group of slimes emerging from the debris among the shelves.";
+    message strcharinfo(0, $@Slime4VictimID), "You notice a group of slimes emerging from the debris among the shelves.";
     end;
 
 OnSlimeDeath:
@@ -441,7 +459,9 @@ L_SlimesEscaped:
     goto L_Clean;
 
 L_ClearedPoint:
-    if (attachrid($@Slime4VictimID) == 0)
+    if (!(isloggedin($@Slime4VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime4VictimID) != "048-2")
         goto L_Clean;
     if (rand($@BlueSageSlime4_Amount - @spawnSlime4) != 0)
         goto L_SlimesEscaped;
@@ -496,11 +516,13 @@ L_End:
     end;
 
 OnSpawn:
-    if (attachrid($@Slime5VictimID) == 0)
+    if (!(isloggedin($@Slime5VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime5VictimID) != "048-2")
         goto L_Clean;
     set $@BlueSageSlime5_Spawn, $@BlueSageSlime5_Amount;
     areamonster "048-2", 180, 107, 186, 113, "", 1091, $@BlueSageSlime5_Spawn, "#Slime5::OnSlimeDeath";
-    message strcharinfo(0), "You notice a group of slimes emerging from the debris among the shelves.";
+    message strcharinfo(0, $@Slime5VictimID), "You notice a group of slimes emerging from the debris among the shelves.";
     end;
 
 OnSlimeDeath:
@@ -530,7 +552,9 @@ L_SlimesEscaped:
     goto L_Clean;
 
 L_ClearedPoint:
-    if (attachrid($@Slime5VictimID) == 0)
+    if (!(isloggedin($@Slime5VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime5VictimID) != "048-2")
         goto L_Clean;
     if (rand($@BlueSageSlime5_Amount - @spawnSlime5) != 0)
         goto L_SlimesEscaped;
@@ -585,11 +609,13 @@ L_End:
     end;
 
 OnSpawn:
-    if (attachrid($@Slime6VictimID) == 0)
+    if (!(isloggedin($@Slime6VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime6VictimID) != "048-2")
         goto L_Clean;
     set $@BlueSageSlime6_Spawn, $@BlueSageSlime6_Amount;
     areamonster "048-2", 161, 99, 167, 105, "", 1091, $@BlueSageSlime6_Spawn, "#Slime6::OnSlimeDeath";
-    message strcharinfo(0), "You notice a group of slimes emerging from the debris among the shelves.";
+    message strcharinfo(0, $@Slime6VictimID), "You notice a group of slimes emerging from the debris among the shelves.";
     end;
 
 OnSlimeDeath:
@@ -619,7 +645,9 @@ L_SlimesEscaped:
     goto L_Clean;
 
 L_ClearedPoint:
-    if (attachrid($@Slime6VictimID) == 0)
+    if (!(isloggedin($@Slime6VictimID)))
+        goto L_Clean;
+    if (getmap($@Slime6VictimID) != "048-2")
         goto L_Clean;
     if (rand($@BlueSageSlime6_Amount - @spawnSlime6) != 0)
         goto L_SlimesEscaped;
