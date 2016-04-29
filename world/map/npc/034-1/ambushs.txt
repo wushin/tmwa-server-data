@@ -26,12 +26,14 @@
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush0VictimID) == 0)
+    if (!(isloggedin($@Ambush0VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush0VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush0_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush0VictimID), "An ambush!";
     areamonster "034-1", 115, 56, 121, 62, "", 1090, $@Ambush0_Spawn, "#Ambush0::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush0_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush0_flag, $@Ambush0VictimID;
     end;
 
 OnWolvernDeath:
@@ -86,12 +88,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush1VictimID) == 0)
+    if (!(isloggedin($@Ambush1VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush1VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush1_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush1VictimID), "An ambush!";
     areamonster "034-1", 91, 88, 97, 94, "", 1090, $@Ambush1_Spawn, "#Ambush1::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush1_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush1_flag, $@Ambush1VictimID;
     end;
 
 OnWolvernDeath:
@@ -146,12 +150,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush2VictimID) == 0)
+    if (!(isloggedin($@Ambush2VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush2VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush2_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush2VictimID), "An ambush!";
     areamonster "034-1", 119, 32, 125, 38, "", 1090, $@Ambush2_Spawn, "#Ambush2::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush2_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush2_flag, $@Ambush2VictimID;
     end;
 
 OnWolvernDeath:
@@ -206,12 +212,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush3VictimID) == 0)
+    if (!(isloggedin($@Ambush3VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush3VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush3_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush3VictimID), "An ambush!";
     areamonster "034-1", 80, 41, 86, 47, "", 1090, $@Ambush3_Spawn, "#Ambush3::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush3_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush3_flag, $@Ambush3VictimID;
     end;
 
 OnWolvernDeath:
@@ -266,12 +274,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush4VictimID) == 0)
+    if (!(isloggedin($@Ambush4VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush4VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush4_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush4VictimID), "An ambush!";
     areamonster "034-1", 71, 25, 77, 31, "", 1090, $@Ambush4_Spawn, "#Ambush4::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush4_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush4_flag, $@Ambush4VictimID;
     end;
 
 OnWolvernDeath:
@@ -326,12 +336,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush5VictimID) == 0)
+    if (!(isloggedin($@Ambush5VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush5VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush5_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush5VictimID), "An ambush!";
     areamonster "034-1", 23, 41, 29, 47, "", 1090, $@Ambush5_Spawn, "#Ambush5::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush5_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush5_flag, $@Ambush5VictimID;
     end;
 
 OnWolvernDeath:
@@ -386,12 +398,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush6VictimID) == 0)
+    if (!(isloggedin($@Ambush6VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush6VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush6_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush6VictimID), "An ambush!";
     areamonster "034-1", 47, 44, 53, 50, "", 1090, $@Ambush6_Spawn, "#Ambush6::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush6_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush6_flag, $@Ambush6VictimID;
     end;
 
 OnWolvernDeath:
@@ -446,12 +460,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush7VictimID) == 0)
+    if (!(isloggedin($@Ambush7VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush7VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush7_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush7VictimID), "An ambush!";
     areamonster "034-1", 33, 59, 39, 65, "", 1090, $@Ambush7_Spawn, "#Ambush7::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush7_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush7_flag, $@Ambush7VictimID;
     end;
 
 OnWolvernDeath:
@@ -506,12 +522,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush8VictimID) == 0)
+    if (!(isloggedin($@Ambush8VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush8VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush8_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush8VictimID), "An ambush!";
     areamonster "034-1", 23, 92, 29, 98, "", 1090, $@Ambush8_Spawn, "#Ambush8::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush8_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush8_flag, $@Ambush8VictimID;
     end;
 
 OnWolvernDeath:
@@ -566,12 +584,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush9VictimID) == 0)
+    if (!(isloggedin($@Ambush9VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush9VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush9_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush9VictimID), "An ambush!";
     areamonster "034-1", 53, 88, 59, 94, "", 1090, $@Ambush9_Spawn, "#Ambush9::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush9_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush9_flag, $@Ambush9VictimID;
     end;
 
 OnWolvernDeath:
@@ -626,12 +646,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush10VictimID) == 0)
+    if (!(isloggedin($@Ambush10VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush10VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush10_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush10VictimID), "An ambush!";
     areamonster "034-1", 62, 63, 68, 69, "", 1090, $@Ambush10_Spawn, "#Ambush10::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush10_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush10_flag, $@Ambush10VictimID;
     end;
 
 OnWolvernDeath:
@@ -686,12 +708,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush11VictimID) == 0)
+    if (!(isloggedin($@Ambush11VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush11VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush11_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush11VictimID), "An ambush!";
     areamonster "034-1", 83, 65, 89, 71, "", 1090, $@Ambush11_Spawn, "#Ambush11::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush11_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush11_flag, $@Ambush11VictimID;
     end;
 
 OnWolvernDeath:
@@ -746,12 +770,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush12VictimID) == 0)
+    if (!(isloggedin($@Ambush12VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush12VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush12_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush12VictimID), "An ambush!";
     areamonster "034-1", 98, 76, 104, 82, "", 1090, $@Ambush12_Spawn, "#Ambush12::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush12_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush12_flag, $@Ambush12VictimID;
     end;
 
 OnWolvernDeath:
@@ -806,12 +832,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush13VictimID) == 0)
+    if (!(isloggedin($@Ambush13VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush13VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush13_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush13VictimID), "An ambush!";
     areamonster "034-1", 121, 85, 127, 91, "", 1090, $@Ambush13_Spawn, "#Ambush13::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush13_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush13_flag, $@Ambush13VictimID;
     end;
 
 OnWolvernDeath:
@@ -866,12 +894,14 @@ L_Count:
 end;
 
 OnAmbush:
-    if (attachrid($@Ambush14VictimID) == 0)
+    if (!(isloggedin($@Ambush14VictimID)))
+        goto L_Clean;
+    if (getmap($@Ambush14VictimID) != "034-1")
         goto L_Clean;
     set $@Ambush14_Spawn, 3 + rand(2);
-    message strcharinfo(0), "An ambush!";
+    message strcharinfo(0, $@Ambush14VictimID), "An ambush!";
     areamonster "034-1", 114, 100, 120, 106, "", 1090, $@Ambush14_Spawn, "#Ambush14::OnWolvernDeath";
-    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush14_flag;
+    set @ambushs034, @ambushs034 | $@Q_Barbarians_Ambush14_flag, $@Ambush14VictimID;
     end;
 
 OnWolvernDeath:
